@@ -37,14 +37,7 @@ char *ConfigGetLogDirectory()
     char *log_dir = NULL;
 
     if (ConfGet("default-log-dir", &log_dir) != 1) {
-#ifdef OS_WIN32
-        log_dir = _getcwd(NULL, 0);
-        if (log_dir == NULL) {
-            log_dir = DEFAULT_LOG_DIR;
-        }
-#else
         log_dir = DEFAULT_LOG_DIR;
-#endif /* OS_WIN32 */
     }
 
     return log_dir;
@@ -53,13 +46,8 @@ char *ConfigGetLogDirectory()
 TmEcode ConfigCheckLogDirectory(char *log_dir)
 {
     SCEnter();
-#ifdef OS_WIN32
-    struct _stat buf;
-    if (_stat(log_dir, &buf) != 0) {
-#else
     struct stat buf;
     if (stat(log_dir, &buf) != 0) {
-#endif /* OS_WIN32 */
             SCReturnInt(TM_ECODE_FAILED);
     }
     SCReturnInt(TM_ECODE_OK);
@@ -102,16 +90,12 @@ int ConfUnixSocketIsEnable(void)
 
     if (!strcmp(value, "auto")) {
 #ifdef HAVE_LIBJANSSON
-#ifdef OS_WIN32
-        return 0;
-#else
         if (TimeModeIsLive()) {
             SCLogInfo("Running in live mode, activating unix socket");
             return 1;
         } else {
             return 0;
         }
-#endif
 #else
         return 0;
 #endif

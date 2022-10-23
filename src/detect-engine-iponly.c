@@ -55,11 +55,7 @@
 #include "util-print.h"
 #include "util-profiling.h"
 
-#ifdef OS_WIN32
-#include <winsock.h>
-#else
 #include <netinet/in.h>
-#endif /* OS_WIN32 */
 
 /**
  * \brief This function creates a new IPOnlyCIDRItem

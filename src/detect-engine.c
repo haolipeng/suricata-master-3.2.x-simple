@@ -1666,13 +1666,8 @@ static int DetectEngineMultiTenantLoadTenant(uint32_t tenant_id, const char *fil
 
     snprintf(prefix, sizeof(prefix), "multi-detect.%d", tenant_id);
 
-#ifdef OS_WIN32
-    struct _stat st;
-    if(_stat(filename, &st) != 0) {
-#else
     struct stat st;
     if(stat(filename, &st) != 0) {
-#endif /* OS_WIN32 */
         SCLogError(SC_ERR_FOPEN, "failed to stat file %s", filename);
         goto error;
     }

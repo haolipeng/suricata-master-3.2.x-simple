@@ -27,11 +27,7 @@
 /** \todo Adjust path */
 #define DAEMON_WORKING_DIRECTORY "/"
 
-#ifdef OS_WIN32
-#define Daemonize()
-#else
 void Daemonize (void);
-#endif
 
 int CheckValidDaemonModes (int, int);
 

@@ -494,11 +494,8 @@ static void SetBpfStringFromFile(char *filename)
     char *bpf_comment_tmp = NULL;
     char *bpf_comment_start =  NULL;
     uint32_t bpf_len = 0;
-#ifdef OS_WIN32
-    struct _stat st;
-#else
     struct stat st;
-#endif /* OS_WIN32 */
+
     FILE *fp = NULL;
     size_t nm = 0;
 
@@ -509,11 +506,7 @@ static void SetBpfStringFromFile(char *filename)
         exit(EXIT_FAILURE);
     }
 
-#ifdef OS_WIN32
-    if(_stat(filename, &st) != 0) {
-#else
     if(stat(filename, &st) != 0) {
-#endif /* OS_WIN32 */
         SCLogError(SC_ERR_FOPEN, "Failed to stat file %s", filename);
         exit(EXIT_FAILURE);
     }
@@ -1180,15 +1173,9 @@ static int ParseCommandLinePcapLive(SCInstance *suri, const char *in_arg)
             LiveRegisterDevice(suri->pcap_dev);
         }
     } else if (suri->run_mode == RUNMODE_PCAP_DEV) {
-#ifdef OS_WIN32
-        SCLogError(SC_ERR_PCAP_MULTI_DEV_NO_SUPPORT, "pcap multi dev "
-                "support is not (yet) supported on Windows.");
-        return TM_ECODE_FAILED;
-#else
         SCLogWarning(SC_WARN_PCAP_MULTI_DEV_EXPERIMENTAL, "using "
                 "multiple pcap devices to get packets is experimental.");
         LiveRegisterDevice(suri->pcap_dev);
-#endif
     } else {
         SCLogError(SC_ERR_MULTIPLE_RUN_MODE, "more than one run mode "
                 "has been specified");
@@ -1509,11 +1496,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
         {"list-keywords", optional_argument, &list_keywords, 1},
         {"runmode", required_argument, NULL, 0},
         {"engine-analysis", 0, &engine_analysis, 1},
-#ifdef OS_WIN32
-		{"service-install", 0, 0, 0},
-		{"service-remove", 0, 0, 0},
-		{"service-change-params", 0, 0, 0},
-#endif /* OS_WIN32 */
         {"pidfile", required_argument, 0, 0},
         {"init-errors-fatal", 0, 0, 0},
         {"disable-detection", 0, 0, 0},
@@ -1695,20 +1677,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
             } else if(strcmp((long_opts[option_index]).name, "engine-analysis") == 0) {
                 // do nothing for now
             }
-#ifdef OS_WIN32
-            else if(strcmp((long_opts[option_index]).name, "service-install") == 0) {
-                suri->run_mode = RUNMODE_INSTALL_SERVICE;
-                return TM_ECODE_OK;
-            }
-            else if(strcmp((long_opts[option_index]).name, "service-remove") == 0) {
-                suri->run_mode = RUNMODE_REMOVE_SERVICE;
-                return TM_ECODE_OK;
-            }
-            else if(strcmp((long_opts[option_index]).name, "service-change-params") == 0) {
-                suri->run_mode = RUNMODE_CHANGE_SERVICE_PARAMS;
-                return TM_ECODE_OK;
-            }
-#endif /* OS_WIN32 */
             else if(strcmp((long_opts[option_index]).name, "pidfile") == 0) {
                 suri->pid_filename = optarg;
             }
@@ -2075,36 +2043,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
     return TM_ECODE_OK;
 }
 
-#ifdef OS_WIN32
-static int WindowsInitService(int argc, char **argv)
-{
-    if (SCRunningAsService()) {
-        char path[MAX_PATH];
-        char *p = NULL;
-        strlcpy(path, argv[0], MAX_PATH);
-        if ((p = strrchr(path, '\\'))) {
-            *p = '\0';
-        }
-        if (!SetCurrentDirectory(path)) {
-            SCLogError(SC_ERR_FATAL, "Can't set current directory to: %s", path);
-            return -1;
-        }
-        SCLogInfo("Current directory is set to: %s", path);
-        daemon = 1;
-        SCServiceInit(argc, argv);
-    }
-
-    /* Windows socket subsystem initialization */
-    WSADATA wsaData;
-    if (0 != WSAStartup(MAKEWORD(2, 2), &wsaData)) {
-        SCLogError(SC_ERR_FATAL, "Can't initialize Windows sockets: %d", WSAGetLastError());
-        return -1;
-    }
-
-    return 0;
-}
-#endif /* OS_WIN32 */
-
 static int MayDaemonize(SCInstance *suri)
 {
     if (suri->daemon == 1 && suri->pid_filename == NULL) {
@@ -2301,26 +2239,6 @@ int StartInternalRunMode(SCInstance *suri, int argc, char **argv)
             RunUnittests(1, suri->regex_arg);
         case RUNMODE_UNITTEST:
             RunUnittests(0, suri->regex_arg);
-#ifdef OS_WIN32
-        case RUNMODE_INSTALL_SERVICE:
-            if (SCServiceInstall(argc, argv)) {
-                return TM_ECODE_FAILED;
-            }
-            SCLogInfo("Suricata service has been successfuly installed.");
-            return TM_ECODE_DONE;
-        case RUNMODE_REMOVE_SERVICE:
-            if (SCServiceRemove(argc, argv)) {
-                return TM_ECODE_FAILED;
-            }
-            SCLogInfo("Suricata service has been successfuly removed.");
-            return TM_ECODE_DONE;
-        case RUNMODE_CHANGE_SERVICE_PARAMS:
-            if (SCServiceChangeParams(argc, argv)) {
-                return TM_ECODE_FAILED;
-            }
-            SCLogInfo("Suricata service startup parameters has been successfuly changed.");
-            return TM_ECODE_DONE;
-#endif /* OS_WIN32 */
         default:
             /* simply continue for other running mode */
             break;
@@ -2776,13 +2694,6 @@ int main(int argc, char **argv)
 
     ParseSizeInit();
     RunModeRegisterRunModes();
-
-#ifdef OS_WIN32
-    /* service initialization */
-    if (WindowsInit(argc, argv) != 0) {
-        exit(EXIT_FAILURE);
-    }
-#endif /* OS_WIN32 */
 
     /* Initialize the configuration module. */
     ConfInit();
