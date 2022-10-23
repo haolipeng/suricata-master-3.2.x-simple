@@ -446,9 +446,6 @@ void MpmTableSetup(void)
         MpmHSRegister();
     #endif /* HAVE_HS_VALID_PLATFORM */
 #endif /* BUILD_HYPERSCAN */
-#ifdef __SC_CUDA_SUPPORT__
-    MpmACCudaRegister();
-#endif /* __SC_CUDA_SUPPORT__ */
 }
 
 int MpmAddPatternCS(struct MpmCtx_ *mpm_ctx, uint8_t *pat, uint16_t patlen,

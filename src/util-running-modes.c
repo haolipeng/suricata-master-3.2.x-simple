@@ -53,12 +53,3 @@ int ListAppLayerProtocols()
 
     exit(EXIT_SUCCESS);
 }
-
-#ifdef __SC_CUDA_SUPPORT__
-int ListCudaCards()
-{
-    SCCudaInitCudaEnvironment();
-    SCCudaListCards();
-    exit(EXIT_SUCCESS);
-}
-#endif

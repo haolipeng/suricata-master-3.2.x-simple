@@ -163,10 +163,6 @@
 #include "tmqh-packetpool.h"
 
 #include "util-proto-name.h"
-#ifdef __SC_CUDA_SUPPORT__
-#include "util-cuda-buffer.h"
-#include "util-mpm-ac.h"
-#endif
 #include "util-mpm-hs.h"
 #include "util-storage.h"
 #include "host-storage.h"
@@ -318,12 +314,6 @@ void CreateLowercaseTable()
 
 void GlobalsInitPreConfig()
 {
-#ifdef __SC_CUDA_SUPPORT__
-    /* Init the CUDA environment */
-    SCCudaInitCudaEnvironment();
-    CudaBufferInit();
-#endif
-
     memset(trans_q, 0, sizeof(trans_q));
     memset(data_queues, 0, sizeof(data_queues));
 
@@ -405,11 +395,6 @@ void GlobalsDestroy(SCInstance *suri)
     MpmHSGlobalCleanup();
 #endif
 
-#ifdef __SC_CUDA_SUPPORT__
-    if (PatternMatchDefaultMatcher() == MPM_AC_CUDA)
-        MpmCudaBufferDeSetup();
-    CudaHandlerFreeProfiles();
-#endif
     ConfDeInit();
 #ifdef HAVE_LUAJIT
     LuajitFreeStatesPool();
@@ -611,9 +596,6 @@ void usage(const char *progname)
 #endif /* UNITTESTS */
     printf("\t--list-app-layer-protos              : list supported app layer protocols\n");
     printf("\t--list-keywords[=all|csv|<kword>]    : list keywords implemented by the engine\n");
-#ifdef __SC_CUDA_SUPPORT__
-    printf("\t--list-cuda-cards                    : list cuda supported cards\n");
-#endif
     printf("\t--list-runmodes                      : list supported runmodes\n");
     printf("\t--runmode <runmode_id>               : specific runmode modification the engine should run.  The argument\n"
            "\t                                       supplied should be the id for the runmode obtained by running\n"
@@ -706,9 +688,7 @@ void SCPrintBuildInfo(void)
 #elif LIBPCAP_VERSION_MAJOR == 0
     strlcat(features, "LIBPCAP_VERSION_MAJOR=0 ", sizeof(features));
 #endif
-#ifdef __SC_CUDA_SUPPORT__
-    strlcat(features, "CUDA ", sizeof(features));
-#endif
+
 #ifdef HAVE_PFRING
     strlcat(features, "PF_RING ", sizeof(features));
 #endif
@@ -1658,11 +1638,9 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 return TM_ECODE_FAILED;
 #endif /* UNITTESTS */
             } else if(strcmp((long_opts[option_index]).name, "list-cuda-cards") == 0) {
-#ifndef __SC_CUDA_SUPPORT__
                 fprintf(stderr, "ERROR: Cuda not enabled. Make sure to pass "
                         "--enable-cuda to configure when building.\n");
                 return TM_ECODE_FAILED;
-#endif /* UNITTESTS */
             } else if (strcmp((long_opts[option_index]).name, "list-runmodes") == 0) {
                 suri->run_mode = RUNMODE_LIST_RUNMODES;
                 return TM_ECODE_OK;
@@ -2228,10 +2206,6 @@ int StartInternalRunMode(SCInstance *suri, int argc, char **argv)
         case RUNMODE_PRINT_USAGE:
             usage(argv[0]);
             return TM_ECODE_DONE;
-#ifdef __SC_CUDA_SUPPORT__
-        case RUNMODE_LIST_CUDA_CARDS:
-            return ListCudaCards();
-#endif
         case RUNMODE_LIST_RUNMODES:
             RunModeListRunmodes();
             return TM_ECODE_DONE;
@@ -2424,11 +2398,6 @@ static void PostConfLoadedDetectSetup(SCInstance *suri)
             exit(EXIT_FAILURE);
         }
 
-#ifdef __SC_CUDA_SUPPORT__
-        if (PatternMatchDefaultMatcher() == MPM_AC_CUDA)
-            CudaVarsSetDeCtx(de_ctx);
-#endif /* __SC_CUDA_SUPPORT__ */
-
         if (!de_ctx->minimal) {
             if (LoadSignatures(de_ctx, suri) != TM_ECODE_OK)
                 exit(EXIT_FAILURE);
@@ -2461,9 +2430,6 @@ static int PostConfLoadedSetup(SCInstance *suri)
 
     /* load the pattern matchers */
     MpmTableSetup();
-#ifdef __SC_CUDA_SUPPORT__
-    MpmCudaEnvironmentSetup();
-#endif
     SpmTableSetup();
 
     int disable_offloading;

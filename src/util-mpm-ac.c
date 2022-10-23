@@ -60,15 +60,6 @@
 #include "util-mpm-ac.h"
 #include "util-memcpy.h"
 
-#ifdef __SC_CUDA_SUPPORT__
-
-#include "util-mpm.h"
-#include "tm-threads.h"
-#include "detect-engine-mpm.h"
-#include "util-cuda.h"
-#include "util-cuda-handlers.h"
-#endif /* __SC_CUDA_SUPPORT__ */
-
 void SCACInitCtx(MpmCtx *);
 void SCACInitThreadCtx(MpmCtx *, MpmThreadCtx *);
 void SCACDestroyCtx(MpmCtx *);
@@ -848,25 +839,6 @@ int SCACPreparePatterns(MpmCtx *mpm_ctx)
 
     /* prepare the state table required by AC */
     SCACPrepareStateTable(mpm_ctx);
-
-#ifdef __SC_CUDA_SUPPORT__
-    if (mpm_ctx->mpm_type == MPM_AC_CUDA) {
-        int r = SCCudaMemAlloc(&ctx->state_table_u32_cuda,
-                               ctx->state_count * sizeof(unsigned int) * 256);
-        if (r < 0) {
-            SCLogError(SC_ERR_AC_CUDA_ERROR, "SCCudaMemAlloc failure.");
-            exit(EXIT_FAILURE);
-        }
-
-        r = SCCudaMemcpyHtoD(ctx->state_table_u32_cuda,
-                             ctx->state_table_u32,
-                             ctx->state_count * sizeof(unsigned int) * 256);
-        if (r < 0) {
-            SCLogError(SC_ERR_AC_CUDA_ERROR, "SCCudaMemcpyHtoD failure.");
-            exit(EXIT_FAILURE);
-        }
-    }
-#endif
 
     /* free all the stored patterns.  Should save us a good 100-200 mbs */
     for (i = 0; i < mpm_ctx->pattern_cnt; i++) {

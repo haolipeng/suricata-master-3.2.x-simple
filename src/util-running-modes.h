@@ -26,8 +26,5 @@
 
 int ListKeywords(const char *keyword_info);
 int ListAppLayerProtocols();
-#ifdef __SC_CUDA_SUPPORT__
-int ListCudaCards();
-#endif
 
 #endif /* __UTIL_RUNNING_MODES_H__ */
