@@ -615,9 +615,6 @@ void usage(const char *progname)
 #ifdef HAVE_AF_PACKET
     printf("\t--af-packet[=<dev>]                  : run in af-packet mode, no value select interfaces from suricata.yaml\n");
 #endif
-#ifdef HAVE_NETMAP
-    printf("\t--netmap[=<dev>]                     : run in netmap mode, no value select interfaces from suricata.yaml\n");
-#endif
 #ifdef HAVE_PFRING
     printf("\t--pfring[=<dev>]                     : run in pfring mode, use interfaces from suricata.yaml\n");
     printf("\t--pfring-int <dev>                   : run in pfring mode, use interface <dev>\n");
@@ -694,9 +691,6 @@ void SCPrintBuildInfo(void)
 #endif
 #ifdef HAVE_AF_PACKET
     strlcat(features, "AF_PACKET ", sizeof(features));
-#endif
-#ifdef HAVE_NETMAP
-    strlcat(features, "NETMAP ", sizeof(features));
 #endif
 #ifdef HAVE_PACKET_FANOUT
     strlcat(features, "HAVE_PACKET_FANOUT ", sizeof(features));
@@ -977,26 +971,6 @@ static TmEcode ParseInterfacesList(int runmode, char *pcap_dev)
             }
             if (AFPRunModeIsIPS()) {
                 SCLogInfo("AF_PACKET: Setting IPS mode");
-                EngineModeSetIPS();
-            }
-        }
-#endif
-#ifdef HAVE_NETMAP
-    } else if (runmode == RUNMODE_NETMAP) {
-        /* iface has been set on command line */
-        if (strlen(pcap_dev)) {
-            if (ConfSetFinal("netmap.live-interface", pcap_dev) != 1) {
-                SCLogError(SC_ERR_INITIALIZATION, "Failed to set netmap.live-interface");
-                SCReturnInt(TM_ECODE_FAILED);
-            }
-        } else {
-            int ret = LiveBuildDeviceList("netmap");
-            if (ret == 0) {
-                SCLogError(SC_ERR_INITIALIZATION, "No interface found in config for netmap");
-                SCReturnInt(TM_ECODE_FAILED);
-            }
-            if (NetmapRunModeIsIPS()) {
-                SCLogInfo("Netmap: Setting IPS mode");
                 EngineModeSetIPS();
             }
         }
@@ -1554,37 +1528,7 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 if (ParseCommandLineAfpacket(suri, optarg) != TM_ECODE_OK) {
                     return TM_ECODE_FAILED;
                 }
-            } else if (strcmp((long_opts[option_index]).name , "netmap") == 0){
-#ifdef HAVE_NETMAP
-                if (suri->run_mode == RUNMODE_UNKNOWN) {
-                    suri->run_mode = RUNMODE_NETMAP;
-                    if (optarg) {
-                        LiveRegisterDevice(optarg);
-                        memset(suri->pcap_dev, 0, sizeof(suri->pcap_dev));
-                        strlcpy(suri->pcap_dev, optarg,
-                                ((strlen(optarg) < sizeof(suri->pcap_dev)) ?
-                                 (strlen(optarg) + 1) : sizeof(suri->pcap_dev)));
-                    }
-                } else if (suri->run_mode == RUNMODE_NETMAP) {
-                    SCLogWarning(SC_WARN_PCAP_MULTI_DEV_EXPERIMENTAL, "using "
-                            "multiple devices to get packets is experimental.");
-                    if (optarg) {
-                        LiveRegisterDevice(optarg);
-                    } else {
-                        SCLogInfo("Multiple netmap option without interface on each is useless");
-                        break;
-                    }
-                } else {
-                    SCLogError(SC_ERR_MULTIPLE_RUN_MODE, "more than one run mode "
-                            "has been specified");
-                    usage(argv[0]);
-                    return TM_ECODE_FAILED;
-                }
-#else
-                    SCLogError(SC_ERR_NO_NETMAP, "NETMAP not enabled.");
-                    return TM_ECODE_FAILED;
-#endif
-            } else if (strcmp((long_opts[option_index]).name, "nflog") == 0) {
+            }else if (strcmp((long_opts[option_index]).name, "nflog") == 0) {
 #ifdef HAVE_NFLOG
                 if (suri->run_mode == RUNMODE_UNKNOWN) {
                     suri->run_mode = RUNMODE_NFLOG;
@@ -1805,12 +1749,9 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
             }
 #else /* not afpacket */
             /* warn user if netmap or pf-ring are available */
-#if defined HAVE_PFRING || HAVE_NETMAP
+#if defined HAVE_PFRING
             int i = 0;
 #ifdef HAVE_PFRING
-            i++;
-#endif
-#ifdef HAVE_NETMAP
             i++;
 #endif
             SCLogWarning(SC_WARN_FASTER_CAPTURE_AVAILABLE, "faster capture "
@@ -1818,15 +1759,9 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
 #ifdef HAVE_PFRING
                     " PF_RING (--pfring-int=%s)"
 #endif
-#ifdef HAVE_NETMAP
-                    " NETMAP (--netmap=%s)"
-#endif
                     ". Use --pcap=%s to suppress this warning",
                     i == 1 ? "" : "s", i == 1 ? "is" : "are"
 #ifdef HAVE_PFRING
-                    , optarg
-#endif
-#ifdef HAVE_NETMAP
                     , optarg
 #endif
                     , optarg
