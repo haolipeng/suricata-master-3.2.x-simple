@@ -55,6 +55,7 @@
 #include "tmqh-packetpool.h"
 #include "source-af-packet.h"
 #include "runmodes.h"
+#include <linux/sockios.h> //add by haolipeng
 
 #ifdef __SC_CUDA_SUPPORT__
 
