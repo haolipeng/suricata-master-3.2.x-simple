@@ -135,13 +135,12 @@ void Daemonize (void)
                 exit(EXIT_FAILURE);
             }
         }
-#ifndef OS_WIN32
+
         else {
             if (chdir("/") < 0) {
                 SCLogError(SC_ERR_DAEMON, "Error changing to working directory '/'");
             }
         }
-#endif
 
         SetupLogging();
 

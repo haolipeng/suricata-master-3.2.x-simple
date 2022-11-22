@@ -114,8 +114,6 @@ uint16_t UtilCpuGetNumProcessorsOnline()
     }
 
     return nprocs;
-#elif OS_WIN32
-	return UtilCpuGetNumProcessorsConfigured();
 #else
     SCLogError(SC_ERR_SYSCONF, "Couldn't retrieve the number of cpus online, "
                "synconf macro unavailable");
