@@ -842,11 +842,11 @@ static int StreamTcpPacketStateNone(ThreadVars *tv, Packet *p,
         if (ssn == NULL) {
             ssn = StreamTcpNewSession(p, stt->ssn_pool_id);
             if (ssn == NULL) {
-                StatsIncr(tv, stt->counter_tcp_ssn_memcap);
+                StatsIncr(tv, stt->counter_tcp_ssn_memcap);//超出tcp会话的内存阈值
                 return -1;
             }
 
-            StatsIncr(tv, stt->counter_tcp_sessions);
+            StatsIncr(tv, stt->counter_tcp_sessions);//增加tcp会话计数
         }
 
         /* set the state */
@@ -856,7 +856,7 @@ static int StreamTcpPacketStateNone(ThreadVars *tv, Packet *p,
         /* set the sequence numbers and window */
         ssn->client.isn = TCP_GET_SEQ(p);
         STREAMTCP_SET_RA_BASE_SEQ(&ssn->client, ssn->client.isn);
-        ssn->client.next_seq = ssn->client.isn + 1;
+        ssn->client.next_seq = ssn->client.isn + 1;//下一个seq
 
         /* Set the stream timestamp value, if packet has timestamp option
          * enabled. */
@@ -886,81 +886,6 @@ static int StreamTcpPacketStateNone(ThreadVars *tv, Packet *p,
                 "ssn->client.next_seq %" PRIu32 ", ssn->client.last_ack "
                 "%"PRIu32"", ssn, ssn->client.isn, ssn->client.next_seq,
                 ssn->client.last_ack);
-
-    } else if (p->tcph->th_flags & TH_ACK) {
-        if (stream_config.midstream == FALSE)
-            return 0;
-
-        if (ssn == NULL) {
-            ssn = StreamTcpNewSession(p, stt->ssn_pool_id);
-            if (ssn == NULL) {
-                StatsIncr(tv, stt->counter_tcp_ssn_memcap);
-                return -1;
-            }
-            StatsIncr(tv, stt->counter_tcp_sessions);
-        }
-        /* set the state */
-        StreamTcpPacketSetState(p, ssn, TCP_ESTABLISHED);
-        SCLogDebug("ssn %p: =~ midstream picked ssn state is now "
-                "TCP_ESTABLISHED", ssn);
-
-        ssn->flags = STREAMTCP_FLAG_MIDSTREAM;
-        ssn->flags |= STREAMTCP_FLAG_MIDSTREAM_ESTABLISHED;
-
-        /** window scaling for midstream pickups, we can't do much other
-         *  than assume that it's set to the max value: 14 */
-        ssn->client.wscale = TCP_WSCALE_MAX;
-        ssn->server.wscale = TCP_WSCALE_MAX;
-
-        /* set the sequence numbers and window */
-        ssn->client.isn = TCP_GET_SEQ(p) - 1;
-        STREAMTCP_SET_RA_BASE_SEQ(&ssn->client, ssn->client.isn);
-        ssn->client.next_seq = TCP_GET_SEQ(p) + p->payload_len;
-        ssn->client.window = TCP_GET_WINDOW(p) << ssn->client.wscale;
-        ssn->client.last_ack = TCP_GET_SEQ(p);
-        ssn->client.next_win = ssn->client.last_ack + ssn->client.window;
-        SCLogDebug("ssn %p: ssn->client.isn %u, ssn->client.next_seq %u",
-                ssn, ssn->client.isn, ssn->client.next_seq);
-
-        ssn->server.isn = TCP_GET_ACK(p) - 1;
-        STREAMTCP_SET_RA_BASE_SEQ(&ssn->server, ssn->server.isn);
-        ssn->server.next_seq = ssn->server.isn + 1;
-        ssn->server.last_ack = TCP_GET_ACK(p);
-        ssn->server.next_win = ssn->server.last_ack;
-
-        SCLogDebug("ssn %p: ssn->client.next_win %"PRIu32", "
-                "ssn->server.next_win %"PRIu32"", ssn,
-                ssn->client.next_win, ssn->server.next_win);
-        SCLogDebug("ssn %p: ssn->client.last_ack %"PRIu32", "
-                "ssn->server.last_ack %"PRIu32"", ssn,
-                ssn->client.last_ack, ssn->server.last_ack);
-
-        /* Set the timestamp value for both streams, if packet has timestamp
-         * option enabled.*/
-        if (TCP_HAS_TS(p)) {
-            ssn->client.last_ts = TCP_GET_TSVAL(p);
-            ssn->server.last_ts = TCP_GET_TSECR(p);
-            SCLogDebug("ssn %p: ssn->server.last_ts %" PRIu32" "
-                    "ssn->client.last_ts %" PRIu32"", ssn,
-                    ssn->server.last_ts, ssn->client.last_ts);
-
-            ssn->flags |= STREAMTCP_FLAG_TIMESTAMP;
-
-            ssn->client.last_pkt_ts = p->ts.tv_sec;
-            if (ssn->server.last_ts == 0)
-                ssn->server.flags |= STREAMTCP_STREAM_FLAG_ZERO_TIMESTAMP;
-            if (ssn->client.last_ts == 0)
-                ssn->client.flags |= STREAMTCP_STREAM_FLAG_ZERO_TIMESTAMP;
-
-        } else {
-            ssn->server.last_ts = 0;
-            ssn->client.last_ts = 0;
-        }
-
-        StreamTcpReassembleHandleSegment(tv, stt->ra_ctx, ssn, &ssn->client, p, pq);
-
-        ssn->flags |= STREAMTCP_FLAG_SACKOK;
-        SCLogDebug("ssn %p: assuming SACK permitted for both sides", ssn);
 
     } else {
         SCLogDebug("default case");
@@ -1099,7 +1024,7 @@ static void StreamTcp3whsSynAckUpdate(TcpSession *ssn, Packet *p, TcpStateQueue 
     }
 
     if (ssn->state != TCP_SYN_RECV) {
-        /* update state */
+        /* 状态更新为TCP_SYN_RECV*/
         StreamTcpPacketSetState(p, ssn, TCP_SYN_RECV);
         SCLogDebug("ssn %p: =~ ssn state is now TCP_SYN_RECV", ssn);
     }
@@ -1431,7 +1356,7 @@ static int StreamTcpPacketStateSynRecv(ThreadVars *tv, Packet *p,
     if (ssn == NULL)
         return -1;
 
-    if (p->tcph->th_flags & TH_RST) {
+    if (p->tcph->th_flags & TH_RST) {//RST数据包
         if (!StreamTcpValidateRst(ssn, p))
             return -1;
 
@@ -1474,7 +1399,8 @@ static int StreamTcpPacketStateSynRecv(ThreadVars *tv, Packet *p,
             }
         }
 
-    } else if (p->tcph->th_flags & TH_FIN) {
+    } 
+	else if (p->tcph->th_flags & TH_FIN) { //FIN数据包
         /* FIN is handled in the same way as in TCP_ESTABLISHED case */;
         if (ssn->flags & STREAMTCP_FLAG_TIMESTAMP) {
             if (!StreamTcpValidateTimestamp(ssn, p))
@@ -1587,9 +1513,11 @@ static int StreamTcpPacketStateSynRecv(ThreadVars *tv, Packet *p,
             ssn->client.window = TCP_GET_WINDOW(p) << ssn->client.wscale;
             ssn->client.next_win = ssn->client.last_ack + ssn->client.window;
 
+			//状态设为TCP_ESTABLISHED
             StreamTcpPacketSetState(p, ssn, TCP_ESTABLISHED);
             SCLogDebug("ssn %p: =~ ssn state is now TCP_ESTABLISHED", ssn);
 
+			//tcp流重组处理分段
             StreamTcpReassembleHandleSegment(tv, stt->ra_ctx, ssn,
                     &ssn->server, p, pq);
 
@@ -2230,6 +2158,7 @@ static int StreamTcpPacketStateEstablished(ThreadVars *tv, Packet *p,
                 return -1;
         }
 
+		//数据包方向不同，调用HandleEstablishedPacketToServer 或者 HandleEstablishedPacketToClient
         if (PKT_IS_TOSERVER(p)) {
             /* Process the received packet to server */
             HandleEstablishedPacketToServer(tv, ssn, p, stt, pq);
@@ -4312,7 +4241,7 @@ int StreamTcpPacket (ThreadVars *tv, Packet *p, StreamTcpThread *stt,
             if (StreamTcpPacketIsWindowUpdate(ssn, p) == 0)
                 if (StreamTcpPacketIsBadWindowUpdate(ssn,p))
                     goto skip;
-
+		//判断session的状态
         switch (ssn->state) {
             case TCP_SYN_SENT:
                 if(StreamTcpPacketStateSynSent(tv, p, stt, ssn, &stt->pseudo_queue)) {
