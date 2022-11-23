@@ -174,7 +174,7 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
 
     /* handle Flow */
     if (p->flags & PKT_WANTS_FLOW) {
-        FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_FLOW);
+        //FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_FLOW);
 
         FlowHandlePacket(tv, fw->dtv, p);
         if (likely(p->flow != NULL)) {
@@ -186,7 +186,7 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
         }
         /* Flow is now LOCKED */
 
-        FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_FLOW);
+        //FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_FLOW);
 
     /* if PKT_WANTS_FLOW is not set, but PKT_HAS_FLOW is, then this is a
      * pseudo packet created by the flow manager. */
@@ -197,13 +197,13 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
     SCLogDebug("packet %"PRIu64" has flow? %s", p->pcap_cnt, p->flow ? "yes" : "no");
 
     /* handle TCP and app layer */
-    if (PKT_IS_TCP(p)) {
+    if (PKT_IS_TCP(p)) { //tcp处理
         SCLogDebug("packet %"PRIu64" is TCP", p->pcap_cnt);
         DEBUG_ASSERT_FLOW_LOCKED(p->flow);
 
-        FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_STREAM);
+        //FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_STREAM);
         StreamTcp(tv, p, fw->stream_thread, &fw->pq, NULL);
-        FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_STREAM);
+        //FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_STREAM);
 
         /* Packets here can safely access p->flow as it's locked */
         SCLogDebug("packet %"PRIu64": extra packets %u", p->pcap_cnt, fw->pq.len);
@@ -214,9 +214,9 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
             // TODO do we need to call StreamTcp on these pseudo packets or not?
             //StreamTcp(tv, x, fw->stream_thread, &fw->pq, NULL);
             if (detect_thread != NULL) {
-                FLOWWORKER_PROFILING_START(x, PROFILE_FLOWWORKER_DETECT);
+                //FLOWWORKER_PROFILING_START(x, PROFILE_FLOWWORKER_DETECT);
                 Detect(tv, x, detect_thread, NULL, NULL);
-                FLOWWORKER_PROFILING_END(x, PROFILE_FLOWWORKER_DETECT);
+                //FLOWWORKER_PROFILING_END(x, PROFILE_FLOWWORKER_DETECT);
             }
 
             //  Outputs
@@ -228,10 +228,10 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
         }
 
     /* handle the app layer part of the UDP packet payload */
-    } else if (p->flow && p->proto == IPPROTO_UDP) {
-        FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_APPLAYERUDP);
+    } else if (p->flow && p->proto == IPPROTO_UDP) { //UDP处理
+        //FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_APPLAYERUDP);
         AppLayerHandleUdp(tv, fw->stream_thread->ra_ctx->app_tctx, p, p->flow);
-        FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_APPLAYERUDP);
+        //FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_APPLAYERUDP);
     }
 
     /* handle Detect */
@@ -239,9 +239,9 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
     SCLogDebug("packet %"PRIu64" calling Detect", p->pcap_cnt);
 
     if (detect_thread != NULL) {
-        FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_DETECT);
+        //FLOWWORKER_PROFILING_START(p, PROFILE_FLOWWORKER_DETECT);
         Detect(tv, p, detect_thread, NULL, NULL);
-        FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_DETECT);
+        //FLOWWORKER_PROFILING_END(p, PROFILE_FLOWWORKER_DETECT);
     }
 
     // Outputs.

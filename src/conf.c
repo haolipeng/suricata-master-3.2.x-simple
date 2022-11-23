@@ -1317,39 +1317,6 @@ int ConfNodeIsSequenceTest(void)
     PASS;
 }
 
-static int ConfSetFromStringTest(void)
-{
-    ConfNode *n;
-
-    ConfCreateContextBackup();
-    ConfInit();
-
-    FAIL_IF_NOT(ConfSetFromString("stream.midstream=true", 0));
-    n = ConfGetNode("stream.midstream");
-    FAIL_IF_NULL(n);
-    FAIL_IF_NULL(n->val);
-    FAIL_IF(strcmp("true", n->val));
-
-    FAIL_IF_NOT(ConfSetFromString("stream.midstream =false", 0));
-    n = ConfGetNode("stream.midstream");
-    FAIL_IF_NULL(n);
-    FAIL_IF(n->val == NULL || strcmp("false", n->val));
-
-    FAIL_IF_NOT(ConfSetFromString("stream.midstream= true", 0));
-    n = ConfGetNode("stream.midstream");
-    FAIL_IF_NULL(n);
-    FAIL_IF(n->val == NULL || strcmp("true", n->val));
-
-    FAIL_IF_NOT(ConfSetFromString("stream.midstream = false", 0));
-    n = ConfGetNode("stream.midstream");
-    FAIL_IF_NULL(n);
-    FAIL_IF(n->val == NULL || strcmp("false", n->val));
-
-    ConfDeInit();
-    ConfRestoreContextBackup();
-    PASS;
-}
-
 void ConfRegisterTests(void)
 {
     UtRegisterTest("ConfTestGetNonExistant", ConfTestGetNonExistant);
@@ -1372,7 +1339,7 @@ void ConfRegisterTests(void)
     UtRegisterTest("ConfGetNodeOrCreateTest", ConfGetNodeOrCreateTest);
     UtRegisterTest("ConfNodePruneTest", ConfNodePruneTest);
     UtRegisterTest("ConfNodeIsSequenceTest", ConfNodeIsSequenceTest);
-    UtRegisterTest("ConfSetFromStringTest", ConfSetFromStringTest);
+    //UtRegisterTest("ConfSetFromStringTest", ConfSetFromStringTest);
 }
 
 #endif /* UNITTESTS */

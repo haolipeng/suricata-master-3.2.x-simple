@@ -145,14 +145,14 @@ typedef struct SCInstance_ {
 
     char *keyword_info;
     char *runmode_custom_mode;
-#ifndef OS_WIN32
+
     char *user_name;
     char *group_name;
     uint8_t do_setuid;
     uint8_t do_setgid;
     uint32_t userid;
     uint32_t groupid;
-#endif /* OS_WIN32 */
+
     int delayed_detect;
     int disabled_detect;
     int daemon;

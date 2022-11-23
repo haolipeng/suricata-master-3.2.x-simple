@@ -50,8 +50,6 @@
 #include "util-optimize.h"
 #include "util-logopenfile.h"
 
-#ifndef OS_WIN32
-
 #define DEFAULT_ALERT_SYSLOG_FACILITY_STR       "local0"
 #define DEFAULT_ALERT_SYSLOG_FACILITY           LOG_LOCAL0
 #define DEFAULT_ALERT_SYSLOG_LEVEL              LOG_ERR
@@ -405,15 +403,11 @@ static int AlertSyslogLogger(ThreadVars *tv, void *thread_data, const Packet *p)
     return TM_ECODE_OK;
 }
 
-#endif /* !OS_WIN32 */
-
 /** \brief   Function to register the AlertSyslog module */
 void AlertSyslogRegister (void)
 {
-#ifndef OS_WIN32
     OutputRegisterPacketModule(LOGGER_ALERT_SYSLOG, MODULE_NAME, "syslog",
         AlertSyslogInitCtx, AlertSyslogLogger, AlertSyslogCondition,
         AlertSyslogThreadInit, AlertSyslogThreadDeinit,
         AlertSyslogExitPrintStats);
-#endif /* !OS_WIN32 */
 }

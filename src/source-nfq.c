@@ -589,10 +589,9 @@ static int NFQCallBack(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg,
 
 TmEcode NFQInitThread(NFQThreadVars *t, uint32_t queue_maxlen)
 {
-#ifndef OS_WIN32
     struct timeval tv;
     int opt;
-#endif
+
     NFQQueueVars *q = NFQGetQueue(t->nfq_index);
     if (q == NULL) {
         SCLogError(SC_ERR_NFQ_OPEN, "no queue for given index");
@@ -663,7 +662,6 @@ TmEcode NFQInitThread(NFQThreadVars *t, uint32_t queue_maxlen)
     }
 #endif /* HAVE_NFQ_MAXLEN */
 
-#ifndef OS_WIN32
     /* set netlink buffer size to a decent value */
     nfnl_rcvbufsiz(nfq_nfnlh(q->h), queue_maxlen * 1500);
     SCLogInfo("setting nfnl bufsize to %" PRId32 "", queue_maxlen * 1500);
@@ -728,12 +726,6 @@ TmEcode NFQInitThread(NFQThreadVars *t, uint32_t queue_maxlen)
 
     SCLogDebug("nfq_q->h %p, nfq_q->nh %p, nfq_q->qh %p, nfq_q->fd %" PRId32 "",
             q->h, q->nh, q->qh, q->fd);
-#else /* OS_WIN32 */
-    NFQMutexInit(q);
-    q->ovr.hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-    q->fd = nfq_fd(q->h);
-    SCLogDebug("q->h %p, q->qh %p, q->fd %p", q->h, q->qh, q->fd);
-#endif /* OS_WIN32 */
 
     return TM_ECODE_OK;
 }
