@@ -403,7 +403,7 @@ EXTRA_DIST = ChangeLog COPYING LICENSE suricata.yaml.in \
              classification.config threshold.config \
              reference.config
 
-SUBDIRS = $(HTP_DIR) src qa rules doc contrib scripts
+SUBDIRS = $(HTP_DIR) src qa rules contrib scripts
 CLEANFILES = stamp-h[0-9]*
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
