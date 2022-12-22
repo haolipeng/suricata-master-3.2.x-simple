@@ -46,3 +46,4 @@ src/build-info.h
 qa/log/
 /suricata-master-3.2.x.si4project
 suricata-3.2-c.si4project
+/.idea/
