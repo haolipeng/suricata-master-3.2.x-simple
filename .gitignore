@@ -1,6 +1,5 @@
 *.o
 *.lo
-*.in
 *.[ch]e
 *.log
 .deps/
@@ -9,12 +8,8 @@ m4/
 TAGS
 aclocal.m4
 autom4te.cache/
-config.guess
 config.log
-config.status
-config.sub
 libtool
-ltmain.sh
 src/*.diff
 src/*.patch
 src/*.rej
