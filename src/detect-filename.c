@@ -78,9 +78,9 @@ void DetectFilenameRegister(void)
             DETECT_SM_LIST_FILEMATCH,
             DetectFileInspectHttp);
 
-    DetectAppLayerInspectEngineRegister(ALPROTO_SMTP, SIG_FLAG_TOSERVER,
-            DETECT_SM_LIST_FILEMATCH,
-            DetectFileInspectSmtp);
+    //DetectAppLayerInspectEngineRegister(ALPROTO_SMTP, SIG_FLAG_TOSERVER,
+    //        DETECT_SM_LIST_FILEMATCH,
+    //        DetectFileInspectSmtp);
 
 	SCLogDebug("registering filename rule option");
     return;

@@ -51,7 +51,6 @@
 #include "app-layer-smb.h"
 #include "app-layer-dcerpc-common.h"
 #include "app-layer-dcerpc.h"
-#include "app-layer-smtp.h"
 
 #include "util-unittest.h"
 #include "util-unittest-helper.h"
@@ -273,6 +272,7 @@ int DetectFileInspectHttp(ThreadVars *tv,
  *
  *  \note flow is not locked at this time
  */
+/*
 int DetectFileInspectSmtp(ThreadVars *tv,
                           DetectEngineCtx *de_ctx, DetectEngineThreadCtx *det_ctx,
                           Signature *s, Flow *f, uint8_t flags, void *alstate,
@@ -311,3 +311,4 @@ int DetectFileInspectSmtp(ThreadVars *tv,
 end:
     SCReturnInt(r);
 }
+*/

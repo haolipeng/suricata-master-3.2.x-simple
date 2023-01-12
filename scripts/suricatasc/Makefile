@@ -134,11 +134,11 @@ CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 -march=native
 CLANG_CFLAGS = 
-CONFIGURE_LOCALSTATEDIR = /usr/var
+CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
-CONFIGURE_SYSCONDIR = /usr/etc
+CONFIGURE_SYSCONDIR = /etc
 CPP = gcc -E
-CPPFLAGS =  -I/usr/local/include -I/usr/local/lib/htp/include -I/usr/include/nspr -I/usr/include/nss -I/usr/include/nspr
+CPPFLAGS = -I/usr/include  -I/usr/local/include -I/usr/local/lib/htp/include
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -160,7 +160,7 @@ HAVE_GIT_CMD = /usr/bin/git
 HAVE_PCAP_CONFIG = /usr/bin/pcap-config
 HAVE_PDFLATEX = no
 HAVE_PKG_CONFIG = /usr/bin/pkg-config
-HAVE_PYTHON_CONFIG = /usr/bin/python
+HAVE_PYTHON_CONFIG = no
 HAVE_SPHINXBUILD = no
 HAVE_WGET = /usr/bin/wget
 HTP_DIR = 
@@ -171,7 +171,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = 
+LDFLAGS =  -L/usr/lib
 LIBHTPDEVVERSION_CFLAGS = 
 LIBHTPDEVVERSION_LIBS = 
 LIBHTPMINVERSION_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
@@ -186,7 +186,7 @@ LIBPRELUDE_LDFLAGS =
 LIBPRELUDE_LIBS = 
 LIBPRELUDE_PREFIX = 
 LIBPRELUDE_PTHREAD_CFLAGS = 
-LIBS = -lmagic -lnss3 -lnspr4 -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -L/usr/local/lib -lhtp -lplds4 -lplc4 -lnspr4 -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
+LIBS = -lmagic -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -L/usr/local/lib -lhtp
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -256,15 +256,15 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 e_enable_evelog = yes
-e_localstatedir = /usr/var/run/suricata
-e_logcertsdir = /usr/var/log/suricata/certs
-e_logdir = /usr/var/log/suricata/
-e_logfilesdir = /usr/var/log/suricata/files
+e_localstatedir = /var/run/suricata
+e_logcertsdir = /var/log/suricata/certs
+e_logdir = /var/log/suricata/
+e_logfilesdir = /var/log/suricata/files
 e_magic_file = 
 e_magic_file_comment = #
-e_rundir = /usr/var/run/
-e_sysconfdir = /usr/etc/suricata/
-e_sysconfrulesdir = /usr/etc/suricata/rules
+e_rundir = /var/run/
+e_sysconfdir = /etc/suricata/
+e_sysconfrulesdir = /etc/suricata/rules
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
 host_alias = 
@@ -283,12 +283,12 @@ libhtp_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
 libhtp_LIBS = -L/usr/local/lib -lhtp
 libnetfilter_queue_CFLAGS = 
 libnetfilter_queue_LIBS = 
-libnspr_CFLAGS = -I/usr/include/nspr
-libnspr_LIBS = -lplds4 -lplc4 -lnspr4
-libnss_CFLAGS = -I/usr/include/nss -I/usr/include/nspr
-libnss_LIBS = -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
+libnspr_CFLAGS = 
+libnspr_LIBS = 
+libnss_CFLAGS = 
+libnss_LIBS = 
 localedir = ${datarootdir}/locale
-localstatedir = ${prefix}/var
+localstatedir = /var
 mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
@@ -305,7 +305,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 subdirs = 
-sysconfdir = ${prefix}/etc
+sysconfdir = /etc
 target_alias = 
 top_build_prefix = ../../
 top_builddir = ../..
@@ -393,7 +393,7 @@ distdir-am: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-#all-local:
+all-local:
 all-am: Makefile all-local
 installdirs:
 install: install-am
@@ -426,9 +426,9 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-#clean-local:
-#install-exec-local:
-#uninstall-local:
+uninstall-local:
+clean-local:
+install-exec-local:
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am
@@ -513,20 +513,20 @@ uninstall-am: uninstall-local
 .PRECIOUS: Makefile
 
 
-all-local:
-	mkdir -p $(top_builddir)/scripts/suricatasc/src
-	$(PYTHON) $(srcdir)/setup.py build;
+#all-local:
+#	mkdir -p $(top_builddir)/scripts/suricatasc/src
+#	$(PYTHON) $(srcdir)/setup.py build;
 
-install-exec-local:
-	$(PYTHON) $(srcdir)/setup.py install --prefix $(DESTDIR)$(prefix)
+#install-exec-local:
+#	$(PYTHON) $(srcdir)/setup.py install --prefix $(DESTDIR)$(prefix)
 
-clean-local:
-	$(PYTHON) $(srcdir)/setup.py clean;
-	rm -rf $(top_builddir)/scripts/suricatasc/build
+#clean-local:
+#	$(PYTHON) $(srcdir)/setup.py clean;
+#	rm -rf $(top_builddir)/scripts/suricatasc/build
 
-uninstall-local:
-	[ ! -f "$(DESTDIR)$(prefix)/bin/suricatasc" ] || rm -f "$(DESTDIR)$(prefix)/bin/suricatasc"
-	find "$(DESTDIR)$(prefix)/lib" -name "suricatasc-*.egg-info" -delete ||true
+#uninstall-local:
+#	[ ! -f "$(DESTDIR)$(prefix)/bin/suricatasc" ] || rm -f "$(DESTDIR)$(prefix)/bin/suricatasc"
+#	find "$(DESTDIR)$(prefix)/lib" -name "suricatasc-*.egg-info" -delete ||true
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

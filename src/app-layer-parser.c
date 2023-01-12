@@ -51,13 +51,10 @@
 #include "app-layer-dcerpc.h"
 #include "app-layer-dcerpc-udp.h"
 #include "app-layer-htp.h"
-#include "app-layer-ftp.h"
 #include "app-layer-ssl.h"
 #include "app-layer-ssh.h"
-#include "app-layer-smtp.h"
 #include "app-layer-dns-udp.h"
 #include "app-layer-dns-tcp.h"
-#include "app-layer-modbus.h"
 #include "app-layer-enip.h"
 #include "app-layer-dnp3.h"
 #include "app-layer-template.h"
@@ -214,7 +211,7 @@ int AppLayerParserDeSetup(void)
 {
     SCEnter();
 
-    SMTPParserCleanup();
+    //SMTPParserCleanup();
 
     SCReturnInt(0);
 }
@@ -1222,12 +1219,12 @@ void AppLayerParserRegisterProtocolParsers(void)
     //RegisterSMB2Parsers();
     RegisterDCERPCParsers();
     RegisterDCERPCUDPParsers();
-    RegisterFTPParsers();
+    //RegisterFTPParsers();
     RegisterSSHParsers();
-    RegisterSMTPParsers();
+    //RegisterSMTPParsers();
     RegisterDNSUDPParsers();
     RegisterDNSTCPParsers();
-    RegisterModbusParsers();
+    //RegisterModbusParsers();
     RegisterENIPUDPParsers();
     RegisterENIPTCPParsers();
     RegisterDNP3Parsers();

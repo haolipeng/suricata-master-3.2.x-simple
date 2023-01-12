@@ -47,7 +47,7 @@ vars:
 ## Step 2: select the rules to enable or disable
 ##
 
-default-rule-path: /usr/etc/suricata/rules
+default-rule-path: /etc/suricata/rules
 rule-files:
  - botcc.rules
  # - botcc.portgrouped.rules
@@ -104,9 +104,9 @@ rule-files:
 # - app-layer-events.rules  # available in suricata sources under rules dir
 # - dnp3-events.rules       # available in suricata sources under rules dir
 
-classification-file: /usr/etc/suricata/classification.config
-reference-config-file: /usr/etc/suricata/reference.config
-# threshold-file: /usr/etc/suricata/threshold.config
+classification-file: /etc/suricata/classification.config
+reference-config-file: /etc/suricata/reference.config
+# threshold-file: /etc/suricata/threshold.config
 
 
 ##
@@ -116,7 +116,7 @@ reference-config-file: /usr/etc/suricata/reference.config
 # The default logging directory.  Any log or output file will be
 # placed here if its not specified with a full path name. This can be
 # overridden with the -l command line parameter.
-default-log-dir: /usr/var/log/suricata/
+default-log-dir: /var/log/suricata/
 
 # global stats configuration
 stats:
@@ -498,7 +498,7 @@ logging:
   - file:
       enabled: yes
       level: info
-      filename: /usr/var/log/suricata/suricata.log
+      filename: /var/log/suricata/suricata.log
       # type: json
   - syslog:
       enabled: no
@@ -893,7 +893,7 @@ asn1-max-frames: 256
 
 # Default pid file.
 # Will use this file if no --pidfile in command options.
-#pid-file: /usr/var/run/suricata.pid
+#pid-file: /var/run/suricata.pid
 
 # Daemon working directory
 # Suricata will change directory to this one if provided
@@ -980,8 +980,8 @@ legacy:
 #   - alert
 
 # IP Reputation
-#reputation-categories-file: /usr/etc/suricata/iprep/categories.txt
-#default-reputation-path: /usr/etc/suricata/iprep
+#reputation-categories-file: /etc/suricata/iprep/categories.txt
+#default-reputation-path: /etc/suricata/iprep
 #reputation-files:
 # - reputation.list
 

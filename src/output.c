@@ -61,7 +61,6 @@
 #include "log-pcap.h"
 #include "log-file.h"
 #include "output-json-file.h"
-#include "output-json-smtp.h"
 #include "output-json-stats.h"
 #include "log-filestore.h"
 #include "log-tcp-data.h"
@@ -1059,8 +1058,6 @@ void OutputRegisterLoggers(void)
     JsonDropLogRegister();
     /* json log */
     OutputJsonRegister();
-    /* email logs */
-    JsonSmtpLogRegister();
     /* http log */
     LogHttpLogRegister();
     JsonHttpLogRegister();

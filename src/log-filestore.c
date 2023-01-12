@@ -54,7 +54,6 @@
 #include "util-logopenfile.h"
 
 #include "app-layer-htp.h"
-#include "app-layer-smtp.h"
 #include "util-decode-mime.h"
 #include "util-memcmp.h"
 #include "stream-tcp-reassemble.h"
@@ -141,7 +140,7 @@ static void LogFilestoreMetaGetUserAgent(FILE *fp, const Packet *p, const File *
 
     fprintf(fp, "<unknown>");
 }
-
+#if 0
 static void LogFilestoreMetaGetSmtp(FILE *fp, const Packet *p, const File *ff)
 {
     SMTPState *state = (SMTPState *) p->flow->alstate;
@@ -166,6 +165,7 @@ static void LogFilestoreMetaGetSmtp(FILE *fp, const Packet *p, const File *ff)
         }
     }
 }
+#endif
 
 static void LogFilestoreLogCreateMetaFile(const Packet *p, const File *ff, char *filename, int ipver) {
     char metafilename[PATH_MAX] = "";
@@ -227,7 +227,7 @@ static void LogFilestoreLogCreateMetaFile(const Packet *p, const File *ff, char 
             fprintf(fp, "\n");
         } else if (p->flow->alproto == ALPROTO_SMTP) {
             /* Only applicable to SMTP */
-            LogFilestoreMetaGetSmtp(fp, p, ff);
+            //LogFilestoreMetaGetSmtp(fp, p, ff);
         }
 
         fprintf(fp, "FILENAME:          ");

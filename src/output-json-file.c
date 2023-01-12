@@ -57,8 +57,6 @@
 #include "output.h"
 #include "output-json.h"
 #include "output-json-http.h"
-#include "output-json-smtp.h"
-#include "output-json-email-common.h"
 
 #include "app-layer-htp.h"
 #include "util-memcmp.h"
@@ -97,12 +95,6 @@ static void FileWriteJsonRecord(JsonFileLogThread *aft, const Packet *p, const F
                 json_object_set_new(js, "http", hjs);
             break;
         case ALPROTO_SMTP:
-            hjs = JsonSMTPAddMetadata(p->flow, ff->txid);
-            if (hjs)
-                json_object_set_new(js, "smtp", hjs);
-            hjs = JsonEmailAddMetadata(p->flow, ff->txid);
-            if (hjs)
-                json_object_set_new(js, "email", hjs);
             break;
     }
 

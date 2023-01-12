@@ -55,7 +55,6 @@
 #include "util-logopenfile.h"
 
 #include "app-layer-htp.h"
-#include "app-layer-smtp.h"
 #include "util-decode-mime.h"
 #include "util-memcmp.h"
 #include "stream-tcp-reassemble.h"
@@ -145,7 +144,7 @@ static void LogFileMetaGetUserAgent(FILE *fp, const Packet *p, const File *ff)
 
     fprintf(fp, "<unknown>");
 }
-
+#if 0
 static void LogFileMetaGetSmtp(FILE *fp, const Packet *p, const File *ff)
 {
     SMTPState *state = (SMTPState *) p->flow->alstate;
@@ -173,6 +172,7 @@ static void LogFileMetaGetSmtp(FILE *fp, const Packet *p, const File *ff)
         }
     }
 }
+#endif
 
 /**
  *  \internal
@@ -263,7 +263,7 @@ static void LogFileWriteJsonRecord(LogFileLogThread *aft, const Packet *p, const
         fprintf(fp, "\", ");
     } else if (p->flow->alproto == ALPROTO_SMTP) {
         /* Only applicable to SMTP */
-        LogFileMetaGetSmtp(fp, p, ff);
+        //LogFileMetaGetSmtp(fp, p, ff);
     }
 
     fprintf(fp, "\"filename\": \"");

@@ -54,7 +54,6 @@
 #include "detect-tls-cert-subject.h"
 #include "detect-engine-state.h"
 #include "detect-engine-analyzer.h"
-#include "detect-engine-filedata-smtp.h"
 
 #include "detect-http-cookie.h"
 #include "detect-http-method.h"
@@ -100,7 +99,6 @@
 #include "detect-rev.h"
 #include "detect-flow.h"
 #include "detect-window.h"
-#include "detect-ftpbounce.h"
 #include "detect-isdataat.h"
 #include "detect-id.h"
 #include "detect-rpc.h"
@@ -175,7 +173,6 @@
 #include "app-layer.h"
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
-#include "app-layer-smtp.h"
 #include "app-layer-template.h"
 #include "detect-tls.h"
 #include "detect-tls-cert-validity.h"
@@ -185,7 +182,6 @@
 #include "detect-http-stat-code.h"
 #include "detect-ssl-version.h"
 #include "detect-ssl-state.h"
-#include "detect-modbus.h"
 #include "detect-cipservice.h"
 #include "detect-dnp3.h"
 
@@ -1577,7 +1573,7 @@ end:
     DetectEngineCleanHCBDBuffers(det_ctx);
     DetectEngineCleanHSBDBuffers(det_ctx);
     DetectEngineCleanHHDBuffers(det_ctx);
-    DetectEngineCleanSMTPBuffers(det_ctx);
+    //DetectEngineCleanSMTPBuffers(det_ctx);
 
     /* store the found sgh (or NULL) in the flow to save us from looking it
      * up again for the next packet. Also return any stream chunk we processed
@@ -4191,7 +4187,6 @@ void SigTableSetup(void)
     DetectHttpStatCodeRegister();
 
     DetectDnsQueryRegister();
-    DetectModbusRegister();
     DetectCipServiceRegister();
     DetectEnipCommandRegister();
     DetectDNP3Register();
@@ -4220,7 +4215,7 @@ void SigTableSetup(void)
     DetectFlowRegister();
     DetectWindowRegister();
     DetectRpcRegister();
-    DetectFtpbounceRegister();
+    //DetectFtpbounceRegister();
     DetectIsdataatRegister();
     DetectIdRegister();
     DetectDsizeRegister();

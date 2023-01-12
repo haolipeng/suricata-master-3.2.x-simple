@@ -63,7 +63,6 @@
 #include "detect-engine-hcbd.h"
 #include "detect-engine-hsbd.h"
 #include "detect-engine-dns.h"
-#include "detect-engine-filedata-smtp.h"
 #include "detect-engine-tls.h"
 
 #include "stream.h"

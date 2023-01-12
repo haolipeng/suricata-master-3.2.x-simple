@@ -186,8 +186,7 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
-am__DIST_COMMON = $(srcdir)/Makefile.in AUTHORS INSTALL NEWS README \
-	TODO
+am__DIST_COMMON = $(srcdir)/Makefile.in INSTALL README TODO
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -226,11 +225,11 @@ CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 -march=native
 CLANG_CFLAGS = 
-CONFIGURE_LOCALSTATEDIR = /usr/var
+CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
-CONFIGURE_SYSCONDIR = /usr/etc
+CONFIGURE_SYSCONDIR = /etc
 CPP = gcc -E
-CPPFLAGS =  -I/usr/local/include -I/usr/local/lib/htp/include -I/usr/include/nspr -I/usr/include/nss -I/usr/include/nspr
+CPPFLAGS = -I/usr/include  -I/usr/local/include -I/usr/local/lib/htp/include
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -252,7 +251,7 @@ HAVE_GIT_CMD = /usr/bin/git
 HAVE_PCAP_CONFIG = /usr/bin/pcap-config
 HAVE_PDFLATEX = no
 HAVE_PKG_CONFIG = /usr/bin/pkg-config
-HAVE_PYTHON_CONFIG = /usr/bin/python
+HAVE_PYTHON_CONFIG = no
 HAVE_SPHINXBUILD = no
 HAVE_WGET = /usr/bin/wget
 HTP_DIR = 
@@ -263,7 +262,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = 
+LDFLAGS =  -L/usr/lib
 LIBHTPDEVVERSION_CFLAGS = 
 LIBHTPDEVVERSION_LIBS = 
 LIBHTPMINVERSION_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
@@ -278,7 +277,7 @@ LIBPRELUDE_LDFLAGS =
 LIBPRELUDE_LIBS = 
 LIBPRELUDE_PREFIX = 
 LIBPRELUDE_PTHREAD_CFLAGS = 
-LIBS = -lmagic -lnss3 -lnspr4 -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -L/usr/local/lib -lhtp -lplds4 -lplc4 -lnspr4 -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
+LIBS = -lmagic -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -L/usr/local/lib -lhtp
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -348,15 +347,15 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE}
 dvidir = ${docdir}
 e_enable_evelog = yes
-e_localstatedir = /usr/var/run/suricata
-e_logcertsdir = /usr/var/log/suricata/certs
-e_logdir = /usr/var/log/suricata/
-e_logfilesdir = /usr/var/log/suricata/files
+e_localstatedir = /var/run/suricata
+e_logcertsdir = /var/log/suricata/certs
+e_logdir = /var/log/suricata/
+e_logfilesdir = /var/log/suricata/files
 e_magic_file = 
 e_magic_file_comment = #
-e_rundir = /usr/var/run/
-e_sysconfdir = /usr/etc/suricata/
-e_sysconfrulesdir = /usr/etc/suricata/rules
+e_rundir = /var/run/
+e_sysconfdir = /etc/suricata/
+e_sysconfrulesdir = /etc/suricata/rules
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
 host_alias = 
@@ -375,12 +374,12 @@ libhtp_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
 libhtp_LIBS = -L/usr/local/lib -lhtp
 libnetfilter_queue_CFLAGS = 
 libnetfilter_queue_LIBS = 
-libnspr_CFLAGS = -I/usr/include/nspr
-libnspr_LIBS = -lplds4 -lplc4 -lnspr4
-libnss_CFLAGS = -I/usr/include/nss -I/usr/include/nspr
-libnss_LIBS = -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
+libnspr_CFLAGS = 
+libnspr_LIBS = 
+libnss_CFLAGS = 
+libnss_LIBS = 
 localedir = ${datarootdir}/locale
-localstatedir = ${prefix}/var
+localstatedir = /var
 mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
@@ -397,27 +396,14 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 subdirs = 
-sysconfdir = ${prefix}/etc
+sysconfdir = /etc
 target_alias = 
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 SUBDIRS = userguide
 EXTRA_DIST = \
-GITGUIDE \
-INSTALL \
-README \
-TODO \
-\
-Basic_Setup.txt \
-HTP_library_installation.txt \
-Installation_from_GIT_with_PF_RING_on_Ubuntu_server_1104.txt \
-Installation_with_PF_RING.txt \
-Installation_from_GIT_with_PCRE-JIT.txt \
-Setting_up_IPSinline_for_Linux.txt \
-Third_Party_Installation_Guides.txt \
-Ubuntu_Installation.txt \
-Ubuntu_Installation_from_GIT.txt 
+INSTALL.PF_RING 
 
 dist_doc_DATA = ${EXTRA_DIST}
 all: all-recursive

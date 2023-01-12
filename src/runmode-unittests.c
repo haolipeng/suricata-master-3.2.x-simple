@@ -50,8 +50,6 @@
 #include "detect-engine-hrhhd.h"
 #include "detect-engine-state.h"
 #include "detect-engine-tag.h"
-#include "detect-engine-modbus.h"
-#include "detect-engine-filedata-smtp.h"
 #include "detect-fast-pattern.h"
 #include "flow.h"
 #include "flow-timeout.h"
@@ -75,10 +73,8 @@
 #include "app-layer-dcerpc.h"
 #include "app-layer-dcerpc-udp.h"
 #include "app-layer-htp.h"
-#include "app-layer-ftp.h"
 #include "app-layer-ssl.h"
 #include "app-layer-ssh.h"
-#include "app-layer-smtp.h"
 
 #include "util-action.h"
 #include "util-radix-tree.h"
@@ -202,9 +198,7 @@ static void RegisterUnittests(void)
     DetectEngineHttpUARegisterTests();
     DetectEngineHttpHHRegisterTests();
     DetectEngineHttpHRHRegisterTests();
-    DetectEngineInspectModbusRegisterTests();
     DetectEngineRegisterTests();
-    DetectEngineSMTPFiledataRegisterTests();
     SCLogRegisterTests();
     MagicRegisterTests();
     UtilMiscRegisterTests();
@@ -214,7 +208,7 @@ static void RegisterUnittests(void)
     SCAtomicRegisterTests();
     MemrchrRegisterTests();
     AppLayerUnittestsRegister();
-    MimeDecRegisterTests();
+    //MimeDecRegisterTests();
     StreamingBufferRegisterTests();
 }
 #endif
