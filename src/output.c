@@ -68,7 +68,6 @@
 #include "output-json.h"
 #include "output-json-template.h"
 #include "output-lua.h"
-#include "output-json-dnp3.h"
 
 typedef struct RootLogger_ {
     ThreadInitFunc ThreadInit;
@@ -1087,9 +1086,6 @@ void OutputRegisterLoggers(void)
     JsonNetFlowLogRegister();
     /* json stats */
     JsonStatsLogRegister();
-
-    /* DNP3. */
-    JsonDNP3LogRegister();
 
     /* Template JSON logger. */
     JsonTemplateLogRegister();

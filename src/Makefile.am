@@ -16,8 +16,6 @@ app-layer.c app-layer.h \
 app-layer-dcerpc.c app-layer-dcerpc.h \
 app-layer-dcerpc-udp.c app-layer-dcerpc-udp.h \
 app-layer-detect-proto.c app-layer-detect-proto.h \
-app-layer-dnp3.c app-layer-dnp3.h \
-app-layer-dnp3-objects.c app-layer-dnp3-objects.h \
 app-layer-dns-common.c app-layer-dns-common.h \
 app-layer-dns-tcp.c app-layer-dns-tcp.h \
 app-layer-dns-udp.c app-layer-dns-udp.h \
@@ -89,7 +87,6 @@ detect-dce-stub-data.c detect-dce-stub-data.h \
 detect-depth.c detect-depth.h \
 detect-detection-filter.c detect-detection-filter.h \
 detect-distance.c detect-distance.h \
-detect-dnp3.c detect-dnp3.h \
 detect-dns-query.c detect-dns-query.h \
 detect-tls-sni.c detect-tls-sni.h \
 detect-tls-cert-issuer.c detect-tls-cert-issuer.h \
@@ -259,8 +256,6 @@ output-filedata.c output-filedata.h \
 output-flow.c output-flow.h \
 output-json-alert.c output-json-alert.h \
 output-json-dns.c output-json-dns.h \
-output-json-dnp3.c output-json-dnp3.h \
-output-json-dnp3-objects.c output-json-dnp3-objects.h \
 output-json-drop.c output-json-drop.h \
 output-json-file.c output-json-file.h \
 output-json-flow.c output-json-flow.h \
@@ -372,8 +367,6 @@ util-logopenfile-tile.h util-logopenfile-tile.c \
 util-lua.c util-lua.h \
 util-luajit.c util-luajit.h \
 util-lua-common.c util-lua-common.h \
-util-lua-dnp3.c util-lua-dnp3.h \
-util-lua-dnp3-objects.c util-lua-dnp3-objects.h \
 util-lua-dns.c util-lua-dns.h \
 util-lua-http.c util-lua-http.h \
 util-lua-tls.c util-lua-tls.h \
@@ -431,10 +424,7 @@ util-unittest-helper.c util-unittest-helper.h \
 util-validate.h util-affinity.h util-affinity.c \
 util-var.c util-var.h \
 util-var-name.c util-var-name.h \
-util-vector.h \
-win32-misc.c win32-misc.h \
-win32-service.c win32-service.h \
-win32-syslog.h
+util-vector.h 
 
 EXTRA_DIST = util-mpm-ac-cuda-kernel.cu ptxdump.py
 

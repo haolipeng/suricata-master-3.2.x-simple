@@ -44,7 +44,6 @@
 #include "detect-engine-mpm.h"
 #include "detect-reference.h"
 #include "app-layer-parser.h"
-#include "app-layer-dnp3.h"
 #include "app-layer-htp.h"
 #include "app-layer-htp-xff.h"
 #include "util-classification-config.h"
@@ -53,7 +52,6 @@
 
 #include "output.h"
 #include "output-json.h"
-#include "output-json-dnp3.h"
 #include "output-json-http.h"
 #include "output-json-tls.h"
 #include "output-json-ssh.h"
@@ -139,7 +137,7 @@ static void AlertJsonSsh(const Flow *f, json_t *js)
 
     return;
 }
-
+#if 0
 static void AlertJsonDnp3(const Flow *f, json_t *js)
 {
     DNP3State *dnp3_state = (DNP3State *)FlowGetAppState(f);
@@ -169,6 +167,7 @@ static void AlertJsonDnp3(const Flow *f, json_t *js)
 
     return;
 }
+#endif
 
 void AlertJsonHeader(const Packet *p, const PacketAlert *pa, json_t *js)
 {
@@ -305,7 +304,7 @@ static int AlertJson(ThreadVars *tv, JsonAlertLogThread *aft, const Packet *p)
             if (p->flow != NULL) {
                 uint16_t proto = FlowGetAppProtocol(p->flow);
                 if (proto == ALPROTO_DNP3) {
-                    AlertJsonDnp3(p->flow, js);
+                    //AlertJsonDnp3(p->flow, js);
                 }
             }
         }

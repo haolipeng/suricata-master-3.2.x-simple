@@ -112,8 +112,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	alert-prelude.$(OBJEXT) alert-syslog.$(OBJEXT) \
 	alert-unified2-alert.$(OBJEXT) app-layer.$(OBJEXT) \
 	app-layer-dcerpc.$(OBJEXT) app-layer-dcerpc-udp.$(OBJEXT) \
-	app-layer-detect-proto.$(OBJEXT) app-layer-dnp3.$(OBJEXT) \
-	app-layer-dnp3-objects.$(OBJEXT) \
+	app-layer-detect-proto.$(OBJEXT) \
 	app-layer-dns-common.$(OBJEXT) app-layer-dns-tcp.$(OBJEXT) \
 	app-layer-dns-udp.$(OBJEXT) app-layer-enip.$(OBJEXT) \
 	app-layer-enip-common.$(OBJEXT) app-layer-events.$(OBJEXT) \
@@ -148,8 +147,8 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-dce-iface.$(OBJEXT) detect-dce-opnum.$(OBJEXT) \
 	detect-dce-stub-data.$(OBJEXT) detect-depth.$(OBJEXT) \
 	detect-detection-filter.$(OBJEXT) detect-distance.$(OBJEXT) \
-	detect-dnp3.$(OBJEXT) detect-dns-query.$(OBJEXT) \
-	detect-tls-sni.$(OBJEXT) detect-tls-cert-issuer.$(OBJEXT) \
+	detect-dns-query.$(OBJEXT) detect-tls-sni.$(OBJEXT) \
+	detect-tls-cert-issuer.$(OBJEXT) \
 	detect-tls-cert-subject.$(OBJEXT) detect-dsize.$(OBJEXT) \
 	detect-engine-address.$(OBJEXT) \
 	detect-engine-address-ipv4.$(OBJEXT) \
@@ -236,8 +235,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	log-tlslog.$(OBJEXT) log-tlsstore.$(OBJEXT) output.$(OBJEXT) \
 	output-file.$(OBJEXT) output-filedata.$(OBJEXT) \
 	output-flow.$(OBJEXT) output-json-alert.$(OBJEXT) \
-	output-json-dns.$(OBJEXT) output-json-dnp3.$(OBJEXT) \
-	output-json-dnp3-objects.$(OBJEXT) output-json-drop.$(OBJEXT) \
+	output-json-dns.$(OBJEXT) output-json-drop.$(OBJEXT) \
 	output-json-file.$(OBJEXT) output-json-flow.$(OBJEXT) \
 	output-json-netflow.$(OBJEXT) output-json-http.$(OBJEXT) \
 	output-json-ssh.$(OBJEXT) output-json-stats.$(OBJEXT) \
@@ -290,8 +288,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	util-ioctl.$(OBJEXT) util-ip.$(OBJEXT) \
 	util-logopenfile.$(OBJEXT) util-logopenfile-tile.$(OBJEXT) \
 	util-lua.$(OBJEXT) util-luajit.$(OBJEXT) \
-	util-lua-common.$(OBJEXT) util-lua-dnp3.$(OBJEXT) \
-	util-lua-dnp3-objects.$(OBJEXT) util-lua-dns.$(OBJEXT) \
+	util-lua-common.$(OBJEXT) util-lua-dns.$(OBJEXT) \
 	util-lua-http.$(OBJEXT) util-lua-tls.$(OBJEXT) \
 	util-lua-ssh.$(OBJEXT) util-magic.$(OBJEXT) \
 	util-memcmp.$(OBJEXT) util-memrchr.$(OBJEXT) \
@@ -318,8 +315,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	util-syslog.$(OBJEXT) util-threshold-config.$(OBJEXT) \
 	util-time.$(OBJEXT) util-unittest.$(OBJEXT) \
 	util-unittest-helper.$(OBJEXT) util-affinity.$(OBJEXT) \
-	util-var.$(OBJEXT) util-var-name.$(OBJEXT) \
-	win32-misc.$(OBJEXT) win32-service.$(OBJEXT)
+	util-var.$(OBJEXT) util-var-name.$(OBJEXT)
 suricata_OBJECTS = $(am_suricata_OBJECTS)
 am__DEPENDENCIES_1 =
 suricata_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -352,8 +348,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-dcerpc-udp.Po \
 	./$(DEPDIR)/app-layer-dcerpc.Po \
 	./$(DEPDIR)/app-layer-detect-proto.Po \
-	./$(DEPDIR)/app-layer-dnp3-objects.Po \
-	./$(DEPDIR)/app-layer-dnp3.Po \
 	./$(DEPDIR)/app-layer-dns-common.Po \
 	./$(DEPDIR)/app-layer-dns-tcp.Po \
 	./$(DEPDIR)/app-layer-dns-udp.Po \
@@ -400,8 +394,8 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-dce-stub-data.Po \
 	./$(DEPDIR)/detect-depth.Po \
 	./$(DEPDIR)/detect-detection-filter.Po \
-	./$(DEPDIR)/detect-distance.Po ./$(DEPDIR)/detect-dnp3.Po \
-	./$(DEPDIR)/detect-dns-query.Po ./$(DEPDIR)/detect-dsize.Po \
+	./$(DEPDIR)/detect-distance.Po ./$(DEPDIR)/detect-dns-query.Po \
+	./$(DEPDIR)/detect-dsize.Po \
 	./$(DEPDIR)/detect-engine-address-ipv4.Po \
 	./$(DEPDIR)/detect-engine-address-ipv6.Po \
 	./$(DEPDIR)/detect-engine-address.Po \
@@ -515,9 +509,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/log-tlslog.Po ./$(DEPDIR)/log-tlsstore.Po \
 	./$(DEPDIR)/output-file.Po ./$(DEPDIR)/output-filedata.Po \
 	./$(DEPDIR)/output-flow.Po ./$(DEPDIR)/output-json-alert.Po \
-	./$(DEPDIR)/output-json-dnp3-objects.Po \
-	./$(DEPDIR)/output-json-dnp3.Po ./$(DEPDIR)/output-json-dns.Po \
-	./$(DEPDIR)/output-json-drop.Po \
+	./$(DEPDIR)/output-json-dns.Po ./$(DEPDIR)/output-json-drop.Po \
 	./$(DEPDIR)/output-json-file.Po \
 	./$(DEPDIR)/output-json-flow.Po \
 	./$(DEPDIR)/output-json-http.Po \
@@ -582,13 +574,12 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-ioctl.Po ./$(DEPDIR)/util-ip.Po \
 	./$(DEPDIR)/util-logopenfile-tile.Po \
 	./$(DEPDIR)/util-logopenfile.Po ./$(DEPDIR)/util-lua-common.Po \
-	./$(DEPDIR)/util-lua-dnp3-objects.Po \
-	./$(DEPDIR)/util-lua-dnp3.Po ./$(DEPDIR)/util-lua-dns.Po \
-	./$(DEPDIR)/util-lua-http.Po ./$(DEPDIR)/util-lua-ssh.Po \
-	./$(DEPDIR)/util-lua-tls.Po ./$(DEPDIR)/util-lua.Po \
-	./$(DEPDIR)/util-luajit.Po ./$(DEPDIR)/util-magic.Po \
-	./$(DEPDIR)/util-memcmp.Po ./$(DEPDIR)/util-memrchr.Po \
-	./$(DEPDIR)/util-misc.Po ./$(DEPDIR)/util-mpm-ac-bs.Po \
+	./$(DEPDIR)/util-lua-dns.Po ./$(DEPDIR)/util-lua-http.Po \
+	./$(DEPDIR)/util-lua-ssh.Po ./$(DEPDIR)/util-lua-tls.Po \
+	./$(DEPDIR)/util-lua.Po ./$(DEPDIR)/util-luajit.Po \
+	./$(DEPDIR)/util-magic.Po ./$(DEPDIR)/util-memcmp.Po \
+	./$(DEPDIR)/util-memrchr.Po ./$(DEPDIR)/util-misc.Po \
+	./$(DEPDIR)/util-mpm-ac-bs.Po \
 	./$(DEPDIR)/util-mpm-ac-tile-small.Po \
 	./$(DEPDIR)/util-mpm-ac-tile.Po ./$(DEPDIR)/util-mpm-ac.Po \
 	./$(DEPDIR)/util-mpm-hs.Po ./$(DEPDIR)/util-mpm.Po \
@@ -615,8 +606,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-threshold-config.Po ./$(DEPDIR)/util-time.Po \
 	./$(DEPDIR)/util-unittest-helper.Po \
 	./$(DEPDIR)/util-unittest.Po ./$(DEPDIR)/util-var-name.Po \
-	./$(DEPDIR)/util-var.Po ./$(DEPDIR)/win32-misc.Po \
-	./$(DEPDIR)/win32-service.Po
+	./$(DEPDIR)/util-var.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -870,8 +860,6 @@ app-layer.c app-layer.h \
 app-layer-dcerpc.c app-layer-dcerpc.h \
 app-layer-dcerpc-udp.c app-layer-dcerpc-udp.h \
 app-layer-detect-proto.c app-layer-detect-proto.h \
-app-layer-dnp3.c app-layer-dnp3.h \
-app-layer-dnp3-objects.c app-layer-dnp3-objects.h \
 app-layer-dns-common.c app-layer-dns-common.h \
 app-layer-dns-tcp.c app-layer-dns-tcp.h \
 app-layer-dns-udp.c app-layer-dns-udp.h \
@@ -943,7 +931,6 @@ detect-dce-stub-data.c detect-dce-stub-data.h \
 detect-depth.c detect-depth.h \
 detect-detection-filter.c detect-detection-filter.h \
 detect-distance.c detect-distance.h \
-detect-dnp3.c detect-dnp3.h \
 detect-dns-query.c detect-dns-query.h \
 detect-tls-sni.c detect-tls-sni.h \
 detect-tls-cert-issuer.c detect-tls-cert-issuer.h \
@@ -1113,8 +1100,6 @@ output-filedata.c output-filedata.h \
 output-flow.c output-flow.h \
 output-json-alert.c output-json-alert.h \
 output-json-dns.c output-json-dns.h \
-output-json-dnp3.c output-json-dnp3.h \
-output-json-dnp3-objects.c output-json-dnp3-objects.h \
 output-json-drop.c output-json-drop.h \
 output-json-file.c output-json-file.h \
 output-json-flow.c output-json-flow.h \
@@ -1226,8 +1211,6 @@ util-logopenfile-tile.h util-logopenfile-tile.c \
 util-lua.c util-lua.h \
 util-luajit.c util-luajit.h \
 util-lua-common.c util-lua-common.h \
-util-lua-dnp3.c util-lua-dnp3.h \
-util-lua-dnp3-objects.c util-lua-dnp3-objects.h \
 util-lua-dns.c util-lua-dns.h \
 util-lua-http.c util-lua-http.h \
 util-lua-tls.c util-lua-tls.h \
@@ -1285,10 +1268,7 @@ util-unittest-helper.c util-unittest-helper.h \
 util-validate.h util-affinity.h util-affinity.c \
 util-var.c util-var.h \
 util-var-name.c util-var-name.h \
-util-vector.h \
-win32-misc.c win32-misc.h \
-win32-service.c win32-service.h \
-win32-syslog.h
+util-vector.h 
 
 EXTRA_DIST = util-mpm-ac-cuda-kernel.cu ptxdump.py
 
@@ -1424,8 +1404,6 @@ include ./$(DEPDIR)/alert-unified2-alert.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dcerpc-udp.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dcerpc.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-detect-proto.Po # am--include-marker
-include ./$(DEPDIR)/app-layer-dnp3-objects.Po # am--include-marker
-include ./$(DEPDIR)/app-layer-dnp3.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dns-common.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dns-tcp.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dns-udp.Po # am--include-marker
@@ -1498,7 +1476,6 @@ include ./$(DEPDIR)/detect-dce-stub-data.Po # am--include-marker
 include ./$(DEPDIR)/detect-depth.Po # am--include-marker
 include ./$(DEPDIR)/detect-detection-filter.Po # am--include-marker
 include ./$(DEPDIR)/detect-distance.Po # am--include-marker
-include ./$(DEPDIR)/detect-dnp3.Po # am--include-marker
 include ./$(DEPDIR)/detect-dns-query.Po # am--include-marker
 include ./$(DEPDIR)/detect-dsize.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-address-ipv4.Po # am--include-marker
@@ -1666,8 +1643,6 @@ include ./$(DEPDIR)/output-file.Po # am--include-marker
 include ./$(DEPDIR)/output-filedata.Po # am--include-marker
 include ./$(DEPDIR)/output-flow.Po # am--include-marker
 include ./$(DEPDIR)/output-json-alert.Po # am--include-marker
-include ./$(DEPDIR)/output-json-dnp3-objects.Po # am--include-marker
-include ./$(DEPDIR)/output-json-dnp3.Po # am--include-marker
 include ./$(DEPDIR)/output-json-dns.Po # am--include-marker
 include ./$(DEPDIR)/output-json-drop.Po # am--include-marker
 include ./$(DEPDIR)/output-json-file.Po # am--include-marker
@@ -1779,8 +1754,6 @@ include ./$(DEPDIR)/util-ip.Po # am--include-marker
 include ./$(DEPDIR)/util-logopenfile-tile.Po # am--include-marker
 include ./$(DEPDIR)/util-logopenfile.Po # am--include-marker
 include ./$(DEPDIR)/util-lua-common.Po # am--include-marker
-include ./$(DEPDIR)/util-lua-dnp3-objects.Po # am--include-marker
-include ./$(DEPDIR)/util-lua-dnp3.Po # am--include-marker
 include ./$(DEPDIR)/util-lua-dns.Po # am--include-marker
 include ./$(DEPDIR)/util-lua-http.Po # am--include-marker
 include ./$(DEPDIR)/util-lua-ssh.Po # am--include-marker
@@ -1836,8 +1809,6 @@ include ./$(DEPDIR)/util-unittest-helper.Po # am--include-marker
 include ./$(DEPDIR)/util-unittest.Po # am--include-marker
 include ./$(DEPDIR)/util-var-name.Po # am--include-marker
 include ./$(DEPDIR)/util-var.Po # am--include-marker
-include ./$(DEPDIR)/win32-misc.Po # am--include-marker
-include ./$(DEPDIR)/win32-service.Po # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -2011,8 +1982,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/app-layer-dcerpc-udp.Po
 	-rm -f ./$(DEPDIR)/app-layer-dcerpc.Po
 	-rm -f ./$(DEPDIR)/app-layer-detect-proto.Po
-	-rm -f ./$(DEPDIR)/app-layer-dnp3-objects.Po
-	-rm -f ./$(DEPDIR)/app-layer-dnp3.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-common.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-tcp.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-udp.Po
@@ -2085,7 +2054,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-depth.Po
 	-rm -f ./$(DEPDIR)/detect-detection-filter.Po
 	-rm -f ./$(DEPDIR)/detect-distance.Po
-	-rm -f ./$(DEPDIR)/detect-dnp3.Po
 	-rm -f ./$(DEPDIR)/detect-dns-query.Po
 	-rm -f ./$(DEPDIR)/detect-dsize.Po
 	-rm -f ./$(DEPDIR)/detect-engine-address-ipv4.Po
@@ -2253,8 +2221,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/output-filedata.Po
 	-rm -f ./$(DEPDIR)/output-flow.Po
 	-rm -f ./$(DEPDIR)/output-json-alert.Po
-	-rm -f ./$(DEPDIR)/output-json-dnp3-objects.Po
-	-rm -f ./$(DEPDIR)/output-json-dnp3.Po
 	-rm -f ./$(DEPDIR)/output-json-dns.Po
 	-rm -f ./$(DEPDIR)/output-json-drop.Po
 	-rm -f ./$(DEPDIR)/output-json-file.Po
@@ -2366,8 +2332,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/util-logopenfile-tile.Po
 	-rm -f ./$(DEPDIR)/util-logopenfile.Po
 	-rm -f ./$(DEPDIR)/util-lua-common.Po
-	-rm -f ./$(DEPDIR)/util-lua-dnp3-objects.Po
-	-rm -f ./$(DEPDIR)/util-lua-dnp3.Po
 	-rm -f ./$(DEPDIR)/util-lua-dns.Po
 	-rm -f ./$(DEPDIR)/util-lua-http.Po
 	-rm -f ./$(DEPDIR)/util-lua-ssh.Po
@@ -2423,8 +2387,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/util-unittest.Po
 	-rm -f ./$(DEPDIR)/util-var-name.Po
 	-rm -f ./$(DEPDIR)/util-var.Po
-	-rm -f ./$(DEPDIR)/win32-misc.Po
-	-rm -f ./$(DEPDIR)/win32-service.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-local distclean-tags
@@ -2478,8 +2440,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/app-layer-dcerpc-udp.Po
 	-rm -f ./$(DEPDIR)/app-layer-dcerpc.Po
 	-rm -f ./$(DEPDIR)/app-layer-detect-proto.Po
-	-rm -f ./$(DEPDIR)/app-layer-dnp3-objects.Po
-	-rm -f ./$(DEPDIR)/app-layer-dnp3.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-common.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-tcp.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-udp.Po
@@ -2552,7 +2512,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-depth.Po
 	-rm -f ./$(DEPDIR)/detect-detection-filter.Po
 	-rm -f ./$(DEPDIR)/detect-distance.Po
-	-rm -f ./$(DEPDIR)/detect-dnp3.Po
 	-rm -f ./$(DEPDIR)/detect-dns-query.Po
 	-rm -f ./$(DEPDIR)/detect-dsize.Po
 	-rm -f ./$(DEPDIR)/detect-engine-address-ipv4.Po
@@ -2720,8 +2679,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/output-filedata.Po
 	-rm -f ./$(DEPDIR)/output-flow.Po
 	-rm -f ./$(DEPDIR)/output-json-alert.Po
-	-rm -f ./$(DEPDIR)/output-json-dnp3-objects.Po
-	-rm -f ./$(DEPDIR)/output-json-dnp3.Po
 	-rm -f ./$(DEPDIR)/output-json-dns.Po
 	-rm -f ./$(DEPDIR)/output-json-drop.Po
 	-rm -f ./$(DEPDIR)/output-json-file.Po
@@ -2833,8 +2790,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-logopenfile-tile.Po
 	-rm -f ./$(DEPDIR)/util-logopenfile.Po
 	-rm -f ./$(DEPDIR)/util-lua-common.Po
-	-rm -f ./$(DEPDIR)/util-lua-dnp3-objects.Po
-	-rm -f ./$(DEPDIR)/util-lua-dnp3.Po
 	-rm -f ./$(DEPDIR)/util-lua-dns.Po
 	-rm -f ./$(DEPDIR)/util-lua-http.Po
 	-rm -f ./$(DEPDIR)/util-lua-ssh.Po
@@ -2890,8 +2845,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-unittest.Po
 	-rm -f ./$(DEPDIR)/util-var-name.Po
 	-rm -f ./$(DEPDIR)/util-var.Po
-	-rm -f ./$(DEPDIR)/win32-misc.Po
-	-rm -f ./$(DEPDIR)/win32-service.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

@@ -183,7 +183,6 @@
 #include "detect-ssl-version.h"
 #include "detect-ssl-state.h"
 #include "detect-cipservice.h"
-#include "detect-dnp3.h"
 
 #include "action-globals.h"
 #include "tm-threads.h"
@@ -4189,7 +4188,6 @@ void SigTableSetup(void)
     DetectDnsQueryRegister();
     DetectCipServiceRegister();
     DetectEnipCommandRegister();
-    DetectDNP3Register();
 
     DetectTlsSniRegister();
     DetectTlsIssuerRegister();

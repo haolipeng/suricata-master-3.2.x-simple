@@ -120,7 +120,6 @@
 #include "app-layer-ssh.h"
 #include "app-layer-smb.h"
 #include "app-layer-enip.h"
-#include "app-layer-dnp3.h"
 
 #include "util-decode-der.h"
 #include "util-radix-tree.h"
