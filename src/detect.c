@@ -49,9 +49,6 @@
 #include "detect-engine-dcepayload.h"
 #include "detect-engine-uri.h"
 #include "detect-dns-query.h"
-#include "detect-tls-sni.h"
-#include "detect-tls-cert-issuer.h"
-#include "detect-tls-cert-subject.h"
 #include "detect-engine-state.h"
 #include "detect-engine-analyzer.h"
 
@@ -174,15 +171,9 @@
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
 #include "app-layer-template.h"
-#include "detect-tls.h"
-#include "detect-tls-cert-validity.h"
-#include "detect-tls-version.h"
 #include "detect-ssh-proto-version.h"
 #include "detect-ssh-software-version.h"
 #include "detect-http-stat-code.h"
-#include "detect-ssl-version.h"
-#include "detect-ssl-state.h"
-#include "detect-cipservice.h"
 
 #include "action-globals.h"
 #include "tm-threads.h"
@@ -4186,12 +4177,6 @@ void SigTableSetup(void)
     DetectHttpStatCodeRegister();
 
     DetectDnsQueryRegister();
-    DetectCipServiceRegister();
-    DetectEnipCommandRegister();
-
-    DetectTlsSniRegister();
-    DetectTlsIssuerRegister();
-    DetectTlsSubjectRegister();
 
     DetectAppLayerEventRegister();
     /* end of order dependent regs */
@@ -4243,16 +4228,11 @@ void SigTableSetup(void)
     DetectDceIfaceRegister();
     DetectDceOpnumRegister();
     DetectDceStubDataRegister();
-    DetectTlsRegister();
-    DetectTlsValidityRegister();
-    DetectTlsVersionRegister();
     DetectUrilenRegister();
     DetectDetectionFilterRegister();
     DetectAsn1Register();
     DetectSshVersionRegister();
     DetectSshSoftwareVersionRegister();
-    DetectSslStateRegister();
-    DetectSslVersionRegister();
     DetectByteExtractRegister();
     DetectFiledataRegister();
     DetectPktDataRegister();

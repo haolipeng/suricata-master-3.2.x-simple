@@ -114,15 +114,13 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	app-layer-dcerpc.$(OBJEXT) app-layer-dcerpc-udp.$(OBJEXT) \
 	app-layer-detect-proto.$(OBJEXT) \
 	app-layer-dns-common.$(OBJEXT) app-layer-dns-tcp.$(OBJEXT) \
-	app-layer-dns-udp.$(OBJEXT) app-layer-enip.$(OBJEXT) \
-	app-layer-enip-common.$(OBJEXT) app-layer-events.$(OBJEXT) \
+	app-layer-dns-udp.$(OBJEXT) app-layer-events.$(OBJEXT) \
 	app-layer-htp-body.$(OBJEXT) app-layer-htp.$(OBJEXT) \
 	app-layer-htp-file.$(OBJEXT) app-layer-htp-libhtp.$(OBJEXT) \
 	app-layer-htp-mem.$(OBJEXT) app-layer-htp-xff.$(OBJEXT) \
 	app-layer-parser.$(OBJEXT) app-layer-protos.$(OBJEXT) \
 	app-layer-smb2.$(OBJEXT) app-layer-smb.$(OBJEXT) \
 	app-layer-template.$(OBJEXT) app-layer-ssh.$(OBJEXT) \
-	app-layer-ssl.$(OBJEXT) app-layer-tls-handshake.$(OBJEXT) \
 	conf.$(OBJEXT) conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
 	data-queue.$(OBJEXT) decode.$(OBJEXT) decode-afl.$(OBJEXT) \
 	decode-erspan.$(OBJEXT) decode-ethernet.$(OBJEXT) \
@@ -147,9 +145,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-dce-iface.$(OBJEXT) detect-dce-opnum.$(OBJEXT) \
 	detect-dce-stub-data.$(OBJEXT) detect-depth.$(OBJEXT) \
 	detect-detection-filter.$(OBJEXT) detect-distance.$(OBJEXT) \
-	detect-dns-query.$(OBJEXT) detect-tls-sni.$(OBJEXT) \
-	detect-tls-cert-issuer.$(OBJEXT) \
-	detect-tls-cert-subject.$(OBJEXT) detect-dsize.$(OBJEXT) \
+	detect-dns-query.$(OBJEXT) detect-dsize.$(OBJEXT) \
 	detect-engine-address.$(OBJEXT) \
 	detect-engine-address-ipv4.$(OBJEXT) \
 	detect-engine-address-ipv6.$(OBJEXT) \
@@ -157,7 +153,6 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-engine.$(OBJEXT) \
 	detect-engine-content-inspection.$(OBJEXT) \
 	detect-engine-dcepayload.$(OBJEXT) detect-engine-dns.$(OBJEXT) \
-	detect-engine-tls.$(OBJEXT) detect-engine-enip.$(OBJEXT) \
 	detect-engine-event.$(OBJEXT) detect-engine-file.$(OBJEXT) \
 	detect-engine-hcbd.$(OBJEXT) detect-engine-hcd.$(OBJEXT) \
 	detect-engine-hhd.$(OBJEXT) detect-engine-hhhd.$(OBJEXT) \
@@ -211,35 +206,30 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-seq.$(OBJEXT) detect-sid.$(OBJEXT) \
 	detect-ssh-proto-version.$(OBJEXT) \
 	detect-ssh-software-version.$(OBJEXT) \
-	detect-ssl-state.$(OBJEXT) detect-ssl-version.$(OBJEXT) \
 	detect-stream_size.$(OBJEXT) detect-tag.$(OBJEXT) \
 	detect-template.$(OBJEXT) detect-template-buffer.$(OBJEXT) \
-	detect-threshold.$(OBJEXT) detect-tls.$(OBJEXT) \
-	detect-tls-cert-validity.$(OBJEXT) \
-	detect-tls-version.$(OBJEXT) detect-tos.$(OBJEXT) \
+	detect-threshold.$(OBJEXT) detect-tos.$(OBJEXT) \
 	detect-ttl.$(OBJEXT) detect-uricontent.$(OBJEXT) \
 	detect-urilen.$(OBJEXT) detect-window.$(OBJEXT) \
 	detect-within.$(OBJEXT) detect-xbits.$(OBJEXT) \
-	detect-cipservice.$(OBJEXT) flow-bit.$(OBJEXT) flow.$(OBJEXT) \
-	flow-hash.$(OBJEXT) flow-manager.$(OBJEXT) \
-	flow-queue.$(OBJEXT) flow-storage.$(OBJEXT) \
-	flow-timeout.$(OBJEXT) flow-util.$(OBJEXT) flow-var.$(OBJEXT) \
-	flow-worker.$(OBJEXT) host.$(OBJEXT) host-bit.$(OBJEXT) \
-	host-queue.$(OBJEXT) host-storage.$(OBJEXT) \
-	host-timeout.$(OBJEXT) ippair.$(OBJEXT) ippair-bit.$(OBJEXT) \
-	ippair-queue.$(OBJEXT) ippair-storage.$(OBJEXT) \
-	ippair-timeout.$(OBJEXT) log-dnslog.$(OBJEXT) \
-	log-droplog.$(OBJEXT) log-file.$(OBJEXT) \
+	flow-bit.$(OBJEXT) flow.$(OBJEXT) flow-hash.$(OBJEXT) \
+	flow-manager.$(OBJEXT) flow-queue.$(OBJEXT) \
+	flow-storage.$(OBJEXT) flow-timeout.$(OBJEXT) \
+	flow-util.$(OBJEXT) flow-var.$(OBJEXT) flow-worker.$(OBJEXT) \
+	host.$(OBJEXT) host-bit.$(OBJEXT) host-queue.$(OBJEXT) \
+	host-storage.$(OBJEXT) host-timeout.$(OBJEXT) ippair.$(OBJEXT) \
+	ippair-bit.$(OBJEXT) ippair-queue.$(OBJEXT) \
+	ippair-storage.$(OBJEXT) ippair-timeout.$(OBJEXT) \
+	log-dnslog.$(OBJEXT) log-droplog.$(OBJEXT) log-file.$(OBJEXT) \
 	log-filestore.$(OBJEXT) log-httplog.$(OBJEXT) \
 	log-pcap.$(OBJEXT) log-stats.$(OBJEXT) log-tcp-data.$(OBJEXT) \
-	log-tlslog.$(OBJEXT) log-tlsstore.$(OBJEXT) output.$(OBJEXT) \
-	output-file.$(OBJEXT) output-filedata.$(OBJEXT) \
-	output-flow.$(OBJEXT) output-json-alert.$(OBJEXT) \
-	output-json-dns.$(OBJEXT) output-json-drop.$(OBJEXT) \
-	output-json-file.$(OBJEXT) output-json-flow.$(OBJEXT) \
-	output-json-netflow.$(OBJEXT) output-json-http.$(OBJEXT) \
-	output-json-ssh.$(OBJEXT) output-json-stats.$(OBJEXT) \
-	output-json-tls.$(OBJEXT) output-json-template.$(OBJEXT) \
+	output.$(OBJEXT) output-file.$(OBJEXT) \
+	output-filedata.$(OBJEXT) output-flow.$(OBJEXT) \
+	output-json-alert.$(OBJEXT) output-json-dns.$(OBJEXT) \
+	output-json-drop.$(OBJEXT) output-json-file.$(OBJEXT) \
+	output-json-flow.$(OBJEXT) output-json-netflow.$(OBJEXT) \
+	output-json-http.$(OBJEXT) output-json-ssh.$(OBJEXT) \
+	output-json-stats.$(OBJEXT) output-json-template.$(OBJEXT) \
 	output-lua.$(OBJEXT) output-packet.$(OBJEXT) \
 	output-stats.$(OBJEXT) output-streaming.$(OBJEXT) \
 	output-tx.$(OBJEXT) output-json.$(OBJEXT) \
@@ -289,14 +279,13 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	util-logopenfile.$(OBJEXT) util-logopenfile-tile.$(OBJEXT) \
 	util-lua.$(OBJEXT) util-luajit.$(OBJEXT) \
 	util-lua-common.$(OBJEXT) util-lua-dns.$(OBJEXT) \
-	util-lua-http.$(OBJEXT) util-lua-tls.$(OBJEXT) \
-	util-lua-ssh.$(OBJEXT) util-magic.$(OBJEXT) \
-	util-memcmp.$(OBJEXT) util-memrchr.$(OBJEXT) \
-	util-misc.$(OBJEXT) util-mpm-ac-bs.$(OBJEXT) \
-	util-mpm-ac.$(OBJEXT) util-mpm-ac-tile.$(OBJEXT) \
-	util-mpm-ac-tile-small.$(OBJEXT) util-mpm-hs.$(OBJEXT) \
-	util-mpm.$(OBJEXT) util-pages.$(OBJEXT) util-path.$(OBJEXT) \
-	util-pidfile.$(OBJEXT) util-pool.$(OBJEXT) \
+	util-lua-http.$(OBJEXT) util-lua-ssh.$(OBJEXT) \
+	util-magic.$(OBJEXT) util-memcmp.$(OBJEXT) \
+	util-memrchr.$(OBJEXT) util-misc.$(OBJEXT) \
+	util-mpm-ac-bs.$(OBJEXT) util-mpm-ac.$(OBJEXT) \
+	util-mpm-ac-tile.$(OBJEXT) util-mpm-ac-tile-small.$(OBJEXT) \
+	util-mpm-hs.$(OBJEXT) util-mpm.$(OBJEXT) util-pages.$(OBJEXT) \
+	util-path.$(OBJEXT) util-pidfile.$(OBJEXT) util-pool.$(OBJEXT) \
 	util-pool-thread.$(OBJEXT) util-prefilter.$(OBJEXT) \
 	util-print.$(OBJEXT) util-privs.$(OBJEXT) \
 	util-profiling.$(OBJEXT) util-profiling-locks.$(OBJEXT) \
@@ -351,8 +340,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-dns-common.Po \
 	./$(DEPDIR)/app-layer-dns-tcp.Po \
 	./$(DEPDIR)/app-layer-dns-udp.Po \
-	./$(DEPDIR)/app-layer-enip-common.Po \
-	./$(DEPDIR)/app-layer-enip.Po ./$(DEPDIR)/app-layer-events.Po \
+	./$(DEPDIR)/app-layer-events.Po \
 	./$(DEPDIR)/app-layer-htp-body.Po \
 	./$(DEPDIR)/app-layer-htp-file.Po \
 	./$(DEPDIR)/app-layer-htp-libhtp.Po \
@@ -361,25 +349,23 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-parser.Po \
 	./$(DEPDIR)/app-layer-protos.Po ./$(DEPDIR)/app-layer-smb.Po \
 	./$(DEPDIR)/app-layer-smb2.Po ./$(DEPDIR)/app-layer-ssh.Po \
-	./$(DEPDIR)/app-layer-ssl.Po ./$(DEPDIR)/app-layer-template.Po \
-	./$(DEPDIR)/app-layer-tls-handshake.Po \
-	./$(DEPDIR)/app-layer.Po ./$(DEPDIR)/conf-yaml-loader.Po \
-	./$(DEPDIR)/conf.Po ./$(DEPDIR)/counters.Po \
-	./$(DEPDIR)/data-queue.Po ./$(DEPDIR)/decode-afl.Po \
-	./$(DEPDIR)/decode-erspan.Po ./$(DEPDIR)/decode-ethernet.Po \
-	./$(DEPDIR)/decode-events.Po ./$(DEPDIR)/decode-gre.Po \
-	./$(DEPDIR)/decode-icmpv4.Po ./$(DEPDIR)/decode-icmpv6.Po \
-	./$(DEPDIR)/decode-ipv4.Po ./$(DEPDIR)/decode-ipv6.Po \
-	./$(DEPDIR)/decode-mpls.Po ./$(DEPDIR)/decode-null.Po \
-	./$(DEPDIR)/decode-ppp.Po ./$(DEPDIR)/decode-pppoe.Po \
-	./$(DEPDIR)/decode-raw.Po ./$(DEPDIR)/decode-sctp.Po \
-	./$(DEPDIR)/decode-sll.Po ./$(DEPDIR)/decode-tcp.Po \
-	./$(DEPDIR)/decode-template.Po ./$(DEPDIR)/decode-teredo.Po \
-	./$(DEPDIR)/decode-udp.Po ./$(DEPDIR)/decode-vlan.Po \
-	./$(DEPDIR)/decode.Po ./$(DEPDIR)/defrag-config.Po \
-	./$(DEPDIR)/defrag-hash.Po ./$(DEPDIR)/defrag-queue.Po \
-	./$(DEPDIR)/defrag-timeout.Po ./$(DEPDIR)/defrag.Po \
-	./$(DEPDIR)/detect-ack.Po \
+	./$(DEPDIR)/app-layer-template.Po ./$(DEPDIR)/app-layer.Po \
+	./$(DEPDIR)/conf-yaml-loader.Po ./$(DEPDIR)/conf.Po \
+	./$(DEPDIR)/counters.Po ./$(DEPDIR)/data-queue.Po \
+	./$(DEPDIR)/decode-afl.Po ./$(DEPDIR)/decode-erspan.Po \
+	./$(DEPDIR)/decode-ethernet.Po ./$(DEPDIR)/decode-events.Po \
+	./$(DEPDIR)/decode-gre.Po ./$(DEPDIR)/decode-icmpv4.Po \
+	./$(DEPDIR)/decode-icmpv6.Po ./$(DEPDIR)/decode-ipv4.Po \
+	./$(DEPDIR)/decode-ipv6.Po ./$(DEPDIR)/decode-mpls.Po \
+	./$(DEPDIR)/decode-null.Po ./$(DEPDIR)/decode-ppp.Po \
+	./$(DEPDIR)/decode-pppoe.Po ./$(DEPDIR)/decode-raw.Po \
+	./$(DEPDIR)/decode-sctp.Po ./$(DEPDIR)/decode-sll.Po \
+	./$(DEPDIR)/decode-tcp.Po ./$(DEPDIR)/decode-template.Po \
+	./$(DEPDIR)/decode-teredo.Po ./$(DEPDIR)/decode-udp.Po \
+	./$(DEPDIR)/decode-vlan.Po ./$(DEPDIR)/decode.Po \
+	./$(DEPDIR)/defrag-config.Po ./$(DEPDIR)/defrag-hash.Po \
+	./$(DEPDIR)/defrag-queue.Po ./$(DEPDIR)/defrag-timeout.Po \
+	./$(DEPDIR)/defrag.Po ./$(DEPDIR)/detect-ack.Po \
 	./$(DEPDIR)/detect-app-layer-event.Po \
 	./$(DEPDIR)/detect-app-layer-protocol.Po \
 	./$(DEPDIR)/detect-asn1.Po ./$(DEPDIR)/detect-base64-data.Po \
@@ -387,7 +373,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-bypass.Po \
 	./$(DEPDIR)/detect-byte-extract.Po \
 	./$(DEPDIR)/detect-bytejump.Po ./$(DEPDIR)/detect-bytetest.Po \
-	./$(DEPDIR)/detect-cipservice.Po \
 	./$(DEPDIR)/detect-classtype.Po ./$(DEPDIR)/detect-content.Po \
 	./$(DEPDIR)/detect-csum.Po ./$(DEPDIR)/detect-dce-iface.Po \
 	./$(DEPDIR)/detect-dce-opnum.Po \
@@ -404,7 +389,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-engine-content-inspection.Po \
 	./$(DEPDIR)/detect-engine-dcepayload.Po \
 	./$(DEPDIR)/detect-engine-dns.Po \
-	./$(DEPDIR)/detect-engine-enip.Po \
 	./$(DEPDIR)/detect-engine-event.Po \
 	./$(DEPDIR)/detect-engine-file.Po \
 	./$(DEPDIR)/detect-engine-hcbd.Po \
@@ -434,7 +418,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-engine-tag.Po \
 	./$(DEPDIR)/detect-engine-template.Po \
 	./$(DEPDIR)/detect-engine-threshold.Po \
-	./$(DEPDIR)/detect-engine-tls.Po \
 	./$(DEPDIR)/detect-engine-uri.Po ./$(DEPDIR)/detect-engine.Po \
 	./$(DEPDIR)/detect-fast-pattern.Po \
 	./$(DEPDIR)/detect-file-data.Po ./$(DEPDIR)/detect-fileext.Po \
@@ -478,16 +461,9 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-seq.Po ./$(DEPDIR)/detect-sid.Po \
 	./$(DEPDIR)/detect-ssh-proto-version.Po \
 	./$(DEPDIR)/detect-ssh-software-version.Po \
-	./$(DEPDIR)/detect-ssl-state.Po \
-	./$(DEPDIR)/detect-ssl-version.Po \
 	./$(DEPDIR)/detect-stream_size.Po ./$(DEPDIR)/detect-tag.Po \
 	./$(DEPDIR)/detect-template-buffer.Po \
 	./$(DEPDIR)/detect-template.Po ./$(DEPDIR)/detect-threshold.Po \
-	./$(DEPDIR)/detect-tls-cert-issuer.Po \
-	./$(DEPDIR)/detect-tls-cert-subject.Po \
-	./$(DEPDIR)/detect-tls-cert-validity.Po \
-	./$(DEPDIR)/detect-tls-sni.Po \
-	./$(DEPDIR)/detect-tls-version.Po ./$(DEPDIR)/detect-tls.Po \
 	./$(DEPDIR)/detect-tos.Po ./$(DEPDIR)/detect-ttl.Po \
 	./$(DEPDIR)/detect-uricontent.Po ./$(DEPDIR)/detect-urilen.Po \
 	./$(DEPDIR)/detect-window.Po ./$(DEPDIR)/detect-within.Po \
@@ -506,7 +482,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/log-file.Po ./$(DEPDIR)/log-filestore.Po \
 	./$(DEPDIR)/log-httplog.Po ./$(DEPDIR)/log-pcap.Po \
 	./$(DEPDIR)/log-stats.Po ./$(DEPDIR)/log-tcp-data.Po \
-	./$(DEPDIR)/log-tlslog.Po ./$(DEPDIR)/log-tlsstore.Po \
 	./$(DEPDIR)/output-file.Po ./$(DEPDIR)/output-filedata.Po \
 	./$(DEPDIR)/output-flow.Po ./$(DEPDIR)/output-json-alert.Po \
 	./$(DEPDIR)/output-json-dns.Po ./$(DEPDIR)/output-json-drop.Po \
@@ -516,8 +491,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/output-json-netflow.Po \
 	./$(DEPDIR)/output-json-ssh.Po \
 	./$(DEPDIR)/output-json-stats.Po \
-	./$(DEPDIR)/output-json-template.Po \
-	./$(DEPDIR)/output-json-tls.Po ./$(DEPDIR)/output-json.Po \
+	./$(DEPDIR)/output-json-template.Po ./$(DEPDIR)/output-json.Po \
 	./$(DEPDIR)/output-lua.Po ./$(DEPDIR)/output-packet.Po \
 	./$(DEPDIR)/output-stats.Po ./$(DEPDIR)/output-streaming.Po \
 	./$(DEPDIR)/output-tx.Po ./$(DEPDIR)/output.Po \
@@ -575,11 +549,10 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-logopenfile-tile.Po \
 	./$(DEPDIR)/util-logopenfile.Po ./$(DEPDIR)/util-lua-common.Po \
 	./$(DEPDIR)/util-lua-dns.Po ./$(DEPDIR)/util-lua-http.Po \
-	./$(DEPDIR)/util-lua-ssh.Po ./$(DEPDIR)/util-lua-tls.Po \
-	./$(DEPDIR)/util-lua.Po ./$(DEPDIR)/util-luajit.Po \
-	./$(DEPDIR)/util-magic.Po ./$(DEPDIR)/util-memcmp.Po \
-	./$(DEPDIR)/util-memrchr.Po ./$(DEPDIR)/util-misc.Po \
-	./$(DEPDIR)/util-mpm-ac-bs.Po \
+	./$(DEPDIR)/util-lua-ssh.Po ./$(DEPDIR)/util-lua.Po \
+	./$(DEPDIR)/util-luajit.Po ./$(DEPDIR)/util-magic.Po \
+	./$(DEPDIR)/util-memcmp.Po ./$(DEPDIR)/util-memrchr.Po \
+	./$(DEPDIR)/util-misc.Po ./$(DEPDIR)/util-mpm-ac-bs.Po \
 	./$(DEPDIR)/util-mpm-ac-tile-small.Po \
 	./$(DEPDIR)/util-mpm-ac-tile.Po ./$(DEPDIR)/util-mpm-ac.Po \
 	./$(DEPDIR)/util-mpm-hs.Po ./$(DEPDIR)/util-mpm.Po \
@@ -863,8 +836,6 @@ app-layer-detect-proto.c app-layer-detect-proto.h \
 app-layer-dns-common.c app-layer-dns-common.h \
 app-layer-dns-tcp.c app-layer-dns-tcp.h \
 app-layer-dns-udp.c app-layer-dns-udp.h \
-app-layer-enip.c app-layer-enip.h \
-app-layer-enip-common.c app-layer-enip-common.h \
 app-layer-events.c app-layer-events.h \
 app-layer-htp-body.c app-layer-htp-body.h \
 app-layer-htp.c app-layer-htp.h \
@@ -878,8 +849,6 @@ app-layer-smb2.c app-layer-smb2.h \
 app-layer-smb.c app-layer-smb.h \
 app-layer-template.c app-layer-template.h \
 app-layer-ssh.c app-layer-ssh.h \
-app-layer-ssl.c app-layer-ssl.h \
-app-layer-tls-handshake.c app-layer-tls-handshake.h \
 conf.c conf.h \
 conf-yaml-loader.c conf-yaml-loader.h \
 counters.c counters.h \
@@ -932,9 +901,6 @@ detect-depth.c detect-depth.h \
 detect-detection-filter.c detect-detection-filter.h \
 detect-distance.c detect-distance.h \
 detect-dns-query.c detect-dns-query.h \
-detect-tls-sni.c detect-tls-sni.h \
-detect-tls-cert-issuer.c detect-tls-cert-issuer.h \
-detect-tls-cert-subject.c detect-tls-cert-subject.h \
 detect-dsize.c detect-dsize.h \
 detect-engine-address.c detect-engine-address.h \
 detect-engine-address-ipv4.c detect-engine-address-ipv4.h \
@@ -945,8 +911,6 @@ detect-engine.c detect-engine.h \
 detect-engine-content-inspection.c detect-engine-content-inspection.h \
 detect-engine-dcepayload.c detect-engine-dcepayload.h \
 detect-engine-dns.c detect-engine-dns.h \
-detect-engine-tls.c detect-engine-tls.h \
-detect-engine-enip.c detect-engine-enip.h \
 detect-engine-event.c detect-engine-event.h \
 detect-engine-file.c detect-engine-file.h \
 detect-engine-hcbd.c detect-engine-hcbd.h \
@@ -1046,16 +1010,11 @@ detect-seq.c detect-seq.h \
 detect-sid.c detect-sid.h \
 detect-ssh-proto-version.c detect-ssh-proto-version.h \
 detect-ssh-software-version.c detect-ssh-software-version.h \
-detect-ssl-state.c detect-ssl-state.h \
-detect-ssl-version.c detect-ssl-version.h \
 detect-stream_size.c detect-stream_size.h \
 detect-tag.c detect-tag.h \
 detect-template.c detect-template.h \
 detect-template-buffer.c detect-template-buffer.h \
 detect-threshold.c detect-threshold.h \
-detect-tls.c detect-tls.h \
-detect-tls-cert-validity.c detect-tls-cert-validity.h \
-detect-tls-version.c detect-tls-version.h \
 detect-tos.c detect-tos.h \
 detect-ttl.c detect-ttl.h \
 detect-uricontent.c detect-uricontent.h \
@@ -1063,7 +1022,6 @@ detect-urilen.c detect-urilen.h \
 detect-window.c detect-window.h \
 detect-within.c detect-within.h \
 detect-xbits.c detect-xbits.h \
-detect-cipservice.c detect-cipservice.h \
 flow-bit.c flow-bit.h \
 flow.c flow.h \
 flow-hash.c flow-hash.h \
@@ -1092,8 +1050,6 @@ log-httplog.c log-httplog.h \
 log-pcap.c log-pcap.h \
 log-stats.c log-stats.h \
 log-tcp-data.c log-tcp-data.h \
-log-tlslog.c log-tlslog.h \
-log-tlsstore.c log-tlsstore.h \
 output.c output.h \
 output-file.c output-file.h \
 output-filedata.c output-filedata.h \
@@ -1107,7 +1063,6 @@ output-json-netflow.c output-json-netflow.h \
 output-json-http.c output-json-http.h \
 output-json-ssh.c output-json-ssh.h \
 output-json-stats.c output-json-stats.h \
-output-json-tls.c output-json-tls.h \
 output-json-template.c output-json-template.h \
 output-lua.c output-lua.h \
 output-packet.c output-packet.h \
@@ -1213,7 +1168,6 @@ util-luajit.c util-luajit.h \
 util-lua-common.c util-lua-common.h \
 util-lua-dns.c util-lua-dns.h \
 util-lua-http.c util-lua-http.h \
-util-lua-tls.c util-lua-tls.h \
 util-lua-ssh.c util-lua-ssh.h \
 util-magic.c util-magic.h \
 util-memcmp.c util-memcmp.h \
@@ -1407,8 +1361,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-dns-common.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-dns-tcp.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-dns-udp.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-enip-common.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-enip.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-events.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-htp-body.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-htp-file.Po@am__quote@ # am--include-marker
@@ -1421,9 +1373,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-smb.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-smb2.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-ssh.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-ssl.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-template.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-tls-handshake.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/conf-yaml-loader.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/conf.Po@am__quote@ # am--include-marker
@@ -1466,7 +1416,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-byte-extract.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-bytejump.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-bytetest.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-cipservice.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-classtype.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-content.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-csum.Po@am__quote@ # am--include-marker
@@ -1486,7 +1435,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-content-inspection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-dcepayload.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-dns.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-enip.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-event.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-file.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-hcbd.Po@am__quote@ # am--include-marker
@@ -1516,7 +1464,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-tag.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-template.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-threshold.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-tls.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine-uri.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-engine.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-fast-pattern.Po@am__quote@ # am--include-marker
@@ -1588,19 +1535,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-sid.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ssh-proto-version.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ssh-software-version.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ssl-state.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ssl-version.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-stream_size.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tag.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-template-buffer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-template.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-threshold.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tls-cert-issuer.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tls-cert-subject.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tls-cert-validity.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tls-sni.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tls-version.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tls.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tos.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ttl.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-uricontent.Po@am__quote@ # am--include-marker
@@ -1637,8 +1576,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/log-pcap.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/log-stats.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/log-tcp-data.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/log-tlslog.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/log-tlsstore.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-file.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-filedata.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-flow.Po@am__quote@ # am--include-marker
@@ -1652,7 +1589,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-ssh.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-stats.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-template.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-tls.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-lua.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-packet.Po@am__quote@ # am--include-marker
@@ -1757,7 +1693,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-dns.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-http.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-ssh.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-tls.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-luajit.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-magic.Po@am__quote@ # am--include-marker
@@ -1985,8 +1920,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/app-layer-dns-common.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-tcp.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-udp.Po
-	-rm -f ./$(DEPDIR)/app-layer-enip-common.Po
-	-rm -f ./$(DEPDIR)/app-layer-enip.Po
 	-rm -f ./$(DEPDIR)/app-layer-events.Po
 	-rm -f ./$(DEPDIR)/app-layer-htp-body.Po
 	-rm -f ./$(DEPDIR)/app-layer-htp-file.Po
@@ -1999,9 +1932,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/app-layer-smb.Po
 	-rm -f ./$(DEPDIR)/app-layer-smb2.Po
 	-rm -f ./$(DEPDIR)/app-layer-ssh.Po
-	-rm -f ./$(DEPDIR)/app-layer-ssl.Po
 	-rm -f ./$(DEPDIR)/app-layer-template.Po
-	-rm -f ./$(DEPDIR)/app-layer-tls-handshake.Po
 	-rm -f ./$(DEPDIR)/app-layer.Po
 	-rm -f ./$(DEPDIR)/conf-yaml-loader.Po
 	-rm -f ./$(DEPDIR)/conf.Po
@@ -2044,7 +1975,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-byte-extract.Po
 	-rm -f ./$(DEPDIR)/detect-bytejump.Po
 	-rm -f ./$(DEPDIR)/detect-bytetest.Po
-	-rm -f ./$(DEPDIR)/detect-cipservice.Po
 	-rm -f ./$(DEPDIR)/detect-classtype.Po
 	-rm -f ./$(DEPDIR)/detect-content.Po
 	-rm -f ./$(DEPDIR)/detect-csum.Po
@@ -2064,7 +1994,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-engine-content-inspection.Po
 	-rm -f ./$(DEPDIR)/detect-engine-dcepayload.Po
 	-rm -f ./$(DEPDIR)/detect-engine-dns.Po
-	-rm -f ./$(DEPDIR)/detect-engine-enip.Po
 	-rm -f ./$(DEPDIR)/detect-engine-event.Po
 	-rm -f ./$(DEPDIR)/detect-engine-file.Po
 	-rm -f ./$(DEPDIR)/detect-engine-hcbd.Po
@@ -2094,7 +2023,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-engine-tag.Po
 	-rm -f ./$(DEPDIR)/detect-engine-template.Po
 	-rm -f ./$(DEPDIR)/detect-engine-threshold.Po
-	-rm -f ./$(DEPDIR)/detect-engine-tls.Po
 	-rm -f ./$(DEPDIR)/detect-engine-uri.Po
 	-rm -f ./$(DEPDIR)/detect-engine.Po
 	-rm -f ./$(DEPDIR)/detect-fast-pattern.Po
@@ -2166,19 +2094,11 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-sid.Po
 	-rm -f ./$(DEPDIR)/detect-ssh-proto-version.Po
 	-rm -f ./$(DEPDIR)/detect-ssh-software-version.Po
-	-rm -f ./$(DEPDIR)/detect-ssl-state.Po
-	-rm -f ./$(DEPDIR)/detect-ssl-version.Po
 	-rm -f ./$(DEPDIR)/detect-stream_size.Po
 	-rm -f ./$(DEPDIR)/detect-tag.Po
 	-rm -f ./$(DEPDIR)/detect-template-buffer.Po
 	-rm -f ./$(DEPDIR)/detect-template.Po
 	-rm -f ./$(DEPDIR)/detect-threshold.Po
-	-rm -f ./$(DEPDIR)/detect-tls-cert-issuer.Po
-	-rm -f ./$(DEPDIR)/detect-tls-cert-subject.Po
-	-rm -f ./$(DEPDIR)/detect-tls-cert-validity.Po
-	-rm -f ./$(DEPDIR)/detect-tls-sni.Po
-	-rm -f ./$(DEPDIR)/detect-tls-version.Po
-	-rm -f ./$(DEPDIR)/detect-tls.Po
 	-rm -f ./$(DEPDIR)/detect-tos.Po
 	-rm -f ./$(DEPDIR)/detect-ttl.Po
 	-rm -f ./$(DEPDIR)/detect-uricontent.Po
@@ -2215,8 +2135,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/log-pcap.Po
 	-rm -f ./$(DEPDIR)/log-stats.Po
 	-rm -f ./$(DEPDIR)/log-tcp-data.Po
-	-rm -f ./$(DEPDIR)/log-tlslog.Po
-	-rm -f ./$(DEPDIR)/log-tlsstore.Po
 	-rm -f ./$(DEPDIR)/output-file.Po
 	-rm -f ./$(DEPDIR)/output-filedata.Po
 	-rm -f ./$(DEPDIR)/output-flow.Po
@@ -2230,7 +2148,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/output-json-ssh.Po
 	-rm -f ./$(DEPDIR)/output-json-stats.Po
 	-rm -f ./$(DEPDIR)/output-json-template.Po
-	-rm -f ./$(DEPDIR)/output-json-tls.Po
 	-rm -f ./$(DEPDIR)/output-json.Po
 	-rm -f ./$(DEPDIR)/output-lua.Po
 	-rm -f ./$(DEPDIR)/output-packet.Po
@@ -2335,7 +2252,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/util-lua-dns.Po
 	-rm -f ./$(DEPDIR)/util-lua-http.Po
 	-rm -f ./$(DEPDIR)/util-lua-ssh.Po
-	-rm -f ./$(DEPDIR)/util-lua-tls.Po
 	-rm -f ./$(DEPDIR)/util-lua.Po
 	-rm -f ./$(DEPDIR)/util-luajit.Po
 	-rm -f ./$(DEPDIR)/util-magic.Po
@@ -2443,8 +2359,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/app-layer-dns-common.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-tcp.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-udp.Po
-	-rm -f ./$(DEPDIR)/app-layer-enip-common.Po
-	-rm -f ./$(DEPDIR)/app-layer-enip.Po
 	-rm -f ./$(DEPDIR)/app-layer-events.Po
 	-rm -f ./$(DEPDIR)/app-layer-htp-body.Po
 	-rm -f ./$(DEPDIR)/app-layer-htp-file.Po
@@ -2457,9 +2371,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/app-layer-smb.Po
 	-rm -f ./$(DEPDIR)/app-layer-smb2.Po
 	-rm -f ./$(DEPDIR)/app-layer-ssh.Po
-	-rm -f ./$(DEPDIR)/app-layer-ssl.Po
 	-rm -f ./$(DEPDIR)/app-layer-template.Po
-	-rm -f ./$(DEPDIR)/app-layer-tls-handshake.Po
 	-rm -f ./$(DEPDIR)/app-layer.Po
 	-rm -f ./$(DEPDIR)/conf-yaml-loader.Po
 	-rm -f ./$(DEPDIR)/conf.Po
@@ -2502,7 +2414,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-byte-extract.Po
 	-rm -f ./$(DEPDIR)/detect-bytejump.Po
 	-rm -f ./$(DEPDIR)/detect-bytetest.Po
-	-rm -f ./$(DEPDIR)/detect-cipservice.Po
 	-rm -f ./$(DEPDIR)/detect-classtype.Po
 	-rm -f ./$(DEPDIR)/detect-content.Po
 	-rm -f ./$(DEPDIR)/detect-csum.Po
@@ -2522,7 +2433,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-engine-content-inspection.Po
 	-rm -f ./$(DEPDIR)/detect-engine-dcepayload.Po
 	-rm -f ./$(DEPDIR)/detect-engine-dns.Po
-	-rm -f ./$(DEPDIR)/detect-engine-enip.Po
 	-rm -f ./$(DEPDIR)/detect-engine-event.Po
 	-rm -f ./$(DEPDIR)/detect-engine-file.Po
 	-rm -f ./$(DEPDIR)/detect-engine-hcbd.Po
@@ -2552,7 +2462,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-engine-tag.Po
 	-rm -f ./$(DEPDIR)/detect-engine-template.Po
 	-rm -f ./$(DEPDIR)/detect-engine-threshold.Po
-	-rm -f ./$(DEPDIR)/detect-engine-tls.Po
 	-rm -f ./$(DEPDIR)/detect-engine-uri.Po
 	-rm -f ./$(DEPDIR)/detect-engine.Po
 	-rm -f ./$(DEPDIR)/detect-fast-pattern.Po
@@ -2624,19 +2533,11 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-sid.Po
 	-rm -f ./$(DEPDIR)/detect-ssh-proto-version.Po
 	-rm -f ./$(DEPDIR)/detect-ssh-software-version.Po
-	-rm -f ./$(DEPDIR)/detect-ssl-state.Po
-	-rm -f ./$(DEPDIR)/detect-ssl-version.Po
 	-rm -f ./$(DEPDIR)/detect-stream_size.Po
 	-rm -f ./$(DEPDIR)/detect-tag.Po
 	-rm -f ./$(DEPDIR)/detect-template-buffer.Po
 	-rm -f ./$(DEPDIR)/detect-template.Po
 	-rm -f ./$(DEPDIR)/detect-threshold.Po
-	-rm -f ./$(DEPDIR)/detect-tls-cert-issuer.Po
-	-rm -f ./$(DEPDIR)/detect-tls-cert-subject.Po
-	-rm -f ./$(DEPDIR)/detect-tls-cert-validity.Po
-	-rm -f ./$(DEPDIR)/detect-tls-sni.Po
-	-rm -f ./$(DEPDIR)/detect-tls-version.Po
-	-rm -f ./$(DEPDIR)/detect-tls.Po
 	-rm -f ./$(DEPDIR)/detect-tos.Po
 	-rm -f ./$(DEPDIR)/detect-ttl.Po
 	-rm -f ./$(DEPDIR)/detect-uricontent.Po
@@ -2673,8 +2574,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/log-pcap.Po
 	-rm -f ./$(DEPDIR)/log-stats.Po
 	-rm -f ./$(DEPDIR)/log-tcp-data.Po
-	-rm -f ./$(DEPDIR)/log-tlslog.Po
-	-rm -f ./$(DEPDIR)/log-tlsstore.Po
 	-rm -f ./$(DEPDIR)/output-file.Po
 	-rm -f ./$(DEPDIR)/output-filedata.Po
 	-rm -f ./$(DEPDIR)/output-flow.Po
@@ -2688,7 +2587,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/output-json-ssh.Po
 	-rm -f ./$(DEPDIR)/output-json-stats.Po
 	-rm -f ./$(DEPDIR)/output-json-template.Po
-	-rm -f ./$(DEPDIR)/output-json-tls.Po
 	-rm -f ./$(DEPDIR)/output-json.Po
 	-rm -f ./$(DEPDIR)/output-lua.Po
 	-rm -f ./$(DEPDIR)/output-packet.Po
@@ -2793,7 +2691,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-lua-dns.Po
 	-rm -f ./$(DEPDIR)/util-lua-http.Po
 	-rm -f ./$(DEPDIR)/util-lua-ssh.Po
-	-rm -f ./$(DEPDIR)/util-lua-tls.Po
 	-rm -f ./$(DEPDIR)/util-lua.Po
 	-rm -f ./$(DEPDIR)/util-luajit.Po
 	-rm -f ./$(DEPDIR)/util-magic.Po

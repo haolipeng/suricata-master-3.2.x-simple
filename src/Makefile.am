@@ -19,8 +19,6 @@ app-layer-detect-proto.c app-layer-detect-proto.h \
 app-layer-dns-common.c app-layer-dns-common.h \
 app-layer-dns-tcp.c app-layer-dns-tcp.h \
 app-layer-dns-udp.c app-layer-dns-udp.h \
-app-layer-enip.c app-layer-enip.h \
-app-layer-enip-common.c app-layer-enip-common.h \
 app-layer-events.c app-layer-events.h \
 app-layer-htp-body.c app-layer-htp-body.h \
 app-layer-htp.c app-layer-htp.h \
@@ -34,8 +32,6 @@ app-layer-smb2.c app-layer-smb2.h \
 app-layer-smb.c app-layer-smb.h \
 app-layer-template.c app-layer-template.h \
 app-layer-ssh.c app-layer-ssh.h \
-app-layer-ssl.c app-layer-ssl.h \
-app-layer-tls-handshake.c app-layer-tls-handshake.h \
 conf.c conf.h \
 conf-yaml-loader.c conf-yaml-loader.h \
 counters.c counters.h \
@@ -88,9 +84,6 @@ detect-depth.c detect-depth.h \
 detect-detection-filter.c detect-detection-filter.h \
 detect-distance.c detect-distance.h \
 detect-dns-query.c detect-dns-query.h \
-detect-tls-sni.c detect-tls-sni.h \
-detect-tls-cert-issuer.c detect-tls-cert-issuer.h \
-detect-tls-cert-subject.c detect-tls-cert-subject.h \
 detect-dsize.c detect-dsize.h \
 detect-engine-address.c detect-engine-address.h \
 detect-engine-address-ipv4.c detect-engine-address-ipv4.h \
@@ -101,8 +94,6 @@ detect-engine.c detect-engine.h \
 detect-engine-content-inspection.c detect-engine-content-inspection.h \
 detect-engine-dcepayload.c detect-engine-dcepayload.h \
 detect-engine-dns.c detect-engine-dns.h \
-detect-engine-tls.c detect-engine-tls.h \
-detect-engine-enip.c detect-engine-enip.h \
 detect-engine-event.c detect-engine-event.h \
 detect-engine-file.c detect-engine-file.h \
 detect-engine-hcbd.c detect-engine-hcbd.h \
@@ -202,16 +193,11 @@ detect-seq.c detect-seq.h \
 detect-sid.c detect-sid.h \
 detect-ssh-proto-version.c detect-ssh-proto-version.h \
 detect-ssh-software-version.c detect-ssh-software-version.h \
-detect-ssl-state.c detect-ssl-state.h \
-detect-ssl-version.c detect-ssl-version.h \
 detect-stream_size.c detect-stream_size.h \
 detect-tag.c detect-tag.h \
 detect-template.c detect-template.h \
 detect-template-buffer.c detect-template-buffer.h \
 detect-threshold.c detect-threshold.h \
-detect-tls.c detect-tls.h \
-detect-tls-cert-validity.c detect-tls-cert-validity.h \
-detect-tls-version.c detect-tls-version.h \
 detect-tos.c detect-tos.h \
 detect-ttl.c detect-ttl.h \
 detect-uricontent.c detect-uricontent.h \
@@ -219,7 +205,6 @@ detect-urilen.c detect-urilen.h \
 detect-window.c detect-window.h \
 detect-within.c detect-within.h \
 detect-xbits.c detect-xbits.h \
-detect-cipservice.c detect-cipservice.h \
 flow-bit.c flow-bit.h \
 flow.c flow.h \
 flow-hash.c flow-hash.h \
@@ -248,8 +233,6 @@ log-httplog.c log-httplog.h \
 log-pcap.c log-pcap.h \
 log-stats.c log-stats.h \
 log-tcp-data.c log-tcp-data.h \
-log-tlslog.c log-tlslog.h \
-log-tlsstore.c log-tlsstore.h \
 output.c output.h \
 output-file.c output-file.h \
 output-filedata.c output-filedata.h \
@@ -263,7 +246,6 @@ output-json-netflow.c output-json-netflow.h \
 output-json-http.c output-json-http.h \
 output-json-ssh.c output-json-ssh.h \
 output-json-stats.c output-json-stats.h \
-output-json-tls.c output-json-tls.h \
 output-json-template.c output-json-template.h \
 output-lua.c output-lua.h \
 output-packet.c output-packet.h \
@@ -369,7 +351,6 @@ util-luajit.c util-luajit.h \
 util-lua-common.c util-lua-common.h \
 util-lua-dns.c util-lua-dns.h \
 util-lua-http.c util-lua-http.h \
-util-lua-tls.c util-lua-tls.h \
 util-lua-ssh.c util-lua-ssh.h \
 util-magic.c util-magic.h \
 util-memcmp.c util-memcmp.h \

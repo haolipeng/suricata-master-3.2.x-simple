@@ -73,7 +73,6 @@
 #include "app-layer-dcerpc.h"
 #include "app-layer-dcerpc-udp.h"
 #include "app-layer-htp.h"
-#include "app-layer-ssl.h"
 #include "app-layer-ssh.h"
 
 #include "util-action.h"

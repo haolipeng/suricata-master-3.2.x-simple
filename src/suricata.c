@@ -114,12 +114,10 @@
 #include "app-layer.h"
 #include "app-layer-parser.h"
 #include "app-layer-htp.h"
-#include "app-layer-ssl.h"
 #include "app-layer-dns-tcp.h"
 #include "app-layer-dns-udp.h"
 #include "app-layer-ssh.h"
 #include "app-layer-smb.h"
-#include "app-layer-enip.h"
 
 #include "util-decode-der.h"
 #include "util-radix-tree.h"

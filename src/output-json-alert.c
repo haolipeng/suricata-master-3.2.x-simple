@@ -53,7 +53,6 @@
 #include "output.h"
 #include "output-json.h"
 #include "output-json-http.h"
-#include "output-json-tls.h"
 #include "output-json-ssh.h"
 
 #include "util-byte.h"
@@ -103,23 +102,6 @@ static int AlertJsonDumpStreamSegmentCallback(const Packet *p, void *data, uint8
     MemBufferWriteRaw(payload, buf, buflen);
 
     return 1;
-}
-
-static void AlertJsonTls(const Flow *f, json_t *js)
-{
-    SSLState *ssl_state = (SSLState *)FlowGetAppState(f);
-    if (ssl_state) {
-        json_t *tjs = json_object();
-        if (unlikely(tjs == NULL))
-            return;
-
-        JsonTlsLogJSONBasic(tjs, ssl_state);
-        JsonTlsLogJSONExtended(tjs, ssl_state);
-
-        json_object_set_new(js, "tls", tjs);
-    }
-
-    return;
 }
 
 static void AlertJsonSsh(const Flow *f, json_t *js)
@@ -267,16 +249,6 @@ static int AlertJson(ThreadVars *tv, JsonAlertLogThread *aft, const Packet *p)
                     if (hjs)
                         json_object_set_new(js, "http", hjs);
                 }
-            }
-        }
-
-        if (json_output_ctx->flags & LOG_JSON_TLS) {
-            if (p->flow != NULL) {
-                uint16_t proto = FlowGetAppProtocol(p->flow);
-
-                /* http alert */
-                if (proto == ALPROTO_TLS)
-                    AlertJsonTls(p->flow, js);
             }
         }
 

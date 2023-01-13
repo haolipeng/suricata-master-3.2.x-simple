@@ -51,11 +51,9 @@
 #include "app-layer-dcerpc.h"
 #include "app-layer-dcerpc-udp.h"
 #include "app-layer-htp.h"
-#include "app-layer-ssl.h"
 #include "app-layer-ssh.h"
 #include "app-layer-dns-udp.h"
 #include "app-layer-dns-tcp.h"
-#include "app-layer-enip.h"
 #include "app-layer-template.h"
 
 #include "conf.h"
@@ -1212,7 +1210,6 @@ void AppLayerParserRegisterProtocolParsers(void)
     SCEnter();
 
     RegisterHTPParsers();
-    RegisterSSLParsers();
     RegisterSMBParsers();
     /** \todo bug 719 */
     //RegisterSMB2Parsers();
@@ -1224,8 +1221,8 @@ void AppLayerParserRegisterProtocolParsers(void)
     RegisterDNSUDPParsers();
     RegisterDNSTCPParsers();
     //RegisterModbusParsers();
-    RegisterENIPUDPParsers();
-    RegisterENIPTCPParsers();
+    //RegisterENIPUDPParsers();
+    //RegisterENIPTCPParsers();
     //RegisterDNP3Parsers();
     RegisterTemplateParsers();
 

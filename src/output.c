@@ -54,9 +54,6 @@
 #include "output-json-http.h"
 #include "log-dnslog.h"
 #include "output-json-dns.h"
-#include "log-tlslog.h"
-#include "log-tlsstore.h"
-#include "output-json-tls.h"
 #include "output-json-ssh.h"
 #include "log-pcap.h"
 #include "log-file.h"
@@ -1060,10 +1057,7 @@ void OutputRegisterLoggers(void)
     /* http log */
     LogHttpLogRegister();
     JsonHttpLogRegister();
-    /* tls log */
-    LogTlsLogRegister();
-    JsonTlsLogRegister();
-    LogTlsStoreRegister();
+
     /* ssh */
     JsonSshLogRegister();
     /* pcap log */

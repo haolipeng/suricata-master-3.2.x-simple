@@ -27,8 +27,6 @@
 #include "app-layer.h"
 
 #include "detect.h"
-#include "detect-cipservice.h"
-#include "detect-engine-enip.h"
 
 #include "flow.h"
 
