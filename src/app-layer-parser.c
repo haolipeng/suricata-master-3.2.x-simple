@@ -48,8 +48,6 @@
 #include "app-layer-parser.h"
 #include "app-layer-smb.h"
 #include "app-layer-smb2.h"
-#include "app-layer-dcerpc.h"
-#include "app-layer-dcerpc-udp.h"
 #include "app-layer-htp.h"
 #include "app-layer-ssh.h"
 #include "app-layer-dns-udp.h"
@@ -1213,8 +1211,8 @@ void AppLayerParserRegisterProtocolParsers(void)
     RegisterSMBParsers();
     /** \todo bug 719 */
     //RegisterSMB2Parsers();
-    RegisterDCERPCParsers();
-    RegisterDCERPCUDPParsers();
+    //RegisterDCERPCParsers();
+    //RegisterDCERPCUDPParsers();
     //RegisterFTPParsers();
     RegisterSSHParsers();
     //RegisterSMTPParsers();

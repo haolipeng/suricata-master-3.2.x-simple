@@ -111,7 +111,6 @@ PROGRAMS = $(bin_PROGRAMS)
 am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	alert-prelude.$(OBJEXT) alert-syslog.$(OBJEXT) \
 	alert-unified2-alert.$(OBJEXT) app-layer.$(OBJEXT) \
-	app-layer-dcerpc.$(OBJEXT) app-layer-dcerpc-udp.$(OBJEXT) \
 	app-layer-detect-proto.$(OBJEXT) \
 	app-layer-dns-common.$(OBJEXT) app-layer-dns-tcp.$(OBJEXT) \
 	app-layer-dns-udp.$(OBJEXT) app-layer-events.$(OBJEXT) \
@@ -142,27 +141,25 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-bytetest.$(OBJEXT) detect-bypass.$(OBJEXT) \
 	detect.$(OBJEXT) detect-classtype.$(OBJEXT) \
 	detect-content.$(OBJEXT) detect-csum.$(OBJEXT) \
-	detect-dce-iface.$(OBJEXT) detect-dce-opnum.$(OBJEXT) \
-	detect-dce-stub-data.$(OBJEXT) detect-depth.$(OBJEXT) \
-	detect-detection-filter.$(OBJEXT) detect-distance.$(OBJEXT) \
-	detect-dns-query.$(OBJEXT) detect-dsize.$(OBJEXT) \
-	detect-engine-address.$(OBJEXT) \
+	detect-depth.$(OBJEXT) detect-detection-filter.$(OBJEXT) \
+	detect-distance.$(OBJEXT) detect-dns-query.$(OBJEXT) \
+	detect-dsize.$(OBJEXT) detect-engine-address.$(OBJEXT) \
 	detect-engine-address-ipv4.$(OBJEXT) \
 	detect-engine-address-ipv6.$(OBJEXT) \
 	detect-engine-alert.$(OBJEXT) detect-engine-analyzer.$(OBJEXT) \
 	detect-engine.$(OBJEXT) \
 	detect-engine-content-inspection.$(OBJEXT) \
-	detect-engine-dcepayload.$(OBJEXT) detect-engine-dns.$(OBJEXT) \
-	detect-engine-event.$(OBJEXT) detect-engine-file.$(OBJEXT) \
-	detect-engine-hcbd.$(OBJEXT) detect-engine-hcd.$(OBJEXT) \
-	detect-engine-hhd.$(OBJEXT) detect-engine-hhhd.$(OBJEXT) \
-	detect-engine-hmd.$(OBJEXT) detect-engine-hrhd.$(OBJEXT) \
-	detect-engine-hrhhd.$(OBJEXT) detect-engine-hrud.$(OBJEXT) \
-	detect-engine-hsbd.$(OBJEXT) detect-engine-hscd.$(OBJEXT) \
-	detect-engine-hsmd.$(OBJEXT) detect-engine-hua.$(OBJEXT) \
-	detect-engine-iponly.$(OBJEXT) detect-engine-loader.$(OBJEXT) \
-	detect-engine-mpm.$(OBJEXT) detect-engine-payload.$(OBJEXT) \
-	detect-engine-port.$(OBJEXT) detect-engine-prefilter.$(OBJEXT) \
+	detect-engine-dns.$(OBJEXT) detect-engine-event.$(OBJEXT) \
+	detect-engine-file.$(OBJEXT) detect-engine-hcbd.$(OBJEXT) \
+	detect-engine-hcd.$(OBJEXT) detect-engine-hhd.$(OBJEXT) \
+	detect-engine-hhhd.$(OBJEXT) detect-engine-hmd.$(OBJEXT) \
+	detect-engine-hrhd.$(OBJEXT) detect-engine-hrhhd.$(OBJEXT) \
+	detect-engine-hrud.$(OBJEXT) detect-engine-hsbd.$(OBJEXT) \
+	detect-engine-hscd.$(OBJEXT) detect-engine-hsmd.$(OBJEXT) \
+	detect-engine-hua.$(OBJEXT) detect-engine-iponly.$(OBJEXT) \
+	detect-engine-loader.$(OBJEXT) detect-engine-mpm.$(OBJEXT) \
+	detect-engine-payload.$(OBJEXT) detect-engine-port.$(OBJEXT) \
+	detect-engine-prefilter.$(OBJEXT) \
 	detect-engine-prefilter-common.$(OBJEXT) \
 	detect-engine-proto.$(OBJEXT) detect-engine-profile.$(OBJEXT) \
 	detect-engine-siggroup.$(OBJEXT) \
@@ -202,9 +199,8 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-prefilter.$(OBJEXT) detect-priority.$(OBJEXT) \
 	detect-rawbytes.$(OBJEXT) detect-reference.$(OBJEXT) \
 	detect-replace.$(OBJEXT) detect-rev.$(OBJEXT) \
-	detect-rpc.$(OBJEXT) detect-sameip.$(OBJEXT) \
-	detect-seq.$(OBJEXT) detect-sid.$(OBJEXT) \
-	detect-ssh-proto-version.$(OBJEXT) \
+	detect-sameip.$(OBJEXT) detect-seq.$(OBJEXT) \
+	detect-sid.$(OBJEXT) detect-ssh-proto-version.$(OBJEXT) \
 	detect-ssh-software-version.$(OBJEXT) \
 	detect-stream_size.$(OBJEXT) detect-tag.$(OBJEXT) \
 	detect-template.$(OBJEXT) detect-template-buffer.$(OBJEXT) \
@@ -334,8 +330,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/alert-fastlog.Po ./$(DEPDIR)/alert-prelude.Po \
 	./$(DEPDIR)/alert-syslog.Po \
 	./$(DEPDIR)/alert-unified2-alert.Po \
-	./$(DEPDIR)/app-layer-dcerpc-udp.Po \
-	./$(DEPDIR)/app-layer-dcerpc.Po \
 	./$(DEPDIR)/app-layer-detect-proto.Po \
 	./$(DEPDIR)/app-layer-dns-common.Po \
 	./$(DEPDIR)/app-layer-dns-tcp.Po \
@@ -374,10 +368,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-byte-extract.Po \
 	./$(DEPDIR)/detect-bytejump.Po ./$(DEPDIR)/detect-bytetest.Po \
 	./$(DEPDIR)/detect-classtype.Po ./$(DEPDIR)/detect-content.Po \
-	./$(DEPDIR)/detect-csum.Po ./$(DEPDIR)/detect-dce-iface.Po \
-	./$(DEPDIR)/detect-dce-opnum.Po \
-	./$(DEPDIR)/detect-dce-stub-data.Po \
-	./$(DEPDIR)/detect-depth.Po \
+	./$(DEPDIR)/detect-csum.Po ./$(DEPDIR)/detect-depth.Po \
 	./$(DEPDIR)/detect-detection-filter.Po \
 	./$(DEPDIR)/detect-distance.Po ./$(DEPDIR)/detect-dns-query.Po \
 	./$(DEPDIR)/detect-dsize.Po \
@@ -387,7 +378,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-engine-alert.Po \
 	./$(DEPDIR)/detect-engine-analyzer.Po \
 	./$(DEPDIR)/detect-engine-content-inspection.Po \
-	./$(DEPDIR)/detect-engine-dcepayload.Po \
 	./$(DEPDIR)/detect-engine-dns.Po \
 	./$(DEPDIR)/detect-engine-event.Po \
 	./$(DEPDIR)/detect-engine-file.Po \
@@ -457,8 +447,8 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-prefilter.Po ./$(DEPDIR)/detect-priority.Po \
 	./$(DEPDIR)/detect-rawbytes.Po ./$(DEPDIR)/detect-reference.Po \
 	./$(DEPDIR)/detect-replace.Po ./$(DEPDIR)/detect-rev.Po \
-	./$(DEPDIR)/detect-rpc.Po ./$(DEPDIR)/detect-sameip.Po \
-	./$(DEPDIR)/detect-seq.Po ./$(DEPDIR)/detect-sid.Po \
+	./$(DEPDIR)/detect-sameip.Po ./$(DEPDIR)/detect-seq.Po \
+	./$(DEPDIR)/detect-sid.Po \
 	./$(DEPDIR)/detect-ssh-proto-version.Po \
 	./$(DEPDIR)/detect-ssh-software-version.Po \
 	./$(DEPDIR)/detect-stream_size.Po ./$(DEPDIR)/detect-tag.Po \
@@ -817,7 +807,7 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 noinst_HEADERS = action-globals.h \
-    app-layer-nbss.h app-layer-dcerpc-common.h \
+    app-layer-nbss.h \
     debug.h \
 	flow-private.h queue.h source-nfq-prototypes.h \
 	suricata-common.h threadvars.h util-binsearch.h \
@@ -830,8 +820,6 @@ alert-prelude.c alert-prelude.h \
 alert-syslog.c alert-syslog.h \
 alert-unified2-alert.c alert-unified2-alert.h \
 app-layer.c app-layer.h \
-app-layer-dcerpc.c app-layer-dcerpc.h \
-app-layer-dcerpc-udp.c app-layer-dcerpc-udp.h \
 app-layer-detect-proto.c app-layer-detect-proto.h \
 app-layer-dns-common.c app-layer-dns-common.h \
 app-layer-dns-tcp.c app-layer-dns-tcp.h \
@@ -894,9 +882,6 @@ detect.c detect.h \
 detect-classtype.c detect-classtype.h \
 detect-content.c detect-content.h \
 detect-csum.c detect-csum.h \
-detect-dce-iface.c detect-dce-iface.h \
-detect-dce-opnum.c detect-dce-opnum.h \
-detect-dce-stub-data.c detect-dce-stub-data.h \
 detect-depth.c detect-depth.h \
 detect-detection-filter.c detect-detection-filter.h \
 detect-distance.c detect-distance.h \
@@ -909,7 +894,6 @@ detect-engine-alert.c detect-engine-alert.h \
 detect-engine-analyzer.c detect-engine-analyzer.h \
 detect-engine.c detect-engine.h \
 detect-engine-content-inspection.c detect-engine-content-inspection.h \
-detect-engine-dcepayload.c detect-engine-dcepayload.h \
 detect-engine-dns.c detect-engine-dns.h \
 detect-engine-event.c detect-engine-event.h \
 detect-engine-file.c detect-engine-file.h \
@@ -1004,7 +988,6 @@ detect-rawbytes.c detect-rawbytes.h \
 detect-reference.c detect-reference.h \
 detect-replace.c detect-replace.h \
 detect-rev.c detect-rev.h \
-detect-rpc.c detect-rpc.h \
 detect-sameip.c detect-sameip.h \
 detect-seq.c detect-seq.h \
 detect-sid.c detect-sid.h \
@@ -1355,8 +1338,6 @@ include ./$(DEPDIR)/alert-fastlog.Po # am--include-marker
 include ./$(DEPDIR)/alert-prelude.Po # am--include-marker
 include ./$(DEPDIR)/alert-syslog.Po # am--include-marker
 include ./$(DEPDIR)/alert-unified2-alert.Po # am--include-marker
-include ./$(DEPDIR)/app-layer-dcerpc-udp.Po # am--include-marker
-include ./$(DEPDIR)/app-layer-dcerpc.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-detect-proto.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dns-common.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-dns-tcp.Po # am--include-marker
@@ -1419,9 +1400,6 @@ include ./$(DEPDIR)/detect-bytetest.Po # am--include-marker
 include ./$(DEPDIR)/detect-classtype.Po # am--include-marker
 include ./$(DEPDIR)/detect-content.Po # am--include-marker
 include ./$(DEPDIR)/detect-csum.Po # am--include-marker
-include ./$(DEPDIR)/detect-dce-iface.Po # am--include-marker
-include ./$(DEPDIR)/detect-dce-opnum.Po # am--include-marker
-include ./$(DEPDIR)/detect-dce-stub-data.Po # am--include-marker
 include ./$(DEPDIR)/detect-depth.Po # am--include-marker
 include ./$(DEPDIR)/detect-detection-filter.Po # am--include-marker
 include ./$(DEPDIR)/detect-distance.Po # am--include-marker
@@ -1433,7 +1411,6 @@ include ./$(DEPDIR)/detect-engine-address.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-alert.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-analyzer.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-content-inspection.Po # am--include-marker
-include ./$(DEPDIR)/detect-engine-dcepayload.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-dns.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-event.Po # am--include-marker
 include ./$(DEPDIR)/detect-engine-file.Po # am--include-marker
@@ -1529,7 +1506,6 @@ include ./$(DEPDIR)/detect-rawbytes.Po # am--include-marker
 include ./$(DEPDIR)/detect-reference.Po # am--include-marker
 include ./$(DEPDIR)/detect-replace.Po # am--include-marker
 include ./$(DEPDIR)/detect-rev.Po # am--include-marker
-include ./$(DEPDIR)/detect-rpc.Po # am--include-marker
 include ./$(DEPDIR)/detect-sameip.Po # am--include-marker
 include ./$(DEPDIR)/detect-seq.Po # am--include-marker
 include ./$(DEPDIR)/detect-sid.Po # am--include-marker
@@ -1914,8 +1890,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/alert-prelude.Po
 	-rm -f ./$(DEPDIR)/alert-syslog.Po
 	-rm -f ./$(DEPDIR)/alert-unified2-alert.Po
-	-rm -f ./$(DEPDIR)/app-layer-dcerpc-udp.Po
-	-rm -f ./$(DEPDIR)/app-layer-dcerpc.Po
 	-rm -f ./$(DEPDIR)/app-layer-detect-proto.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-common.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-tcp.Po
@@ -1978,9 +1952,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-classtype.Po
 	-rm -f ./$(DEPDIR)/detect-content.Po
 	-rm -f ./$(DEPDIR)/detect-csum.Po
-	-rm -f ./$(DEPDIR)/detect-dce-iface.Po
-	-rm -f ./$(DEPDIR)/detect-dce-opnum.Po
-	-rm -f ./$(DEPDIR)/detect-dce-stub-data.Po
 	-rm -f ./$(DEPDIR)/detect-depth.Po
 	-rm -f ./$(DEPDIR)/detect-detection-filter.Po
 	-rm -f ./$(DEPDIR)/detect-distance.Po
@@ -1992,7 +1963,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-engine-alert.Po
 	-rm -f ./$(DEPDIR)/detect-engine-analyzer.Po
 	-rm -f ./$(DEPDIR)/detect-engine-content-inspection.Po
-	-rm -f ./$(DEPDIR)/detect-engine-dcepayload.Po
 	-rm -f ./$(DEPDIR)/detect-engine-dns.Po
 	-rm -f ./$(DEPDIR)/detect-engine-event.Po
 	-rm -f ./$(DEPDIR)/detect-engine-file.Po
@@ -2088,7 +2058,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-reference.Po
 	-rm -f ./$(DEPDIR)/detect-replace.Po
 	-rm -f ./$(DEPDIR)/detect-rev.Po
-	-rm -f ./$(DEPDIR)/detect-rpc.Po
 	-rm -f ./$(DEPDIR)/detect-sameip.Po
 	-rm -f ./$(DEPDIR)/detect-seq.Po
 	-rm -f ./$(DEPDIR)/detect-sid.Po
@@ -2353,8 +2322,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/alert-prelude.Po
 	-rm -f ./$(DEPDIR)/alert-syslog.Po
 	-rm -f ./$(DEPDIR)/alert-unified2-alert.Po
-	-rm -f ./$(DEPDIR)/app-layer-dcerpc-udp.Po
-	-rm -f ./$(DEPDIR)/app-layer-dcerpc.Po
 	-rm -f ./$(DEPDIR)/app-layer-detect-proto.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-common.Po
 	-rm -f ./$(DEPDIR)/app-layer-dns-tcp.Po
@@ -2417,9 +2384,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-classtype.Po
 	-rm -f ./$(DEPDIR)/detect-content.Po
 	-rm -f ./$(DEPDIR)/detect-csum.Po
-	-rm -f ./$(DEPDIR)/detect-dce-iface.Po
-	-rm -f ./$(DEPDIR)/detect-dce-opnum.Po
-	-rm -f ./$(DEPDIR)/detect-dce-stub-data.Po
 	-rm -f ./$(DEPDIR)/detect-depth.Po
 	-rm -f ./$(DEPDIR)/detect-detection-filter.Po
 	-rm -f ./$(DEPDIR)/detect-distance.Po
@@ -2431,7 +2395,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-engine-alert.Po
 	-rm -f ./$(DEPDIR)/detect-engine-analyzer.Po
 	-rm -f ./$(DEPDIR)/detect-engine-content-inspection.Po
-	-rm -f ./$(DEPDIR)/detect-engine-dcepayload.Po
 	-rm -f ./$(DEPDIR)/detect-engine-dns.Po
 	-rm -f ./$(DEPDIR)/detect-engine-event.Po
 	-rm -f ./$(DEPDIR)/detect-engine-file.Po
@@ -2527,7 +2490,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-reference.Po
 	-rm -f ./$(DEPDIR)/detect-replace.Po
 	-rm -f ./$(DEPDIR)/detect-rev.Po
-	-rm -f ./$(DEPDIR)/detect-rpc.Po
 	-rm -f ./$(DEPDIR)/detect-sameip.Po
 	-rm -f ./$(DEPDIR)/detect-seq.Po
 	-rm -f ./$(DEPDIR)/detect-sid.Po

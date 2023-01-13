@@ -46,7 +46,6 @@
 #include "detect-engine-prefilter.h"
 
 #include "detect-engine-payload.h"
-#include "detect-engine-dcepayload.h"
 #include "detect-engine-uri.h"
 #include "detect-dns-query.h"
 #include "detect-engine-state.h"
@@ -98,7 +97,6 @@
 #include "detect-window.h"
 #include "detect-isdataat.h"
 #include "detect-id.h"
-#include "detect-rpc.h"
 #include "detect-asn1.h"
 #include "detect-filename.h"
 #include "detect-fileext.h"
@@ -125,9 +123,6 @@
 #include "detect-icode.h"
 #include "detect-icmp-id.h"
 #include "detect-icmp-seq.h"
-#include "detect-dce-iface.h"
-#include "detect-dce-opnum.h"
-#include "detect-dce-stub-data.h"
 #include "detect-urilen.h"
 #include "detect-detection-filter.h"
 #include "detect-http-client-body.h"
@@ -4197,7 +4192,6 @@ void SigTableSetup(void)
     DetectReplaceRegister();
     DetectFlowRegister();
     DetectWindowRegister();
-    DetectRpcRegister();
     //DetectFtpbounceRegister();
     DetectIsdataatRegister();
     DetectIdRegister();
@@ -4225,9 +4219,6 @@ void SigTableSetup(void)
     DetectICodeRegister();
     DetectIcmpIdRegister();
     DetectIcmpSeqRegister();
-    DetectDceIfaceRegister();
-    DetectDceOpnumRegister();
-    DetectDceStubDataRegister();
     DetectUrilenRegister();
     DetectDetectionFilterRegister();
     DetectAsn1Register();

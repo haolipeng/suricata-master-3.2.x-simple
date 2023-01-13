@@ -39,7 +39,6 @@
 #include "detect-engine-hmd.h"
 #include "detect-engine-hcd.h"
 #include "detect-engine-hrud.h"
-#include "detect-engine-dcepayload.h"
 
 #include "stream-tcp.h"
 #include "stream-tcp-private.h"
@@ -49,8 +48,6 @@
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
 #include "app-layer-smb.h"
-#include "app-layer-dcerpc-common.h"
-#include "app-layer-dcerpc.h"
 
 #include "util-unittest.h"
 #include "util-unittest-helper.h"

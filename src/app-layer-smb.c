@@ -42,7 +42,6 @@
 #include "app-layer-detect-proto.h"
 #include "app-layer-protos.h"
 #include "app-layer-parser.h"
-#include "app-layer-dcerpc.h"
 
 #include "util-spm.h"
 #include "util-unittest.h"
@@ -670,11 +669,11 @@ static int32_t DataParser(void *smb_state, AppLayerParserState *pstate,
     int32_t parsed = 0;
 
     if (sstate->andx.paddingparsed) {
-        parsed = DCERPCParser(&sstate->dcerpc, input, input_len);
+        //parsed = DCERPCParser(&sstate->dcerpc, input, input_len);
         if (parsed == -1 || parsed > sstate->bytecount.bytecountleft || parsed > (int32_t)input_len) {
             SCReturnInt(-1);
         } else {
-            sstate->dcerpc_present = 1;
+            //sstate->dcerpc_present = 1;
             sstate->bytesprocessed += parsed;
             sstate->bytecount.bytecountleft -= parsed;
             input_len -= parsed;
@@ -1435,7 +1434,7 @@ static void *SMBStateAlloc(void)
         SCReturnPtr(NULL, "void");
     }
 
-    DCERPCInit(&s->dcerpc);
+    //DCERPCInit(&s->dcerpc);
 
     SCReturnPtr(s, "void");
 }
@@ -1447,8 +1446,6 @@ static void SMBStateFree(void *s)
 {
     SCEnter();
     SMBState *sstate = (SMBState *) s;
-
-    DCERPCCleanup(&sstate->dcerpc);
 
     SCFree(s);
     SCReturn;
@@ -1705,7 +1702,6 @@ int SMBParserTest02(void)
         goto end;
     }
 
-    printUUID("BIND", smb_state->dcerpc.dcerpcbindbindack.uuid_entry);
     result = 1;
 end:
     if (alp_tctx != NULL)
@@ -2012,7 +2008,6 @@ int SMBParserTest03(void)
         goto end;
     }
     FLOWLOCK_UNLOCK(&f);
-    printUUID("BIND", smb_state->dcerpc.dcerpcbindbindack.uuid_entry);
     result = 1;
 end:
     if (alp_tctx != NULL)

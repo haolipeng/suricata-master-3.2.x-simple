@@ -34,7 +34,6 @@
 #include "detect-engine-mpm.h"
 #include "detect-engine-sigorder.h"
 #include "detect-engine-payload.h"
-#include "detect-engine-dcepayload.h"
 #include "detect-engine-uri.h"
 #include "detect-engine-hcbd.h"
 #include "detect-engine-hsbd.h"
@@ -70,8 +69,6 @@
 #include "app-layer-parser.h"
 #include "app-layer.h"
 #include "app-layer-smb.h"
-#include "app-layer-dcerpc.h"
-#include "app-layer-dcerpc-udp.h"
 #include "app-layer-htp.h"
 #include "app-layer-ssh.h"
 
@@ -177,7 +174,6 @@ static void RegisterUnittests(void)
     SCThresholdConfRegisterTests();
     SCRConfRegisterTests();
     PayloadRegisterTests();
-    DcePayloadRegisterTests();
     UriRegisterTests();
 #ifdef PROFILING
     SCProfilingRegisterTests();

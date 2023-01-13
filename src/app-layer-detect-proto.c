@@ -3142,8 +3142,8 @@ static int AppLayerProtoDetectTest15(void)
         };
 
     AppLayerProtoDetectPPTestDataElement element_ts_81[] = {
-        { "dcerpc", ALPROTO_DCERPC, 81, 1 << ALPROTO_DCERPC, 9, 10 },
-          { "ftp", ALPROTO_FTP, 81, 1 << ALPROTO_FTP, 7, 15 },
+        //{ "dcerpc", ALPROTO_DCERPC, 81, 1 << ALPROTO_DCERPC, 9, 10 },
+        //  { "ftp", ALPROTO_FTP, 81, 1 << ALPROTO_FTP, 7, 15 },
           { "smtp", ALPROTO_SMTP, 0, 1 << ALPROTO_SMTP, 12, 0 },
           { "tls", ALPROTO_TLS, 0, 1 << ALPROTO_TLS, 12, 18 },
           { "irc", ALPROTO_IRC, 0, 1 << ALPROTO_IRC, 12, 25 },

@@ -55,7 +55,6 @@
 #include "detect-engine.h"
 #include "detect-parse.h"
 #include "detect-engine-state.h"
-#include "detect-engine-dcepayload.h"
 
 #include "detect-flowvar.h"
 
@@ -68,8 +67,6 @@
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
 #include "app-layer-smb.h"
-#include "app-layer-dcerpc-common.h"
-#include "app-layer-dcerpc.h"
 #include "app-layer-dns-common.h"
 
 #include "util-unittest.h"
@@ -627,21 +624,6 @@ int DeStateDetectStartDetection(ThreadVars *tv, DetectEngineCtx *de_ctx,
         }
 
         KEYWORD_PROFILING_SET_LIST(det_ctx, DETECT_SM_LIST_DMATCH);
-        if (alproto == ALPROTO_SMB || alproto == ALPROTO_SMB2) {
-            SMBState *smb_state = (SMBState *)alstate;
-            if (smb_state->dcerpc_present &&
-                DetectEngineInspectDcePayload(de_ctx, det_ctx, s, f,
-                                              flags, &smb_state->dcerpc) == 1) {
-                inspect_flags |= DE_STATE_FLAG_DCE_PAYLOAD_INSPECT;
-                dmatch = 1;
-            }
-        } else {
-            if (DetectEngineInspectDcePayload(de_ctx, det_ctx, s, f,
-                                              flags, alstate) == 1) {
-                inspect_flags |= DE_STATE_FLAG_DCE_PAYLOAD_INSPECT;
-                dmatch = 1;
-            }
-        }
     }
 
     int amatch = 0;
@@ -659,12 +641,6 @@ int DeStateDetectStartDetection(ThreadVars *tv, DetectEngineCtx *de_ctx,
                 int match = 0;
                 if (alproto == ALPROTO_SMB || alproto == ALPROTO_SMB2) {
                     SMBState *smb_state = (SMBState *)alstate;
-                    if (smb_state->dcerpc_present) {
-                        KEYWORD_PROFILING_START;
-                        match = sigmatch_table[sm->type].
-                            AppLayerMatch(tv, det_ctx, f, flags, &smb_state->dcerpc, s, sm);
-                        KEYWORD_PROFILING_END(det_ctx, sm->type, (match == 1));
-                    }
                 } else {
                     KEYWORD_PROFILING_START;
                     match = sigmatch_table[sm->type].
@@ -964,13 +940,7 @@ static int DoInspectFlowRule(ThreadVars *tv,
             {
                 int match = 0;
                 if (alproto == ALPROTO_SMB || alproto == ALPROTO_SMB2) {
-                    SMBState *smb_state = (SMBState *)alstate;
-                    if (smb_state->dcerpc_present) {
-                        KEYWORD_PROFILING_START;
-                        match = sigmatch_table[sm->type].
-                            AppLayerMatch(tv, det_ctx, f, flags, &smb_state->dcerpc, s, sm);
-                        KEYWORD_PROFILING_END(det_ctx, sm->type, (match == 1));
-                    }
+
                 } else {
                     KEYWORD_PROFILING_START;
                     match = sigmatch_table[sm->type].
@@ -1001,20 +971,8 @@ static int DoInspectFlowRule(ThreadVars *tv,
             KEYWORD_PROFILING_SET_LIST(det_ctx, DETECT_SM_LIST_DMATCH);
             if (alproto == ALPROTO_SMB || alproto == ALPROTO_SMB2) {
                 SMBState *smb_state = (SMBState *)alstate;
-                if (smb_state->dcerpc_present &&
-                        DetectEngineInspectDcePayload(de_ctx, det_ctx, s, f,
-                            flags, &smb_state->dcerpc) == 1)
-                {
-                    total_matches++;
-                    inspect_flags |= DE_STATE_FLAG_DCE_PAYLOAD_INSPECT;
-                }
             } else {
-                if (DetectEngineInspectDcePayload(de_ctx, det_ctx, s, f,
-                            flags, alstate) == 1)
-                {
-                    total_matches++;
-                    inspect_flags |= DE_STATE_FLAG_DCE_PAYLOAD_INSPECT;
-                }
+
             }
         }
     }

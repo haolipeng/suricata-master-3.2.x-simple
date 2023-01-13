@@ -45,8 +45,6 @@
 #include "detect-base64-decode.h"
 #include "detect-base64-data.h"
 
-#include "app-layer-dcerpc.h"
-
 #include "util-spm.h"
 #include "util-debug.h"
 #include "util-print.h"
@@ -454,16 +452,6 @@ int DetectEngineContentInspection(DetectEngineCtx *de_ctx, DetectEngineThreadCtx
             value = det_ctx->bj_values[value];
         }
 
-        /* if we have dce enabled we will have to use the endianness
-         * specified by the dce header */
-        if (flags & DETECT_BYTETEST_DCE && data != NULL) {
-            DCERPCState *dcerpc_state = (DCERPCState *)data;
-            /* enable the endianness flag temporarily.  once we are done
-             * processing we reset the flags to the original value*/
-            flags |= ((dcerpc_state->dcerpc.dcerpchdr.packed_drep[0] & 0x10) ?
-                      DETECT_BYTETEST_LITTLE: 0);
-        }
-
         if (DetectBytetestDoMatch(det_ctx, s, sm->ctx, buffer, buffer_len, flags,
                                   offset, value) != 1) {
             goto no_match;
@@ -480,15 +468,6 @@ int DetectEngineContentInspection(DetectEngineCtx *de_ctx, DetectEngineThreadCtx
             offset = det_ctx->bj_values[offset];
         }
 
-        /* if we have dce enabled we will have to use the endianness
-         * specified by the dce header */
-        if (flags & DETECT_BYTEJUMP_DCE && data != NULL) {
-            DCERPCState *dcerpc_state = (DCERPCState *)data;
-            /* enable the endianness flag temporarily.  once we are done
-             * processing we reset the flags to the original value*/
-            flags |= ((dcerpc_state->dcerpc.dcerpchdr.packed_drep[0] & 0x10) ?
-                      DETECT_BYTEJUMP_LITTLE: 0);
-        }
 
         if (DetectBytejumpDoMatch(det_ctx, s, sm->ctx, buffer, buffer_len,
                                   flags, offset) != 1) {
@@ -501,18 +480,6 @@ int DetectEngineContentInspection(DetectEngineCtx *de_ctx, DetectEngineThreadCtx
 
         DetectByteExtractData *bed = (DetectByteExtractData *)sm->ctx;
         uint8_t endian = bed->endian;
-
-        /* if we have dce enabled we will have to use the endianness
-         * specified by the dce header */
-        if ((bed->flags & DETECT_BYTE_EXTRACT_FLAG_ENDIAN) &&
-            endian == DETECT_BYTE_EXTRACT_ENDIAN_DCE && data != NULL) {
-
-            DCERPCState *dcerpc_state = (DCERPCState *)data;
-            /* enable the endianness flag temporarily.  once we are done
-             * processing we reset the flags to the original value*/
-            endian |= ((dcerpc_state->dcerpc.dcerpchdr.packed_drep[0] == 0x10) ?
-                       DETECT_BYTE_EXTRACT_ENDIAN_LITTLE : DETECT_BYTE_EXTRACT_ENDIAN_BIG);
-        }
 
         if (DetectByteExtractDoMatch(det_ctx, sm, s, buffer,
                                      buffer_len,

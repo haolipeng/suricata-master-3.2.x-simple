@@ -1,5 +1,5 @@
 noinst_HEADERS = action-globals.h \
-    app-layer-nbss.h app-layer-dcerpc-common.h \
+    app-layer-nbss.h \
     debug.h \
 	flow-private.h queue.h source-nfq-prototypes.h \
 	suricata-common.h threadvars.h util-binsearch.h \
@@ -13,8 +13,6 @@ alert-prelude.c alert-prelude.h \
 alert-syslog.c alert-syslog.h \
 alert-unified2-alert.c alert-unified2-alert.h \
 app-layer.c app-layer.h \
-app-layer-dcerpc.c app-layer-dcerpc.h \
-app-layer-dcerpc-udp.c app-layer-dcerpc-udp.h \
 app-layer-detect-proto.c app-layer-detect-proto.h \
 app-layer-dns-common.c app-layer-dns-common.h \
 app-layer-dns-tcp.c app-layer-dns-tcp.h \
@@ -77,9 +75,6 @@ detect.c detect.h \
 detect-classtype.c detect-classtype.h \
 detect-content.c detect-content.h \
 detect-csum.c detect-csum.h \
-detect-dce-iface.c detect-dce-iface.h \
-detect-dce-opnum.c detect-dce-opnum.h \
-detect-dce-stub-data.c detect-dce-stub-data.h \
 detect-depth.c detect-depth.h \
 detect-detection-filter.c detect-detection-filter.h \
 detect-distance.c detect-distance.h \
@@ -92,7 +87,6 @@ detect-engine-alert.c detect-engine-alert.h \
 detect-engine-analyzer.c detect-engine-analyzer.h \
 detect-engine.c detect-engine.h \
 detect-engine-content-inspection.c detect-engine-content-inspection.h \
-detect-engine-dcepayload.c detect-engine-dcepayload.h \
 detect-engine-dns.c detect-engine-dns.h \
 detect-engine-event.c detect-engine-event.h \
 detect-engine-file.c detect-engine-file.h \
@@ -187,7 +181,6 @@ detect-rawbytes.c detect-rawbytes.h \
 detect-reference.c detect-reference.h \
 detect-replace.c detect-replace.h \
 detect-rev.c detect-rev.h \
-detect-rpc.c detect-rpc.h \
 detect-sameip.c detect-sameip.h \
 detect-seq.c detect-seq.h \
 detect-sid.c detect-sid.h \
