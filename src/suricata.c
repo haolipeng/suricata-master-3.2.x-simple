@@ -117,7 +117,6 @@
 #include "app-layer-dns-tcp.h"
 #include "app-layer-dns-udp.h"
 #include "app-layer-ssh.h"
-#include "app-layer-smb.h"
 
 #include "util-decode-der.h"
 #include "util-radix-tree.h"
@@ -1252,7 +1251,6 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
         MpmTableSetup();
         SpmTableSetup();
         AppLayerProtoDetectSetup();
-        RegisterSMBParsers();
         exit(AppLayerParserRequestFromFile(IPPROTO_TCP, ALPROTO_SMB, opt_arg));
     } else if(strcmp(opt_name, "afl-smb") == 0) {
         //printf("arg: //%s\n", opt_arg);
@@ -1260,7 +1258,6 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
         SpmTableSetup();
         AppLayerProtoDetectSetup();
         AppLayerParserSetup();
-        RegisterSMBParsers();
         exit(AppLayerParserFromFile(IPPROTO_TCP, ALPROTO_SMB, opt_arg));
 
     } else if(strcmp(opt_name, "afl-modbus-request") == 0) {

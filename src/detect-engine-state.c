@@ -66,7 +66,6 @@
 #include "app-layer-parser.h"
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
-#include "app-layer-smb.h"
 #include "app-layer-dns-common.h"
 
 #include "util-unittest.h"
@@ -640,7 +639,7 @@ int DeStateDetectStartDetection(ThreadVars *tv, DetectEngineCtx *de_ctx,
             if (sigmatch_table[sm->type].AppLayerMatch != NULL) {
                 int match = 0;
                 if (alproto == ALPROTO_SMB || alproto == ALPROTO_SMB2) {
-                    SMBState *smb_state = (SMBState *)alstate;
+
                 } else {
                     KEYWORD_PROFILING_START;
                     match = sigmatch_table[sm->type].
@@ -970,7 +969,7 @@ static int DoInspectFlowRule(ThreadVars *tv,
         if (alstate != NULL) {
             KEYWORD_PROFILING_SET_LIST(det_ctx, DETECT_SM_LIST_DMATCH);
             if (alproto == ALPROTO_SMB || alproto == ALPROTO_SMB2) {
-                SMBState *smb_state = (SMBState *)alstate;
+
             } else {
 
             }

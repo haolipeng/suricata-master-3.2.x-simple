@@ -47,7 +47,6 @@
 #include "app-layer-parser.h"
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
-#include "app-layer-smb.h"
 
 #include "util-unittest.h"
 #include "util-unittest-helper.h"

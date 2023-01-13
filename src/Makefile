@@ -118,7 +118,6 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	app-layer-htp-file.$(OBJEXT) app-layer-htp-libhtp.$(OBJEXT) \
 	app-layer-htp-mem.$(OBJEXT) app-layer-htp-xff.$(OBJEXT) \
 	app-layer-parser.$(OBJEXT) app-layer-protos.$(OBJEXT) \
-	app-layer-smb2.$(OBJEXT) app-layer-smb.$(OBJEXT) \
 	app-layer-template.$(OBJEXT) app-layer-ssh.$(OBJEXT) \
 	conf.$(OBJEXT) conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
 	data-queue.$(OBJEXT) decode.$(OBJEXT) decode-afl.$(OBJEXT) \
@@ -341,8 +340,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-htp-mem.Po \
 	./$(DEPDIR)/app-layer-htp-xff.Po ./$(DEPDIR)/app-layer-htp.Po \
 	./$(DEPDIR)/app-layer-parser.Po \
-	./$(DEPDIR)/app-layer-protos.Po ./$(DEPDIR)/app-layer-smb.Po \
-	./$(DEPDIR)/app-layer-smb2.Po ./$(DEPDIR)/app-layer-ssh.Po \
+	./$(DEPDIR)/app-layer-protos.Po ./$(DEPDIR)/app-layer-ssh.Po \
 	./$(DEPDIR)/app-layer-template.Po ./$(DEPDIR)/app-layer.Po \
 	./$(DEPDIR)/conf-yaml-loader.Po ./$(DEPDIR)/conf.Po \
 	./$(DEPDIR)/counters.Po ./$(DEPDIR)/data-queue.Po \
@@ -833,8 +831,6 @@ app-layer-htp-mem.c app-layer-htp-mem.h \
 app-layer-htp-xff.c app-layer-htp-xff.h \
 app-layer-parser.c app-layer-parser.h \
 app-layer-protos.c app-layer-protos.h \
-app-layer-smb2.c app-layer-smb2.h \
-app-layer-smb.c app-layer-smb.h \
 app-layer-template.c app-layer-template.h \
 app-layer-ssh.c app-layer-ssh.h \
 conf.c conf.h \
@@ -1351,8 +1347,6 @@ include ./$(DEPDIR)/app-layer-htp-xff.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-htp.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-parser.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-protos.Po # am--include-marker
-include ./$(DEPDIR)/app-layer-smb.Po # am--include-marker
-include ./$(DEPDIR)/app-layer-smb2.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-ssh.Po # am--include-marker
 include ./$(DEPDIR)/app-layer-template.Po # am--include-marker
 include ./$(DEPDIR)/app-layer.Po # am--include-marker
@@ -1903,8 +1897,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/app-layer-htp.Po
 	-rm -f ./$(DEPDIR)/app-layer-parser.Po
 	-rm -f ./$(DEPDIR)/app-layer-protos.Po
-	-rm -f ./$(DEPDIR)/app-layer-smb.Po
-	-rm -f ./$(DEPDIR)/app-layer-smb2.Po
 	-rm -f ./$(DEPDIR)/app-layer-ssh.Po
 	-rm -f ./$(DEPDIR)/app-layer-template.Po
 	-rm -f ./$(DEPDIR)/app-layer.Po
@@ -2335,8 +2327,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/app-layer-htp.Po
 	-rm -f ./$(DEPDIR)/app-layer-parser.Po
 	-rm -f ./$(DEPDIR)/app-layer-protos.Po
-	-rm -f ./$(DEPDIR)/app-layer-smb.Po
-	-rm -f ./$(DEPDIR)/app-layer-smb2.Po
 	-rm -f ./$(DEPDIR)/app-layer-ssh.Po
 	-rm -f ./$(DEPDIR)/app-layer-template.Po
 	-rm -f ./$(DEPDIR)/app-layer.Po

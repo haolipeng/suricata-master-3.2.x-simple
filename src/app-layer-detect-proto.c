@@ -682,10 +682,6 @@ void AppLayerProtoDetectPrintProbingParsers(AppLayerProtoDetectProbingParser *pp
                         printf("            alproto: ALPROTO_MSN\n");
                     else if (pp_pe->alproto == ALPROTO_JABBER)
                         printf("            alproto: ALPROTO_JABBER\n");
-                    else if (pp_pe->alproto == ALPROTO_SMB)
-                        printf("            alproto: ALPROTO_SMB\n");
-                    else if (pp_pe->alproto == ALPROTO_SMB2)
-                        printf("            alproto: ALPROTO_SMB2\n");
                     else if (pp_pe->alproto == ALPROTO_DCERPC)
                         printf("            alproto: ALPROTO_DCERPC\n");
                     else if (pp_pe->alproto == ALPROTO_IRC)
@@ -739,10 +735,6 @@ void AppLayerProtoDetectPrintProbingParsers(AppLayerProtoDetectProbingParser *pp
                     printf("            alproto: ALPROTO_MSN\n");
                 else if (pp_pe->alproto == ALPROTO_JABBER)
                     printf("            alproto: ALPROTO_JABBER\n");
-                else if (pp_pe->alproto == ALPROTO_SMB)
-                    printf("            alproto: ALPROTO_SMB\n");
-                else if (pp_pe->alproto == ALPROTO_SMB2)
-                    printf("            alproto: ALPROTO_SMB2\n");
                 else if (pp_pe->alproto == ALPROTO_DCERPC)
                     printf("            alproto: ALPROTO_DCERPC\n");
                 else if (pp_pe->alproto == ALPROTO_IRC)
