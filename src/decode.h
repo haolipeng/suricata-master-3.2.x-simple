@@ -63,8 +63,6 @@ enum PktSrcEnum {
 #include "decode-erspan.h"
 #include "decode-ethernet.h"
 #include "decode-gre.h"
-#include "decode-ppp.h"
-#include "decode-pppoe.h"
 #include "decode-sll.h"
 #include "decode-ipv4.h"
 #include "decode-ipv6.h"
@@ -496,10 +494,6 @@ typedef struct Packet_
 
     ICMPV6Hdr *icmpv6h;
 
-    PPPHdr *ppph;
-    PPPOESessionHdr *pppoesh;
-    PPPOEDiscoveryHdr *pppoedh;
-
     GREHdr *greh;
 
     VLANHdr *vlanh[2];
@@ -755,9 +749,6 @@ void CaptureStatsSetup(ThreadVars *tv, CaptureStats *s);
         if ((p)->icmpv6h != NULL) {             \
             CLEAR_ICMPV6_PACKET((p));           \
         }                                       \
-        (p)->ppph = NULL;                       \
-        (p)->pppoesh = NULL;                    \
-        (p)->pppoedh = NULL;                    \
         (p)->greh = NULL;                       \
         (p)->vlanh[0] = NULL;                   \
         (p)->vlanh[1] = NULL;                   \
