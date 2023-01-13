@@ -805,7 +805,6 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 noinst_HEADERS = action-globals.h \
-    app-layer-nbss.h \
     debug.h \
 	flow-private.h queue.h source-nfq-prototypes.h \
 	suricata-common.h threadvars.h util-binsearch.h \
