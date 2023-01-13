@@ -92,7 +92,6 @@
 #include "source-napatech.h"
 
 #include "source-af-packet.h"
-#include "source-netmap.h"
 #include "source-mpipe.h"
 
 #include "respond-reject.h"
@@ -861,9 +860,7 @@ void RegisterAllModules()
     /* af-packet */
     TmModuleReceiveAFPRegister();
     TmModuleDecodeAFPRegister();
-    /* netmap */
-    TmModuleReceiveNetmapRegister();
-    TmModuleDecodeNetmapRegister();
+
     /* pfring */
     TmModuleReceivePfringRegister();
     TmModuleDecodePfringRegister();

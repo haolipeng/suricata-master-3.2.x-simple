@@ -208,7 +208,6 @@ void RunModeRegisterRunModes(void)
     RunModeErfDagRegister();
     RunModeNapatechRegister();
     RunModeIdsAFPRegister();
-    RunModeIdsNetmapRegister();
     RunModeIdsNflogRegister();
     RunModeTileMpipeRegister();
     RunModeUnixSocketRegister();
@@ -310,9 +309,6 @@ void RunModeDispatch(int runmode, const char *custom_mode)
                 break;
             case RUNMODE_AFP_DEV:
                 custom_mode = RunModeAFPGetDefaultMode();
-                break;
-            case RUNMODE_NETMAP:
-                custom_mode = RunModeNetmapGetDefaultMode();
                 break;
             case RUNMODE_UNIX_SOCKET:
                 custom_mode = RunModeUnixSocketGetDefaultMode();

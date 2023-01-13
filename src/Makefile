@@ -231,15 +231,14 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	respond-reject-libnet11.$(OBJEXT) runmode-af-packet.$(OBJEXT) \
 	runmode-erf-dag.$(OBJEXT) runmode-erf-file.$(OBJEXT) \
 	runmode-ipfw.$(OBJEXT) runmode-napatech.$(OBJEXT) \
-	runmode-netmap.$(OBJEXT) runmode-nfq.$(OBJEXT) \
-	runmode-nflog.$(OBJEXT) runmode-pcap.$(OBJEXT) \
-	runmode-pcap-file.$(OBJEXT) runmode-pfring.$(OBJEXT) \
-	runmode-unittests.$(OBJEXT) runmode-unix-socket.$(OBJEXT) \
-	runmode-tile.$(OBJEXT) runmodes.$(OBJEXT) \
-	source-af-packet.$(OBJEXT) source-erf-dag.$(OBJEXT) \
-	source-erf-file.$(OBJEXT) source-ipfw.$(OBJEXT) \
-	source-mpipe.$(OBJEXT) source-napatech.$(OBJEXT) \
-	source-netmap.$(OBJEXT) source-nfq.$(OBJEXT) \
+	runmode-nfq.$(OBJEXT) runmode-nflog.$(OBJEXT) \
+	runmode-pcap.$(OBJEXT) runmode-pcap-file.$(OBJEXT) \
+	runmode-pfring.$(OBJEXT) runmode-unittests.$(OBJEXT) \
+	runmode-unix-socket.$(OBJEXT) runmode-tile.$(OBJEXT) \
+	runmodes.$(OBJEXT) source-af-packet.$(OBJEXT) \
+	source-erf-dag.$(OBJEXT) source-erf-file.$(OBJEXT) \
+	source-ipfw.$(OBJEXT) source-mpipe.$(OBJEXT) \
+	source-napatech.$(OBJEXT) source-nfq.$(OBJEXT) \
 	source-nflog.$(OBJEXT) source-pcap.$(OBJEXT) \
 	source-pcap-file.$(OBJEXT) source-pfring.$(OBJEXT) \
 	stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
@@ -485,18 +484,17 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/respond-reject.Po ./$(DEPDIR)/runmode-af-packet.Po \
 	./$(DEPDIR)/runmode-erf-dag.Po ./$(DEPDIR)/runmode-erf-file.Po \
 	./$(DEPDIR)/runmode-ipfw.Po ./$(DEPDIR)/runmode-napatech.Po \
-	./$(DEPDIR)/runmode-netmap.Po ./$(DEPDIR)/runmode-nflog.Po \
-	./$(DEPDIR)/runmode-nfq.Po ./$(DEPDIR)/runmode-pcap-file.Po \
-	./$(DEPDIR)/runmode-pcap.Po ./$(DEPDIR)/runmode-pfring.Po \
-	./$(DEPDIR)/runmode-tile.Po ./$(DEPDIR)/runmode-unittests.Po \
+	./$(DEPDIR)/runmode-nflog.Po ./$(DEPDIR)/runmode-nfq.Po \
+	./$(DEPDIR)/runmode-pcap-file.Po ./$(DEPDIR)/runmode-pcap.Po \
+	./$(DEPDIR)/runmode-pfring.Po ./$(DEPDIR)/runmode-tile.Po \
+	./$(DEPDIR)/runmode-unittests.Po \
 	./$(DEPDIR)/runmode-unix-socket.Po ./$(DEPDIR)/runmodes.Po \
 	./$(DEPDIR)/source-af-packet.Po ./$(DEPDIR)/source-erf-dag.Po \
 	./$(DEPDIR)/source-erf-file.Po ./$(DEPDIR)/source-ipfw.Po \
 	./$(DEPDIR)/source-mpipe.Po ./$(DEPDIR)/source-napatech.Po \
-	./$(DEPDIR)/source-netmap.Po ./$(DEPDIR)/source-nflog.Po \
-	./$(DEPDIR)/source-nfq.Po ./$(DEPDIR)/source-pcap-file.Po \
-	./$(DEPDIR)/source-pcap.Po ./$(DEPDIR)/source-pfring.Po \
-	./$(DEPDIR)/stream-tcp-inline.Po \
+	./$(DEPDIR)/source-nflog.Po ./$(DEPDIR)/source-nfq.Po \
+	./$(DEPDIR)/source-pcap-file.Po ./$(DEPDIR)/source-pcap.Po \
+	./$(DEPDIR)/source-pfring.Po ./$(DEPDIR)/stream-tcp-inline.Po \
 	./$(DEPDIR)/stream-tcp-reassemble.Po \
 	./$(DEPDIR)/stream-tcp-sack.Po ./$(DEPDIR)/stream-tcp-util.Po \
 	./$(DEPDIR)/stream-tcp.Po ./$(DEPDIR)/stream.Po \
@@ -1050,7 +1048,6 @@ runmode-erf-dag.c runmode-erf-dag.h \
 runmode-erf-file.c runmode-erf-file.h \
 runmode-ipfw.c runmode-ipfw.h \
 runmode-napatech.c runmode-napatech.h \
-runmode-netmap.c runmode-netmap.h \
 runmode-nfq.c runmode-nfq.h \
 runmode-nflog.c runmode-nflog.h \
 runmode-pcap.c runmode-pcap.h \
@@ -1066,7 +1063,6 @@ source-erf-file.c source-erf-file.h \
 source-ipfw.c source-ipfw.h \
 source-mpipe.c source-mpipe.h \
 source-napatech.c source-napatech.h \
-source-netmap.c source-netmap.h \
 source-nfq.c source-nfq.h \
 source-nflog.c source-nflog.h \
 source-pcap.c source-pcap.h \
@@ -1562,7 +1558,6 @@ include ./$(DEPDIR)/runmode-erf-dag.Po # am--include-marker
 include ./$(DEPDIR)/runmode-erf-file.Po # am--include-marker
 include ./$(DEPDIR)/runmode-ipfw.Po # am--include-marker
 include ./$(DEPDIR)/runmode-napatech.Po # am--include-marker
-include ./$(DEPDIR)/runmode-netmap.Po # am--include-marker
 include ./$(DEPDIR)/runmode-nflog.Po # am--include-marker
 include ./$(DEPDIR)/runmode-nfq.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap-file.Po # am--include-marker
@@ -1578,7 +1573,6 @@ include ./$(DEPDIR)/source-erf-file.Po # am--include-marker
 include ./$(DEPDIR)/source-ipfw.Po # am--include-marker
 include ./$(DEPDIR)/source-mpipe.Po # am--include-marker
 include ./$(DEPDIR)/source-napatech.Po # am--include-marker
-include ./$(DEPDIR)/source-netmap.Po # am--include-marker
 include ./$(DEPDIR)/source-nflog.Po # am--include-marker
 include ./$(DEPDIR)/source-nfq.Po # am--include-marker
 include ./$(DEPDIR)/source-pcap-file.Po # am--include-marker
@@ -2107,7 +2101,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
 	-rm -f ./$(DEPDIR)/runmode-ipfw.Po
 	-rm -f ./$(DEPDIR)/runmode-napatech.Po
-	-rm -f ./$(DEPDIR)/runmode-netmap.Po
 	-rm -f ./$(DEPDIR)/runmode-nflog.Po
 	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
@@ -2123,7 +2116,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/source-ipfw.Po
 	-rm -f ./$(DEPDIR)/source-mpipe.Po
 	-rm -f ./$(DEPDIR)/source-napatech.Po
-	-rm -f ./$(DEPDIR)/source-netmap.Po
 	-rm -f ./$(DEPDIR)/source-nflog.Po
 	-rm -f ./$(DEPDIR)/source-nfq.Po
 	-rm -f ./$(DEPDIR)/source-pcap-file.Po
@@ -2532,7 +2524,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
 	-rm -f ./$(DEPDIR)/runmode-ipfw.Po
 	-rm -f ./$(DEPDIR)/runmode-napatech.Po
-	-rm -f ./$(DEPDIR)/runmode-netmap.Po
 	-rm -f ./$(DEPDIR)/runmode-nflog.Po
 	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
@@ -2548,7 +2539,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/source-ipfw.Po
 	-rm -f ./$(DEPDIR)/source-mpipe.Po
 	-rm -f ./$(DEPDIR)/source-napatech.Po
-	-rm -f ./$(DEPDIR)/source-netmap.Po
 	-rm -f ./$(DEPDIR)/source-nflog.Po
 	-rm -f ./$(DEPDIR)/source-nfq.Po
 	-rm -f ./$(DEPDIR)/source-pcap-file.Po

@@ -96,7 +96,6 @@ int RunModeOutputFiledataEnabled(void);
 #include "runmode-af-packet.h"
 #include "runmode-nflog.h"
 #include "runmode-unix-socket.h"
-#include "runmode-netmap.h"
 
 int threading_set_cpu_affinity;
 extern float threading_detect_ratio;

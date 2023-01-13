@@ -57,7 +57,6 @@ enum PktSrcEnum {
 #include "source-pcap.h"
 #include "source-af-packet.h"
 #include "source-mpipe.h"
-#include "source-netmap.h"
 
 #include "action-globals.h"
 
