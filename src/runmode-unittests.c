@@ -69,7 +69,6 @@
 #include "app-layer-parser.h"
 #include "app-layer.h"
 #include "app-layer-htp.h"
-#include "app-layer-ssh.h"
 
 #include "util-action.h"
 #include "util-radix-tree.h"

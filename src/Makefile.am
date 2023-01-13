@@ -26,7 +26,6 @@ app-layer-htp-xff.c app-layer-htp-xff.h \
 app-layer-parser.c app-layer-parser.h \
 app-layer-protos.c app-layer-protos.h \
 app-layer-template.c app-layer-template.h \
-app-layer-ssh.c app-layer-ssh.h \
 conf.c conf.h \
 conf-yaml-loader.c conf-yaml-loader.h \
 counters.c counters.h \
@@ -181,8 +180,6 @@ detect-rev.c detect-rev.h \
 detect-sameip.c detect-sameip.h \
 detect-seq.c detect-seq.h \
 detect-sid.c detect-sid.h \
-detect-ssh-proto-version.c detect-ssh-proto-version.h \
-detect-ssh-software-version.c detect-ssh-software-version.h \
 detect-stream_size.c detect-stream_size.h \
 detect-tag.c detect-tag.h \
 detect-template.c detect-template.h \
@@ -234,7 +231,6 @@ output-json-file.c output-json-file.h \
 output-json-flow.c output-json-flow.h \
 output-json-netflow.c output-json-netflow.h \
 output-json-http.c output-json-http.h \
-output-json-ssh.c output-json-ssh.h \
 output-json-stats.c output-json-stats.h \
 output-json-template.c output-json-template.h \
 output-lua.c output-lua.h \
@@ -341,7 +337,6 @@ util-luajit.c util-luajit.h \
 util-lua-common.c util-lua-common.h \
 util-lua-dns.c util-lua-dns.h \
 util-lua-http.c util-lua-http.h \
-util-lua-ssh.c util-lua-ssh.h \
 util-magic.c util-magic.h \
 util-memcmp.c util-memcmp.h \
 util-memcpy.h \

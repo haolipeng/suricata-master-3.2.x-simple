@@ -67,7 +67,6 @@
 #include "util-lua-http.h"
 #include "util-lua-dns.h"
 #include "util-lua-tls.h"
-#include "util-lua-ssh.h"
 #include "util-lua-smtp.h"
 #include "util-lua-dnp3.h"
 

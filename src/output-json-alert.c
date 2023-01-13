@@ -53,7 +53,6 @@
 #include "output.h"
 #include "output-json.h"
 #include "output-json-http.h"
-#include "output-json-ssh.h"
 
 #include "util-byte.h"
 #include "util-privs.h"
@@ -104,21 +103,6 @@ static int AlertJsonDumpStreamSegmentCallback(const Packet *p, void *data, uint8
     return 1;
 }
 
-static void AlertJsonSsh(const Flow *f, json_t *js)
-{
-    SshState *ssh_state = (SshState *)FlowGetAppState(f);
-    if (ssh_state) {
-        json_t *tjs = json_object();
-        if (unlikely(tjs == NULL))
-            return;
-
-        JsonSshLogJSON(tjs, ssh_state);
-
-        json_object_set_new(js, "ssh", tjs);
-    }
-
-    return;
-}
 #if 0
 static void AlertJsonDnp3(const Flow *f, json_t *js)
 {
@@ -248,35 +232,6 @@ static int AlertJson(ThreadVars *tv, JsonAlertLogThread *aft, const Packet *p)
                     hjs = JsonHttpAddMetadata(p->flow, pa->tx_id);
                     if (hjs)
                         json_object_set_new(js, "http", hjs);
-                }
-            }
-        }
-
-        if (json_output_ctx->flags & LOG_JSON_SSH) {
-            if (p->flow != NULL) {
-                uint16_t proto = FlowGetAppProtocol(p->flow);
-
-                /* http alert */
-                if (proto == ALPROTO_SSH)
-                    AlertJsonSsh(p->flow, js);
-            }
-        }
-
-        if (json_output_ctx->flags & LOG_JSON_SMTP) {
-            if (p->flow != NULL) {
-                uint16_t proto = FlowGetAppProtocol(p->flow);
-
-                /* http alert */
-                if (proto == ALPROTO_SMTP) {
-                }
-            }
-        }
-
-        if (json_output_ctx->flags & LOG_JSON_DNP3) {
-            if (p->flow != NULL) {
-                uint16_t proto = FlowGetAppProtocol(p->flow);
-                if (proto == ALPROTO_DNP3) {
-                    //AlertJsonDnp3(p->flow, js);
                 }
             }
         }

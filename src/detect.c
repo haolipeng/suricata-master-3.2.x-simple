@@ -166,8 +166,6 @@
 #include "app-layer-protos.h"
 #include "app-layer-htp.h"
 #include "app-layer-template.h"
-#include "detect-ssh-proto-version.h"
-#include "detect-ssh-software-version.h"
 #include "detect-http-stat-code.h"
 
 #include "action-globals.h"
@@ -4222,8 +4220,6 @@ void SigTableSetup(void)
     DetectUrilenRegister();
     DetectDetectionFilterRegister();
     DetectAsn1Register();
-    DetectSshVersionRegister();
-    DetectSshSoftwareVersionRegister();
     DetectByteExtractRegister();
     DetectFiledataRegister();
     DetectPktDataRegister();

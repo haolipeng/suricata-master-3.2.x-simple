@@ -47,7 +47,6 @@
 #include "app-layer-protos.h"
 #include "app-layer-parser.h"
 #include "app-layer-htp.h"
-#include "app-layer-ssh.h"
 #include "app-layer-dns-udp.h"
 #include "app-layer-dns-tcp.h"
 #include "app-layer-template.h"
@@ -1211,7 +1210,7 @@ void AppLayerParserRegisterProtocolParsers(void)
     //RegisterDCERPCParsers();
     //RegisterDCERPCUDPParsers();
     //RegisterFTPParsers();
-    RegisterSSHParsers();
+    //RegisterSSHParsers();
     //RegisterSMTPParsers();
     RegisterDNSUDPParsers();
     RegisterDNSTCPParsers();

@@ -116,7 +116,6 @@
 #include "app-layer-htp.h"
 #include "app-layer-dns-tcp.h"
 #include "app-layer-dns-udp.h"
-#include "app-layer-ssh.h"
 
 #include "util-decode-der.h"
 #include "util-radix-tree.h"
@@ -1201,7 +1200,7 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
         MpmTableSetup();
         SpmTableSetup();
         AppLayerProtoDetectSetup();
-        RegisterSSHParsers();
+        //RegisterSSHParsers();
         exit(AppLayerParserRequestFromFile(IPPROTO_TCP, ALPROTO_SSH, opt_arg));
     } else if(strcmp(opt_name, "afl-ssh") == 0) {
         //printf("arg: //%s\n", opt_arg);
@@ -1209,7 +1208,7 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
         SpmTableSetup();
         AppLayerProtoDetectSetup();
         AppLayerParserSetup();
-        RegisterSSHParsers();
+        //RegisterSSHParsers();
         exit(AppLayerParserFromFile(IPPROTO_TCP, ALPROTO_SSH, opt_arg));
 
     } else if(strcmp(opt_name, "afl-ftp-request") == 0) {

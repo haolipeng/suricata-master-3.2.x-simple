@@ -118,8 +118,8 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	app-layer-htp-file.$(OBJEXT) app-layer-htp-libhtp.$(OBJEXT) \
 	app-layer-htp-mem.$(OBJEXT) app-layer-htp-xff.$(OBJEXT) \
 	app-layer-parser.$(OBJEXT) app-layer-protos.$(OBJEXT) \
-	app-layer-template.$(OBJEXT) app-layer-ssh.$(OBJEXT) \
-	conf.$(OBJEXT) conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
+	app-layer-template.$(OBJEXT) conf.$(OBJEXT) \
+	conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
 	data-queue.$(OBJEXT) decode.$(OBJEXT) decode-afl.$(OBJEXT) \
 	decode-erspan.$(OBJEXT) decode-ethernet.$(OBJEXT) \
 	decode-events.$(OBJEXT) decode-gre.$(OBJEXT) \
@@ -199,23 +199,22 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	detect-rawbytes.$(OBJEXT) detect-reference.$(OBJEXT) \
 	detect-replace.$(OBJEXT) detect-rev.$(OBJEXT) \
 	detect-sameip.$(OBJEXT) detect-seq.$(OBJEXT) \
-	detect-sid.$(OBJEXT) detect-ssh-proto-version.$(OBJEXT) \
-	detect-ssh-software-version.$(OBJEXT) \
-	detect-stream_size.$(OBJEXT) detect-tag.$(OBJEXT) \
-	detect-template.$(OBJEXT) detect-template-buffer.$(OBJEXT) \
-	detect-threshold.$(OBJEXT) detect-tos.$(OBJEXT) \
-	detect-ttl.$(OBJEXT) detect-uricontent.$(OBJEXT) \
-	detect-urilen.$(OBJEXT) detect-window.$(OBJEXT) \
-	detect-within.$(OBJEXT) detect-xbits.$(OBJEXT) \
-	flow-bit.$(OBJEXT) flow.$(OBJEXT) flow-hash.$(OBJEXT) \
-	flow-manager.$(OBJEXT) flow-queue.$(OBJEXT) \
-	flow-storage.$(OBJEXT) flow-timeout.$(OBJEXT) \
-	flow-util.$(OBJEXT) flow-var.$(OBJEXT) flow-worker.$(OBJEXT) \
-	host.$(OBJEXT) host-bit.$(OBJEXT) host-queue.$(OBJEXT) \
-	host-storage.$(OBJEXT) host-timeout.$(OBJEXT) ippair.$(OBJEXT) \
-	ippair-bit.$(OBJEXT) ippair-queue.$(OBJEXT) \
-	ippair-storage.$(OBJEXT) ippair-timeout.$(OBJEXT) \
-	log-dnslog.$(OBJEXT) log-droplog.$(OBJEXT) log-file.$(OBJEXT) \
+	detect-sid.$(OBJEXT) detect-stream_size.$(OBJEXT) \
+	detect-tag.$(OBJEXT) detect-template.$(OBJEXT) \
+	detect-template-buffer.$(OBJEXT) detect-threshold.$(OBJEXT) \
+	detect-tos.$(OBJEXT) detect-ttl.$(OBJEXT) \
+	detect-uricontent.$(OBJEXT) detect-urilen.$(OBJEXT) \
+	detect-window.$(OBJEXT) detect-within.$(OBJEXT) \
+	detect-xbits.$(OBJEXT) flow-bit.$(OBJEXT) flow.$(OBJEXT) \
+	flow-hash.$(OBJEXT) flow-manager.$(OBJEXT) \
+	flow-queue.$(OBJEXT) flow-storage.$(OBJEXT) \
+	flow-timeout.$(OBJEXT) flow-util.$(OBJEXT) flow-var.$(OBJEXT) \
+	flow-worker.$(OBJEXT) host.$(OBJEXT) host-bit.$(OBJEXT) \
+	host-queue.$(OBJEXT) host-storage.$(OBJEXT) \
+	host-timeout.$(OBJEXT) ippair.$(OBJEXT) ippair-bit.$(OBJEXT) \
+	ippair-queue.$(OBJEXT) ippair-storage.$(OBJEXT) \
+	ippair-timeout.$(OBJEXT) log-dnslog.$(OBJEXT) \
+	log-droplog.$(OBJEXT) log-file.$(OBJEXT) \
 	log-filestore.$(OBJEXT) log-httplog.$(OBJEXT) \
 	log-pcap.$(OBJEXT) log-stats.$(OBJEXT) log-tcp-data.$(OBJEXT) \
 	output.$(OBJEXT) output-file.$(OBJEXT) \
@@ -223,27 +222,27 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	output-json-alert.$(OBJEXT) output-json-dns.$(OBJEXT) \
 	output-json-drop.$(OBJEXT) output-json-file.$(OBJEXT) \
 	output-json-flow.$(OBJEXT) output-json-netflow.$(OBJEXT) \
-	output-json-http.$(OBJEXT) output-json-ssh.$(OBJEXT) \
-	output-json-stats.$(OBJEXT) output-json-template.$(OBJEXT) \
-	output-lua.$(OBJEXT) output-packet.$(OBJEXT) \
-	output-stats.$(OBJEXT) output-streaming.$(OBJEXT) \
-	output-tx.$(OBJEXT) output-json.$(OBJEXT) \
-	packet-queue.$(OBJEXT) pkt-var.$(OBJEXT) reputation.$(OBJEXT) \
-	respond-reject.$(OBJEXT) respond-reject-libnet11.$(OBJEXT) \
-	runmode-af-packet.$(OBJEXT) runmode-erf-dag.$(OBJEXT) \
-	runmode-erf-file.$(OBJEXT) runmode-ipfw.$(OBJEXT) \
-	runmode-napatech.$(OBJEXT) runmode-netmap.$(OBJEXT) \
-	runmode-nfq.$(OBJEXT) runmode-nflog.$(OBJEXT) \
-	runmode-pcap.$(OBJEXT) runmode-pcap-file.$(OBJEXT) \
-	runmode-pfring.$(OBJEXT) runmode-unittests.$(OBJEXT) \
-	runmode-unix-socket.$(OBJEXT) runmode-tile.$(OBJEXT) \
-	runmodes.$(OBJEXT) source-af-packet.$(OBJEXT) \
-	source-erf-dag.$(OBJEXT) source-erf-file.$(OBJEXT) \
-	source-ipfw.$(OBJEXT) source-mpipe.$(OBJEXT) \
-	source-napatech.$(OBJEXT) source-netmap.$(OBJEXT) \
-	source-nfq.$(OBJEXT) source-nflog.$(OBJEXT) \
-	source-pcap.$(OBJEXT) source-pcap-file.$(OBJEXT) \
-	source-pfring.$(OBJEXT) stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
+	output-json-http.$(OBJEXT) output-json-stats.$(OBJEXT) \
+	output-json-template.$(OBJEXT) output-lua.$(OBJEXT) \
+	output-packet.$(OBJEXT) output-stats.$(OBJEXT) \
+	output-streaming.$(OBJEXT) output-tx.$(OBJEXT) \
+	output-json.$(OBJEXT) packet-queue.$(OBJEXT) pkt-var.$(OBJEXT) \
+	reputation.$(OBJEXT) respond-reject.$(OBJEXT) \
+	respond-reject-libnet11.$(OBJEXT) runmode-af-packet.$(OBJEXT) \
+	runmode-erf-dag.$(OBJEXT) runmode-erf-file.$(OBJEXT) \
+	runmode-ipfw.$(OBJEXT) runmode-napatech.$(OBJEXT) \
+	runmode-netmap.$(OBJEXT) runmode-nfq.$(OBJEXT) \
+	runmode-nflog.$(OBJEXT) runmode-pcap.$(OBJEXT) \
+	runmode-pcap-file.$(OBJEXT) runmode-pfring.$(OBJEXT) \
+	runmode-unittests.$(OBJEXT) runmode-unix-socket.$(OBJEXT) \
+	runmode-tile.$(OBJEXT) runmodes.$(OBJEXT) \
+	source-af-packet.$(OBJEXT) source-erf-dag.$(OBJEXT) \
+	source-erf-file.$(OBJEXT) source-ipfw.$(OBJEXT) \
+	source-mpipe.$(OBJEXT) source-napatech.$(OBJEXT) \
+	source-netmap.$(OBJEXT) source-nfq.$(OBJEXT) \
+	source-nflog.$(OBJEXT) source-pcap.$(OBJEXT) \
+	source-pcap-file.$(OBJEXT) source-pfring.$(OBJEXT) \
+	stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
 	stream-tcp-inline.$(OBJEXT) stream-tcp-reassemble.$(OBJEXT) \
 	stream-tcp-sack.$(OBJEXT) stream-tcp-util.$(OBJEXT) \
 	suricata.$(OBJEXT) threads.$(OBJEXT) tm-modules.$(OBJEXT) \
@@ -274,13 +273,13 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	util-logopenfile.$(OBJEXT) util-logopenfile-tile.$(OBJEXT) \
 	util-lua.$(OBJEXT) util-luajit.$(OBJEXT) \
 	util-lua-common.$(OBJEXT) util-lua-dns.$(OBJEXT) \
-	util-lua-http.$(OBJEXT) util-lua-ssh.$(OBJEXT) \
-	util-magic.$(OBJEXT) util-memcmp.$(OBJEXT) \
-	util-memrchr.$(OBJEXT) util-misc.$(OBJEXT) \
-	util-mpm-ac-bs.$(OBJEXT) util-mpm-ac.$(OBJEXT) \
-	util-mpm-ac-tile.$(OBJEXT) util-mpm-ac-tile-small.$(OBJEXT) \
-	util-mpm-hs.$(OBJEXT) util-mpm.$(OBJEXT) util-pages.$(OBJEXT) \
-	util-path.$(OBJEXT) util-pidfile.$(OBJEXT) util-pool.$(OBJEXT) \
+	util-lua-http.$(OBJEXT) util-magic.$(OBJEXT) \
+	util-memcmp.$(OBJEXT) util-memrchr.$(OBJEXT) \
+	util-misc.$(OBJEXT) util-mpm-ac-bs.$(OBJEXT) \
+	util-mpm-ac.$(OBJEXT) util-mpm-ac-tile.$(OBJEXT) \
+	util-mpm-ac-tile-small.$(OBJEXT) util-mpm-hs.$(OBJEXT) \
+	util-mpm.$(OBJEXT) util-pages.$(OBJEXT) util-path.$(OBJEXT) \
+	util-pidfile.$(OBJEXT) util-pool.$(OBJEXT) \
 	util-pool-thread.$(OBJEXT) util-prefilter.$(OBJEXT) \
 	util-print.$(OBJEXT) util-privs.$(OBJEXT) \
 	util-profiling.$(OBJEXT) util-profiling-locks.$(OBJEXT) \
@@ -340,7 +339,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-htp-mem.Po \
 	./$(DEPDIR)/app-layer-htp-xff.Po ./$(DEPDIR)/app-layer-htp.Po \
 	./$(DEPDIR)/app-layer-parser.Po \
-	./$(DEPDIR)/app-layer-protos.Po ./$(DEPDIR)/app-layer-ssh.Po \
+	./$(DEPDIR)/app-layer-protos.Po \
 	./$(DEPDIR)/app-layer-template.Po ./$(DEPDIR)/app-layer.Po \
 	./$(DEPDIR)/conf-yaml-loader.Po ./$(DEPDIR)/conf.Po \
 	./$(DEPDIR)/counters.Po ./$(DEPDIR)/data-queue.Po \
@@ -446,10 +445,8 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/detect-rawbytes.Po ./$(DEPDIR)/detect-reference.Po \
 	./$(DEPDIR)/detect-replace.Po ./$(DEPDIR)/detect-rev.Po \
 	./$(DEPDIR)/detect-sameip.Po ./$(DEPDIR)/detect-seq.Po \
-	./$(DEPDIR)/detect-sid.Po \
-	./$(DEPDIR)/detect-ssh-proto-version.Po \
-	./$(DEPDIR)/detect-ssh-software-version.Po \
-	./$(DEPDIR)/detect-stream_size.Po ./$(DEPDIR)/detect-tag.Po \
+	./$(DEPDIR)/detect-sid.Po ./$(DEPDIR)/detect-stream_size.Po \
+	./$(DEPDIR)/detect-tag.Po \
 	./$(DEPDIR)/detect-template-buffer.Po \
 	./$(DEPDIR)/detect-template.Po ./$(DEPDIR)/detect-threshold.Po \
 	./$(DEPDIR)/detect-tos.Po ./$(DEPDIR)/detect-ttl.Po \
@@ -477,7 +474,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/output-json-flow.Po \
 	./$(DEPDIR)/output-json-http.Po \
 	./$(DEPDIR)/output-json-netflow.Po \
-	./$(DEPDIR)/output-json-ssh.Po \
 	./$(DEPDIR)/output-json-stats.Po \
 	./$(DEPDIR)/output-json-template.Po ./$(DEPDIR)/output-json.Po \
 	./$(DEPDIR)/output-lua.Po ./$(DEPDIR)/output-packet.Po \
@@ -537,10 +533,10 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-logopenfile-tile.Po \
 	./$(DEPDIR)/util-logopenfile.Po ./$(DEPDIR)/util-lua-common.Po \
 	./$(DEPDIR)/util-lua-dns.Po ./$(DEPDIR)/util-lua-http.Po \
-	./$(DEPDIR)/util-lua-ssh.Po ./$(DEPDIR)/util-lua.Po \
-	./$(DEPDIR)/util-luajit.Po ./$(DEPDIR)/util-magic.Po \
-	./$(DEPDIR)/util-memcmp.Po ./$(DEPDIR)/util-memrchr.Po \
-	./$(DEPDIR)/util-misc.Po ./$(DEPDIR)/util-mpm-ac-bs.Po \
+	./$(DEPDIR)/util-lua.Po ./$(DEPDIR)/util-luajit.Po \
+	./$(DEPDIR)/util-magic.Po ./$(DEPDIR)/util-memcmp.Po \
+	./$(DEPDIR)/util-memrchr.Po ./$(DEPDIR)/util-misc.Po \
+	./$(DEPDIR)/util-mpm-ac-bs.Po \
 	./$(DEPDIR)/util-mpm-ac-tile-small.Po \
 	./$(DEPDIR)/util-mpm-ac-tile.Po ./$(DEPDIR)/util-mpm-ac.Po \
 	./$(DEPDIR)/util-mpm-hs.Po ./$(DEPDIR)/util-mpm.Po \
@@ -831,7 +827,6 @@ app-layer-htp-xff.c app-layer-htp-xff.h \
 app-layer-parser.c app-layer-parser.h \
 app-layer-protos.c app-layer-protos.h \
 app-layer-template.c app-layer-template.h \
-app-layer-ssh.c app-layer-ssh.h \
 conf.c conf.h \
 conf-yaml-loader.c conf-yaml-loader.h \
 counters.c counters.h \
@@ -986,8 +981,6 @@ detect-rev.c detect-rev.h \
 detect-sameip.c detect-sameip.h \
 detect-seq.c detect-seq.h \
 detect-sid.c detect-sid.h \
-detect-ssh-proto-version.c detect-ssh-proto-version.h \
-detect-ssh-software-version.c detect-ssh-software-version.h \
 detect-stream_size.c detect-stream_size.h \
 detect-tag.c detect-tag.h \
 detect-template.c detect-template.h \
@@ -1039,7 +1032,6 @@ output-json-file.c output-json-file.h \
 output-json-flow.c output-json-flow.h \
 output-json-netflow.c output-json-netflow.h \
 output-json-http.c output-json-http.h \
-output-json-ssh.c output-json-ssh.h \
 output-json-stats.c output-json-stats.h \
 output-json-template.c output-json-template.h \
 output-lua.c output-lua.h \
@@ -1146,7 +1138,6 @@ util-luajit.c util-luajit.h \
 util-lua-common.c util-lua-common.h \
 util-lua-dns.c util-lua-dns.h \
 util-lua-http.c util-lua-http.h \
-util-lua-ssh.c util-lua-ssh.h \
 util-magic.c util-magic.h \
 util-memcmp.c util-memcmp.h \
 util-memcpy.h \
@@ -1346,7 +1337,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-htp.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-parser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-protos.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-ssh.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer-template.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/app-layer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/conf-yaml-loader.Po@am__quote@ # am--include-marker
@@ -1502,8 +1492,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-sameip.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-seq.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-sid.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ssh-proto-version.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-ssh-software-version.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-stream_size.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-tag.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/detect-template-buffer.Po@am__quote@ # am--include-marker
@@ -1555,7 +1543,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-flow.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-http.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-netflow.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-ssh.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-stats.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json-template.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/output-json.Po@am__quote@ # am--include-marker
@@ -1661,7 +1648,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-common.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-dns.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-http.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua-ssh.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-lua.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-luajit.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/util-magic.Po@am__quote@ # am--include-marker
@@ -1896,7 +1882,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/app-layer-htp.Po
 	-rm -f ./$(DEPDIR)/app-layer-parser.Po
 	-rm -f ./$(DEPDIR)/app-layer-protos.Po
-	-rm -f ./$(DEPDIR)/app-layer-ssh.Po
 	-rm -f ./$(DEPDIR)/app-layer-template.Po
 	-rm -f ./$(DEPDIR)/app-layer.Po
 	-rm -f ./$(DEPDIR)/conf-yaml-loader.Po
@@ -2052,8 +2037,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/detect-sameip.Po
 	-rm -f ./$(DEPDIR)/detect-seq.Po
 	-rm -f ./$(DEPDIR)/detect-sid.Po
-	-rm -f ./$(DEPDIR)/detect-ssh-proto-version.Po
-	-rm -f ./$(DEPDIR)/detect-ssh-software-version.Po
 	-rm -f ./$(DEPDIR)/detect-stream_size.Po
 	-rm -f ./$(DEPDIR)/detect-tag.Po
 	-rm -f ./$(DEPDIR)/detect-template-buffer.Po
@@ -2105,7 +2088,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/output-json-flow.Po
 	-rm -f ./$(DEPDIR)/output-json-http.Po
 	-rm -f ./$(DEPDIR)/output-json-netflow.Po
-	-rm -f ./$(DEPDIR)/output-json-ssh.Po
 	-rm -f ./$(DEPDIR)/output-json-stats.Po
 	-rm -f ./$(DEPDIR)/output-json-template.Po
 	-rm -f ./$(DEPDIR)/output-json.Po
@@ -2211,7 +2193,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/util-lua-common.Po
 	-rm -f ./$(DEPDIR)/util-lua-dns.Po
 	-rm -f ./$(DEPDIR)/util-lua-http.Po
-	-rm -f ./$(DEPDIR)/util-lua-ssh.Po
 	-rm -f ./$(DEPDIR)/util-lua.Po
 	-rm -f ./$(DEPDIR)/util-luajit.Po
 	-rm -f ./$(DEPDIR)/util-magic.Po
@@ -2326,7 +2307,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/app-layer-htp.Po
 	-rm -f ./$(DEPDIR)/app-layer-parser.Po
 	-rm -f ./$(DEPDIR)/app-layer-protos.Po
-	-rm -f ./$(DEPDIR)/app-layer-ssh.Po
 	-rm -f ./$(DEPDIR)/app-layer-template.Po
 	-rm -f ./$(DEPDIR)/app-layer.Po
 	-rm -f ./$(DEPDIR)/conf-yaml-loader.Po
@@ -2482,8 +2462,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/detect-sameip.Po
 	-rm -f ./$(DEPDIR)/detect-seq.Po
 	-rm -f ./$(DEPDIR)/detect-sid.Po
-	-rm -f ./$(DEPDIR)/detect-ssh-proto-version.Po
-	-rm -f ./$(DEPDIR)/detect-ssh-software-version.Po
 	-rm -f ./$(DEPDIR)/detect-stream_size.Po
 	-rm -f ./$(DEPDIR)/detect-tag.Po
 	-rm -f ./$(DEPDIR)/detect-template-buffer.Po
@@ -2535,7 +2513,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/output-json-flow.Po
 	-rm -f ./$(DEPDIR)/output-json-http.Po
 	-rm -f ./$(DEPDIR)/output-json-netflow.Po
-	-rm -f ./$(DEPDIR)/output-json-ssh.Po
 	-rm -f ./$(DEPDIR)/output-json-stats.Po
 	-rm -f ./$(DEPDIR)/output-json-template.Po
 	-rm -f ./$(DEPDIR)/output-json.Po
@@ -2641,7 +2618,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-lua-common.Po
 	-rm -f ./$(DEPDIR)/util-lua-dns.Po
 	-rm -f ./$(DEPDIR)/util-lua-http.Po
-	-rm -f ./$(DEPDIR)/util-lua-ssh.Po
 	-rm -f ./$(DEPDIR)/util-lua.Po
 	-rm -f ./$(DEPDIR)/util-luajit.Po
 	-rm -f ./$(DEPDIR)/util-magic.Po

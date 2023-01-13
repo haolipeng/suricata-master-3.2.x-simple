@@ -40,7 +40,6 @@
 #include "output.h"
 #include "app-layer-htp.h"
 #include "app-layer.h"
-#include "app-layer-ssh.h"
 #include "app-layer-parser.h"
 #include "util-privs.h"
 #include "util-buffer.h"
@@ -59,7 +58,6 @@
 #include "util-lua-http.h"
 #include "util-lua-dns.h"
 #include "util-lua-tls.h"
-#include "util-lua-ssh.h"
 #include "util-lua-smtp.h"
 
 #define MODULE_NAME "LuaLog"
