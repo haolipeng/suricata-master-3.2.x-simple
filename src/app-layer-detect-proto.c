@@ -128,13 +128,13 @@ typedef struct AppLayerProtoDetectPMCtx_ {
     AppLayerProtoDetectPMSignature *head;
 
     /* \todo we don't need this except at setup time.  Get rid of it. */
-    PatIntId max_pat_id;
+    PatIntId max_pat_id;//记录去重后的pattern数量
     SigIntId max_sig_id;
 } AppLayerProtoDetectPMCtx;
 
 typedef struct AppLayerProtoDetectCtxIpproto_ {
     /* 0 - toserver, 1 - toclient */
-    AppLayerProtoDetectPMCtx ctx_pm[2];
+    AppLayerProtoDetectPMCtx ctx_pm[2];//模式匹配
 } AppLayerProtoDetectCtxIpproto;
 
 /**
@@ -147,7 +147,7 @@ typedef struct AppLayerProtoDetectCtx_ {
     AppLayerProtoDetectCtxIpproto ctx_ipp[FLOW_PROTO_DEFAULT];
 
     /* Global SPM thread context prototype. */
-    SpmGlobalThreadCtx *spm_global_thread_ctx;
+    SpmGlobalThreadCtx *spm_global_thread_ctx;//全局的单模匹配线程上下文
 
     AppLayerProtoDetectProbingParser *ctx_pp;
 
@@ -158,7 +158,7 @@ typedef struct AppLayerProtoDetectCtx_ {
 } AppLayerProtoDetectCtx;
 
 /**
- * \brief The app layer protocol detection thread context.
+ * \brief The app layer protocol detection thread context. 应用层协议识别 线程上下文
  */
 struct AppLayerProtoDetectThreadCtx_ {
     PrefilterRuleStore pmq;
@@ -241,7 +241,7 @@ static AppProto AppLayerProtoDetectPMGetProto(AppLayerProtoDetectThreadCtx *tctx
     if (pm_ctx->mpm_ctx.pattern_cnt == 0)
         goto end;
 
-    searchlen = buflen;
+    searchlen = buflen;//匹配的长度
     if (searchlen > pm_ctx->max_len)
         searchlen = pm_ctx->max_len;
 
@@ -1083,6 +1083,7 @@ static int AppLayerProtoDetectPMSetContentIDs(AppLayerProtoDetectPMCtx *ctx)
     if (ctx->head == NULL)
         goto end;
 
+	//遍历ctx->head成员链接的所有特征(AppLayerProtoDetectPMSignature)
     for (s = ctx->head; s != NULL; s = s->next) {
         struct_total_size += sizeof(TempContainer);
         content_total_size += s->cd->content_len;
@@ -1155,6 +1156,7 @@ static int AppLayerProtoDetectPMMapSignatures(AppLayerProtoDetectPMCtx *ctx)
         s->id = id++;
         SCLogDebug("s->id %u", s->id);
 
+		//遍历每个特征时，判断特征是否区分大小写
         if (s->cd->flags & DETECT_CONTENT_NOCASE) {
             mpm_ret = MpmAddPatternCI(&ctx->mpm_ctx,
                                       s->cd->content, s->cd->content_len,
@@ -1169,11 +1171,11 @@ static int AppLayerProtoDetectPMMapSignatures(AppLayerProtoDetectPMCtx *ctx)
                 goto error;
         }
 
-        ctx->map[s->id] = s;
-        s->next = NULL;
+        ctx->map[s->id] = s;//特征id为数组索引，数组元素是指向特征的指针
+        s->next = NULL;//断开特征链的每一个next连接
         s = next_s;
     }
-    ctx->head = NULL;
+    ctx->head = NULL;//head连接也置空
 
     goto end;
  error:
@@ -1616,6 +1618,7 @@ int AppLayerProtoDetectConfProtoDetectionEnabled(const char *ipproto,
     if (RunmodeIsUnittests())
         goto enabled;
 
+	//检测配置app-layer.protocols.http.enabled是否开启
     r = snprintf(param, sizeof(param), "%s%s%s", "app-layer.protocols.",
                  alproto, ".enabled");
     if (r < 0) {

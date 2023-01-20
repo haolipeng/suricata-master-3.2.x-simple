@@ -158,7 +158,7 @@ typedef struct MpmTableElmt_ {
     uint8_t flags;
 } MpmTableElmt;
 
-MpmTableElmt mpm_table[MPM_TABLE_SIZE];
+MpmTableElmt mpm_table[MPM_TABLE_SIZE];//多模匹配注册表
 int mpm_default_matcher;
 
 /* macros decides if cuda is enabled for the platform or not */
