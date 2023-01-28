@@ -76,8 +76,8 @@ typedef struct MpmPattern_ {
 } MpmPattern;
 
 typedef struct MpmCtx_ {
-    void *ctx;
-    uint16_t mpm_type;
+    void *ctx;//该mpm算法运行需要的上下文内容
+    uint16_t mpm_type;//mpm运行的算法
 
     /* Indicates if this a global mpm_ctx.  Global mpm_ctx is the one that
      * is instantiated when we use "single".  Non-global is "full", i.e.
@@ -86,17 +86,22 @@ typedef struct MpmCtx_ {
     uint16_t global;
 
     /* unique patterns */
+	/* 该mpm上下文包含的去重后的模式个数 */
     uint32_t pattern_cnt;
 
+	/* 该mpm上下文包含的模式的长度的最小值 */
     uint16_t minlen;
+	/* 该mpm上下文包含的模式的长度的最大值 */
     uint16_t maxlen;
 
+	/* 该mpm上下文内部结构所分配的内存次数和内存大小 */
     uint32_t memory_cnt;
     uint32_t memory_size;
 
     uint32_t max_pat_id;
 
     /* hash used during ctx initialization */
+	/* 该mpm上下文包含的模式的最大ID */
     MpmPattern **init_hash;
 } MpmCtx;
 

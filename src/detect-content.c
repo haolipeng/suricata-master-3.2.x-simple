@@ -258,13 +258,14 @@ DetectContentData *DetectContentParse(SpmGlobalThreadCtx *spm_global_thread_ctx,
         return NULL;
     }
 
+	//将成员depth、offset、within、distance都置0
     cd->depth = 0;
     cd->offset = 0;
     cd->within = 0;
     cd->distance = 0;
 
     SCFree(content);
-    return cd;
+    return cd;//返回DetectContentData实例
 
 }
 

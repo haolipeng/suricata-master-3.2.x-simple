@@ -75,6 +75,7 @@ uint16_t SinglePatternMatchDefaultMatcher(void)
                 if (spm_table[i].name == NULL) {
                     continue;
                 }
+				//spm_table中注册了两种模式匹配算法(hs和bm)
                 if (strcmp(spm_table[i].name, spm_algo) == 0) {
                     return i;
                 }
@@ -89,7 +90,7 @@ uint16_t SinglePatternMatchDefaultMatcher(void)
     }
 
 default_matcher:
-    /* When Suricata is built with Hyperscan support, default to using it for
+    /* 默认情况下，使用Hyperscan作为匹配引擎。When Suricata is built with Hyperscan support, default to using it for
      * SPM. */
 #ifdef BUILD_HYPERSCAN
     #ifdef HAVE_HS_VALID_PLATFORM

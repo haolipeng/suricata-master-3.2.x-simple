@@ -2737,6 +2737,8 @@ static int HTPRegisterPatternsForProtocolDetection(void)
              * 3 is subtracted from the length since the spacing is hex typed as |xx|
              * but the pattern matching should only be one char
             */
+            //STREAM_TOSERVER方向，使用http method + 空格的字符串检测方式；
+            //比如"GET "，这里的空格可以是ascii中的0x20，也可以是0x09
             register_result = AppLayerProtoDetectPMRegisterPatternCI(IPPROTO_TCP,
                     ALPROTO_HTTP, method_buffer, strlen(method_buffer)-3, 0, STREAM_TOSERVER);
             if (register_result < 0) {
@@ -2746,6 +2748,7 @@ static int HTPRegisterPatternsForProtocolDetection(void)
     }
 
     /* Loop through all the http verions patterns that are TO_CLIENT */
+	//检查服务端返回的http版本号（比如"HTTP/1.1"）
     for (versions_pos = 0; versions[versions_pos]; versions_pos++) {
         register_result = AppLayerProtoDetectPMRegisterPatternCI(IPPROTO_TCP,
                 ALPROTO_HTTP, versions[versions_pos], strlen(versions[versions_pos]),
@@ -2770,7 +2773,10 @@ void RegisterHTPParsers(void)
 
     /** HTTP */
     if (AppLayerProtoDetectConfProtoDetectionEnabled("tcp", proto_name)) {
+		//将协议名字符串("http")注册到alpd_ctx.alproto_names[alproto]中，alproto=ALPROTO_HTTP
         AppLayerProtoDetectRegisterProtocol(ALPROTO_HTTP, proto_name);
+
+		//注册协议检测需要的patterns模式
         if (HTPRegisterPatternsForProtocolDetection() < 0)
             return;
     } else {
@@ -2780,6 +2786,7 @@ void RegisterHTPParsers(void)
     }
 
     if (AppLayerParserConfParserEnabled("tcp", proto_name)) {
+		//TODO:搞清楚这里做的事情是什么？
         AppLayerParserRegisterStateFuncs(IPPROTO_TCP, ALPROTO_HTTP, HTPStateAlloc, HTPStateFree);
         AppLayerParserRegisterTxFreeFunc(IPPROTO_TCP, ALPROTO_HTTP, HTPStateTransactionFree);
         AppLayerParserRegisterGetFilesFunc(IPPROTO_TCP, ALPROTO_HTTP, HTPStateGetFiles);

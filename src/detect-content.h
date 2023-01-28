@@ -80,8 +80,8 @@
 #include "util-spm.h"
 
 typedef struct DetectContentData_ {
-    uint8_t *content;
-    uint16_t content_len;
+    uint8_t *content;//模式字符串的首地址
+    uint16_t content_len;//模式字符串的长度,因为不是‘\0’结尾，所以需要长度
     uint16_t replace_len;
     /* for chopped fast pattern, the length */
     uint16_t fp_chop_len;
@@ -92,8 +92,8 @@ typedef struct DetectContentData_ {
      * casting.  \todo check this and fix it if posssible */
     uint32_t flags;
     PatIntId id;
-    uint16_t depth;
-    uint16_t offset;
+    uint16_t depth;//模式匹配查找时所检查的输入最长深度
+    uint16_t offset;//模式匹配查找时的开始位置
     int32_t distance;
     int32_t within;
     /* SPM search context. */

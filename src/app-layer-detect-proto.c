@@ -128,7 +128,7 @@ typedef struct AppLayerProtoDetectPMCtx_ {
     AppLayerProtoDetectPMSignature *head;
 
     /* \todo we don't need this except at setup time.  Get rid of it. */
-    PatIntId max_pat_id;//记录去重后的pattern数量
+    PatIntId max_pat_id;//去重后的pattern模式数量
     SigIntId max_sig_id;
 } AppLayerProtoDetectPMCtx;
 
@@ -1087,7 +1087,7 @@ static int AppLayerProtoDetectPMSetContentIDs(AppLayerProtoDetectPMCtx *ctx)
     for (s = ctx->head; s != NULL; s = s->next) {
         struct_total_size += sizeof(TempContainer);
         content_total_size += s->cd->content_len;
-        ctx->max_sig_id++;
+        ctx->max_sig_id++;//记录特征数量
     }
 
     ahb = SCMalloc(sizeof(uint8_t) * (struct_total_size + content_total_size));
@@ -1125,7 +1125,7 @@ static int AppLayerProtoDetectPMSetContentIDs(AppLayerProtoDetectPMCtx *ctx)
         struct_offset++;
     }
 
-    ctx->max_pat_id = max_id;
+    ctx->max_pat_id = max_id;//去重后的模式数量
 
     goto end;
  error:
@@ -1212,6 +1212,7 @@ static void AppLayerProtoDetectPMFreeSignature(AppLayerProtoDetectPMSignature *s
     SCReturn;
 }
 
+//将AppLayerProtoDetectPMSignature实例链接到ctx的head成员上，组成链表。
 static int AppLayerProtoDetectPMAddSignature(AppLayerProtoDetectPMCtx *ctx, DetectContentData *cd,
                                              AppProto alproto)
 {
@@ -1227,6 +1228,7 @@ static int AppLayerProtoDetectPMAddSignature(AppLayerProtoDetectPMCtx *ctx, Dete
     s->cd = cd;
 
     /* prepend to the list */
+	//前置插入
     s->next = ctx->head;
     ctx->head = s;
 
@@ -1250,13 +1252,16 @@ static int AppLayerProtoDetectPMRegisterPattern(uint8_t ipproto, AppProto alprot
     DetectContentData *cd;
     int ret = 0;
 
+	//处理模式字符串后，存入DetectContentData结构体
     cd = DetectContentParseEncloseQuotes(alpd_ctx.spm_global_thread_ctx,
                                          pattern);
     if (cd == NULL)
         goto error;
+
+	//修改cd成员depth和offset
     cd->depth = depth;
     cd->offset = offset;
-    if (!is_cs) {
+    if (!is_cs) {//大小写不敏感
         /* Rebuild as nocase */
         SpmDestroyCtx(cd->spm_ctx);
         cd->spm_ctx = SpmInitCtx(cd->content, cd->content_len, 1,
@@ -1264,22 +1269,25 @@ static int AppLayerProtoDetectPMRegisterPattern(uint8_t ipproto, AppProto alprot
         if (cd->spm_ctx == NULL) {
             goto error;
         }
-        cd->flags |= DETECT_CONTENT_NOCASE;
+        cd->flags |= DETECT_CONTENT_NOCASE;//设置标志
     }
     if (depth < cd->content_len)
         goto error;
 
+	//根据方向获取ctx_pm
     if (direction & STREAM_TOSERVER)
         ctx_pm = (AppLayerProtoDetectPMCtx *)&ctx_ipp->ctx_pm[0];
     else
         ctx_pm = (AppLayerProtoDetectPMCtx *)&ctx_ipp->ctx_pm[1];
 
+	//根据depth更新max_len和min_len
     if (depth > ctx_pm->max_len)
         ctx_pm->max_len = depth;
     if (depth < ctx_pm->min_len)
         ctx_pm->min_len = depth;
 
     /* Finally turn it into a signature and add to the ctx. */
+	//
     AppLayerProtoDetectPMAddSignature(ctx_pm, cd, alproto);
 
     goto end;
@@ -1303,6 +1311,7 @@ AppProto AppLayerProtoDetectGetProto(AppLayerProtoDetectThreadCtx *tctx,
     uint16_t pm_matches;
 
     if (!FLOW_IS_PM_DONE(f, direction)) {
+		//patern match方式
         pm_matches = AppLayerProtoDetectPMGetProto(tctx, f,
                                                    buf, buflen,
                                                    direction,
@@ -1314,6 +1323,7 @@ AppProto AppLayerProtoDetectGetProto(AppLayerProtoDetectThreadCtx *tctx,
         }
     }
 
+	//probing parser方式
     if (!FLOW_IS_PP_DONE(f, direction))
         alproto = AppLayerProtoDetectPPGetProto(f, buf, buflen, ipproto, direction);
 
@@ -1350,6 +1360,7 @@ int AppLayerProtoDetectPrepareState(void)
     int i, j;
     int ret = 0;
 
+	//针对四层协议(tcp,udp,icmp,sctp)的客户端/服务器方向调用函数
     for (i = 0; i < FLOW_PROTO_DEFAULT; i++) {
         for (j = 0; j < 2; j++) {
             ctx_pm = &alpd_ctx.ctx_ipp[i].ctx_pm[j];
@@ -1497,7 +1508,7 @@ int AppLayerProtoDetectPPParseConfPorts(const char *ipproto_name,
 }
 
 /***** PM registration *****/
-
+//大小写敏感
 int AppLayerProtoDetectPMRegisterPatternCS(uint8_t ipproto, AppProto alproto,
                                            char *pattern,
                                            uint16_t depth, uint16_t offset,
@@ -1512,7 +1523,7 @@ int AppLayerProtoDetectPMRegisterPatternCS(uint8_t ipproto, AppProto alproto,
                                                      1 /* case-sensitive */);
     SCReturnInt(r);
 }
-
+//忽略大小写敏感
 int AppLayerProtoDetectPMRegisterPatternCI(uint8_t ipproto, AppProto alproto,
                                            char *pattern,
                                            uint16_t depth, uint16_t offset,
@@ -1632,6 +1643,7 @@ int AppLayerProtoDetectConfProtoDetectionEnabled(const char *ipproto,
     node = ConfGetNode(param);
     if (node == NULL) {
         SCLogDebug("Entry for %s not found.", param);
+		//检测配置app-layer.protocols.http.tcp.enabled是否开启
         r = snprintf(param, sizeof(param), "%s%s%s%s%s", "app-layer.protocols.",
                      alproto, ".", ipproto, ".enabled");
         if (r < 0) {
@@ -1650,6 +1662,7 @@ int AppLayerProtoDetectConfProtoDetectionEnabled(const char *ipproto,
     }
 
     if (node->val) {
+		//true mean:yes true on 1
         if (ConfValIsTrue(node->val)) {
             goto enabled;
         } else if (ConfValIsFalse(node->val)) {

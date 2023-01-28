@@ -391,13 +391,14 @@ typedef struct SpmBmCtx_ {
 static SpmCtx *BMInitCtx(const uint8_t *needle, uint16_t needle_len, int nocase,
                          SpmGlobalThreadCtx *global_thread_ctx)
 {
+	//申请单模匹配上下文
     SpmCtx *ctx = SCMalloc(sizeof(SpmCtx));
     if (ctx == NULL) {
         SCLogDebug("Unable to alloc SpmCtx.");
         return NULL;
     }
     memset(ctx, 0, sizeof(*ctx));
-    ctx->matcher = SPM_BM;
+    ctx->matcher = SPM_BM;//匹配器为SPM_BM
 
     SpmBmCtx *sctx = SCMalloc(sizeof(SpmBmCtx));
     if (sctx == NULL) {
