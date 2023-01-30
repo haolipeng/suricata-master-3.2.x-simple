@@ -263,8 +263,8 @@ void FlowHandlePacketUpdate(Flow *f, Packet *p)
 
     /* update flags and counters */
     if (FlowGetPacketDirection(f, p) == TOSERVER) {
-        f->todstpktcnt++;
-        f->todstbytecnt += GET_PKT_LEN(p);
+        f->todstpktcnt++;//数据包数
+        f->todstbytecnt += GET_PKT_LEN(p);//数据包字节数
         p->flowflags = FLOW_PKT_TOSERVER;
         if (!(f->flags & FLOW_TO_DST_SEEN)) {
             if (FlowUpdateSeenFlag(p)) {
@@ -294,6 +294,7 @@ void FlowHandlePacketUpdate(Flow *f, Packet *p)
         }
     }
 
+    //带有FLOW_TO_DST_SEEN和FLOW_TO_SRC_SEEN标记的流为已建立连接
     if ((f->flags & (FLOW_TO_DST_SEEN|FLOW_TO_SRC_SEEN)) == (FLOW_TO_DST_SEEN|FLOW_TO_SRC_SEEN)) {
         SCLogDebug("pkt %p FLOW_PKT_ESTABLISHED", p);
         p->flowflags |= FLOW_PKT_ESTABLISHED;

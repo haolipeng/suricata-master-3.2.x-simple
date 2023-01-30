@@ -169,7 +169,7 @@ static int DecodeTCPPacket(ThreadVars *tv, Packet *p, uint8_t *pkt, uint16_t len
 
     p->tcph = (TCPHdr *)pkt;
 
-    uint8_t hlen = TCP_GET_HLEN(p);
+    uint8_t hlen = TCP_GET_HLEN(p);//header length
     if (unlikely(len < hlen)) {
         ENGINE_SET_INVALID_EVENT(p, TCP_HLEN_TOO_SMALL);
         return -1;
@@ -182,6 +182,7 @@ static int DecodeTCPPacket(ThreadVars *tv, Packet *p, uint8_t *pkt, uint16_t len
     }
 
     if (likely(tcp_opt_len > 0)) {
+        //解码tcp可选字段
         DecodeTCPOptions(p, pkt + TCP_HEADER_LEN, tcp_opt_len);
     }
 
