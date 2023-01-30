@@ -1220,20 +1220,6 @@ void AppLayerParserRegisterProtocolParsers(void)
     //RegisterDNP3Parsers();
     RegisterTemplateParsers();
 
-    /** IMAP */
-    AppLayerProtoDetectRegisterProtocol(ALPROTO_IMAP, "imap");
-    if (AppLayerProtoDetectConfProtoDetectionEnabled("tcp", "imap")) {
-        if (AppLayerProtoDetectPMRegisterPatternCS(IPPROTO_TCP, ALPROTO_IMAP,
-                                  "1|20|capability", 12, 0, STREAM_TOSERVER) < 0)
-        {
-            SCLogInfo("imap proto registration failure\n");
-            exit(EXIT_FAILURE);
-        }
-    } else {
-        SCLogInfo("Protocol detection and parser disabled for %s protocol.",
-                  "imap");
-    }
-
     return;
 }
 

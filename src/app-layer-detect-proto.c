@@ -675,10 +675,6 @@ void AppLayerProtoDetectPrintProbingParsers(AppLayerProtoDetectProbingParser *pp
                         printf("            alproto: ALPROTO_TLS\n");
                     else if (pp_pe->alproto == ALPROTO_SSH)
                         printf("            alproto: ALPROTO_SSH\n");
-                    else if (pp_pe->alproto == ALPROTO_IMAP)
-                        printf("            alproto: ALPROTO_IMAP\n");
-                    else if (pp_pe->alproto == ALPROTO_MSN)
-                        printf("            alproto: ALPROTO_MSN\n");
                     else if (pp_pe->alproto == ALPROTO_JABBER)
                         printf("            alproto: ALPROTO_JABBER\n");
                     else if (pp_pe->alproto == ALPROTO_DCERPC)
@@ -728,10 +724,6 @@ void AppLayerProtoDetectPrintProbingParsers(AppLayerProtoDetectProbingParser *pp
                     printf("            alproto: ALPROTO_TLS\n");
                 else if (pp_pe->alproto == ALPROTO_SSH)
                     printf("            alproto: ALPROTO_SSH\n");
-                else if (pp_pe->alproto == ALPROTO_IMAP)
-                    printf("            alproto: ALPROTO_IMAP\n");
-                else if (pp_pe->alproto == ALPROTO_MSN)
-                    printf("            alproto: ALPROTO_MSN\n");
                 else if (pp_pe->alproto == ALPROTO_JABBER)
                     printf("            alproto: ALPROTO_JABBER\n");
                 else if (pp_pe->alproto == ALPROTO_DCERPC)
@@ -3047,13 +3039,6 @@ static int AppLayerProtoDetectTest15(void)
                                   ProbingParserDummyForTesting, NULL);
     result = 1;
 
-    AppLayerProtoDetectPPRegister(IPPROTO_UDP,
-                                  "85",
-                                  ALPROTO_IMAP,
-                                  12, 23,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-
     /* toclient */
     AppLayerProtoDetectPPRegister(IPPROTO_TCP,
                                   "0",
@@ -3110,12 +3095,7 @@ static int AppLayerProtoDetectTest15(void)
                                   5, 6,
                                   STREAM_TOCLIENT,
                                   ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_UDP,
-                                  "85",
-                                  ALPROTO_IMAP,
-                                  12, 23,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
+
     AppLayerProtoDetectPPRegister(IPPROTO_TCP,
                                   "0",
                                   ALPROTO_SMTP,
@@ -3208,14 +3188,6 @@ static int AppLayerProtoDetectTest15(void)
           { "smtp", ALPROTO_SMTP, 0, 1 << ALPROTO_SMTP, 12, 17 }
         };
 
-
-    AppLayerProtoDetectPPTestDataElement element_ts_85_udp[] = {
-        { "imap", ALPROTO_IMAP, 85, 1 << ALPROTO_IMAP, 12, 23 },
-        };
-    AppLayerProtoDetectPPTestDataElement element_tc_85_udp[] = {
-        { "imap", ALPROTO_IMAP, 85, 1 << ALPROTO_IMAP, 12, 23 },
-        };
-
     AppLayerProtoDetectPPTestDataPort ports_tcp[] = {
         { 80,
           ((1 << ALPROTO_HTTP) | (1 << ALPROTO_SMB) | (1 << ALPROTO_FTP) |
@@ -3266,25 +3238,10 @@ static int AppLayerProtoDetectTest15(void)
         }
     };
 
-    AppLayerProtoDetectPPTestDataPort ports_udp[] = {
-        { 85,
-            (1 << ALPROTO_IMAP),
-            (1 << ALPROTO_IMAP),
-            23,
-            element_ts_85_udp, element_tc_85_udp,
-            sizeof(element_ts_85_udp) / sizeof(AppLayerProtoDetectPPTestDataElement),
-            sizeof(element_tc_85_udp) / sizeof(AppLayerProtoDetectPPTestDataElement),
-            },
-        };
-
     AppLayerProtoDetectPPTestDataIPProto ip_proto[] = {
         { IPPROTO_TCP,
           ports_tcp,
           sizeof(ports_tcp) / sizeof(AppLayerProtoDetectPPTestDataPort),
-        },
-        { IPPROTO_UDP,
-          ports_udp,
-          sizeof(ports_udp) / sizeof(AppLayerProtoDetectPPTestDataPort),
         },
     };
 
