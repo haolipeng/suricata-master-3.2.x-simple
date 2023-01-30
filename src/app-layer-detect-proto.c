@@ -59,7 +59,6 @@
 #include "conf.h"
 #include "util-memcmp.h"
 #include "util-spm.h"
-#include "util-cuda.h"
 #include "util-debug.h"
 
 #include "runmodes.h"

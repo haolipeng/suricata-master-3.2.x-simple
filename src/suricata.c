@@ -140,7 +140,6 @@
 #include "runmodes.h"
 #include "runmode-unittests.h"
 
-#include "util-cuda.h"
 #include "util-decode-asn1.h"
 #include "util-debug.h"
 #include "util-error.h"
