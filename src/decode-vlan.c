@@ -99,14 +99,6 @@ int DecodeVLAN(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p, uint8_t *pkt, u
             DecodeIPV6(tv, dtv, p, pkt + VLAN_HEADER_LEN,
                        len - VLAN_HEADER_LEN, pq);
             break;
-        case ETHERNET_TYPE_PPPOE_SESS:
-            DecodePPPOESession(tv, dtv, p, pkt + VLAN_HEADER_LEN,
-                               len - VLAN_HEADER_LEN, pq);
-            break;
-        case ETHERNET_TYPE_PPPOE_DISC:
-            DecodePPPOEDiscovery(tv, dtv, p, pkt + VLAN_HEADER_LEN,
-                                 len - VLAN_HEADER_LEN, pq);
-            break;
         case ETHERNET_TYPE_VLAN:
         case ETHERNET_TYPE_8021AD:
             if (p->vlan_idx >= 2) {

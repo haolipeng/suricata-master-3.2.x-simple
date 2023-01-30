@@ -481,7 +481,7 @@
 /* #undef PROFILING */
 
 /* Git revision */
-#define REVISION 5660bf02
+#define REVISION 5ad5d8f0
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1

@@ -25,8 +25,7 @@
  * recursivity in the call.
  *
  * For each protocol a DecodePROTO function is provided. For
- * example we have DecodeIPV4() for IPv4 and DecodePPP() for
- * PPP.
+ * example we have DecodeIPV4() for IPv4.
  *
  * These functions have all a pkt and and a len argument which
  * are respectively a pointer to the protocol data and the length
@@ -70,8 +69,6 @@ int DecodeTunnel(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p,
         uint8_t *pkt, uint16_t len, PacketQueue *pq, enum DecodeTunnelProto proto)
 {
     switch (proto) {
-        case DECODE_TUNNEL_PPP:
-            return DecodePPP(tv, dtv, p, pkt, len, pq);
         case DECODE_TUNNEL_IPV4:
             return DecodeIPV4(tv, dtv, p, pkt, len, pq);
         case DECODE_TUNNEL_IPV6:

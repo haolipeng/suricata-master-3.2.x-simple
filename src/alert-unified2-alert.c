@@ -1705,90 +1705,6 @@ end:
 }
 
 /**
- *  \test Test the PPP unified2 test
- *
- *  \retval 1 on succces
- *  \retval 0 on failure
- */
-
-static int Unified2Test04(void)
-{
-    ThreadVars tv;
-    DecodeThreadVars dtv;
-    PacketQueue pq;
-    void *data = NULL;
-    OutputCtx *oc;
-    LogFileCtx *lf;
-    Unified2AlertFileCtx *uaf = NULL;
-    Signature s;
-
-    uint8_t raw_ppp[] = {
-        0xff, 0x03, 0x00, 0x21, 0x45, 0xc0, 0x00, 0x2c,
-        0x4d, 0xed, 0x00, 0x00, 0xff, 0x06, 0xd5, 0x17,
-        0xbf, 0x01, 0x0d, 0x01, 0xbf, 0x01, 0x0d, 0x03,
-        0xea, 0x37, 0x00, 0x17, 0x6d, 0x0b, 0xba, 0xc3,
-        0x00, 0x00, 0x00, 0x00, 0x60, 0x02, 0x10, 0x20,
-        0xdd, 0xe1, 0x00, 0x00, 0x02, 0x04, 0x05, 0xb4};
-    Packet *p = PacketGetFromAlloc();
-    if (unlikely(p == NULL))
-        return 0;
-    int ret;
-
-    memset(&dtv, 0, sizeof(DecodeThreadVars));
-    memset(&tv, 0, sizeof(ThreadVars));
-    memset(&pq, 0, sizeof(PacketQueue));
-    memset(&s, 0, sizeof(Signature));
-
-    p->alerts.cnt++;
-    p->alerts.alerts[p->alerts.cnt-1].s = &s;
-    p->alerts.alerts[p->alerts.cnt-1].s->id = 1;
-    p->alerts.alerts[p->alerts.cnt-1].s->gid = 1;
-    p->alerts.alerts[p->alerts.cnt-1].s->rev = 1;
-    SET_PKT_LEN(p, sizeof(raw_ppp));
-
-    FlowInitConfig(FLOW_QUIET);
-
-    DecodePPP(&tv, &dtv, p, raw_ppp, sizeof(raw_ppp), &pq);
-
-    oc = Unified2AlertInitCtx(NULL);
-    if (oc == NULL) {
-        goto end;
-    }
-    uaf = oc->data;
-    if (uaf == NULL)
-        return 0;
-    lf = uaf->file_ctx;
-    if(lf == NULL) {
-        goto end;
-    }
-    ret = Unified2AlertThreadInit(&tv, oc, &data);
-    if(ret == -1) {
-        goto end;
-    }
-    ret = Unified2Logger(&tv, data, p);
-    if(ret == TM_ECODE_FAILED) {
-        goto end;
-    }
-    ret = Unified2AlertThreadDeinit(&tv, data);
-    if(ret == -1) {
-        goto end;
-    }
-
-    Unified2AlertDeInitCtx(oc);
-
-    PACKET_RECYCLE(p);
-    SCFree(p);
-    FlowShutdown();
-    return 1;
-
-end:
-    PACKET_RECYCLE(p);
-    SCFree(p);
-    FlowShutdown();
-    return 0;
-}
-
-/**
  *  \test Test the ethernet+ipv4+tcp droped unified2 test
  *
  *  \retval 1 on succces
@@ -1954,7 +1870,7 @@ void Unified2RegisterTests(void)
     UtRegisterTest("Unified2Test01 -- Ipv4 test", Unified2Test01);
     UtRegisterTest("Unified2Test02 -- Ipv6 test", Unified2Test02);
     UtRegisterTest("Unified2Test03 -- GRE test", Unified2Test03);
-    UtRegisterTest("Unified2Test04 -- PPP test", Unified2Test04);
+    //UtRegisterTest("Unified2Test04 -- PPP test", Unified2Test04);
     UtRegisterTest("Unified2Test05 -- Inline test", Unified2Test05);
     UtRegisterTest("Unified2TestRotate01 -- Rotate File",
                    Unified2TestRotate01);

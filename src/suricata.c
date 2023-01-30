@@ -1298,10 +1298,6 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
         MpmTableSetup();
         SpmTableSetup();
         AppLayerProtoDetectSetup();
-        if (strcmp(opt_name, "afl-decoder-ppp") == 0)
-            exit(DecoderParseDataFromFile(opt_arg, DecodePPP));
-        else
-            exit(DecoderParseDataFromFileSerie(opt_arg, DecodePPP));
     } else if(strstr(opt_name, "afl-decoder-ipv4") != NULL) {
         StatsInit();
         MpmTableSetup();
