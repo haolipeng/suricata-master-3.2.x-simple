@@ -106,19 +106,6 @@ const struct DecodeEvents_ DEvents[] = {
     /* ETHERNET EVENTS */
     { "decoder.ethernet.pkt_too_small", ETHERNET_PKT_TOO_SMALL, },
 
-    /* PPP EVENTS */
-    { "decoder.ppp.pkt_too_small", PPP_PKT_TOO_SMALL, },
-    { "decoder.ppp.vju_pkt_too_small", PPPVJU_PKT_TOO_SMALL, },
-    { "decoder.ppp.ip4_pkt_too_small", PPPIPV4_PKT_TOO_SMALL, },
-    { "decoder.ppp.ip6_pkt_too_small", PPPIPV6_PKT_TOO_SMALL, },
-    { "decoder.ppp.wrong_type", PPP_WRONG_TYPE, }, /** unknown & invalid protocol */
-    { "decoder.ppp.unsup_proto", PPP_UNSUP_PROTO, }, /** unsupported but valid protocol */
-
-    /* PPPOE EVENTS */
-    { "decoder.pppoe.pkt_too_small", PPPOE_PKT_TOO_SMALL, },
-    { "decoder.pppoe.wrong_code", PPPOE_WRONG_CODE, },
-    { "decoder.pppoe.malformed_tags", PPPOE_MALFORMED_TAGS, },
-
     /* GRE EVENTS */
     { "decoder.gre.pkt_too_small", GRE_PKT_TOO_SMALL, },
     { "decoder.gre.wrong_version", GRE_WRONG_VERSION, },
@@ -148,9 +135,6 @@ const struct DecodeEvents_ DEvents[] = {
     { "decoder.ltnull.pkt_too_small", LTNULL_PKT_TOO_SMALL, },
     { "decoder.ltnull.unsupported_type", LTNULL_UNSUPPORTED_TYPE, },
 
-    /* SCTP EVENTS */
-    { "decoder.sctp.pkt_too_small", SCTP_PKT_TOO_SMALL, },
-
     /* Fragmentation reasembly events. */
     { "decoder.ipv4.frag_pkt_too_large", IPV4_FRAG_PKT_TOO_LARGE, },
     { "decoder.ipv6.frag_pkt_too_large", IPV6_FRAG_PKT_TOO_LARGE, },
@@ -166,13 +150,6 @@ const struct DecodeEvents_ DEvents[] = {
     /* IPv6 in IPv6 events */
     { "decoder.ipv6.ipv6_in_ipv6_too_small", IPV6_IN_IPV6_PKT_TOO_SMALL, },
     { "decoder.ipv6.ipv6_in_ipv6_wrong_version", IPV6_IN_IPV6_WRONG_IP_VER, },
-
-    /* MPLS events */
-    { "decoder.mpls.header_too_small", MPLS_HEADER_TOO_SMALL, },
-    { "decoder.mpls.bad_label_router_alert", MPLS_BAD_LABEL_ROUTER_ALERT, },
-    { "decoder.mpls.bad_label_implicit_null", MPLS_BAD_LABEL_IMPLICIT_NULL, },
-    { "decoder.mpls.bad_label_reserved", MPLS_BAD_LABEL_RESERVED, },
-    { "decoder.mpls.unknown_payload_type", MPLS_UNKNOWN_PAYLOAD_TYPE, },
 
     /* ERSPAN events */
     { "decoder.erspan.header_too_small", ERSPAN_HEADER_TOO_SMALL, },

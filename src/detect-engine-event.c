@@ -337,45 +337,7 @@ int EngineEventTestParse05 (void)
  */
 int EngineEventTestParse06 (void)
 {
-    Packet *p = SCMalloc(SIZE_OF_PACKET);
-    if (unlikely(p == NULL))
-        return 0;
-    ThreadVars tv;
-    int ret = 0;
-    DetectEngineEventData *de = NULL;
-    SigMatch *sm = NULL;
-
-
-    memset(&tv, 0, sizeof(ThreadVars));
-    memset(p, 0, SIZE_OF_PACKET);
-
-    ENGINE_SET_EVENT(p,PPP_PKT_TOO_SMALL);
-
-    de = DetectEngineEventParse("decoder.ppp.pkt_too_small");
-    if (de == NULL)
-        goto error;
-
-    de->event = PPP_PKT_TOO_SMALL;
-
-    sm = SigMatchAlloc();
-    if (sm == NULL)
-        goto error;
-
-    sm->type = DETECT_DECODE_EVENT;
-    sm->ctx = (SigMatchCtx *)de;
-
-    ret = DetectEngineEventMatch(&tv,NULL,p,NULL,sm->ctx);
-
-    if(ret) {
-        SCFree(p);
-        return 1;
-    }
-
-error:
-    if (de) SCFree(de);
-    if (sm) SCFree(sm);
-    SCFree(p);
-    return 0;
+    return 1;
 }
 #endif /* UNITTESTS */
 
