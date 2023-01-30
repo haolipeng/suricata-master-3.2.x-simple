@@ -232,7 +232,7 @@ detect.o: detect.c /usr/include/stdc-predef.h suricata-common.h \
  util-rule-vars.h app-layer.h util-profiling.h detect-http-stat-code.h \
  pkt-var.h conf-yaml-loader.h stream-tcp.h stream-tcp-inline.h util-lua.h \
  util-var-name.h util-classification-config.h util-print.h \
- util-unittest.h util-unittest-helper.h util-cuda.h util-privs.h \
+ util-unittest.h util-unittest-helper.h util-privs.h \
  /usr/include/cap-ng.h /usr/include/linux/capability.h util-validate.h \
  util-mpm-ac.h /usr/include/glob.h flow-util.h tmqh-flow.h
 
@@ -1143,8 +1143,6 @@ util-print.h:
 util-unittest.h:
 
 util-unittest-helper.h:
-
-util-cuda.h:
 
 util-privs.h:
 

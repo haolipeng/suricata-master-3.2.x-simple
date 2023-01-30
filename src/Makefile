@@ -252,9 +252,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	util-checksum.$(OBJEXT) util-cidr.$(OBJEXT) \
 	util-classification-config.$(OBJEXT) util-conf.$(OBJEXT) \
 	util-coredump-config.$(OBJEXT) util-cpu.$(OBJEXT) \
-	util-crypt.$(OBJEXT) util-cuda.$(OBJEXT) \
-	util-cuda-buffer.$(OBJEXT) util-cuda-handlers.$(OBJEXT) \
-	util-cuda-vars.$(OBJEXT) util-daemon.$(OBJEXT) \
+	util-crypt.$(OBJEXT) util-daemon.$(OBJEXT) \
 	util-debug.$(OBJEXT) util-debug-filters.$(OBJEXT) \
 	util-decode-asn1.$(OBJEXT) util-decode-der.$(OBJEXT) \
 	util-decode-der-get.$(OBJEXT) util-decode-mime.$(OBJEXT) \

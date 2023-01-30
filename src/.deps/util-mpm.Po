@@ -191,8 +191,8 @@ util-mpm.o: util-mpm.c /usr/include/stdc-predef.h suricata-common.h \
  detect-mark.h stream.h detect-threshold.h util-path.h util-conf.h \
  util-mpm-ac.h util-mpm-ac-bs.h util-mpm-ac-tile.h util-mpm-hs.h \
  detect-engine.h tm-threads.h tmqh-packetpool.h tm-modules.h \
- flow-private.h flow-hash.h flow-queue.h util-cuda.h util-misc.h \
- conf-yaml-loader.h util-unittest.h util-memcpy.h
+ flow-private.h flow-hash.h flow-queue.h util-misc.h conf-yaml-loader.h \
+ util-unittest.h util-memcpy.h
 
 /usr/include/stdc-predef.h:
 
@@ -819,8 +819,6 @@ flow-private.h:
 flow-hash.h:
 
 flow-queue.h:
-
-util-cuda.h:
 
 util-misc.h:
 

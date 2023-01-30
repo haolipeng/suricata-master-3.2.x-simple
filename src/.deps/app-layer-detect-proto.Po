@@ -206,7 +206,7 @@ app-layer-detect-proto.o: app-layer-detect-proto.c \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/mm_malloc.h \
- /usr/lib/gcc/x86_64-linux-gnu/9/include/popcntintrin.h util-cuda.h
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/popcntintrin.h
 
 /usr/include/stdc-predef.h:
 
@@ -893,5 +893,3 @@ util-memcmp.h:
 /usr/lib/gcc/x86_64-linux-gnu/9/include/mm_malloc.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/9/include/popcntintrin.h:
-
-util-cuda.h:
