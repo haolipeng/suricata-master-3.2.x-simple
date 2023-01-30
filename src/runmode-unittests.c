@@ -150,7 +150,6 @@ static void RegisterUnittests(void)
     DecodeUDPV4RegisterTests();
     DecodeGRERegisterTests();
     DecodeAsn1RegisterTests();
-    DecodeMPLSRegisterTests();
     AppLayerProtoDetectUnittestsRegister();
     ConfRegisterTests();
     ConfYamlRegisterTests();

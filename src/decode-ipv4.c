@@ -586,10 +586,6 @@ int DecodeIPV4(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p, uint8_t *pkt, u
             DecodeGRE(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
                       IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
             break;
-        case IPPROTO_SCTP:
-            DecodeSCTP(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
-                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
-            break;
         case IPPROTO_IPV6:
             {
                 if (pq != NULL) {

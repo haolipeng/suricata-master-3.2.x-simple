@@ -70,11 +70,9 @@ enum PktSrcEnum {
 #include "decode-icmpv6.h"
 #include "decode-tcp.h"
 #include "decode-udp.h"
-#include "decode-sctp.h"
 #include "decode-raw.h"
 #include "decode-null.h"
 #include "decode-vlan.h"
-#include "decode-mpls.h"
 
 #include "detect-reference.h"
 
@@ -180,18 +178,6 @@ typedef struct Address_ {
 #define SET_UDP_DST_PORT(pkt, prt) do {            \
         SET_PORT(UDP_GET_DST_PORT((pkt)), *(prt)); \
     } while (0)
-
-/* Set the SCTP ports into the Ports of the Packet.
- * Make sure p->sctph is initialized and validated. */
-#define SET_SCTP_SRC_PORT(pkt, prt) do {            \
-        SET_PORT(SCTP_GET_SRC_PORT((pkt)), *(prt)); \
-    } while (0)
-
-#define SET_SCTP_DST_PORT(pkt, prt) do {            \
-        SET_PORT(SCTP_GET_DST_PORT((pkt)), *(prt)); \
-    } while (0)
-
-
 
 #define GET_IPV4_SRC_ADDR_U32(p) ((p)->src.addr_data32[0])
 #define GET_IPV4_DST_ADDR_U32(p) ((p)->dst.addr_data32[0])
@@ -488,8 +474,6 @@ typedef struct Packet_
 
     UDPHdr *udph;
 
-    SCTPHdr *sctph;
-
     ICMPV4Hdr *icmpv4h;
 
     ICMPV6Hdr *icmpv6h;
@@ -740,9 +724,6 @@ void CaptureStatsSetup(ThreadVars *tv, CaptureStats *s);
         if ((p)->udph != NULL) {                \
             CLEAR_UDP_PACKET((p));              \
         }                                       \
-        if ((p)->sctph != NULL) {               \
-            CLEAR_SCTP_PACKET((p));             \
-        }                                       \
         if ((p)->icmpv4h != NULL) {             \
             CLEAR_ICMPV4_PACKET((p));           \
         }                                       \
@@ -903,10 +884,8 @@ int DecodeICMPV4(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t
 int DecodeICMPV6(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeTCP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeUDP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodeSCTP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeGRE(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeVLAN(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodeMPLS(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeERSPAN(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 
 void AddressDebugPrint(Address *);

@@ -42,13 +42,11 @@ decode-ipv4.c decode-ipv4.h \
 decode-ipv6.c decode-ipv6.h \
 decode-null.c decode-null.h \
 decode-raw.c decode-raw.h \
-decode-sctp.c decode-sctp.h \
 decode-sll.c decode-sll.h \
 decode-tcp.c decode-tcp.h \
 decode-teredo.c decode-teredo.h \
 decode-udp.c decode-udp.h \
 decode-vlan.c decode-vlan.h \
-decode-mpls.c decode-mpls.h \
 decode-template.c decode-template.h \
 defrag-config.c defrag-config.h \
 defrag.c defrag.h \

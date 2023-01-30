@@ -124,10 +124,9 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	decode-icmpv4.$(OBJEXT) decode-icmpv6.$(OBJEXT) \
 	decode-ipv4.$(OBJEXT) decode-ipv6.$(OBJEXT) \
 	decode-null.$(OBJEXT) decode-raw.$(OBJEXT) \
-	decode-sctp.$(OBJEXT) decode-sll.$(OBJEXT) \
-	decode-tcp.$(OBJEXT) decode-teredo.$(OBJEXT) \
-	decode-udp.$(OBJEXT) decode-vlan.$(OBJEXT) \
-	decode-mpls.$(OBJEXT) decode-template.$(OBJEXT) \
+	decode-sll.$(OBJEXT) decode-tcp.$(OBJEXT) \
+	decode-teredo.$(OBJEXT) decode-udp.$(OBJEXT) \
+	decode-vlan.$(OBJEXT) decode-template.$(OBJEXT) \
 	defrag-config.$(OBJEXT) defrag.$(OBJEXT) defrag-hash.$(OBJEXT) \
 	defrag-queue.$(OBJEXT) defrag-timeout.$(OBJEXT) \
 	detect-ack.$(OBJEXT) detect-app-layer-event.$(OBJEXT) \
@@ -343,9 +342,8 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/decode-ethernet.Po ./$(DEPDIR)/decode-events.Po \
 	./$(DEPDIR)/decode-gre.Po ./$(DEPDIR)/decode-icmpv4.Po \
 	./$(DEPDIR)/decode-icmpv6.Po ./$(DEPDIR)/decode-ipv4.Po \
-	./$(DEPDIR)/decode-ipv6.Po ./$(DEPDIR)/decode-mpls.Po \
-	./$(DEPDIR)/decode-null.Po ./$(DEPDIR)/decode-raw.Po \
-	./$(DEPDIR)/decode-sctp.Po ./$(DEPDIR)/decode-sll.Po \
+	./$(DEPDIR)/decode-ipv6.Po ./$(DEPDIR)/decode-null.Po \
+	./$(DEPDIR)/decode-raw.Po ./$(DEPDIR)/decode-sll.Po \
 	./$(DEPDIR)/decode-tcp.Po ./$(DEPDIR)/decode-template.Po \
 	./$(DEPDIR)/decode-teredo.Po ./$(DEPDIR)/decode-udp.Po \
 	./$(DEPDIR)/decode-vlan.Po ./$(DEPDIR)/decode.Po \
@@ -837,13 +835,11 @@ decode-ipv4.c decode-ipv4.h \
 decode-ipv6.c decode-ipv6.h \
 decode-null.c decode-null.h \
 decode-raw.c decode-raw.h \
-decode-sctp.c decode-sctp.h \
 decode-sll.c decode-sll.h \
 decode-tcp.c decode-tcp.h \
 decode-teredo.c decode-teredo.h \
 decode-udp.c decode-udp.h \
 decode-vlan.c decode-vlan.h \
-decode-mpls.c decode-mpls.h \
 decode-template.c decode-template.h \
 defrag-config.c defrag-config.h \
 defrag.c defrag.h \
@@ -1342,10 +1338,8 @@ include ./$(DEPDIR)/decode-icmpv4.Po # am--include-marker
 include ./$(DEPDIR)/decode-icmpv6.Po # am--include-marker
 include ./$(DEPDIR)/decode-ipv4.Po # am--include-marker
 include ./$(DEPDIR)/decode-ipv6.Po # am--include-marker
-include ./$(DEPDIR)/decode-mpls.Po # am--include-marker
 include ./$(DEPDIR)/decode-null.Po # am--include-marker
 include ./$(DEPDIR)/decode-raw.Po # am--include-marker
-include ./$(DEPDIR)/decode-sctp.Po # am--include-marker
 include ./$(DEPDIR)/decode-sll.Po # am--include-marker
 include ./$(DEPDIR)/decode-tcp.Po # am--include-marker
 include ./$(DEPDIR)/decode-template.Po # am--include-marker
@@ -1883,10 +1877,8 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/decode-icmpv6.Po
 	-rm -f ./$(DEPDIR)/decode-ipv4.Po
 	-rm -f ./$(DEPDIR)/decode-ipv6.Po
-	-rm -f ./$(DEPDIR)/decode-mpls.Po
 	-rm -f ./$(DEPDIR)/decode-null.Po
 	-rm -f ./$(DEPDIR)/decode-raw.Po
-	-rm -f ./$(DEPDIR)/decode-sctp.Po
 	-rm -f ./$(DEPDIR)/decode-sll.Po
 	-rm -f ./$(DEPDIR)/decode-tcp.Po
 	-rm -f ./$(DEPDIR)/decode-template.Po
@@ -2304,10 +2296,8 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/decode-icmpv6.Po
 	-rm -f ./$(DEPDIR)/decode-ipv4.Po
 	-rm -f ./$(DEPDIR)/decode-ipv6.Po
-	-rm -f ./$(DEPDIR)/decode-mpls.Po
 	-rm -f ./$(DEPDIR)/decode-null.Po
 	-rm -f ./$(DEPDIR)/decode-raw.Po
-	-rm -f ./$(DEPDIR)/decode-sctp.Po
 	-rm -f ./$(DEPDIR)/decode-sll.Po
 	-rm -f ./$(DEPDIR)/decode-tcp.Po
 	-rm -f ./$(DEPDIR)/decode-template.Po
