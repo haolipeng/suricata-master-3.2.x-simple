@@ -30,7 +30,6 @@
 #include "runmodes.h"
 #include "runmode-tile.h"
 #include "output.h"
-#include "source-mpipe.h"
 
 #include "detect-engine.h"
 

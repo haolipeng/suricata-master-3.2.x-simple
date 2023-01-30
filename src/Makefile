@@ -232,8 +232,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	runmode-unittests.$(OBJEXT) runmode-unix-socket.$(OBJEXT) \
 	runmode-tile.$(OBJEXT) runmodes.$(OBJEXT) \
 	source-af-packet.$(OBJEXT) source-erf-dag.$(OBJEXT) \
-	source-erf-file.$(OBJEXT) \
-	source-mpipe.$(OBJEXT) source-napatech.$(OBJEXT) \
+	source-erf-file.$(OBJEXT) source-napatech.$(OBJEXT) \
 	source-nfq.$(OBJEXT) source-nflog.$(OBJEXT) \
 	source-pcap.$(OBJEXT) source-pcap-file.$(OBJEXT) \
 	source-pfring.$(OBJEXT) stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
@@ -503,6 +502,9 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-classification-config.Po \
 	./$(DEPDIR)/util-conf.Po ./$(DEPDIR)/util-coredump-config.Po \
 	./$(DEPDIR)/util-cpu.Po ./$(DEPDIR)/util-crypt.Po \
+	./$(DEPDIR)/util-cuda-buffer.Po \
+	./$(DEPDIR)/util-cuda-handlers.Po \
+	./$(DEPDIR)/util-cuda-vars.Po ./$(DEPDIR)/util-cuda.Po \
 	./$(DEPDIR)/util-daemon.Po ./$(DEPDIR)/util-debug-filters.Po \
 	./$(DEPDIR)/util-debug.Po ./$(DEPDIR)/util-decode-asn1.Po \
 	./$(DEPDIR)/util-decode-der-get.Po \
@@ -1042,7 +1044,6 @@ runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
 source-erf-dag.c source-erf-dag.h \
 source-erf-file.c source-erf-file.h \
-source-mpipe.c source-mpipe.h \
 source-napatech.c source-napatech.h \
 source-nfq.c source-nfq.h \
 source-nflog.c source-nflog.h \
@@ -1082,6 +1083,10 @@ util-conf.c util-conf.h \
 util-coredump-config.c util-coredump-config.h \
 util-cpu.c util-cpu.h \
 util-crypt.c util-crypt.h \
+util-cuda.c util-cuda.h \
+util-cuda-buffer.c util-cuda-buffer.h \
+util-cuda-handlers.c util-cuda-handlers.h \
+util-cuda-vars.c util-cuda-vars.h \
 util-daemon.c util-daemon.h \
 util-debug.c util-debug.h \
 util-debug-filters.c util-debug-filters.h \
@@ -2080,8 +2085,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
 	-rm -f ./$(DEPDIR)/source-erf-dag.Po
 	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-ipfw.Po
-	-rm -f ./$(DEPDIR)/source-mpipe.Po
 	-rm -f ./$(DEPDIR)/source-napatech.Po
 	-rm -f ./$(DEPDIR)/source-nflog.Po
 	-rm -f ./$(DEPDIR)/source-nfq.Po
@@ -2498,8 +2501,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
 	-rm -f ./$(DEPDIR)/source-erf-dag.Po
 	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-ipfw.Po
-	-rm -f ./$(DEPDIR)/source-mpipe.Po
 	-rm -f ./$(DEPDIR)/source-napatech.Po
 	-rm -f ./$(DEPDIR)/source-nflog.Po
 	-rm -f ./$(DEPDIR)/source-nfq.Po
@@ -2539,6 +2540,10 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-coredump-config.Po
 	-rm -f ./$(DEPDIR)/util-cpu.Po
 	-rm -f ./$(DEPDIR)/util-crypt.Po
+	-rm -f ./$(DEPDIR)/util-cuda-buffer.Po
+	-rm -f ./$(DEPDIR)/util-cuda-handlers.Po
+	-rm -f ./$(DEPDIR)/util-cuda-vars.Po
+	-rm -f ./$(DEPDIR)/util-cuda.Po
 	-rm -f ./$(DEPDIR)/util-daemon.Po
 	-rm -f ./$(DEPDIR)/util-debug-filters.Po
 	-rm -f ./$(DEPDIR)/util-debug.Po

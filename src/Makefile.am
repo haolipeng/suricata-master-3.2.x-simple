@@ -256,8 +256,6 @@ runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
 source-erf-dag.c source-erf-dag.h \
 source-erf-file.c source-erf-file.h \
-source-ipfw.c source-ipfw.h \
-source-mpipe.c source-mpipe.h \
 source-napatech.c source-napatech.h \
 source-nfq.c source-nfq.h \
 source-nflog.c source-nflog.h \
@@ -297,10 +295,6 @@ util-conf.c util-conf.h \
 util-coredump-config.c util-coredump-config.h \
 util-cpu.c util-cpu.h \
 util-crypt.c util-crypt.h \
-util-cuda.c util-cuda.h \
-util-cuda-buffer.c util-cuda-buffer.h \
-util-cuda-handlers.c util-cuda-handlers.h \
-util-cuda-vars.c util-cuda-vars.h \
 util-daemon.c util-daemon.h \
 util-debug.c util-debug.h \
 util-debug-filters.c util-debug-filters.h \

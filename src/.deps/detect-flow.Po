@@ -175,7 +175,7 @@ detect-flow.o: detect-flow.c /usr/include/stdc-predef.h suricata-common.h \
  util-debug-filters.h util-mem.h util-atomic.h detect-engine-alert.h \
  decode.h threadvars.h util-affinity.h tm-queues.h counters.h \
  decode-events.h flow-worker.h source-nflog.h source-nfq.h source-pcap.h \
- source-af-packet.h /usr/include/linux/if_packet.h queue.h source-mpipe.h \
+ source-af-packet.h /usr/include/linux/if_packet.h queue.h \
  action-globals.h decode-erspan.h decode-ethernet.h decode-gre.h \
  decode-sll.h decode-ipv4.h decode-ipv6.h decode-icmpv4.h decode-tcp.h \
  decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
@@ -675,8 +675,6 @@ source-af-packet.h:
 /usr/include/linux/if_packet.h:
 
 queue.h:
-
-source-mpipe.h:
 
 action-globals.h:
 

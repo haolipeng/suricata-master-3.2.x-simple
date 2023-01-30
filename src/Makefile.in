@@ -1047,8 +1047,6 @@ runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
 source-erf-dag.c source-erf-dag.h \
 source-erf-file.c source-erf-file.h \
-source-ipfw.c source-ipfw.h \
-source-mpipe.c source-mpipe.h \
 source-napatech.c source-napatech.h \
 source-nfq.c source-nfq.h \
 source-nflog.c source-nflog.h \
@@ -2090,8 +2088,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
 	-rm -f ./$(DEPDIR)/source-erf-dag.Po
 	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-ipfw.Po
-	-rm -f ./$(DEPDIR)/source-mpipe.Po
 	-rm -f ./$(DEPDIR)/source-napatech.Po
 	-rm -f ./$(DEPDIR)/source-nflog.Po
 	-rm -f ./$(DEPDIR)/source-nfq.Po
@@ -2508,8 +2504,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
 	-rm -f ./$(DEPDIR)/source-erf-dag.Po
 	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-ipfw.Po
-	-rm -f ./$(DEPDIR)/source-mpipe.Po
 	-rm -f ./$(DEPDIR)/source-napatech.Po
 	-rm -f ./$(DEPDIR)/source-nflog.Po
 	-rm -f ./$(DEPDIR)/source-nfq.Po
