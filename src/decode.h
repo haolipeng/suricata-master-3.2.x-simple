@@ -376,38 +376,38 @@ typedef struct Packet_
     /* Addresses, Ports and protocol
      * these are on top so we can use
      * the Packet as a hash key */
-    Address src;
-    Address dst;
+    Address src;//源地址
+    Address dst;//目的地址
     union {
-        Port sp;
+        Port sp;//源端口
         uint8_t type;
     };
     union {
-        Port dp;
+        Port dp;//目的端口
         uint8_t code;
     };
-    uint8_t proto;
+    uint8_t proto;//三层数据包载荷的协议类型
     /* make sure we can't be attacked on when the tunneled packet
      * has the exact same tuple as the lower levels */
-    uint8_t recursion_level;
+    uint8_t recursion_level;//隧道封装次数
 
-    uint16_t vlan_id[2];
-    uint8_t vlan_idx;
+    uint16_t vlan_id[2];//
+    uint8_t vlan_idx;//vlan嵌套层数
 
     /* flow */
-    uint8_t flowflags;
+    uint8_t flowflags;//flow标识,比如FLOW_PKT_TOSERVER
     /* coccinelle: Packet:flowflags:FLOW_PKT_ */
 
     /* Pkt Flags */
-    uint32_t flags;
+    uint32_t flags;//当前Packet的标识
 
-    struct Flow_ *flow;
+    struct Flow_ *flow;//关联的flow
 
     /* raw hash value for looking up the flow, will need to modulated to the
      * hash size still */
-    uint32_t flow_hash;
+    uint32_t flow_hash;//数据包匹配相应的flow时使用的hash值
 
-    struct timeval ts;
+    struct timeval ts;//数据包的时间
 
     union {
         /* nfq stuff */
@@ -432,7 +432,7 @@ typedef struct Packet_
     };
 
     /** The release function for packet structure and data */
-    void (*ReleasePacket)(struct Packet_ *);
+    void (*ReleasePacket)(struct Packet_ *);//回调函数,当数据包需要被释放时调用
     /** The function triggering bypass the flow in the capture method.
      * Return 1 for success and 0 on error */
     int (*BypassPacketsFlow)(struct Packet_ *);
@@ -443,14 +443,14 @@ typedef struct Packet_
     /* header pointers */
     EthernetHdr *ethh;
 
-    /* Checksum for IP packets. */
+    /* Checksum for IP packets. 3层数据校验和*/
     int32_t level3_comp_csum;
-    /* Check sum for TCP, UDP or ICMP packets */
+    /* Check sum for TCP, UDP or ICMP packets 4层数据校验和*/
     int32_t level4_comp_csum;
 
-    IPV4Hdr *ip4h;
+    IPV4Hdr *ip4h;//ipv4包头指针
 
-    IPV6Hdr *ip6h;
+    IPV6Hdr *ip6h;//ipv6包头指针
 
     /* IPv4 and IPv6 are mutually exclusive */
     union {
@@ -470,34 +470,34 @@ typedef struct Packet_
 #define icmpv4vars  l4vars.icmpv4vars
 #define icmpv6vars  l4vars.icmpv6vars
 
-    TCPHdr *tcph;
+    TCPHdr *tcph;//tcp协议头指针
 
-    UDPHdr *udph;
+    UDPHdr *udph;//udp协议头指针
 
-    ICMPV4Hdr *icmpv4h;
+    ICMPV4Hdr *icmpv4h;//icmp协议头指针
 
     ICMPV6Hdr *icmpv6h;
 
-    GREHdr *greh;
+    GREHdr *greh;//gre协议头指针
 
-    VLANHdr *vlanh[2];
+    VLANHdr *vlanh[2];//vlan协议头指针
 
     /* ptr to the payload of the packet
      * with it's length. */
-    uint8_t *payload;
-    uint16_t payload_len;
+    uint8_t *payload;//四层数据包的载荷，比如tcp或udp协议内的载荷。
+    uint16_t payload_len;//四层数据包的载荷长度。
 
     /* IPS action to take */
-    uint8_t action;
+    uint8_t action;//对数据包的处理动作
 
-    uint8_t pkt_src;
+    uint8_t pkt_src;//标识数据包的来源
 
     /* storage: set to pointer to heap and extended via allocation if necessary */
-    uint32_t pktlen;
+    uint32_t pktlen;//数据包字节长度
     uint8_t *ext_pkt;
 
     /* Incoming interface */
-    struct LiveDevice_ *livedev;
+    struct LiveDevice_ *livedev;//数据源的网口信息
 
     PacketAlerts alerts;
 
@@ -515,7 +515,7 @@ typedef struct Packet_
 
     /* double linked list ptrs */
     struct Packet_ *next;
-    struct Packet_ *prev;
+    struct Packet_ *prev;//next和prev将Packet链接起来
 
     /** data linktype in host order */
     int datalink;

@@ -547,6 +547,7 @@ failure:
  *
  *  First run protocol detection and then when the protocol is known invoke
  *  the app layer parser.
+ *  首先进行协议识别，如果是已知的，则调用应用层解析器
  */
 int AppLayerHandleTCPData(ThreadVars *tv, TcpReassemblyThreadCtx *ra_ctx,
                           Packet *p, Flow *f,
