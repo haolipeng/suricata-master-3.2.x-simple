@@ -80,8 +80,6 @@
 
 #include "source-nflog.h"
 
-#include "source-ipfw.h"
-
 #include "source-pcap.h"
 #include "source-pcap-file.h"
 
@@ -561,9 +559,6 @@ void usage(const char *progname)
 #ifdef NFQ
     printf("\t-q <qid>                             : run in inline nfqueue mode\n");
 #endif /* NFQ */
-#ifdef IPFW
-    printf("\t-d <divert port>                     : run in inline ipfw divert mode\n");
-#endif /* IPFW */
     printf("\t-s <path>                            : path to signature file loaded in addition to suricata.yaml settings (optional)\n");
     printf("\t-S <path>                            : path to signature file loaded exclusively (optional)\n");
     printf("\t-l <dir>                             : default log directory\n");
@@ -663,9 +658,6 @@ void SCPrintBuildInfo(void)
 #endif
 #ifdef NFQ
     strlcat(features, "NFQ ", sizeof(features));
-#endif
-#ifdef IPFW
-    strlcat(features, "IPFW ", sizeof(features));
 #endif
 #ifdef HAVE_PCAP_SET_BUFF
     strlcat(features, "PCAP_SET_BUFF ", sizeof(features));
@@ -841,10 +833,6 @@ void RegisterAllModules()
     TmModuleReceiveNFQRegister();
     TmModuleVerdictNFQRegister();
     TmModuleDecodeNFQRegister();
-    /* ipfw */
-    TmModuleReceiveIPFWRegister();
-    TmModuleVerdictIPFWRegister();
-    TmModuleDecodeIPFWRegister();
     /* pcap live */
     TmModuleReceivePcapRegister();
     TmModuleDecodePcapRegister();
@@ -1795,25 +1783,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
 #endif /* NFQ */
             break;
         case 'd':
-#ifdef IPFW
-            if (suri->run_mode == RUNMODE_UNKNOWN) {
-                suri->run_mode = RUNMODE_IPFW;
-                EngineModeSetIPS();
-                if (IPFWRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else if (suri->run_mode == RUNMODE_IPFW) {
-                if (IPFWRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else {
-                SCLogError(SC_ERR_MULTIPLE_RUN_MODE, "more than one run mode "
-                                                     "has been specified");
-                usage(argv[0]);
-                return TM_ECODE_FAILED;
-            }
-#else
-            SCLogError(SC_ERR_IPFW_NOSUPPORT,"IPFW not enabled. Make sure to pass --enable-ipfw to configure when building.");
-            return TM_ECODE_FAILED;
-#endif /* IPFW */
             break;
         case 'r':
             if (suri->run_mode == RUNMODE_UNKNOWN) {

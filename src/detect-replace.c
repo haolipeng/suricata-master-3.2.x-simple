@@ -93,7 +93,6 @@ int DetectReplaceSetup(DetectEngineCtx *de_ctx, Signature *s, char *replacestr)
 
     switch (run_mode) {
         case RUNMODE_NFQ:
-        case RUNMODE_IPFW:
             break;
         default:
             SCLogWarning(SC_ERR_RUNMODE,

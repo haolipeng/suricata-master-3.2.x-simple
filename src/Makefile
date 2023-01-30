@@ -226,18 +226,17 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	reputation.$(OBJEXT) respond-reject.$(OBJEXT) \
 	respond-reject-libnet11.$(OBJEXT) runmode-af-packet.$(OBJEXT) \
 	runmode-erf-dag.$(OBJEXT) runmode-erf-file.$(OBJEXT) \
-	runmode-ipfw.$(OBJEXT) runmode-napatech.$(OBJEXT) \
-	runmode-nfq.$(OBJEXT) runmode-nflog.$(OBJEXT) \
-	runmode-pcap.$(OBJEXT) runmode-pcap-file.$(OBJEXT) \
-	runmode-pfring.$(OBJEXT) runmode-unittests.$(OBJEXT) \
-	runmode-unix-socket.$(OBJEXT) runmode-tile.$(OBJEXT) \
-	runmodes.$(OBJEXT) source-af-packet.$(OBJEXT) \
-	source-erf-dag.$(OBJEXT) source-erf-file.$(OBJEXT) \
-	source-ipfw.$(OBJEXT) source-mpipe.$(OBJEXT) \
-	source-napatech.$(OBJEXT) source-nfq.$(OBJEXT) \
-	source-nflog.$(OBJEXT) source-pcap.$(OBJEXT) \
-	source-pcap-file.$(OBJEXT) source-pfring.$(OBJEXT) \
-	stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
+	runmode-napatech.$(OBJEXT) runmode-nfq.$(OBJEXT) \
+	runmode-nflog.$(OBJEXT) runmode-pcap.$(OBJEXT) \
+	runmode-pcap-file.$(OBJEXT) runmode-pfring.$(OBJEXT) \
+	runmode-unittests.$(OBJEXT) runmode-unix-socket.$(OBJEXT) \
+	runmode-tile.$(OBJEXT) runmodes.$(OBJEXT) \
+	source-af-packet.$(OBJEXT) source-erf-dag.$(OBJEXT) \
+	source-erf-file.$(OBJEXT) \
+	source-mpipe.$(OBJEXT) source-napatech.$(OBJEXT) \
+	source-nfq.$(OBJEXT) source-nflog.$(OBJEXT) \
+	source-pcap.$(OBJEXT) source-pcap-file.$(OBJEXT) \
+	source-pfring.$(OBJEXT) stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
 	stream-tcp-inline.$(OBJEXT) stream-tcp-reassemble.$(OBJEXT) \
 	stream-tcp-sack.$(OBJEXT) stream-tcp-util.$(OBJEXT) \
 	suricata.$(OBJEXT) threads.$(OBJEXT) tm-modules.$(OBJEXT) \
@@ -475,11 +474,10 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/respond-reject-libnet11.Po \
 	./$(DEPDIR)/respond-reject.Po ./$(DEPDIR)/runmode-af-packet.Po \
 	./$(DEPDIR)/runmode-erf-dag.Po ./$(DEPDIR)/runmode-erf-file.Po \
-	./$(DEPDIR)/runmode-ipfw.Po ./$(DEPDIR)/runmode-napatech.Po \
-	./$(DEPDIR)/runmode-nflog.Po ./$(DEPDIR)/runmode-nfq.Po \
-	./$(DEPDIR)/runmode-pcap-file.Po ./$(DEPDIR)/runmode-pcap.Po \
-	./$(DEPDIR)/runmode-pfring.Po ./$(DEPDIR)/runmode-tile.Po \
-	./$(DEPDIR)/runmode-unittests.Po \
+	./$(DEPDIR)/runmode-napatech.Po ./$(DEPDIR)/runmode-nflog.Po \
+	./$(DEPDIR)/runmode-nfq.Po ./$(DEPDIR)/runmode-pcap-file.Po \
+	./$(DEPDIR)/runmode-pcap.Po ./$(DEPDIR)/runmode-pfring.Po \
+	./$(DEPDIR)/runmode-tile.Po ./$(DEPDIR)/runmode-unittests.Po \
 	./$(DEPDIR)/runmode-unix-socket.Po ./$(DEPDIR)/runmodes.Po \
 	./$(DEPDIR)/source-af-packet.Po ./$(DEPDIR)/source-erf-dag.Po \
 	./$(DEPDIR)/source-erf-file.Po ./$(DEPDIR)/source-ipfw.Po \
@@ -505,9 +503,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-classification-config.Po \
 	./$(DEPDIR)/util-conf.Po ./$(DEPDIR)/util-coredump-config.Po \
 	./$(DEPDIR)/util-cpu.Po ./$(DEPDIR)/util-crypt.Po \
-	./$(DEPDIR)/util-cuda-buffer.Po \
-	./$(DEPDIR)/util-cuda-handlers.Po \
-	./$(DEPDIR)/util-cuda-vars.Po ./$(DEPDIR)/util-cuda.Po \
 	./$(DEPDIR)/util-daemon.Po ./$(DEPDIR)/util-debug-filters.Po \
 	./$(DEPDIR)/util-debug.Po ./$(DEPDIR)/util-decode-asn1.Po \
 	./$(DEPDIR)/util-decode-der-get.Po \
@@ -1034,7 +1029,6 @@ respond-reject-libnet11.h respond-reject-libnet11.c \
 runmode-af-packet.c runmode-af-packet.h \
 runmode-erf-dag.c runmode-erf-dag.h \
 runmode-erf-file.c runmode-erf-file.h \
-runmode-ipfw.c runmode-ipfw.h \
 runmode-napatech.c runmode-napatech.h \
 runmode-nfq.c runmode-nfq.h \
 runmode-nflog.c runmode-nflog.h \
@@ -1048,7 +1042,6 @@ runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
 source-erf-dag.c source-erf-dag.h \
 source-erf-file.c source-erf-file.h \
-source-ipfw.c source-ipfw.h \
 source-mpipe.c source-mpipe.h \
 source-napatech.c source-napatech.h \
 source-nfq.c source-nfq.h \
@@ -1089,10 +1082,6 @@ util-conf.c util-conf.h \
 util-coredump-config.c util-coredump-config.h \
 util-cpu.c util-cpu.h \
 util-crypt.c util-crypt.h \
-util-cuda.c util-cuda.h \
-util-cuda-buffer.c util-cuda-buffer.h \
-util-cuda-handlers.c util-cuda-handlers.h \
-util-cuda-vars.c util-cuda-vars.h \
 util-daemon.c util-daemon.h \
 util-debug.c util-debug.h \
 util-debug-filters.c util-debug-filters.h \
@@ -1540,7 +1529,6 @@ include ./$(DEPDIR)/respond-reject.Po # am--include-marker
 include ./$(DEPDIR)/runmode-af-packet.Po # am--include-marker
 include ./$(DEPDIR)/runmode-erf-dag.Po # am--include-marker
 include ./$(DEPDIR)/runmode-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/runmode-ipfw.Po # am--include-marker
 include ./$(DEPDIR)/runmode-napatech.Po # am--include-marker
 include ./$(DEPDIR)/runmode-nflog.Po # am--include-marker
 include ./$(DEPDIR)/runmode-nfq.Po # am--include-marker
@@ -2079,7 +2067,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-ipfw.Po
 	-rm -f ./$(DEPDIR)/runmode-napatech.Po
 	-rm -f ./$(DEPDIR)/runmode-nflog.Po
 	-rm -f ./$(DEPDIR)/runmode-nfq.Po
@@ -2498,7 +2485,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-ipfw.Po
 	-rm -f ./$(DEPDIR)/runmode-napatech.Po
 	-rm -f ./$(DEPDIR)/runmode-nflog.Po
 	-rm -f ./$(DEPDIR)/runmode-nfq.Po
@@ -2553,10 +2539,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-coredump-config.Po
 	-rm -f ./$(DEPDIR)/util-cpu.Po
 	-rm -f ./$(DEPDIR)/util-crypt.Po
-	-rm -f ./$(DEPDIR)/util-cuda-buffer.Po
-	-rm -f ./$(DEPDIR)/util-cuda-handlers.Po
-	-rm -f ./$(DEPDIR)/util-cuda-vars.Po
-	-rm -f ./$(DEPDIR)/util-cuda.Po
 	-rm -f ./$(DEPDIR)/util-daemon.Po
 	-rm -f ./$(DEPDIR)/util-debug-filters.Po
 	-rm -f ./$(DEPDIR)/util-debug.Po

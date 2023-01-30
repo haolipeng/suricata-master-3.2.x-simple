@@ -89,7 +89,6 @@ int RunModeOutputFiledataEnabled(void);
 #include "runmode-pfring.h"
 #include "runmode-tile.h"
 #include "runmode-nfq.h"
-#include "runmode-ipfw.h"
 #include "runmode-erf-file.h"
 #include "runmode-erf-dag.h"
 #include "runmode-napatech.h"

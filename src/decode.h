@@ -53,7 +53,6 @@ enum PktSrcEnum {
 
 #include "source-nflog.h"
 #include "source-nfq.h"
-#include "source-ipfw.h"
 #include "source-pcap.h"
 #include "source-af-packet.h"
 #include "source-mpipe.h"

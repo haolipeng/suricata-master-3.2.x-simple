@@ -123,8 +123,6 @@ static const char *RunModeTranslateModeToName(int runmode)
             return "NFQ";
         case RUNMODE_NFLOG:
             return "NFLOG";
-        case RUNMODE_IPFW:
-            return "IPFW";
         case RUNMODE_ERF_FILE:
             return "ERF_FILE";
         case RUNMODE_DAG:
@@ -203,7 +201,6 @@ void RunModeRegisterRunModes(void)
     RunModeFilePcapRegister();
     RunModeIdsPfringRegister();
     RunModeIpsNFQRegister();
-    RunModeIpsIPFWRegister();
     RunModeErfFileRegister();
     RunModeErfDagRegister();
     RunModeNapatechRegister();
@@ -291,9 +288,6 @@ void RunModeDispatch(int runmode, const char *custom_mode)
 #endif
             case RUNMODE_NFQ:
                 custom_mode = RunModeIpsNFQGetDefaultMode();
-                break;
-            case RUNMODE_IPFW:
-                custom_mode = RunModeIpsIPFWGetDefaultMode();
                 break;
             case RUNMODE_ERF_FILE:
                 custom_mode = RunModeErfFileGetDefaultMode();

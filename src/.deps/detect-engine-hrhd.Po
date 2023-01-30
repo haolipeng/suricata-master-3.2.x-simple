@@ -174,27 +174,26 @@ detect-engine-hrhd.o: detect-engine-hrhd.c /usr/include/stdc-predef.h \
  tm-threads-common.h util-debug.h util-enum.h util-error.h \
  util-debug-filters.h util-mem.h util-atomic.h detect-engine-alert.h \
  decode.h threadvars.h util-affinity.h tm-queues.h counters.h \
- decode-events.h flow-worker.h source-nflog.h source-nfq.h source-ipfw.h \
- source-pcap.h source-af-packet.h /usr/include/linux/if_packet.h queue.h \
- source-mpipe.h action-globals.h decode-erspan.h decode-ethernet.h \
- decode-gre.h decode-sll.h decode-ipv4.h decode-ipv6.h decode-icmpv4.h \
- decode-tcp.h decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h \
- decode-vlan.h detect-reference.h app-layer-protos.h detect.h flow.h \
- util-var.h detect-tag.h suricata.h packet-queue.h data-queue.h \
- runmodes.h runmode-pcap.h runmode-pcap-file.h runmode-pfring.h \
- runmode-tile.h runmode-nfq.h runmode-ipfw.h runmode-erf-file.h \
- runmode-erf-dag.h runmode-napatech.h runmode-af-packet.h runmode-nflog.h \
- runmode-unix-socket.h util-time.h util-optimize.h detect-engine-proto.h \
- util-prefilter.h util-mpm.h util-spm.h util-spm-bs.h util-spm-bs2bm.h \
- util-spm-bm.h util-hash.h util-hashlist.h util-radix-tree.h util-file.h \
- conf.h util-streaming-buffer.h reputation.h host.h util-storage.h \
- detect-mark.h stream.h detect-threshold.h util-path.h util-conf.h \
- detect-engine.h tm-threads.h tmqh-packetpool.h tm-modules.h \
- flow-private.h flow-hash.h flow-queue.h detect-engine-hrhd.h \
- app-layer-htp.h app-layer-htp-mem.h stream-tcp-reassemble.h \
- stream-tcp-private.h util-pool.h util-pool-thread.h \
- app-layer-detect-proto.h detect-engine-state.h detect-engine-mpm.h \
- detect-content.h detect-uricontent.h detect-parse.h \
+ decode-events.h flow-worker.h source-nflog.h source-nfq.h source-pcap.h \
+ source-af-packet.h /usr/include/linux/if_packet.h queue.h source-mpipe.h \
+ action-globals.h decode-erspan.h decode-ethernet.h decode-gre.h \
+ decode-sll.h decode-ipv4.h decode-ipv6.h decode-icmpv4.h decode-tcp.h \
+ decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
+ detect-reference.h app-layer-protos.h detect.h flow.h util-var.h \
+ detect-tag.h suricata.h packet-queue.h data-queue.h runmodes.h \
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
+ runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
+ runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h util-time.h \
+ util-optimize.h detect-engine-proto.h util-prefilter.h util-mpm.h \
+ util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
+ util-hashlist.h util-radix-tree.h util-file.h conf.h \
+ util-streaming-buffer.h reputation.h host.h util-storage.h detect-mark.h \
+ stream.h detect-threshold.h util-path.h util-conf.h detect-engine.h \
+ tm-threads.h tmqh-packetpool.h tm-modules.h flow-private.h flow-hash.h \
+ flow-queue.h detect-engine-hrhd.h app-layer-htp.h app-layer-htp-mem.h \
+ stream-tcp-reassemble.h stream-tcp-private.h util-pool.h \
+ util-pool-thread.h app-layer-detect-proto.h detect-engine-state.h \
+ detect-engine-mpm.h detect-content.h detect-uricontent.h detect-parse.h \
  detect-engine-content-inspection.h detect-engine-prefilter.h flow-util.h \
  tmqh-flow.h util-print.h stream-tcp.h app-layer-parser.h \
  app-layer-events.h util-unittest.h util-unittest-helper.h app-layer.h \
@@ -674,8 +673,6 @@ source-nflog.h:
 
 source-nfq.h:
 
-source-ipfw.h:
-
 source-pcap.h:
 
 source-af-packet.h:
@@ -743,8 +740,6 @@ runmode-pfring.h:
 runmode-tile.h:
 
 runmode-nfq.h:
-
-runmode-ipfw.h:
 
 runmode-erf-file.h:
 
