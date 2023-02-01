@@ -181,14 +181,13 @@ suricata.o: suricata.c /usr/include/stdc-predef.h suricata-common.h \
  decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
  detect-reference.h app-layer-protos.h detect.h flow.h util-var.h \
  detect-tag.h suricata.h packet-queue.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h util-time.h \
- util-optimize.h detect-engine-proto.h util-prefilter.h util-mpm.h \
- util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
- util-hashlist.h util-radix-tree.h util-file.h conf.h \
- util-streaming-buffer.h reputation.h host.h util-storage.h detect-mark.h \
- stream.h detect-threshold.h util-path.h util-conf.h \
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h util-time.h util-optimize.h detect-engine-proto.h \
+ util-prefilter.h util-mpm.h util-spm.h util-spm-bs.h util-spm-bs2bm.h \
+ util-spm-bm.h util-hash.h util-hashlist.h util-radix-tree.h util-file.h \
+ conf.h util-streaming-buffer.h reputation.h host.h util-storage.h \
+ detect-mark.h stream.h detect-threshold.h util-path.h util-conf.h \
  /usr/include/getopt.h /usr/include/x86_64-linux-gnu/bits/getopt_ext.h \
  util-cpu.h util-action.h util-pidfile.h util-ioctl.h util-device.h \
  unix-manager.h util-misc.h util-running-modes.h detect-engine.h \
@@ -200,9 +199,9 @@ suricata.o: suricata.c /usr/include/stdc-predef.h suricata-common.h \
  util-pool.h util-pool-thread.h app-layer-detect-proto.h \
  detect-engine-state.h tm-queuehandlers.h tmqh-flow.h conf-yaml-loader.h \
  stream-tcp.h source-nfq-prototypes.h source-pcap-file.h source-pfring.h \
- source-erf-file.h source-erf-dag.h source-napatech.h respond-reject.h \
- flow-timeout.h flow-manager.h flow-var.h flow-bit.h pkt-var.h host-bit.h \
- ippair.h ippair-bit.h app-layer.h util-profiling.h app-layer-parser.h \
+ source-erf-file.h source-erf-dag.h respond-reject.h flow-timeout.h \
+ flow-manager.h flow-var.h flow-bit.h pkt-var.h host-bit.h ippair.h \
+ ippair-bit.h app-layer.h util-profiling.h app-layer-parser.h \
  app-layer-events.h app-layer-dns-tcp.h app-layer-dns-common.h \
  util-byte.h /usr/include/byteswap.h app-layer-dns-udp.h \
  util-decode-der.h util-host-os-info.h util-cidr.h util-unittest.h \
@@ -751,15 +750,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 
@@ -898,8 +893,6 @@ source-pfring.h:
 source-erf-file.h:
 
 source-erf-dag.h:
-
-source-napatech.h:
 
 respond-reject.h:
 

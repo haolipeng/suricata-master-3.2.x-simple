@@ -186,15 +186,14 @@ tmqh-packetpool.o: tmqh-packetpool.c /usr/include/stdc-predef.h \
  util-radix-tree.h util-file.h conf.h util-streaming-buffer.h \
  reputation.h host.h util-storage.h detect-mark.h stream.h \
  detect-threshold.h util-path.h util-conf.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h \
- detect-uricontent.h detect-content.h app-layer-htp.h app-layer-htp-mem.h \
- stream-tcp-reassemble.h stream-tcp-private.h util-pool.h \
- util-pool-thread.h app-layer-detect-proto.h detect-engine-state.h \
- flow-util.h tmqh-flow.h tm-queuehandlers.h tm-threads.h \
- tmqh-packetpool.h tm-modules.h pkt-var.h util-profiling.h util-device.h \
- unix-manager.h
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h detect-uricontent.h detect-content.h \
+ app-layer-htp.h app-layer-htp-mem.h stream-tcp-reassemble.h \
+ stream-tcp-private.h util-pool.h util-pool-thread.h \
+ app-layer-detect-proto.h detect-engine-state.h flow-util.h tmqh-flow.h \
+ tm-queuehandlers.h tm-threads.h tmqh-packetpool.h tm-modules.h pkt-var.h \
+ util-profiling.h util-device.h unix-manager.h
 
 /usr/include/stdc-predef.h:
 
@@ -778,15 +777,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 

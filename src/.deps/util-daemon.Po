@@ -186,9 +186,9 @@ util-daemon.o: util-daemon.c /usr/include/stdc-predef.h suricata.h \
  util-radix-tree.h util-file.h conf.h util-streaming-buffer.h \
  reputation.h host.h util-storage.h detect-mark.h stream.h \
  detect-threshold.h util-path.h util-conf.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h util-daemon.h \
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h util-daemon.h \
  /usr/include/x86_64-linux-gnu/sys/wait.h
 
 /usr/include/stdc-predef.h:
@@ -773,15 +773,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 

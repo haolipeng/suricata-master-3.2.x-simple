@@ -186,18 +186,18 @@ app-layer-htp.o: app-layer-htp.c /usr/include/stdc-predef.h suricata.h \
  util-radix-tree.h util-file.h conf.h util-streaming-buffer.h \
  reputation.h host.h util-storage.h detect-mark.h stream.h \
  detect-threshold.h util-path.h util-conf.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h debug.h \
- util-print.h util-pool.h stream-tcp-private.h util-pool-thread.h \
- stream-tcp-reassemble.h app-layer-detect-proto.h stream-tcp.h \
- app-layer-parser.h app-layer-events.h detect-engine-state.h app-layer.h \
- util-profiling.h app-layer-htp.h app-layer-htp-mem.h \
- app-layer-htp-body.h app-layer-htp-file.h app-layer-htp-libhtp.h \
- app-layer-htp-xff.h util-misc.h util-unittest.h util-unittest-helper.h \
- flow-util.h tmqh-flow.h detect-engine.h tm-threads.h tmqh-packetpool.h \
- tm-modules.h flow-private.h flow-hash.h flow-queue.h detect-parse.h \
- util-memcmp.h /usr/lib/gcc/x86_64-linux-gnu/9/include/nmmintrin.h \
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h debug.h util-print.h util-pool.h \
+ stream-tcp-private.h util-pool-thread.h stream-tcp-reassemble.h \
+ app-layer-detect-proto.h stream-tcp.h app-layer-parser.h \
+ app-layer-events.h detect-engine-state.h app-layer.h util-profiling.h \
+ app-layer-htp.h app-layer-htp-mem.h app-layer-htp-body.h \
+ app-layer-htp-file.h app-layer-htp-libhtp.h app-layer-htp-xff.h \
+ util-misc.h util-unittest.h util-unittest-helper.h flow-util.h \
+ tmqh-flow.h detect-engine.h tm-threads.h tmqh-packetpool.h tm-modules.h \
+ flow-private.h flow-hash.h flow-queue.h detect-parse.h util-memcmp.h \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/nmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/smmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/tmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/pmmintrin.h \
@@ -790,15 +790,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 

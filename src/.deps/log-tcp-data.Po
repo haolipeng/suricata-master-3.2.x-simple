@@ -181,23 +181,22 @@ log-tcp-data.o: log-tcp-data.c /usr/include/stdc-predef.h \
  decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
  detect-reference.h app-layer-protos.h detect.h flow.h util-var.h \
  detect-tag.h suricata.h packet-queue.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h util-time.h \
- util-optimize.h detect-engine-proto.h util-prefilter.h util-mpm.h \
- util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
- util-hashlist.h util-radix-tree.h util-file.h conf.h \
- util-streaming-buffer.h reputation.h host.h util-storage.h detect-mark.h \
- stream.h detect-threshold.h util-path.h util-conf.h debug.h pkt-var.h \
- tm-threads.h tmqh-packetpool.h tm-modules.h util-print.h util-unittest.h \
- output.h output-packet.h output-tx.h output-file.h output-filedata.h \
- output-flow.h output-streaming.h output-stats.h log-tcp-data.h \
- app-layer-htp.h app-layer-htp-mem.h stream-tcp-reassemble.h \
- stream-tcp-private.h util-pool.h util-pool-thread.h \
- app-layer-detect-proto.h detect-engine-state.h app-layer.h \
- util-profiling.h app-layer-parser.h app-layer-events.h util-privs.h \
- /usr/include/cap-ng.h /usr/include/linux/capability.h util-buffer.h \
- util-logopenfile.h
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h util-time.h util-optimize.h detect-engine-proto.h \
+ util-prefilter.h util-mpm.h util-spm.h util-spm-bs.h util-spm-bs2bm.h \
+ util-spm-bm.h util-hash.h util-hashlist.h util-radix-tree.h util-file.h \
+ conf.h util-streaming-buffer.h reputation.h host.h util-storage.h \
+ detect-mark.h stream.h detect-threshold.h util-path.h util-conf.h \
+ debug.h pkt-var.h tm-threads.h tmqh-packetpool.h tm-modules.h \
+ util-print.h util-unittest.h output.h output-packet.h output-tx.h \
+ output-file.h output-filedata.h output-flow.h output-streaming.h \
+ output-stats.h log-tcp-data.h app-layer-htp.h app-layer-htp-mem.h \
+ stream-tcp-reassemble.h stream-tcp-private.h util-pool.h \
+ util-pool-thread.h app-layer-detect-proto.h detect-engine-state.h \
+ app-layer.h util-profiling.h app-layer-parser.h app-layer-events.h \
+ util-privs.h /usr/include/cap-ng.h /usr/include/linux/capability.h \
+ util-buffer.h util-logopenfile.h
 
 /usr/include/stdc-predef.h:
 
@@ -735,15 +734,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 

@@ -226,13 +226,13 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	reputation.$(OBJEXT) respond-reject.$(OBJEXT) \
 	respond-reject-libnet11.$(OBJEXT) runmode-af-packet.$(OBJEXT) \
 	runmode-erf-dag.$(OBJEXT) runmode-erf-file.$(OBJEXT) \
-	runmode-napatech.$(OBJEXT) runmode-nfq.$(OBJEXT) \
+	runmode-nfq.$(OBJEXT) \
 	runmode-nflog.$(OBJEXT) runmode-pcap.$(OBJEXT) \
 	runmode-pcap-file.$(OBJEXT) runmode-pfring.$(OBJEXT) \
 	runmode-unittests.$(OBJEXT) runmode-unix-socket.$(OBJEXT) \
-	runmode-tile.$(OBJEXT) runmodes.$(OBJEXT) \
+	runmodes.$(OBJEXT) \
 	source-af-packet.$(OBJEXT) source-erf-dag.$(OBJEXT) \
-	source-erf-file.$(OBJEXT) source-napatech.$(OBJEXT) \
+	source-erf-file.$(OBJEXT) \
 	source-nfq.$(OBJEXT) source-nflog.$(OBJEXT) \
 	source-pcap.$(OBJEXT) source-pcap-file.$(OBJEXT) \
 	source-pfring.$(OBJEXT) stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
@@ -1031,7 +1031,6 @@ respond-reject-libnet11.h respond-reject-libnet11.c \
 runmode-af-packet.c runmode-af-packet.h \
 runmode-erf-dag.c runmode-erf-dag.h \
 runmode-erf-file.c runmode-erf-file.h \
-runmode-napatech.c runmode-napatech.h \
 runmode-nfq.c runmode-nfq.h \
 runmode-nflog.c runmode-nflog.h \
 runmode-pcap.c runmode-pcap.h \
@@ -1039,7 +1038,6 @@ runmode-pcap-file.c runmode-pcap-file.h \
 runmode-pfring.c runmode-pfring.h \
 runmode-unittests.c runmode-unittests.h \
 runmode-unix-socket.c runmode-unix-socket.h \
-runmode-tile.c runmode-tile.h \
 runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
 source-erf-dag.c source-erf-dag.h \
@@ -1534,7 +1532,6 @@ include ./$(DEPDIR)/respond-reject.Po # am--include-marker
 include ./$(DEPDIR)/runmode-af-packet.Po # am--include-marker
 include ./$(DEPDIR)/runmode-erf-dag.Po # am--include-marker
 include ./$(DEPDIR)/runmode-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/runmode-napatech.Po # am--include-marker
 include ./$(DEPDIR)/runmode-nflog.Po # am--include-marker
 include ./$(DEPDIR)/runmode-nfq.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap-file.Po # am--include-marker
@@ -2072,7 +2069,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-napatech.Po
 	-rm -f ./$(DEPDIR)/runmode-nflog.Po
 	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
@@ -2488,7 +2484,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
 	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-napatech.Po
 	-rm -f ./$(DEPDIR)/runmode-nflog.Po
 	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po

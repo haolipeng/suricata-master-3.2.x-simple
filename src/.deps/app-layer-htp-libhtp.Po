@@ -186,9 +186,9 @@ app-layer-htp-libhtp.o: app-layer-htp-libhtp.c /usr/include/stdc-predef.h \
  util-radix-tree.h util-file.h conf.h util-streaming-buffer.h \
  reputation.h host.h util-storage.h detect-mark.h stream.h \
  detect-threshold.h util-path.h util-conf.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h
 
 /usr/include/stdc-predef.h:
 
@@ -772,15 +772,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 

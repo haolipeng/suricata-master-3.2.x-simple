@@ -182,14 +182,13 @@ detect-engine-prefilter.o: detect-engine-prefilter.c \
  decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
  detect-reference.h app-layer-protos.h detect.h flow.h util-var.h \
  detect-tag.h suricata.h packet-queue.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h util-time.h \
- util-optimize.h detect-engine-proto.h util-prefilter.h util-mpm.h \
- util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
- util-hashlist.h util-radix-tree.h util-file.h conf.h \
- util-streaming-buffer.h reputation.h host.h util-storage.h detect-mark.h \
- stream.h detect-threshold.h util-path.h util-conf.h \
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h util-time.h util-optimize.h detect-engine-proto.h \
+ util-prefilter.h util-mpm.h util-spm.h util-spm-bs.h util-spm-bs2bm.h \
+ util-spm-bm.h util-hash.h util-hashlist.h util-radix-tree.h util-file.h \
+ conf.h util-streaming-buffer.h reputation.h host.h util-storage.h \
+ detect-mark.h stream.h detect-threshold.h util-path.h util-conf.h \
  detect-engine-prefilter.h detect-engine-mpm.h tm-threads.h \
  tmqh-packetpool.h tm-modules.h detect-content.h detect-uricontent.h \
  app-layer-htp.h app-layer-htp-mem.h stream-tcp-reassemble.h \
@@ -733,15 +732,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 

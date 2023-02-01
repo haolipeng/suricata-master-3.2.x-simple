@@ -186,13 +186,13 @@ app-layer-htp-body.o: app-layer-htp-body.c /usr/include/stdc-predef.h \
  util-radix-tree.h util-file.h conf.h util-streaming-buffer.h \
  reputation.h host.h util-storage.h detect-mark.h stream.h \
  detect-threshold.h util-path.h util-conf.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-tile.h \
- runmode-nfq.h runmode-erf-file.h runmode-erf-dag.h runmode-napatech.h \
- runmode-af-packet.h runmode-nflog.h runmode-unix-socket.h debug.h \
- util-print.h util-pool.h stream-tcp-private.h util-pool-thread.h \
- stream-tcp-reassemble.h app-layer-detect-proto.h stream-tcp.h \
- app-layer-parser.h app-layer-events.h detect-engine-state.h \
- app-layer-htp.h app-layer-htp-mem.h app-layer-htp-file.h util-unittest.h \
+ runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
+ runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
+ runmode-unix-socket.h debug.h util-print.h util-pool.h \
+ stream-tcp-private.h util-pool-thread.h stream-tcp-reassemble.h \
+ app-layer-detect-proto.h stream-tcp.h app-layer-parser.h \
+ app-layer-events.h detect-engine-state.h app-layer-htp.h \
+ app-layer-htp-mem.h app-layer-htp-file.h util-unittest.h \
  util-unittest-helper.h flow-util.h tmqh-flow.h detect-engine.h \
  tm-threads.h tmqh-packetpool.h tm-modules.h flow-private.h flow-hash.h \
  flow-queue.h detect-parse.h util-memcmp.h \
@@ -788,15 +788,11 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-tile.h:
-
 runmode-nfq.h:
 
 runmode-erf-file.h:
 
 runmode-erf-dag.h:
-
-runmode-napatech.h:
 
 runmode-af-packet.h:
 
