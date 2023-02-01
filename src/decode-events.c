@@ -151,9 +151,6 @@ const struct DecodeEvents_ DEvents[] = {
     { "decoder.ipv6.ipv6_in_ipv6_too_small", IPV6_IN_IPV6_PKT_TOO_SMALL, },
     { "decoder.ipv6.ipv6_in_ipv6_wrong_version", IPV6_IN_IPV6_WRONG_IP_VER, },
 
-    /* Cisco Fabric Path/DCE events. */
-    { "decoder.dce.pkt_too_small", DCE_PKT_TOO_SMALL, },
-
     /* STREAM EVENTS */
     { "stream.3whs_ack_in_wrong_dir", STREAM_3WHS_ACK_IN_WRONG_DIR, },
     { "stream.3whs_async_wrong_seq", STREAM_3WHS_ASYNC_WRONG_SEQ, },
