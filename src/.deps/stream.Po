@@ -176,9 +176,9 @@ stream.o: stream.c /usr/include/stdc-predef.h suricata-common.h \
  decode.h threadvars.h util-affinity.h tm-queues.h counters.h \
  decode-events.h flow-worker.h source-nflog.h source-nfq.h source-pcap.h \
  source-af-packet.h /usr/include/linux/if_packet.h queue.h \
- action-globals.h decode-erspan.h decode-ethernet.h decode-gre.h \
- decode-sll.h decode-ipv4.h decode-ipv6.h decode-icmpv4.h decode-tcp.h \
- decode-udp.h decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
+ action-globals.h decode-ethernet.h decode-gre.h decode-sll.h \
+ decode-ipv4.h decode-ipv6.h decode-icmpv4.h decode-tcp.h decode-udp.h \
+ decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
  detect-reference.h app-layer-protos.h detect.h flow.h util-var.h \
  detect-tag.h suricata.h packet-queue.h data-queue.h runmodes.h \
  runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
@@ -675,8 +675,6 @@ source-af-packet.h:
 queue.h:
 
 action-globals.h:
-
-decode-erspan.h:
 
 decode-ethernet.h:
 

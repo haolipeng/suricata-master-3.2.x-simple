@@ -119,7 +119,7 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	app-layer-template.$(OBJEXT) conf.$(OBJEXT) \
 	conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
 	data-queue.$(OBJEXT) decode.$(OBJEXT) decode-afl.$(OBJEXT) \
-	decode-erspan.$(OBJEXT) decode-ethernet.$(OBJEXT) \
+	decode-ethernet.$(OBJEXT) \
 	decode-events.$(OBJEXT) decode-gre.$(OBJEXT) \
 	decode-icmpv4.$(OBJEXT) decode-icmpv6.$(OBJEXT) \
 	decode-ipv4.$(OBJEXT) decode-ipv6.$(OBJEXT) \
@@ -334,7 +334,7 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-template.Po ./$(DEPDIR)/app-layer.Po \
 	./$(DEPDIR)/conf-yaml-loader.Po ./$(DEPDIR)/conf.Po \
 	./$(DEPDIR)/counters.Po ./$(DEPDIR)/data-queue.Po \
-	./$(DEPDIR)/decode-afl.Po ./$(DEPDIR)/decode-erspan.Po \
+	./$(DEPDIR)/decode-afl.Po \
 	./$(DEPDIR)/decode-ethernet.Po ./$(DEPDIR)/decode-events.Po \
 	./$(DEPDIR)/decode-gre.Po ./$(DEPDIR)/decode-icmpv4.Po \
 	./$(DEPDIR)/decode-icmpv6.Po ./$(DEPDIR)/decode-ipv4.Po \
@@ -820,7 +820,6 @@ counters.c counters.h \
 data-queue.c data-queue.h \
 decode.c decode.h \
 decode-afl.c \
-decode-erspan.c decode-erspan.h \
 decode-ethernet.c decode-ethernet.h \
 decode-events.c decode-events.h \
 decode-gre.c decode-gre.h \
@@ -1320,7 +1319,6 @@ include ./$(DEPDIR)/conf.Po # am--include-marker
 include ./$(DEPDIR)/counters.Po # am--include-marker
 include ./$(DEPDIR)/data-queue.Po # am--include-marker
 include ./$(DEPDIR)/decode-afl.Po # am--include-marker
-include ./$(DEPDIR)/decode-erspan.Po # am--include-marker
 include ./$(DEPDIR)/decode-ethernet.Po # am--include-marker
 include ./$(DEPDIR)/decode-events.Po # am--include-marker
 include ./$(DEPDIR)/decode-gre.Po # am--include-marker
@@ -1857,7 +1855,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/counters.Po
 	-rm -f ./$(DEPDIR)/data-queue.Po
 	-rm -f ./$(DEPDIR)/decode-afl.Po
-	-rm -f ./$(DEPDIR)/decode-erspan.Po
 	-rm -f ./$(DEPDIR)/decode-ethernet.Po
 	-rm -f ./$(DEPDIR)/decode-events.Po
 	-rm -f ./$(DEPDIR)/decode-gre.Po
@@ -2272,7 +2269,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/counters.Po
 	-rm -f ./$(DEPDIR)/data-queue.Po
 	-rm -f ./$(DEPDIR)/decode-afl.Po
-	-rm -f ./$(DEPDIR)/decode-erspan.Po
 	-rm -f ./$(DEPDIR)/decode-ethernet.Po
 	-rm -f ./$(DEPDIR)/decode-events.Po
 	-rm -f ./$(DEPDIR)/decode-gre.Po

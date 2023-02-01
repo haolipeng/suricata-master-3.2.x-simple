@@ -32,7 +32,6 @@ counters.c counters.h \
 data-queue.c data-queue.h \
 decode.c decode.h \
 decode-afl.c \
-decode-erspan.c decode-erspan.h \
 decode-ethernet.c decode-ethernet.h \
 decode-events.c decode-events.h \
 decode-gre.c decode-gre.h \

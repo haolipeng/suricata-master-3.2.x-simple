@@ -58,7 +58,6 @@ enum PktSrcEnum {
 
 #include "action-globals.h"
 
-#include "decode-erspan.h"
 #include "decode-ethernet.h"
 #include "decode-gre.h"
 #include "decode-sll.h"

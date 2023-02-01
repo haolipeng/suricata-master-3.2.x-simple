@@ -151,11 +151,6 @@ const struct DecodeEvents_ DEvents[] = {
     { "decoder.ipv6.ipv6_in_ipv6_too_small", IPV6_IN_IPV6_PKT_TOO_SMALL, },
     { "decoder.ipv6.ipv6_in_ipv6_wrong_version", IPV6_IN_IPV6_WRONG_IP_VER, },
 
-    /* ERSPAN events */
-    { "decoder.erspan.header_too_small", ERSPAN_HEADER_TOO_SMALL, },
-    { "decoder.erspan.unsupported_version", ERSPAN_UNSUPPORTED_VERSION, },
-    { "decoder.erspan.too_many_vlan_layers", ERSPAN_TOO_MANY_VLAN_LAYERS, },
-
     /* Cisco Fabric Path/DCE events. */
     { "decoder.dce.pkt_too_small", DCE_PKT_TOO_SMALL, },
 
