@@ -667,18 +667,8 @@ void AppLayerProtoDetectPrintProbingParsers(AppLayerProtoDetectProbingParser *pp
 
                     if (pp_pe->alproto == ALPROTO_HTTP)
                         printf("            alproto: ALPROTO_HTTP\n");
-                    else if (pp_pe->alproto == ALPROTO_FTP)
-                        printf("            alproto: ALPROTO_FTP\n");
-                    else if (pp_pe->alproto == ALPROTO_SMTP)
-                        printf("            alproto: ALPROTO_SMTP\n");
                     else if (pp_pe->alproto == ALPROTO_TLS)
                         printf("            alproto: ALPROTO_TLS\n");
-                    else if (pp_pe->alproto == ALPROTO_SSH)
-                        printf("            alproto: ALPROTO_SSH\n");
-                    else if (pp_pe->alproto == ALPROTO_JABBER)
-                        printf("            alproto: ALPROTO_JABBER\n");
-                    else if (pp_pe->alproto == ALPROTO_DCERPC)
-                        printf("            alproto: ALPROTO_DCERPC\n");
                     else if (pp_pe->alproto == ALPROTO_IRC)
                         printf("            alproto: ALPROTO_IRC\n");
                     else if (pp_pe->alproto == ALPROTO_DNS)
@@ -716,30 +706,10 @@ void AppLayerProtoDetectPrintProbingParsers(AppLayerProtoDetectProbingParser *pp
 
                 if (pp_pe->alproto == ALPROTO_HTTP)
                     printf("            alproto: ALPROTO_HTTP\n");
-                else if (pp_pe->alproto == ALPROTO_FTP)
-                    printf("            alproto: ALPROTO_FTP\n");
-                else if (pp_pe->alproto == ALPROTO_SMTP)
-                    printf("            alproto: ALPROTO_SMTP\n");
-                else if (pp_pe->alproto == ALPROTO_TLS)
-                    printf("            alproto: ALPROTO_TLS\n");
-                else if (pp_pe->alproto == ALPROTO_SSH)
-                    printf("            alproto: ALPROTO_SSH\n");
-                else if (pp_pe->alproto == ALPROTO_JABBER)
-                    printf("            alproto: ALPROTO_JABBER\n");
-                else if (pp_pe->alproto == ALPROTO_DCERPC)
-                    printf("            alproto: ALPROTO_DCERPC\n");
-                else if (pp_pe->alproto == ALPROTO_IRC)
-                    printf("            alproto: ALPROTO_IRC\n");
                 else if (pp_pe->alproto == ALPROTO_DNS)
                     printf("            alproto: ALPROTO_DNS\n");
-                else if (pp_pe->alproto == ALPROTO_MODBUS)
-                    printf("            alproto: ALPROTO_MODBUS\n");
-                else if (pp_pe->alproto == ALPROTO_ENIP)
-                    printf("            alproto: ALPROTO_ENIP\n");
                 else if (pp_pe->alproto == ALPROTO_TEMPLATE)
                     printf("            alproto: ALPROTO_TEMPLATE\n");
-                else if (pp_pe->alproto == ALPROTO_DNP3)
-                    printf("            alproto: ALPROTO_DNP3\n");
                 else
                     printf("impossible\n");
 
@@ -2987,125 +2957,11 @@ static int AppLayerProtoDetectTest15(void)
                                   5, 8,
                                   STREAM_TOSERVER,
                                   ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "80",
-                                  ALPROTO_SMB,
-                                  5, 6,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "80",
-                                  ALPROTO_FTP,
-                                  7, 10,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "81",
-                                  ALPROTO_DCERPC,
-                                  9, 10,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "81",
-                                  ALPROTO_FTP,
-                                  7, 15,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "0",
-                                  ALPROTO_SMTP,
-                                  12, 0,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "0",
-                                  ALPROTO_TLS,
-                                  12, 18,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "85",
-                                  ALPROTO_DCERPC,
-                                  9, 10,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "85",
-                                  ALPROTO_FTP,
-                                  7, 15,
-                                  STREAM_TOSERVER,
-                                  ProbingParserDummyForTesting, NULL);
     result = 1;
-
-    /* toclient */
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "0",
-                                  ALPROTO_JABBER,
-                                  12, 23,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "0",
-                                  ALPROTO_IRC,
-                                  12, 14,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "85",
-                                  ALPROTO_DCERPC,
-                                  9, 10,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "81",
-                                  ALPROTO_FTP,
-                                  7, 15,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "0",
-                                  ALPROTO_TLS,
-                                  12, 18,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
     AppLayerProtoDetectPPRegister(IPPROTO_TCP,
                                   "80",
                                   ALPROTO_HTTP,
                                   5, 8,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "81",
-                                  ALPROTO_DCERPC,
-                                  9, 10,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "90",
-                                  ALPROTO_FTP,
-                                  7, 15,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "80",
-                                  ALPROTO_SMB,
-                                  5, 6,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "0",
-                                  ALPROTO_SMTP,
-                                  12, 17,
-                                  STREAM_TOCLIENT,
-                                  ProbingParserDummyForTesting, NULL);
-    AppLayerProtoDetectPPRegister(IPPROTO_TCP,
-                                  "80",
-                                  ALPROTO_FTP,
-                                  7, 10,
                                   STREAM_TOCLIENT,
                                   ProbingParserDummyForTesting, NULL);
 
@@ -3119,13 +2975,7 @@ static int AppLayerProtoDetectTest15(void)
           { "jabber", ALPROTO_JABBER, 0, 1 << ALPROTO_JABBER, 12, 23 },
         };
     AppLayerProtoDetectPPTestDataElement element_tc_80[] = {
-        { "http", ALPROTO_HTTP, 80, 1 << ALPROTO_HTTP, 5, 8 },
-          { "smb", ALPROTO_SMB, 80, 1 << ALPROTO_SMB, 5, 6 },
-          { "ftp", ALPROTO_FTP, 80, 1 << ALPROTO_FTP, 7, 10 },
-          { "jabber", ALPROTO_JABBER, 0, 1 << ALPROTO_JABBER, 12, 23 },
-          { "irc", ALPROTO_IRC, 0, 1 << ALPROTO_IRC, 12, 14 },
-          { "tls", ALPROTO_TLS, 0, 1 << ALPROTO_TLS, 12, 18 },
-          { "smtp", ALPROTO_SMTP, 0, 1 << ALPROTO_SMTP, 12, 17 }
+        { "http", ALPROTO_HTTP, 80, 1 << ALPROTO_HTTP, 5, 8 }
         };
 
     AppLayerProtoDetectPPTestDataElement element_ts_81[] = {

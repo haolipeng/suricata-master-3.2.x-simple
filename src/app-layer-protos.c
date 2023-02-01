@@ -39,23 +39,8 @@ const char *AppProtoToString(AppProto alproto)
         case ALPROTO_TLS:
             proto_name = "tls";
             break;
-        case ALPROTO_SSH:
-            proto_name = "ssh";
-            break;
-        case ALPROTO_JABBER:
-            proto_name = "jabber";
-            break;
-        case ALPROTO_IRC:
-            proto_name = "irc";
-            break;
         case ALPROTO_DNS:
             proto_name = "dns";
-            break;
-        case ALPROTO_MODBUS:
-            proto_name = "modbus";
-            break;
-        case ALPROTO_ENIP:
-            proto_name = "enip";
             break;
         case ALPROTO_TEMPLATE:
             proto_name = "template";

@@ -2507,6 +2507,7 @@ int main(int argc, char **argv)
     GlobalsInitPreConfig();
 
     /* Load yaml configuration file if provided. */
+    //加载suricata.yaml配置文件
     if (LoadYamlConfig(&suri) != TM_ECODE_OK) {
         exit(EXIT_FAILURE);
     }
