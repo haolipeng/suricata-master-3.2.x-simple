@@ -227,9 +227,9 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	runmode-pcap.$(OBJEXT) runmode-pcap-file.$(OBJEXT) \
 	runmode-pfring.$(OBJEXT) runmode-unittests.$(OBJEXT) \
 	runmode-unix-socket.$(OBJEXT) runmodes.$(OBJEXT) \
-	source-af-packet.$(OBJEXT) \
-	source-pcap.$(OBJEXT) source-pcap-file.$(OBJEXT) \
-	source-pfring.$(OBJEXT) stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
+	source-af-packet.$(OBJEXT) source-pcap.$(OBJEXT) \
+	source-pcap-file.$(OBJEXT) source-pfring.$(OBJEXT) \
+	stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
 	stream-tcp-inline.$(OBJEXT) stream-tcp-reassemble.$(OBJEXT) \
 	stream-tcp-sack.$(OBJEXT) stream-tcp-util.$(OBJEXT) \
 	suricata.$(OBJEXT) threads.$(OBJEXT) tm-modules.$(OBJEXT) \
@@ -466,14 +466,10 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/reputation.Po \
 	./$(DEPDIR)/respond-reject-libnet11.Po \
 	./$(DEPDIR)/respond-reject.Po ./$(DEPDIR)/runmode-af-packet.Po \
-	./$(DEPDIR)/runmode-erf-dag.Po ./$(DEPDIR)/runmode-erf-file.Po \
-	./$(DEPDIR)/runmode-nflog.Po ./$(DEPDIR)/runmode-nfq.Po \
 	./$(DEPDIR)/runmode-pcap-file.Po ./$(DEPDIR)/runmode-pcap.Po \
 	./$(DEPDIR)/runmode-pfring.Po ./$(DEPDIR)/runmode-unittests.Po \
 	./$(DEPDIR)/runmode-unix-socket.Po ./$(DEPDIR)/runmodes.Po \
-	./$(DEPDIR)/source-af-packet.Po ./$(DEPDIR)/source-erf-dag.Po \
-	./$(DEPDIR)/source-erf-file.Po ./$(DEPDIR)/source-napatech.Po \
-	./$(DEPDIR)/source-nflog.Po ./$(DEPDIR)/source-nfq.Po \
+	./$(DEPDIR)/source-af-packet.Po \
 	./$(DEPDIR)/source-pcap-file.Po ./$(DEPDIR)/source-pcap.Po \
 	./$(DEPDIR)/source-pfring.Po ./$(DEPDIR)/stream-tcp-inline.Po \
 	./$(DEPDIR)/stream-tcp-reassemble.Po \
@@ -778,7 +774,7 @@ top_builddir = ..
 top_srcdir = ..
 noinst_HEADERS = action-globals.h \
     debug.h \
-	flow-private.h queue.h source-nfq-prototypes.h \
+	flow-private.h queue.h  \
 	suricata-common.h threadvars.h util-binsearch.h \
     util-validate.h
 
@@ -1017,10 +1013,6 @@ reputation.c reputation.h \
 respond-reject.c respond-reject.h \
 respond-reject-libnet11.h respond-reject-libnet11.c \
 runmode-af-packet.c runmode-af-packet.h \
-runmode-erf-dag.c runmode-erf-dag.h \
-runmode-erf-file.c runmode-erf-file.h \
-runmode-nfq.c runmode-nfq.h \
-runmode-nflog.c runmode-nflog.h \
 runmode-pcap.c runmode-pcap.h \
 runmode-pcap-file.c runmode-pcap-file.h \
 runmode-pfring.c runmode-pfring.h \
@@ -1508,10 +1500,6 @@ include ./$(DEPDIR)/reputation.Po # am--include-marker
 include ./$(DEPDIR)/respond-reject-libnet11.Po # am--include-marker
 include ./$(DEPDIR)/respond-reject.Po # am--include-marker
 include ./$(DEPDIR)/runmode-af-packet.Po # am--include-marker
-include ./$(DEPDIR)/runmode-erf-dag.Po # am--include-marker
-include ./$(DEPDIR)/runmode-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/runmode-nflog.Po # am--include-marker
-include ./$(DEPDIR)/runmode-nfq.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap-file.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pfring.Po # am--include-marker
@@ -1519,11 +1507,6 @@ include ./$(DEPDIR)/runmode-unittests.Po # am--include-marker
 include ./$(DEPDIR)/runmode-unix-socket.Po # am--include-marker
 include ./$(DEPDIR)/runmodes.Po # am--include-marker
 include ./$(DEPDIR)/source-af-packet.Po # am--include-marker
-include ./$(DEPDIR)/source-erf-dag.Po # am--include-marker
-include ./$(DEPDIR)/source-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/source-napatech.Po # am--include-marker
-include ./$(DEPDIR)/source-nflog.Po # am--include-marker
-include ./$(DEPDIR)/source-nfq.Po # am--include-marker
 include ./$(DEPDIR)/source-pcap-file.Po # am--include-marker
 include ./$(DEPDIR)/source-pcap.Po # am--include-marker
 include ./$(DEPDIR)/source-pfring.Po # am--include-marker
@@ -2037,10 +2020,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/respond-reject-libnet11.Po
 	-rm -f ./$(DEPDIR)/respond-reject.Po
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-nflog.Po
-	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap.Po
 	-rm -f ./$(DEPDIR)/runmode-pfring.Po
@@ -2048,11 +2027,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/runmode-unix-socket.Po
 	-rm -f ./$(DEPDIR)/runmodes.Po
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
-	-rm -f ./$(DEPDIR)/source-erf-dag.Po
-	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-napatech.Po
-	-rm -f ./$(DEPDIR)/source-nflog.Po
-	-rm -f ./$(DEPDIR)/source-nfq.Po
 	-rm -f ./$(DEPDIR)/source-pcap-file.Po
 	-rm -f ./$(DEPDIR)/source-pcap.Po
 	-rm -f ./$(DEPDIR)/source-pfring.Po
@@ -2446,10 +2420,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/respond-reject-libnet11.Po
 	-rm -f ./$(DEPDIR)/respond-reject.Po
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-nflog.Po
-	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap.Po
 	-rm -f ./$(DEPDIR)/runmode-pfring.Po
@@ -2457,11 +2427,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/runmode-unix-socket.Po
 	-rm -f ./$(DEPDIR)/runmodes.Po
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
-	-rm -f ./$(DEPDIR)/source-erf-dag.Po
-	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-napatech.Po
-	-rm -f ./$(DEPDIR)/source-nflog.Po
-	-rm -f ./$(DEPDIR)/source-nfq.Po
 	-rm -f ./$(DEPDIR)/source-pcap-file.Po
 	-rm -f ./$(DEPDIR)/source-pcap.Po
 	-rm -f ./$(DEPDIR)/source-pfring.Po

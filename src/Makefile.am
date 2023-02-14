@@ -1,6 +1,6 @@
 noinst_HEADERS = action-globals.h \
     debug.h \
-	flow-private.h queue.h source-nfq-prototypes.h \
+	flow-private.h queue.h  \
 	suricata-common.h threadvars.h util-binsearch.h \
     util-validate.h
 bin_PROGRAMS = suricata
@@ -240,10 +240,6 @@ reputation.c reputation.h \
 respond-reject.c respond-reject.h \
 respond-reject-libnet11.h respond-reject-libnet11.c \
 runmode-af-packet.c runmode-af-packet.h \
-runmode-erf-dag.c runmode-erf-dag.h \
-runmode-erf-file.c runmode-erf-file.h \
-runmode-nfq.c runmode-nfq.h \
-runmode-nflog.c runmode-nflog.h \
 runmode-pcap.c runmode-pcap.h \
 runmode-pcap-file.c runmode-pcap-file.h \
 runmode-pfring.c runmode-pfring.h \
@@ -251,11 +247,6 @@ runmode-unittests.c runmode-unittests.h \
 runmode-unix-socket.c runmode-unix-socket.h \
 runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
-source-erf-dag.c source-erf-dag.h \
-source-erf-file.c source-erf-file.h \
-source-napatech.c source-napatech.h \
-source-nfq.c source-nfq.h \
-source-nflog.c source-nflog.h \
 source-pcap.c source-pcap.h \
 source-pcap-file.c source-pcap-file.h \
 source-pfring.c source-pfring.h \
