@@ -119,12 +119,11 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	app-layer-template.$(OBJEXT) conf.$(OBJEXT) \
 	conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
 	data-queue.$(OBJEXT) decode.$(OBJEXT) decode-afl.$(OBJEXT) \
-	decode-ethernet.$(OBJEXT) \
-	decode-events.$(OBJEXT) decode-gre.$(OBJEXT) \
-	decode-icmpv4.$(OBJEXT) decode-icmpv6.$(OBJEXT) \
-	decode-ipv4.$(OBJEXT) decode-ipv6.$(OBJEXT) \
-	decode-null.$(OBJEXT) decode-raw.$(OBJEXT) \
-	decode-sll.$(OBJEXT) decode-tcp.$(OBJEXT) \
+	decode-ethernet.$(OBJEXT) decode-events.$(OBJEXT) \
+	decode-gre.$(OBJEXT) decode-icmpv4.$(OBJEXT) \
+	decode-icmpv6.$(OBJEXT) decode-ipv4.$(OBJEXT) \
+	decode-ipv6.$(OBJEXT) decode-null.$(OBJEXT) \
+	decode-raw.$(OBJEXT) decode-sll.$(OBJEXT) decode-tcp.$(OBJEXT) \
 	decode-teredo.$(OBJEXT) decode-udp.$(OBJEXT) \
 	decode-vlan.$(OBJEXT) decode-template.$(OBJEXT) \
 	defrag-config.$(OBJEXT) defrag.$(OBJEXT) defrag-hash.$(OBJEXT) \
@@ -225,15 +224,10 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	output-json.$(OBJEXT) packet-queue.$(OBJEXT) pkt-var.$(OBJEXT) \
 	reputation.$(OBJEXT) respond-reject.$(OBJEXT) \
 	respond-reject-libnet11.$(OBJEXT) runmode-af-packet.$(OBJEXT) \
-	runmode-erf-dag.$(OBJEXT) runmode-erf-file.$(OBJEXT) \
-	runmode-nfq.$(OBJEXT) \
-	runmode-nflog.$(OBJEXT) runmode-pcap.$(OBJEXT) \
-	runmode-pcap-file.$(OBJEXT) runmode-pfring.$(OBJEXT) \
-	runmode-unittests.$(OBJEXT) runmode-unix-socket.$(OBJEXT) \
-	runmodes.$(OBJEXT) \
-	source-af-packet.$(OBJEXT) source-erf-dag.$(OBJEXT) \
-	source-erf-file.$(OBJEXT) \
-	source-nfq.$(OBJEXT) source-nflog.$(OBJEXT) \
+	runmode-pcap.$(OBJEXT) runmode-pcap-file.$(OBJEXT) \
+	runmode-pfring.$(OBJEXT) runmode-unittests.$(OBJEXT) \
+	runmode-unix-socket.$(OBJEXT) runmodes.$(OBJEXT) \
+	source-af-packet.$(OBJEXT) \
 	source-pcap.$(OBJEXT) source-pcap-file.$(OBJEXT) \
 	source-pfring.$(OBJEXT) stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
 	stream-tcp-inline.$(OBJEXT) stream-tcp-reassemble.$(OBJEXT) \
@@ -334,18 +328,18 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-template.Po ./$(DEPDIR)/app-layer.Po \
 	./$(DEPDIR)/conf-yaml-loader.Po ./$(DEPDIR)/conf.Po \
 	./$(DEPDIR)/counters.Po ./$(DEPDIR)/data-queue.Po \
-	./$(DEPDIR)/decode-afl.Po \
-	./$(DEPDIR)/decode-ethernet.Po ./$(DEPDIR)/decode-events.Po \
-	./$(DEPDIR)/decode-gre.Po ./$(DEPDIR)/decode-icmpv4.Po \
-	./$(DEPDIR)/decode-icmpv6.Po ./$(DEPDIR)/decode-ipv4.Po \
-	./$(DEPDIR)/decode-ipv6.Po ./$(DEPDIR)/decode-null.Po \
-	./$(DEPDIR)/decode-raw.Po ./$(DEPDIR)/decode-sll.Po \
-	./$(DEPDIR)/decode-tcp.Po ./$(DEPDIR)/decode-template.Po \
-	./$(DEPDIR)/decode-teredo.Po ./$(DEPDIR)/decode-udp.Po \
-	./$(DEPDIR)/decode-vlan.Po ./$(DEPDIR)/decode.Po \
-	./$(DEPDIR)/defrag-config.Po ./$(DEPDIR)/defrag-hash.Po \
-	./$(DEPDIR)/defrag-queue.Po ./$(DEPDIR)/defrag-timeout.Po \
-	./$(DEPDIR)/defrag.Po ./$(DEPDIR)/detect-ack.Po \
+	./$(DEPDIR)/decode-afl.Po ./$(DEPDIR)/decode-ethernet.Po \
+	./$(DEPDIR)/decode-events.Po ./$(DEPDIR)/decode-gre.Po \
+	./$(DEPDIR)/decode-icmpv4.Po ./$(DEPDIR)/decode-icmpv6.Po \
+	./$(DEPDIR)/decode-ipv4.Po ./$(DEPDIR)/decode-ipv6.Po \
+	./$(DEPDIR)/decode-null.Po ./$(DEPDIR)/decode-raw.Po \
+	./$(DEPDIR)/decode-sll.Po ./$(DEPDIR)/decode-tcp.Po \
+	./$(DEPDIR)/decode-template.Po ./$(DEPDIR)/decode-teredo.Po \
+	./$(DEPDIR)/decode-udp.Po ./$(DEPDIR)/decode-vlan.Po \
+	./$(DEPDIR)/decode.Po ./$(DEPDIR)/defrag-config.Po \
+	./$(DEPDIR)/defrag-hash.Po ./$(DEPDIR)/defrag-queue.Po \
+	./$(DEPDIR)/defrag-timeout.Po ./$(DEPDIR)/defrag.Po \
+	./$(DEPDIR)/detect-ack.Po \
 	./$(DEPDIR)/detect-app-layer-event.Po \
 	./$(DEPDIR)/detect-app-layer-protocol.Po \
 	./$(DEPDIR)/detect-asn1.Po ./$(DEPDIR)/detect-base64-data.Po \
@@ -473,14 +467,12 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/respond-reject-libnet11.Po \
 	./$(DEPDIR)/respond-reject.Po ./$(DEPDIR)/runmode-af-packet.Po \
 	./$(DEPDIR)/runmode-erf-dag.Po ./$(DEPDIR)/runmode-erf-file.Po \
-	./$(DEPDIR)/runmode-napatech.Po ./$(DEPDIR)/runmode-nflog.Po \
-	./$(DEPDIR)/runmode-nfq.Po ./$(DEPDIR)/runmode-pcap-file.Po \
-	./$(DEPDIR)/runmode-pcap.Po ./$(DEPDIR)/runmode-pfring.Po \
-	./$(DEPDIR)/runmode-tile.Po ./$(DEPDIR)/runmode-unittests.Po \
+	./$(DEPDIR)/runmode-nflog.Po ./$(DEPDIR)/runmode-nfq.Po \
+	./$(DEPDIR)/runmode-pcap-file.Po ./$(DEPDIR)/runmode-pcap.Po \
+	./$(DEPDIR)/runmode-pfring.Po ./$(DEPDIR)/runmode-unittests.Po \
 	./$(DEPDIR)/runmode-unix-socket.Po ./$(DEPDIR)/runmodes.Po \
 	./$(DEPDIR)/source-af-packet.Po ./$(DEPDIR)/source-erf-dag.Po \
-	./$(DEPDIR)/source-erf-file.Po ./$(DEPDIR)/source-ipfw.Po \
-	./$(DEPDIR)/source-mpipe.Po ./$(DEPDIR)/source-napatech.Po \
+	./$(DEPDIR)/source-erf-file.Po ./$(DEPDIR)/source-napatech.Po \
 	./$(DEPDIR)/source-nflog.Po ./$(DEPDIR)/source-nfq.Po \
 	./$(DEPDIR)/source-pcap-file.Po ./$(DEPDIR)/source-pcap.Po \
 	./$(DEPDIR)/source-pfring.Po ./$(DEPDIR)/stream-tcp-inline.Po \
@@ -502,9 +494,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-classification-config.Po \
 	./$(DEPDIR)/util-conf.Po ./$(DEPDIR)/util-coredump-config.Po \
 	./$(DEPDIR)/util-cpu.Po ./$(DEPDIR)/util-crypt.Po \
-	./$(DEPDIR)/util-cuda-buffer.Po \
-	./$(DEPDIR)/util-cuda-handlers.Po \
-	./$(DEPDIR)/util-cuda-vars.Po ./$(DEPDIR)/util-cuda.Po \
 	./$(DEPDIR)/util-daemon.Po ./$(DEPDIR)/util-debug-filters.Po \
 	./$(DEPDIR)/util-debug.Po ./$(DEPDIR)/util-decode-asn1.Po \
 	./$(DEPDIR)/util-decode-der-get.Po \
@@ -615,7 +604,7 @@ CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
 CONFIGURE_SYSCONDIR = /etc
 CPP = gcc -E
-CPPFLAGS = -I/usr/include  -I/usr/local/include -I/usr/local/lib/htp/include
+CPPFLAGS = -I/usr/include  -I/usr/lib/htp/include -I/usr/include/nspr -I/usr/include/nss -I/usr/include/nspr
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -637,7 +626,7 @@ HAVE_GIT_CMD = /usr/bin/git
 HAVE_PCAP_CONFIG = /usr/bin/pcap-config
 HAVE_PDFLATEX = no
 HAVE_PKG_CONFIG = /usr/bin/pkg-config
-HAVE_PYTHON_CONFIG = no
+HAVE_PYTHON_CONFIG = /usr/bin/python
 HAVE_SPHINXBUILD = no
 HAVE_WGET = /usr/bin/wget
 HTP_DIR = 
@@ -651,8 +640,8 @@ LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS =  -L/usr/lib
 LIBHTPDEVVERSION_CFLAGS = 
 LIBHTPDEVVERSION_LIBS = 
-LIBHTPMINVERSION_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
-LIBHTPMINVERSION_LIBS = -L/usr/local/lib -lhtp
+LIBHTPMINVERSION_CFLAGS = -I/usr/lib/htp/include
+LIBHTPMINVERSION_LIBS = -lhtp
 LIBOBJS = 
 LIBPCREVERSION_CFLAGS = 
 LIBPCREVERSION_LIBS = 
@@ -663,7 +652,7 @@ LIBPRELUDE_LDFLAGS =
 LIBPRELUDE_LIBS = 
 LIBPRELUDE_PREFIX = 
 LIBPRELUDE_PTHREAD_CFLAGS = 
-LIBS = -lmagic -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -L/usr/local/lib -lhtp
+LIBS = -lmagic -lnss3 -lnspr4 -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -lhtp -lplds4 -lplc4 -lnspr4 -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -756,14 +745,14 @@ libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 libhs_CFLAGS = 
 libhs_LIBS = 
-libhtp_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
-libhtp_LIBS = -L/usr/local/lib -lhtp
+libhtp_CFLAGS = -I/usr/lib/htp/include
+libhtp_LIBS = -lhtp
 libnetfilter_queue_CFLAGS = 
 libnetfilter_queue_LIBS = 
-libnspr_CFLAGS = 
-libnspr_LIBS = 
-libnss_CFLAGS = 
-libnss_LIBS = 
+libnspr_CFLAGS = -I/usr/include/nspr
+libnspr_LIBS = -lplds4 -lplc4 -lnspr4
+libnss_CFLAGS = -I/usr/include/nss -I/usr/include/nspr
+libnss_LIBS = -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
 localedir = ${datarootdir}/locale
 localstatedir = /var
 mandir = ${datarootdir}/man
@@ -1039,11 +1028,6 @@ runmode-unittests.c runmode-unittests.h \
 runmode-unix-socket.c runmode-unix-socket.h \
 runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
-source-erf-dag.c source-erf-dag.h \
-source-erf-file.c source-erf-file.h \
-source-napatech.c source-napatech.h \
-source-nfq.c source-nfq.h \
-source-nflog.c source-nflog.h \
 source-pcap.c source-pcap.h \
 source-pcap-file.c source-pcap-file.h \
 source-pfring.c source-pfring.h \
@@ -1080,10 +1064,6 @@ util-conf.c util-conf.h \
 util-coredump-config.c util-coredump-config.h \
 util-cpu.c util-cpu.h \
 util-crypt.c util-crypt.h \
-util-cuda.c util-cuda.h \
-util-cuda-buffer.c util-cuda-buffer.h \
-util-cuda-handlers.c util-cuda-handlers.h \
-util-cuda-vars.c util-cuda-vars.h \
 util-daemon.c util-daemon.h \
 util-debug.c util-debug.h \
 util-debug-filters.c util-debug-filters.h \
@@ -1535,15 +1515,12 @@ include ./$(DEPDIR)/runmode-nfq.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap-file.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pfring.Po # am--include-marker
-include ./$(DEPDIR)/runmode-tile.Po # am--include-marker
 include ./$(DEPDIR)/runmode-unittests.Po # am--include-marker
 include ./$(DEPDIR)/runmode-unix-socket.Po # am--include-marker
 include ./$(DEPDIR)/runmodes.Po # am--include-marker
 include ./$(DEPDIR)/source-af-packet.Po # am--include-marker
 include ./$(DEPDIR)/source-erf-dag.Po # am--include-marker
 include ./$(DEPDIR)/source-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/source-ipfw.Po # am--include-marker
-include ./$(DEPDIR)/source-mpipe.Po # am--include-marker
 include ./$(DEPDIR)/source-napatech.Po # am--include-marker
 include ./$(DEPDIR)/source-nflog.Po # am--include-marker
 include ./$(DEPDIR)/source-nfq.Po # am--include-marker
@@ -1583,10 +1560,6 @@ include ./$(DEPDIR)/util-conf.Po # am--include-marker
 include ./$(DEPDIR)/util-coredump-config.Po # am--include-marker
 include ./$(DEPDIR)/util-cpu.Po # am--include-marker
 include ./$(DEPDIR)/util-crypt.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda-buffer.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda-handlers.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda-vars.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda.Po # am--include-marker
 include ./$(DEPDIR)/util-daemon.Po # am--include-marker
 include ./$(DEPDIR)/util-debug-filters.Po # am--include-marker
 include ./$(DEPDIR)/util-debug.Po # am--include-marker
@@ -2071,7 +2044,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap.Po
 	-rm -f ./$(DEPDIR)/runmode-pfring.Po
-	-rm -f ./$(DEPDIR)/runmode-tile.Po
 	-rm -f ./$(DEPDIR)/runmode-unittests.Po
 	-rm -f ./$(DEPDIR)/runmode-unix-socket.Po
 	-rm -f ./$(DEPDIR)/runmodes.Po
@@ -2117,10 +2089,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/util-coredump-config.Po
 	-rm -f ./$(DEPDIR)/util-cpu.Po
 	-rm -f ./$(DEPDIR)/util-crypt.Po
-	-rm -f ./$(DEPDIR)/util-cuda-buffer.Po
-	-rm -f ./$(DEPDIR)/util-cuda-handlers.Po
-	-rm -f ./$(DEPDIR)/util-cuda-vars.Po
-	-rm -f ./$(DEPDIR)/util-cuda.Po
 	-rm -f ./$(DEPDIR)/util-daemon.Po
 	-rm -f ./$(DEPDIR)/util-debug-filters.Po
 	-rm -f ./$(DEPDIR)/util-debug.Po
@@ -2485,7 +2453,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap.Po
 	-rm -f ./$(DEPDIR)/runmode-pfring.Po
-	-rm -f ./$(DEPDIR)/runmode-tile.Po
 	-rm -f ./$(DEPDIR)/runmode-unittests.Po
 	-rm -f ./$(DEPDIR)/runmode-unix-socket.Po
 	-rm -f ./$(DEPDIR)/runmodes.Po
@@ -2531,10 +2498,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-coredump-config.Po
 	-rm -f ./$(DEPDIR)/util-cpu.Po
 	-rm -f ./$(DEPDIR)/util-crypt.Po
-	-rm -f ./$(DEPDIR)/util-cuda-buffer.Po
-	-rm -f ./$(DEPDIR)/util-cuda-handlers.Po
-	-rm -f ./$(DEPDIR)/util-cuda-vars.Po
-	-rm -f ./$(DEPDIR)/util-cuda.Po
 	-rm -f ./$(DEPDIR)/util-daemon.Po
 	-rm -f ./$(DEPDIR)/util-debug-filters.Po
 	-rm -f ./$(DEPDIR)/util-debug.Po

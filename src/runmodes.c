@@ -198,11 +198,7 @@ void RunModeRegisterRunModes(void)
     RunModeIdsPcapRegister();
     RunModeFilePcapRegister();
     RunModeIdsPfringRegister();
-    RunModeIpsNFQRegister();
-    RunModeErfFileRegister();
-    RunModeErfDagRegister();
     RunModeIdsAFPRegister();
-    RunModeIdsNflogRegister();
     RunModeUnixSocketRegister();
 #ifdef UNITTESTS
     UtRunModeRegister();
@@ -282,23 +278,11 @@ void RunModeDispatch(int runmode, const char *custom_mode)
                 custom_mode = RunModeIdsPfringGetDefaultMode();
                 break;
 #endif
-            case RUNMODE_NFQ:
-                custom_mode = RunModeIpsNFQGetDefaultMode();
-                break;
-            case RUNMODE_ERF_FILE:
-                custom_mode = RunModeErfFileGetDefaultMode();
-                break;
-            case RUNMODE_DAG:
-                custom_mode = RunModeErfDagGetDefaultMode();
-                break;
             case RUNMODE_AFP_DEV:
                 custom_mode = RunModeAFPGetDefaultMode();
                 break;
             case RUNMODE_UNIX_SOCKET:
                 custom_mode = RunModeUnixSocketGetDefaultMode();
-                break;
-            case RUNMODE_NFLOG:
-                custom_mode = RunModeIdsNflogGetDefaultMode();
                 break;
             default:
                 SCLogError(SC_ERR_UNKNOWN_RUN_MODE, "Unknown runtime mode. Aborting");

@@ -154,41 +154,42 @@ util-decode-der.o: util-decode-der.c /usr/include/stdc-predef.h \
  /usr/include/pcap/socket.h /usr/include/pcap/bpf.h \
  /usr/include/pcap/dlt.h /usr/include/jansson.h \
  /usr/include/jansson_config.h /usr/include/magic.h /usr/include/assert.h \
- /usr/local/include/htp/htp.h /usr/local/include/htp/htp_version.h \
- /usr/local/include/htp/htp_core.h /usr/local/include/htp/bstr.h \
- /usr/local/include/htp/bstr_builder.h /usr/local/include/htp/htp_list.h \
- /usr/local/include/htp/htp_base64.h /usr/local/include/htp/htp_config.h \
- /usr/local/include/htp/htp.h \
- /usr/local/include/htp/htp_connection_parser.h \
- /usr/local/include/htp/htp_decompressors.h /usr/include/zlib.h \
- /usr/include/zconf.h /usr/local/include/htp/lzma/LzmaDec.h \
- /usr/local/include/htp/lzma/7zTypes.h /usr/include/zconf.h \
- /usr/local/include/htp/htp_hooks.h \
- /usr/local/include/htp/htp_multipart.h \
- /usr/local/include/htp/htp_table.h \
- /usr/local/include/htp/htp_transaction.h \
- /usr/local/include/htp/htp_urlencoded.h \
- /usr/local/include/htp/htp_utf8_decoder.h threads.h \
+ /usr/include/htp/htp.h /usr/include/htp/htp_version.h \
+ /usr/include/htp/htp_core.h /usr/include/htp/bstr.h \
+ /usr/include/htp/bstr_builder.h /usr/include/htp/htp_list.h \
+ /usr/include/htp/htp_base64.h /usr/include/htp/htp_config.h \
+ /usr/include/htp/htp.h /usr/include/htp/htp_connection_parser.h \
+ /usr/include/htp/htp_decompressors.h /usr/include/zlib.h \
+ /usr/include/zconf.h /usr/include/htp/htp_hooks.h \
+ /usr/include/htp/htp_multipart.h /usr/include/htp/htp_table.h \
+ /usr/include/htp/htp_transaction.h /usr/include/htp/htp_urlencoded.h \
+ /usr/include/htp/htp_utf8_decoder.h threads.h \
  /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
  /usr/include/pthread.h /usr/include/x86_64-linux-gnu/bits/setjmp.h \
  tm-threads-common.h util-debug.h util-enum.h util-error.h \
  util-debug-filters.h util-mem.h util-atomic.h detect-engine-alert.h \
  decode.h threadvars.h util-affinity.h tm-queues.h counters.h \
- decode-events.h flow-worker.h source-nflog.h source-nfq.h source-pcap.h \
- source-af-packet.h /usr/include/linux/if_packet.h queue.h \
- action-globals.h decode-ethernet.h decode-gre.h decode-sll.h \
- decode-ipv4.h decode-ipv6.h decode-icmpv4.h decode-tcp.h decode-udp.h \
- decode-icmpv6.h decode-raw.h decode-null.h decode-vlan.h \
- detect-reference.h app-layer-protos.h detect.h flow.h util-var.h \
- detect-tag.h suricata.h packet-queue.h data-queue.h runmodes.h \
- runmode-pcap.h runmode-pcap-file.h runmode-pfring.h runmode-nfq.h \
- runmode-erf-file.h runmode-erf-dag.h runmode-af-packet.h runmode-nflog.h \
- runmode-unix-socket.h util-time.h util-optimize.h detect-engine-proto.h \
- util-prefilter.h util-mpm.h util-spm.h util-spm-bs.h util-spm-bs2bm.h \
- util-spm-bm.h util-hash.h util-hashlist.h util-radix-tree.h util-file.h \
- conf.h util-streaming-buffer.h reputation.h host.h util-storage.h \
- detect-mark.h stream.h detect-threshold.h util-path.h util-conf.h \
- util-decode-der.h
+ decode-events.h flow-worker.h source-pcap.h source-af-packet.h \
+ /usr/include/linux/if_packet.h queue.h action-globals.h \
+ decode-ethernet.h decode-gre.h decode-sll.h decode-ipv4.h decode-ipv6.h \
+ decode-icmpv4.h decode-tcp.h decode-udp.h decode-icmpv6.h decode-raw.h \
+ decode-null.h decode-vlan.h detect-reference.h app-layer-protos.h \
+ detect.h flow.h util-var.h detect-tag.h suricata.h packet-queue.h \
+ data-queue.h runmodes.h runmode-pcap.h runmode-pcap-file.h \
+ runmode-pfring.h runmode-af-packet.h runmode-unix-socket.h util-time.h \
+ util-optimize.h detect-engine-proto.h util-prefilter.h util-mpm.h \
+ util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
+ util-hashlist.h util-radix-tree.h util-file.h /usr/include/nss/sechash.h \
+ /usr/include/nss/seccomon.h /usr/include/nss/utilrename.h \
+ /usr/include/nspr/prtypes.h /usr/include/nspr/prcpucfg.h \
+ /usr/include/nspr/obsolete/protypes.h /usr/include/nss/secport.h \
+ /usr/include/nspr/prlink.h /usr/include/nspr/prtypes.h \
+ /usr/include/nspr/prlog.h /usr/include/nspr/plarena.h \
+ /usr/include/nspr/plstr.h /usr/include/nss/hasht.h \
+ /usr/include/nss/secoidt.h /usr/include/nss/secitem.h \
+ /usr/include/nspr/plhash.h conf.h util-streaming-buffer.h reputation.h \
+ host.h util-storage.h detect-mark.h stream.h detect-threshold.h \
+ util-path.h util-conf.h util-decode-der.h
 
 /usr/include/stdc-predef.h:
 
@@ -576,49 +577,43 @@ suricata-common.h:
 
 /usr/include/assert.h:
 
-/usr/local/include/htp/htp.h:
+/usr/include/htp/htp.h:
 
-/usr/local/include/htp/htp_version.h:
+/usr/include/htp/htp_version.h:
 
-/usr/local/include/htp/htp_core.h:
+/usr/include/htp/htp_core.h:
 
-/usr/local/include/htp/bstr.h:
+/usr/include/htp/bstr.h:
 
-/usr/local/include/htp/bstr_builder.h:
+/usr/include/htp/bstr_builder.h:
 
-/usr/local/include/htp/htp_list.h:
+/usr/include/htp/htp_list.h:
 
-/usr/local/include/htp/htp_base64.h:
+/usr/include/htp/htp_base64.h:
 
-/usr/local/include/htp/htp_config.h:
+/usr/include/htp/htp_config.h:
 
-/usr/local/include/htp/htp.h:
+/usr/include/htp/htp.h:
 
-/usr/local/include/htp/htp_connection_parser.h:
+/usr/include/htp/htp_connection_parser.h:
 
-/usr/local/include/htp/htp_decompressors.h:
+/usr/include/htp/htp_decompressors.h:
 
 /usr/include/zlib.h:
 
 /usr/include/zconf.h:
 
-/usr/local/include/htp/lzma/LzmaDec.h:
+/usr/include/htp/htp_hooks.h:
 
-/usr/local/include/htp/lzma/7zTypes.h:
+/usr/include/htp/htp_multipart.h:
 
-/usr/include/zconf.h:
+/usr/include/htp/htp_table.h:
 
-/usr/local/include/htp/htp_hooks.h:
+/usr/include/htp/htp_transaction.h:
 
-/usr/local/include/htp/htp_multipart.h:
+/usr/include/htp/htp_urlencoded.h:
 
-/usr/local/include/htp/htp_table.h:
-
-/usr/local/include/htp/htp_transaction.h:
-
-/usr/local/include/htp/htp_urlencoded.h:
-
-/usr/local/include/htp/htp_utf8_decoder.h:
+/usr/include/htp/htp_utf8_decoder.h:
 
 threads.h:
 
@@ -659,10 +654,6 @@ counters.h:
 decode-events.h:
 
 flow-worker.h:
-
-source-nflog.h:
-
-source-nfq.h:
 
 source-pcap.h:
 
@@ -724,15 +715,7 @@ runmode-pcap-file.h:
 
 runmode-pfring.h:
 
-runmode-nfq.h:
-
-runmode-erf-file.h:
-
-runmode-erf-dag.h:
-
 runmode-af-packet.h:
-
-runmode-nflog.h:
 
 runmode-unix-socket.h:
 
@@ -761,6 +744,38 @@ util-hashlist.h:
 util-radix-tree.h:
 
 util-file.h:
+
+/usr/include/nss/sechash.h:
+
+/usr/include/nss/seccomon.h:
+
+/usr/include/nss/utilrename.h:
+
+/usr/include/nspr/prtypes.h:
+
+/usr/include/nspr/prcpucfg.h:
+
+/usr/include/nspr/obsolete/protypes.h:
+
+/usr/include/nss/secport.h:
+
+/usr/include/nspr/prlink.h:
+
+/usr/include/nspr/prtypes.h:
+
+/usr/include/nspr/prlog.h:
+
+/usr/include/nspr/plarena.h:
+
+/usr/include/nspr/plstr.h:
+
+/usr/include/nss/hasht.h:
+
+/usr/include/nss/secoidt.h:
+
+/usr/include/nss/secitem.h:
+
+/usr/include/nspr/plhash.h:
 
 conf.h:
 

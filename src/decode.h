@@ -51,8 +51,6 @@ enum PktSrcEnum {
     PKT_SRC_FFR,
 };
 
-#include "source-nflog.h"
-#include "source-nfq.h"
 #include "source-pcap.h"
 #include "source-af-packet.h"
 

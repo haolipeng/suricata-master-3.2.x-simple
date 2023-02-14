@@ -75,18 +75,11 @@
 
 #include "stream-tcp.h"
 
-#include "source-nfq.h"
-#include "source-nfq-prototypes.h"
-
-#include "source-nflog.h"
-
 #include "source-pcap.h"
 #include "source-pcap-file.h"
 
 #include "source-pfring.h"
 
-#include "source-erf-file.h"
-#include "source-erf-dag.h"
 #include "source-af-packet.h"
 #include "respond-reject.h"
 
@@ -822,10 +815,6 @@ void RegisterAllModules()
     /* managers */
     TmModuleFlowManagerRegister();
     TmModuleFlowRecyclerRegister();
-    /* nfq */
-    TmModuleReceiveNFQRegister();
-    TmModuleVerdictNFQRegister();
-    TmModuleDecodeNFQRegister();
     /* pcap live */
     TmModuleReceivePcapRegister();
     TmModuleDecodePcapRegister();
@@ -840,12 +829,6 @@ void RegisterAllModules()
     /* pfring */
     TmModuleReceivePfringRegister();
     TmModuleDecodePfringRegister();
-    /* dag file */
-    TmModuleReceiveErfFileRegister();
-    TmModuleDecodeErfFileRegister();
-    /* dag live */
-    TmModuleReceiveErfDagRegister();
-    TmModuleDecodeErfDagRegister();
 
     /* flow worker */
     TmModuleFlowWorkerRegister();
@@ -857,9 +840,6 @@ void RegisterAllModules()
     TmModuleStatsLoggerRegister();
 
     TmModuleDebugList();
-    /* nflog */
-    TmModuleReceiveNFLOGRegister();
-    TmModuleDecodeNFLOGRegister();
 }
 
 static TmEcode LoadYamlConfig(SCInstance *suri)

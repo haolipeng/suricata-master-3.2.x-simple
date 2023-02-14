@@ -179,10 +179,10 @@
 /* #undef HAVE_LIBNFNETLINK */
 
 /* Define to 1 if you have the `nspr4' library (-lnspr4). */
-/* #undef HAVE_LIBNSPR4 */
+#define HAVE_LIBNSPR4 1
 
 /* Define to 1 if you have the `nss3' library (-lnss3). */
-/* #undef HAVE_LIBNSS3 */
+#define HAVE_LIBNSS3 1
 
 /* Define to 1 if you have the `pcap' library (-lpcap). */
 #define HAVE_LIBPCAP 1
@@ -282,7 +282,7 @@
 /* #undef HAVE_NFQ_SET_VERDICT_BATCH */
 
 /* libnss available for md5 */
-/* #undef HAVE_NSS */
+#define HAVE_NSS 1
 
 /* Use workaround for old barnyard2 in unified2 output */
 /* #undef HAVE_OLD_BARNYARD2 */
@@ -481,7 +481,7 @@
 /* #undef PROFILING */
 
 /* Git revision */
-#define REVISION 5ad5d8f0
+#define REVISION 0fd27951
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1

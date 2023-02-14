@@ -136,7 +136,7 @@ CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
 CONFIGURE_SYSCONDIR = /etc
 CPP = gcc -E
-CPPFLAGS = -I/usr/include  -I/usr/local/include -I/usr/local/lib/htp/include
+CPPFLAGS = -I/usr/include  -I/usr/lib/htp/include -I/usr/include/nspr -I/usr/include/nss -I/usr/include/nspr
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -158,7 +158,7 @@ HAVE_GIT_CMD = /usr/bin/git
 HAVE_PCAP_CONFIG = /usr/bin/pcap-config
 HAVE_PDFLATEX = no
 HAVE_PKG_CONFIG = /usr/bin/pkg-config
-HAVE_PYTHON_CONFIG = no
+HAVE_PYTHON_CONFIG = /usr/bin/python
 HAVE_SPHINXBUILD = no
 HAVE_WGET = /usr/bin/wget
 HTP_DIR = 
@@ -172,8 +172,8 @@ LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS =  -L/usr/lib
 LIBHTPDEVVERSION_CFLAGS = 
 LIBHTPDEVVERSION_LIBS = 
-LIBHTPMINVERSION_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
-LIBHTPMINVERSION_LIBS = -L/usr/local/lib -lhtp
+LIBHTPMINVERSION_CFLAGS = -I/usr/lib/htp/include
+LIBHTPMINVERSION_LIBS = -lhtp
 LIBOBJS = 
 LIBPCREVERSION_CFLAGS = 
 LIBPCREVERSION_LIBS = 
@@ -184,7 +184,7 @@ LIBPRELUDE_LDFLAGS =
 LIBPRELUDE_LIBS = 
 LIBPRELUDE_PREFIX = 
 LIBPRELUDE_PTHREAD_CFLAGS = 
-LIBS = -lmagic -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -L/usr/local/lib -lhtp
+LIBS = -lmagic -lnss3 -lnspr4 -lcap-ng -lhtp -lpcap -lnet -ljansson -lpthread -lyaml -lpcre  -lhtp -lplds4 -lplc4 -lnspr4 -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -277,14 +277,14 @@ libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 libhs_CFLAGS = 
 libhs_LIBS = 
-libhtp_CFLAGS = -I/usr/local/include -I/usr/local/lib/htp/include
-libhtp_LIBS = -L/usr/local/lib -lhtp
+libhtp_CFLAGS = -I/usr/lib/htp/include
+libhtp_LIBS = -lhtp
 libnetfilter_queue_CFLAGS = 
 libnetfilter_queue_LIBS = 
-libnspr_CFLAGS = 
-libnspr_LIBS = 
-libnss_CFLAGS = 
-libnss_LIBS = 
+libnspr_CFLAGS = -I/usr/include/nspr
+libnspr_LIBS = -lplds4 -lplc4 -lnspr4
+libnss_CFLAGS = -I/usr/include/nss -I/usr/include/nspr
+libnss_LIBS = -lnss3 -lnssutil3 -lsmime3 -lssl3 -lplds4 -lplc4 -lnspr4
 localedir = ${datarootdir}/locale
 localstatedir = /var
 mandir = ${datarootdir}/man
@@ -391,7 +391,7 @@ distdir-am: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-local:
+#all-local:
 all-am: Makefile all-local
 installdirs:
 install: install-am
@@ -424,9 +424,9 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-clean-local:
-install-exec-local:
-uninstall-local:
+#install-exec-local:
+#uninstall-local:
+#clean-local:
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am
@@ -511,20 +511,20 @@ uninstall-am: uninstall-local
 .PRECIOUS: Makefile
 
 
-#all-local:
-#	mkdir -p $(top_builddir)/scripts/suricatasc/src
-#	$(PYTHON) $(srcdir)/setup.py build;
+all-local:
+	mkdir -p $(top_builddir)/scripts/suricatasc/src
+	$(PYTHON) $(srcdir)/setup.py build;
 
-#install-exec-local:
-#	$(PYTHON) $(srcdir)/setup.py install --prefix $(DESTDIR)$(prefix)
+install-exec-local:
+	$(PYTHON) $(srcdir)/setup.py install --prefix $(DESTDIR)$(prefix)
 
-#clean-local:
-#	$(PYTHON) $(srcdir)/setup.py clean;
-#	rm -rf $(top_builddir)/scripts/suricatasc/build
+clean-local:
+	$(PYTHON) $(srcdir)/setup.py clean;
+	rm -rf $(top_builddir)/scripts/suricatasc/build
 
-#uninstall-local:
-#	[ ! -f "$(DESTDIR)$(prefix)/bin/suricatasc" ] || rm -f "$(DESTDIR)$(prefix)/bin/suricatasc"
-#	find "$(DESTDIR)$(prefix)/lib" -name "suricatasc-*.egg-info" -delete ||true
+uninstall-local:
+	[ ! -f "$(DESTDIR)$(prefix)/bin/suricatasc" ] || rm -f "$(DESTDIR)$(prefix)/bin/suricatasc"
+	find "$(DESTDIR)$(prefix)/lib" -name "suricatasc-*.egg-info" -delete ||true
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
