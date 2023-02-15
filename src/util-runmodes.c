@@ -387,15 +387,14 @@ int RunModeSetLiveCaptureSingle(ConfigIfaceParserFunc ConfigParser,
                               ConfigIfaceThreadsCountFunc ModThreadsCount,
                               const char *recv_mod_name,
                               const char *decode_mod_name, const char *thread_name,
-                              const char *live_dev)
-{
+                              const char *live_dev) {
     int nlive = LiveGetDeviceCount();
     const char *live_dev_c = NULL;
     void *aconf;
 
     if (nlive > 1) {
         SCLogError(SC_ERR_RUNMODE,
-                "Can't use single runmode with multiple device");
+                   "Can't use single runmode with multiple device");
         exit(EXIT_FAILURE);
     }
 
@@ -409,240 +408,11 @@ int RunModeSetLiveCaptureSingle(ConfigIfaceParserFunc ConfigParser,
     }
 
     return RunModeSetLiveCaptureWorkersForDevice(
-                                 ModThreadsCount,
-                                 recv_mod_name,
-                                 decode_mod_name,
-                                 thread_name,
-                                 live_dev_c,
-                                 aconf,
-                                 1);
-}
-
-
-/**
- */
-int RunModeSetIPSAutoFp(ConfigIPSParserFunc ConfigParser,
-                        const char *recv_mod_name,
-                        const char *verdict_mod_name,
-                        const char *decode_mod_name)
-{
-    SCEnter();
-    char tname[TM_THREAD_NAME_MAX];
-    char qname[TM_QUEUE_NAME_MAX];
-    TmModule *tm_module ;
-    const char *cur_queue = NULL;
-    char *queues = NULL;
-
-    /* Available cpus */
-    uint16_t ncpus = UtilCpuGetNumProcessorsOnline();
-    int nqueue = LiveGetDeviceCount();
-
-    int thread_max = TmThreadGetNbThreads(WORKER_CPU_SET);
-    /* always create at least one thread */
-    if (thread_max == 0)
-        thread_max = ncpus * threading_detect_ratio;
-    if (thread_max < 1)
-        thread_max = 1;
-    if (thread_max > 1024) {
-        SCLogWarning(SC_ERR_RUNMODE, "limited number of 'worker' threads to 1024. Wanted %d", thread_max);
-        thread_max = 1024;
-    }
-
-    queues = RunmodeAutoFpCreatePickupQueuesString(thread_max);
-    if (queues == NULL) {
-        SCLogError(SC_ERR_RUNMODE, "RunmodeAutoFpCreatePickupQueuesString failed");
-        exit(EXIT_FAILURE);
-    }
-
-    for (int i = 0; i < nqueue; i++) {
-    /* create the threads */
-        cur_queue = LiveGetDeviceName(i);
-        if (cur_queue == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "invalid queue number");
-            exit(EXIT_FAILURE);
-        }
-        memset(tname, 0, sizeof(tname));
-        snprintf(tname, sizeof(tname), "%s-Q%s", thread_name_autofp, cur_queue);
-
-        ThreadVars *tv_receive =
-            TmThreadCreatePacketHandler(tname,
-                    "packetpool", "packetpool",
-                    queues, "flow", "pktacqloop");
-        if (tv_receive == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadsCreate failed");
-            exit(EXIT_FAILURE);
-        }
-        tm_module = TmModuleGetByName(recv_mod_name);
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName failed for %s", recv_mod_name);
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv_receive, tm_module, (void *) ConfigParser(i));
-
-        tm_module = TmModuleGetByName(decode_mod_name);
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName %s failed", decode_mod_name);
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv_receive, tm_module, NULL);
-
-        TmThreadSetCPU(tv_receive, RECEIVE_CPU_SET);
-
-        if (TmThreadSpawn(tv_receive) != TM_ECODE_OK) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadSpawn failed");
-            exit(EXIT_FAILURE);
-        }
-
-    }
-    for (int thread = 0; thread < thread_max; thread++) {
-        snprintf(tname, sizeof(tname), "%s#%02u", thread_name_workers, thread+1);
-        snprintf(qname, sizeof(qname), "pickup%u", thread+1);
-
-        SCLogDebug("tname %s, qname %s", tname, qname);
-
-        ThreadVars *tv_detect_ncpu =
-            TmThreadCreatePacketHandler(tname,
-                                        qname, "flow",
-                                        "verdict-queue", "simple",
-                                        "varslot");
-        if (tv_detect_ncpu == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadsCreate failed");
-            exit(EXIT_FAILURE);
-        }
-
-        tm_module = TmModuleGetByName("FlowWorker");
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName for FlowWorker failed");
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv_detect_ncpu, tm_module, NULL);
-
-        TmThreadSetCPU(tv_detect_ncpu, WORKER_CPU_SET);
-
-        TmThreadSetGroupName(tv_detect_ncpu, "Detect");
-
-        if (TmThreadSpawn(tv_detect_ncpu) != TM_ECODE_OK) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadSpawn failed");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    /* create the threads */
-    for (int i = 0; i < nqueue; i++) {
-        memset(tname, 0, sizeof(tname));
-        snprintf(tname, sizeof(tname), "%s#%02d", thread_name_verdict, i);
-
-        ThreadVars *tv_verdict =
-            TmThreadCreatePacketHandler(tname,
-                                        "verdict-queue", "simple",
-                                        "packetpool", "packetpool",
-                                        "varslot");
-        if (tv_verdict == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadsCreate failed");
-            exit(EXIT_FAILURE);
-        }
-        tm_module = TmModuleGetByName(verdict_mod_name);
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName %s failed", verdict_mod_name);
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv_verdict, tm_module, (void *)ConfigParser(i));
-
-        tm_module = TmModuleGetByName("RespondReject");
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName for RespondReject failed");
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv_verdict, tm_module, NULL);
-
-        TmThreadSetCPU(tv_verdict, VERDICT_CPU_SET);
-
-        if (TmThreadSpawn(tv_verdict) != TM_ECODE_OK) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadSpawn failed");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    SCFree(queues);
-    return 0;
-}
-
-/**
- */
-int RunModeSetIPSWorker(ConfigIPSParserFunc ConfigParser,
-        const char *recv_mod_name,
-        const char *verdict_mod_name,
-        const char *decode_mod_name)
-{
-    char tname[TM_THREAD_NAME_MAX];
-    ThreadVars *tv = NULL;
-    TmModule *tm_module = NULL;
-    const char *cur_queue = NULL;
-
-    int nqueue = LiveGetDeviceCount();
-
-    for (int i = 0; i < nqueue; i++) {
-        /* create the threads */
-        cur_queue = LiveGetDeviceName(i);
-        if (cur_queue == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "invalid queue number");
-            exit(EXIT_FAILURE);
-        }
-        memset(tname, 0, sizeof(tname));
-        snprintf(tname, sizeof(tname), "%s-Q%s", thread_name_workers, cur_queue);
-
-        tv = TmThreadCreatePacketHandler(tname,
-                "packetpool", "packetpool",
-                "packetpool", "packetpool",
-                "pktacqloop");
-        if (tv == NULL) {
-            SCLogError(SC_ERR_THREAD_CREATE, "TmThreadsCreate failed");
-            exit(EXIT_FAILURE);
-        }
-
-        tm_module = TmModuleGetByName(recv_mod_name);
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName failed for %s", recv_mod_name);
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv, tm_module, (void *) ConfigParser(i));
-
-        tm_module = TmModuleGetByName(decode_mod_name);
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName %s failed", decode_mod_name);
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
-
-        tm_module = TmModuleGetByName("FlowWorker");
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName for FlowWorker failed");
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
-
-        tm_module = TmModuleGetByName(verdict_mod_name);
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName %s failed", verdict_mod_name);
-            exit(EXIT_FAILURE);
-        }
-
-        TmSlotSetFuncAppend(tv, tm_module, (void *) ConfigParser(i));
-
-        tm_module = TmModuleGetByName("RespondReject");
-        if (tm_module == NULL) {
-            SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName for RespondReject failed");
-            exit(EXIT_FAILURE);
-        }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
-
-        TmThreadSetCPU(tv, WORKER_CPU_SET);
-
-        if (TmThreadSpawn(tv) != TM_ECODE_OK) {
-            SCLogError(SC_ERR_RUNMODE, "TmThreadSpawn failed");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    return 0;
+            ModThreadsCount,
+            recv_mod_name,
+            decode_mod_name,
+            thread_name,
+            live_dev_c,
+            aconf,
+            1);
 }

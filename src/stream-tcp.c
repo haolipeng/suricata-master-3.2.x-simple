@@ -5510,6 +5510,7 @@ static int StreamTcpTest01 (void)
         printf("AppLayer field not set to NULL: ");
         goto end;
     }
+
     if (ssn->state != 0) {
         printf("TCP state field not set to 0: ");
         goto end;

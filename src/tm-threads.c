@@ -1147,10 +1147,10 @@ ThreadVars *TmThreadCreate(const char *name, char *inq_name, char *inqh_name,
     /* set the incoming queue */
     if (inq_name != NULL && strcmp(inq_name, "packetpool") != 0) {
         SCLogDebug("inq_name \"%s\"", inq_name);
-
+        //inq_name对应队列是否已存在
         tmq = TmqGetQueueByName(inq_name);
         if (tmq == NULL) {
-            tmq = TmqCreateQueue(inq_name);
+            tmq = TmqCreateQueue(inq_name);//重新创建incoming队列
             if (tmq == NULL)
                 goto error;
         }
@@ -1176,6 +1176,7 @@ ThreadVars *TmThreadCreate(const char *name, char *inq_name, char *inqh_name,
     if (outqh_name != NULL) {
         SCLogDebug("outqh_name \"%s\"", outqh_name);
 
+        //通过outqh_name获取queue的handler
         tmqh = TmqhGetQueueHandlerByName(outqh_name);
         if (tmqh == NULL)
             goto error;
@@ -1194,7 +1195,7 @@ ThreadVars *TmThreadCreate(const char *name, char *inq_name, char *inqh_name,
             } else {
                 tmq = TmqGetQueueByName(outq_name);
                 if (tmq == NULL) {
-                    tmq = TmqCreateQueue(outq_name);
+                    tmq = TmqCreateQueue(outq_name);//重新创建outgoing队列
                     if (tmq == NULL)
                         goto error;
                 }

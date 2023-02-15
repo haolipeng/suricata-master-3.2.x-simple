@@ -405,22 +405,8 @@ typedef struct Packet_
     struct timeval ts;//数据包的时间
 
     union {
-        /* nfq stuff */
-#ifdef HAVE_NFLOG
-        NFLOGPacketVars nflog_v;
-#endif /* HAVE_NFLOG */
-#ifdef NFQ
-        NFQPacketVars nfq_v;
-#endif /* NFQ */
-#ifdef IPFW
-        IPFWPacketVars ipfw_v;
-#endif /* IPFW */
 #ifdef AF_PACKET
         AFPPacketVars afp_v;
-#endif
-#ifdef HAVE_MPIPE
-        /* tilegx mpipe stuff */
-        MpipePacketVars mpipe_v;
 #endif
         /** libpcap vars: shared by Pcap Live mode and Pcap File mode */
         PcapPacketVars pcap_v;
@@ -548,10 +534,6 @@ typedef struct Packet_
     PktProfiling *profile;
 #endif
 }
-#ifdef HAVE_MPIPE
-    /* mPIPE requires packet buffers to be aligned to 128 byte boundaries. */
-    __attribute__((aligned(128)))
-#endif
 Packet;
 
 /** highest mtu of the interfaces we monitor */

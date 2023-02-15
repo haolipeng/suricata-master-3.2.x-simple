@@ -54,16 +54,6 @@ int RunModeSetLiveCaptureWorkers(ConfigIfaceParserFunc configparser,
                               const char *decode_mod_name, const char *thread_name,
                               const char *live_dev);
 
-int RunModeSetIPSAutoFp(ConfigIPSParserFunc ConfigParser,
-                        const char *recv_mod_name,
-                        const char *verdict_mod_name,
-                        const char *decode_mod_name);
-
-int RunModeSetIPSWorker(ConfigIPSParserFunc ConfigParser,
-                        const char *recv_mod_name,
-                        const char *verdict_mod_name,
-                        const char *decode_mod_name);
-
 char *RunmodeAutoFpCreatePickupQueuesString(int n);
 
 #endif /* __UTIL_RUNMODES_H__ */

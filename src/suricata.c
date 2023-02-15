@@ -902,14 +902,6 @@ static TmEcode ParseInterfacesList(int runmode, char *pcap_dev)
             }
         }
 #endif
-#ifdef HAVE_NFLOG
-    } else if (runmode == RUNMODE_NFLOG) {
-        int ret = LiveBuildDeviceListCustom("nflog", "group");
-        if (ret == 0) {
-            SCLogError(SC_ERR_INITIALIZATION, "No group found in config for nflog");
-            SCReturnInt(TM_ECODE_FAILED);
-        }
-#endif
     }
 
     SCReturnInt(TM_ECODE_OK);
@@ -1372,9 +1364,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
         {"napatech", 0, 0, 0},
         {"build-info", 0, &build_info, 1},
         {"set", required_argument, 0, 0},
-#ifdef HAVE_NFLOG
-        {"nflog", optional_argument, 0, 0},
-#endif
 #ifdef AFLFUZZ_CONF_TEST
         {"afl-parse-rules", 0, &conf_test_force_success, 1},
 #endif
@@ -1435,17 +1424,7 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 if (ParseCommandLineAfpacket(suri, optarg) != TM_ECODE_OK) {
                     return TM_ECODE_FAILED;
                 }
-            }else if (strcmp((long_opts[option_index]).name, "nflog") == 0) {
-#ifdef HAVE_NFLOG
-                if (suri->run_mode == RUNMODE_UNKNOWN) {
-                    suri->run_mode = RUNMODE_NFLOG;
-                    LiveBuildDeviceListCustom("nflog", "group");
-                }
-#else
-                SCLogError(SC_ERR_NFLOG_NOSUPPORT, "NFLOG not enabled.");
-                return TM_ECODE_FAILED;
-#endif /* HAVE_NFLOG */
-            } else if (strcmp((long_opts[option_index]).name , "pcap") == 0) {
+            }else if (strcmp((long_opts[option_index]).name , "pcap") == 0) {
                 if (ParseCommandLinePcapLive(suri, optarg) != TM_ECODE_OK) {
                     return TM_ECODE_FAILED;
                 }
@@ -1541,40 +1520,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 suri->do_setgid = TRUE;
 #endif /* HAVE_LIBCAP_NG */
             }
-            else if (strcmp((long_opts[option_index]).name, "erf-in") == 0) {
-                suri->run_mode = RUNMODE_ERF_FILE;
-                if (ConfSetFinal("erf-file.file", optarg) != 1) {
-                    fprintf(stderr, "ERROR: Failed to set erf-file.file\n");
-                    return TM_ECODE_FAILED;
-                }
-            }
-            else if (strcmp((long_opts[option_index]).name, "dag") == 0) {
-#ifdef HAVE_DAG
-                if (suri->run_mode == RUNMODE_UNKNOWN) {
-                    suri->run_mode = RUNMODE_DAG;
-                }
-                else if (suri->run_mode != RUNMODE_DAG) {
-                    SCLogError(SC_ERR_MULTIPLE_RUN_MODE,
-                        "more than one run mode has been specified");
-                    usage(argv[0]);
-                    return TM_ECODE_FAILED;
-                }
-                LiveRegisterDevice(optarg);
-#else
-                SCLogError(SC_ERR_DAG_REQUIRED, "libdag and a DAG card are required"
-						" to receive packets using --dag.");
-                return TM_ECODE_FAILED;
-#endif /* HAVE_DAG */
-		}
-        else if (strcmp((long_opts[option_index]).name, "napatech") == 0) {
-#ifdef HAVE_NAPATECH
-            suri->run_mode = RUNMODE_NAPATECH;
-#else
-            SCLogError(SC_ERR_NAPATECH_REQUIRED, "libntapi and a Napatech adapter are required"
-                                                 " to capture packets using --napatech.");
-            return TM_ECODE_FAILED;
-#endif /* HAVE_NAPATECH */
-			}
             else if(strcmp((long_opts[option_index]).name, "pcap-buffer-size") == 0) {
 #ifdef HAVE_PCAP_SET_BUFF
                 if (ConfSetFinal("pcap.buffer-size", optarg) != 1) {
@@ -1680,25 +1625,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
 
             break;
         case 'q':
-#ifdef NFQ
-            if (suri->run_mode == RUNMODE_UNKNOWN) {
-                suri->run_mode = RUNMODE_NFQ;
-                EngineModeSetIPS();
-                if (NFQRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else if (suri->run_mode == RUNMODE_NFQ) {
-                if (NFQRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else {
-                SCLogError(SC_ERR_MULTIPLE_RUN_MODE, "more than one run mode "
-                                                     "has been specified");
-                usage(argv[0]);
-                return TM_ECODE_FAILED;
-            }
-#else
-            SCLogError(SC_ERR_NFQ_NOSUPPORT,"NFQUEUE not enabled. Make sure to pass --enable-nfqueue to configure when building.");
-            return TM_ECODE_FAILED;
-#endif /* NFQ */
             break;
         case 'd':
             break;
@@ -2028,7 +1954,6 @@ static int FinalizeRunMode(SCInstance *suri, char **argv)
 {
     switch (suri->run_mode) {
         case RUNMODE_PCAP_FILE:
-        case RUNMODE_ERF_FILE:
         case RUNMODE_ENGINE_ANALYSIS:
             suri->offline = 1;
             break;
@@ -2111,11 +2036,6 @@ static int ConfigGetCaptureValue(SCInstance *suri)
         switch (suri->run_mode) {
             case RUNMODE_PCAP_DEV:
             case RUNMODE_AFP_DEV:
-            case RUNMODE_NETMAP:
-                /* in netmap igb0+ has a special meaning, however the
-                 * interface really is igb0 */
-                strip_trailing_plus = 1;
-                /* fall through */
             case RUNMODE_PFRING:
                 nlive = LiveGetDeviceCount();
                 for (lthread = 0; lthread < nlive; lthread++) {
@@ -2311,11 +2231,6 @@ static int PostConfLoadedSetup(SCInstance *suri)
                       "default setting 'sniffer-only'");
         }
     }
-
-#ifdef NFQ
-    if (suri->run_mode == RUNMODE_NFQ)
-        NFQInitConfig(FALSE);
-#endif
 
     /* Load the Host-OS lookup. */
     SCHInfoLoadFromConfig();

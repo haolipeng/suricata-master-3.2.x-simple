@@ -119,16 +119,6 @@ static const char *RunModeTranslateModeToName(int runmode)
 #else
             return "PFRING(DISABLED)";
 #endif
-        case RUNMODE_NFQ:
-            return "NFQ";
-        case RUNMODE_NFLOG:
-            return "NFLOG";
-        case RUNMODE_ERF_FILE:
-            return "ERF_FILE";
-        case RUNMODE_DAG:
-            return "ERF_DAG";
-        case RUNMODE_NAPATECH:
-            return "NAPATECH";
         case RUNMODE_UNITTEST:
             return "UNITTEST";
         case RUNMODE_AFP_DEV:

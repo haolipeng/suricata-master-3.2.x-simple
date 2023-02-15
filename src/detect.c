@@ -4189,7 +4189,6 @@ void SigTableSetup(void)
     DetectReplaceRegister();
     DetectFlowRegister();
     DetectWindowRegister();
-    //DetectFtpbounceRegister();
     DetectIsdataatRegister();
     DetectIdRegister();
     DetectDsizeRegister();
