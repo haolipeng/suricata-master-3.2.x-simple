@@ -110,12 +110,6 @@ enum
  * Per SESSION flags
  */
 
-/** Flag for mid stream session */
-#define STREAMTCP_FLAG_MIDSTREAM                    0x0001
-/** Flag for mid stream established session */
-#define STREAMTCP_FLAG_MIDSTREAM_ESTABLISHED        0x0002
-/** Flag for mid session when syn/ack is received */
-#define STREAMTCP_FLAG_MIDSTREAM_SYNACK             0x0004
 /** Flag for TCP Timestamp option */
 #define STREAMTCP_FLAG_TIMESTAMP                    0x0008
 /** Server supports wscale (even though it can be 0) */
@@ -185,11 +179,6 @@ enum
 
 
 #define PAWS_24DAYS         2073600         /**< 24 days in seconds */
-
-#define PKT_IS_IN_RIGHT_DIR(ssn, p)        ((ssn)->flags & STREAMTCP_FLAG_MIDSTREAM_SYNACK ? \
-                                            PKT_IS_TOSERVER(p) ? (p)->flowflags &= ~FLOW_PKT_TOSERVER \
-                                            (p)->flowflags |= FLOW_PKT_TOCLIENT : (p)->flowflags &= ~FLOW_PKT_TOCLIENT \
-                                            (p)->flowflags |= FLOW_PKT_TOSERVER : 0)
 
 /* Macro's for comparing Sequence numbers
  * Page 810 from TCP/IP Illustrated, Volume 2. */

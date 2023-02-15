@@ -1908,6 +1908,7 @@ int StreamTcpReassembleHandleSegmentHandleData(ThreadVars *tv, TcpReassemblyThre
         }
     }
 
+    //检查STREAMTCP_FLAG_APP_LAYER_DISABLED和STREAMTCP_STREAM_FLAG_NEW_RAW_DISABLED标志
     if ((ssn->flags & STREAMTCP_FLAG_APP_LAYER_DISABLED) &&
         (stream->flags & STREAMTCP_STREAM_FLAG_NEW_RAW_DISABLED)) {
         SCLogDebug("ssn %p: both app and raw reassembly disabled, not reassembling", ssn);
@@ -1919,6 +1920,7 @@ int StreamTcpReassembleHandleSegmentHandleData(ThreadVars *tv, TcpReassemblyThre
     uint32_t size = StreamTcpReassembleCheckDepth(ssn, stream, TCP_GET_SEQ(p), p->payload_len);
     SCLogDebug("ssn %p: check depth returned %"PRIu32, ssn, size);
 
+    //当前数据包会导致超出重组深度
     if (stream->flags & STREAMTCP_STREAM_FLAG_DEPTH_REACHED) {
         /* increment stream depth counter */
         StatsIncr(tv, ra_ctx->counter_tcp_stream_depth);
@@ -1927,6 +1929,7 @@ int StreamTcpReassembleHandleSegmentHandleData(ThreadVars *tv, TcpReassemblyThre
         SCLogDebug("ssn %p: reassembly depth reached, "
                 "STREAMTCP_STREAM_FLAG_NOREASSEMBLY set", ssn);
     }
+    //数据长度为0，则直接返回
     if (size == 0) {
         SCLogDebug("ssn %p: depth reached, not reassembling", ssn);
         SCReturnInt(0);
@@ -3452,6 +3455,7 @@ int StreamTcpReassembleHandleSegment(ThreadVars *tv, TcpReassemblyThreadCtx *ra_
 
     /* If no stream reassembly/application layer protocol inspection, then
        simple return */
+    //针对payload大于0的进行流重组
     if (p->payload_len > 0 && !(stream->flags & STREAMTCP_STREAM_FLAG_NOREASSEMBLY)) {
         SCLogDebug("calling StreamTcpReassembleHandleSegmentHandleData");
 
