@@ -233,18 +233,17 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	stream-tcp-inline.$(OBJEXT) stream-tcp-reassemble.$(OBJEXT) \
 	stream-tcp-sack.$(OBJEXT) stream-tcp-util.$(OBJEXT) \
 	suricata.$(OBJEXT) threads.$(OBJEXT) tm-modules.$(OBJEXT) \
-	tmqh-flow.$(OBJEXT) tmqh-nfq.$(OBJEXT) \
-	tmqh-packetpool.$(OBJEXT) tmqh-ringbuffer.$(OBJEXT) \
-	tmqh-simple.$(OBJEXT) tm-queuehandlers.$(OBJEXT) \
-	tm-queues.$(OBJEXT) tm-threads.$(OBJEXT) \
-	unix-manager.$(OBJEXT) util-action.$(OBJEXT) \
-	util-atomic.$(OBJEXT) util-base64.$(OBJEXT) \
-	util-bloomfilter-counting.$(OBJEXT) util-bloomfilter.$(OBJEXT) \
-	util-buffer.$(OBJEXT) util-byte.$(OBJEXT) \
-	util-checksum.$(OBJEXT) util-cidr.$(OBJEXT) \
-	util-classification-config.$(OBJEXT) util-conf.$(OBJEXT) \
-	util-coredump-config.$(OBJEXT) util-cpu.$(OBJEXT) \
-	util-crypt.$(OBJEXT) util-daemon.$(OBJEXT) \
+	tmqh-flow.$(OBJEXT) tmqh-packetpool.$(OBJEXT) \
+	tmqh-ringbuffer.$(OBJEXT) tmqh-simple.$(OBJEXT) \
+	tm-queuehandlers.$(OBJEXT) tm-queues.$(OBJEXT) \
+	tm-threads.$(OBJEXT) unix-manager.$(OBJEXT) \
+	util-action.$(OBJEXT) util-atomic.$(OBJEXT) \
+	util-base64.$(OBJEXT) util-bloomfilter-counting.$(OBJEXT) \
+	util-bloomfilter.$(OBJEXT) util-buffer.$(OBJEXT) \
+	util-byte.$(OBJEXT) util-checksum.$(OBJEXT) \
+	util-cidr.$(OBJEXT) util-classification-config.$(OBJEXT) \
+	util-conf.$(OBJEXT) util-coredump-config.$(OBJEXT) \
+	util-cpu.$(OBJEXT) util-crypt.$(OBJEXT) util-daemon.$(OBJEXT) \
 	util-debug.$(OBJEXT) util-debug-filters.$(OBJEXT) \
 	util-decode-asn1.$(OBJEXT) util-decode-der.$(OBJEXT) \
 	util-decode-der-get.$(OBJEXT) util-decode-mime.$(OBJEXT) \
@@ -478,11 +477,11 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/suricata.Po ./$(DEPDIR)/threads.Po \
 	./$(DEPDIR)/tm-modules.Po ./$(DEPDIR)/tm-queuehandlers.Po \
 	./$(DEPDIR)/tm-queues.Po ./$(DEPDIR)/tm-threads.Po \
-	./$(DEPDIR)/tmqh-flow.Po ./$(DEPDIR)/tmqh-nfq.Po \
-	./$(DEPDIR)/tmqh-packetpool.Po ./$(DEPDIR)/tmqh-ringbuffer.Po \
-	./$(DEPDIR)/tmqh-simple.Po ./$(DEPDIR)/unix-manager.Po \
-	./$(DEPDIR)/util-action.Po ./$(DEPDIR)/util-affinity.Po \
-	./$(DEPDIR)/util-atomic.Po ./$(DEPDIR)/util-base64.Po \
+	./$(DEPDIR)/tmqh-flow.Po ./$(DEPDIR)/tmqh-packetpool.Po \
+	./$(DEPDIR)/tmqh-ringbuffer.Po ./$(DEPDIR)/tmqh-simple.Po \
+	./$(DEPDIR)/unix-manager.Po ./$(DEPDIR)/util-action.Po \
+	./$(DEPDIR)/util-affinity.Po ./$(DEPDIR)/util-atomic.Po \
+	./$(DEPDIR)/util-base64.Po \
 	./$(DEPDIR)/util-bloomfilter-counting.Po \
 	./$(DEPDIR)/util-bloomfilter.Po ./$(DEPDIR)/util-buffer.Po \
 	./$(DEPDIR)/util-byte.Po ./$(DEPDIR)/util-checksum.Po \
@@ -1034,7 +1033,6 @@ threads.c threads.h threads-arch-tile.h \
 threads-debug.h threads-profile.h \
 tm-modules.c tm-modules.h \
 tmqh-flow.c tmqh-flow.h \
-tmqh-nfq.c tmqh-nfq.h \
 tmqh-packetpool.c tmqh-packetpool.h \
 tmqh-ringbuffer.c tmqh-ringbuffer.h \
 tmqh-simple.c tmqh-simple.h \
@@ -1523,7 +1521,6 @@ include ./$(DEPDIR)/tm-queuehandlers.Po # am--include-marker
 include ./$(DEPDIR)/tm-queues.Po # am--include-marker
 include ./$(DEPDIR)/tm-threads.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-flow.Po # am--include-marker
-include ./$(DEPDIR)/tmqh-nfq.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-packetpool.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-ringbuffer.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-simple.Po # am--include-marker
@@ -2043,7 +2040,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/tm-queues.Po
 	-rm -f ./$(DEPDIR)/tm-threads.Po
 	-rm -f ./$(DEPDIR)/tmqh-flow.Po
-	-rm -f ./$(DEPDIR)/tmqh-nfq.Po
 	-rm -f ./$(DEPDIR)/tmqh-packetpool.Po
 	-rm -f ./$(DEPDIR)/tmqh-ringbuffer.Po
 	-rm -f ./$(DEPDIR)/tmqh-simple.Po
@@ -2443,7 +2439,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/tm-queues.Po
 	-rm -f ./$(DEPDIR)/tm-threads.Po
 	-rm -f ./$(DEPDIR)/tmqh-flow.Po
-	-rm -f ./$(DEPDIR)/tmqh-nfq.Po
 	-rm -f ./$(DEPDIR)/tmqh-packetpool.Po
 	-rm -f ./$(DEPDIR)/tmqh-ringbuffer.Po
 	-rm -f ./$(DEPDIR)/tmqh-simple.Po

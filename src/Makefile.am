@@ -261,7 +261,6 @@ threads.c threads.h threads-arch-tile.h \
 threads-debug.h threads-profile.h \
 tm-modules.c tm-modules.h \
 tmqh-flow.c tmqh-flow.h \
-tmqh-nfq.c tmqh-nfq.h \
 tmqh-packetpool.c tmqh-packetpool.h \
 tmqh-ringbuffer.c tmqh-ringbuffer.h \
 tmqh-simple.c tmqh-simple.h \
