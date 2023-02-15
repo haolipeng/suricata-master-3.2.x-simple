@@ -251,7 +251,7 @@ void FlowHandlePacketUpdate(Flow *f, Packet *p)
 
     if (state != FLOW_STATE_CAPTURE_BYPASSED) {
         /* update the last seen timestamp of this flow */
-        COPY_TIMESTAMP(&p->ts, &f->lastts);
+        COPY_TIMESTAMP(&p->ts, &f->lastts);//更新flow成员lastts的时间戳
     } else {
         /* still seeing packet, we downgrade to local bypass */
         if (p->ts.tv_sec - f->lastts.tv_sec > FLOW_BYPASSED_TIMEOUT / 2) {
@@ -262,10 +262,12 @@ void FlowHandlePacketUpdate(Flow *f, Packet *p)
     }
 
     /* update flags and counters */
+    //方向判断，发起方为client，接收方为server
     if (FlowGetPacketDirection(f, p) == TOSERVER) {
         f->todstpktcnt++;//数据包数
         f->todstbytecnt += GET_PKT_LEN(p);//数据包字节数
-        p->flowflags = FLOW_PKT_TOSERVER;
+        p->flowflags = FLOW_PKT_TOSERVER;//flowflags增加标记FLOW_PKT_TOSERVER
+        //如果flags没有标记FLOW_TO_DST_SEEN，则增加该标记并对packet成员flowflags增加标记FLOW_PKT_TOSERVER_FIRST。
         if (!(f->flags & FLOW_TO_DST_SEEN)) {
             if (FlowUpdateSeenFlag(p)) {
                 f->flags |= FLOW_TO_DST_SEEN;
@@ -280,7 +282,7 @@ void FlowHandlePacketUpdate(Flow *f, Packet *p)
     } else {
         f->tosrcpktcnt++;
         f->tosrcbytecnt += GET_PKT_LEN(p);
-        p->flowflags = FLOW_PKT_TOCLIENT;
+        p->flowflags = FLOW_PKT_TOCLIENT;//flowflags增加标记FLOW_PKT_TOCLIENT
         if (!(f->flags & FLOW_TO_SRC_SEEN)) {
             if (FlowUpdateSeenFlag(p)) {
                 f->flags |= FLOW_TO_SRC_SEEN;
@@ -294,11 +296,12 @@ void FlowHandlePacketUpdate(Flow *f, Packet *p)
         }
     }
 
-    //带有FLOW_TO_DST_SEEN和FLOW_TO_SRC_SEEN标记的流为已建立连接
+    //flow的flags带有FLOW_TO_DST_SEEN和FLOW_TO_SRC_SEEN标记的流为已建立连接
     if ((f->flags & (FLOW_TO_DST_SEEN|FLOW_TO_SRC_SEEN)) == (FLOW_TO_DST_SEEN|FLOW_TO_SRC_SEEN)) {
         SCLogDebug("pkt %p FLOW_PKT_ESTABLISHED", p);
         p->flowflags |= FLOW_PKT_ESTABLISHED;
 
+        //tcp协议需经过三次握手才算建立连接
         if (f->proto != IPPROTO_TCP) {
             FlowUpdateState(f, FLOW_STATE_ESTABLISHED);
         }

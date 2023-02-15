@@ -72,11 +72,11 @@ const char *thread_name_counter_wakeup = "CW";
  */
 typedef struct RunMode_ {
     /* the runmode type */
-    int runmode;
-    const char *name;
+    int runmode;//抓包模式的索引值
+    const char *name;//线程模型的字符串名
     const char *description;
     /* runmode function */
-    int (*RunModeFunc)(void);
+    int (*RunModeFunc)(void);//运行模式函数,在RunModeDispatch函数中被调用
 } RunMode;
 
 typedef struct RunModes_ {

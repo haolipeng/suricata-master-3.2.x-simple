@@ -30,7 +30,6 @@ enum RunModes {
     RUNMODE_PCAP_FILE,
     RUNMODE_PFRING,
     RUNMODE_AFP_DEV,
-    RUNMODE_NETMAP,
     RUNMODE_UNITTEST,
     RUNMODE_UNIX_SOCKET,
     RUNMODE_USER_MAX, /* Last standard running mode */

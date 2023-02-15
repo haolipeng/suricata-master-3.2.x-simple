@@ -986,8 +986,6 @@ int DecoderParseDataFromFileSerie(char *fileprefix, DecoderFunc Decoder);
 /* http://www.tcpdump.org/linktypes.html defines DLT_RAW as 101, yet others don't.
  * Libpcap on at least OpenBSD returns 101 as datalink type for RAW pcaps though. */
 #define LINKTYPE_RAW2       101
-#define PPP_OVER_GRE        11
-#define VLAN_OVER_GRE       13
 
 /*Packet Flags*/
 #define PKT_NOPACKET_INSPECTION         (1)         /**< Flag to indicate that packet header or contents should not be inspected*/

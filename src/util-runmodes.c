@@ -281,7 +281,7 @@ static int RunModeSetLiveCaptureWorkersForDevice(ConfigIfaceThreadsCountFunc Mod
     int threads_count;
 
     if (single_mode) {
-        threads_count = 1;
+        threads_count = 1;//单工作线程模式
     } else {
         threads_count = ModThreadsCount(aconf);
         SCLogInfo("Going to use %" PRId32 " thread(s)", threads_count);

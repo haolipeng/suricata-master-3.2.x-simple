@@ -840,6 +840,7 @@ static int StreamTcpPacketStateNone(ThreadVars *tv, Packet *p,
     /* SYN/ACK */
     } else if (p->tcph->th_flags & TH_SYN) {
         if (ssn == NULL) {
+            //获取新session会话
             ssn = StreamTcpNewSession(p, stt->ssn_pool_id);
             if (ssn == NULL) {
                 StatsIncr(tv, stt->counter_tcp_ssn_memcap);//超出tcp会话的内存阈值
@@ -850,7 +851,7 @@ static int StreamTcpPacketStateNone(ThreadVars *tv, Packet *p,
         }
 
         /* set the state */
-        StreamTcpPacketSetState(p, ssn, TCP_SYN_SENT);
+        StreamTcpPacketSetState(p, ssn, TCP_SYN_SENT);//设置TCP_SYN_SENT
         SCLogDebug("ssn %p: =~ ssn state is now TCP_SYN_SENT", ssn);
 
         /* set the sequence numbers and window */
@@ -4116,6 +4117,7 @@ int StreamTcpPacket (ThreadVars *tv, Packet *p, StreamTcpThread *stt,
     SCLogDebug("p->pcap_cnt %"PRIu64, p->pcap_cnt);
 
     /* assign the thread id to the flow */
+    //将线程id赋值给flow
     if (unlikely(p->flow->thread_id == 0)) {
         p->flow->thread_id = (FlowThreadId)tv->id;
 #ifdef DEBUG
@@ -4126,7 +4128,7 @@ int StreamTcpPacket (ThreadVars *tv, Packet *p, StreamTcpThread *stt,
 
     TcpSession *ssn = (TcpSession *)p->flow->protoctx;
 
-    /* track TCP flags */
+    /* track TCP flags 跟踪tcp标志*/
     if (ssn != NULL) {
         ssn->tcp_packet_flags |= p->tcph->th_flags;
         if (PKT_IS_TOSERVER(p))
@@ -4165,6 +4167,7 @@ int StreamTcpPacket (ThreadVars *tv, Packet *p, StreamTcpThread *stt,
         SCReturnInt(0);
     }
 
+    //ssn means TcpSession,and ssn->state 初始状态为TCP_NONE
     if (ssn == NULL || ssn->state == TCP_NONE) {
         if (StreamTcpPacketStateNone(tv, p, stt, ssn, &stt->pseudo_queue) == -1) {
             goto error;

@@ -68,7 +68,7 @@ typedef struct TcpStream_ {
     uint8_t os_policy;              /**< target based OS policy used for reassembly and handling packets*/
     uint8_t tcp_flags;              /**< TCP flags seen */
 
-    uint32_t isn;                   /**< initial sequence number 初始化的seq序列号*/
+    uint32_t isn;                   /**< initial sequence number 初始的seq序列号*/
     uint32_t next_seq;              /**< next expected sequence number 下一个期望的seq序列号*/
     uint32_t last_ack;              /**< last ack'd sequence number in this stream */
     uint32_t next_win;              /**< next max seq within window */

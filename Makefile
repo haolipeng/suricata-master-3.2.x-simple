@@ -214,7 +214,7 @@ AUTOMAKE = ${SHELL} /home/work/suricata-master-3.2.x-simple/missing automake-1.1
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -march=native
+CFLAGS = -g -O0 -march=native
 CLANG_CFLAGS = 
 CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
