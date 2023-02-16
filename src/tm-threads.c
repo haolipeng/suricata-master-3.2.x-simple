@@ -826,6 +826,7 @@ ThreadVars *TmThreadsGetTVContainingSlot(TmSlot *tm_slot)
  */
 static inline TmSlot * _TmSlotSetFuncAppend(ThreadVars *tv, TmModule *tm, void *data)
 {
+    //申请slot并进行赋值
     TmSlot *slot = SCMalloc(sizeof(TmSlot));
     if (unlikely(slot == NULL))
         return NULL;
