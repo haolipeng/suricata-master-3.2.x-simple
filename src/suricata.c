@@ -601,12 +601,6 @@ void usage(const char *progname)
     printf("\t--group <group>                      : run suricata as this group after init\n");
 #endif /* HAVE_LIBCAP_NG */
     printf("\t--erf-in <path>                      : process an ERF file\n");
-#ifdef HAVE_DAG
-    printf("\t--dag <dagX:Y>                       : process ERF records from DAG interface X, stream Y\n");
-#endif
-#ifdef HAVE_NAPATECH
-    printf("\t--napatech                           : run Napatech Streams using the API\n");
-#endif
 #ifdef BUILD_UNIX_SOCKET
     printf("\t--unix-socket[=<file>]               : use unix socket to control suricata work\n");
 #endif
@@ -662,9 +656,6 @@ void SCPrintBuildInfo(void)
 #endif
 #ifdef HAVE_PACKET_FANOUT
     strlcat(features, "HAVE_PACKET_FANOUT ", sizeof(features));
-#endif
-#ifdef HAVE_DAG
-    strlcat(features, "DAG ", sizeof(features));
 #endif
 #ifdef HAVE_LIBCAP_NG
     strlcat(features, "LIBCAP_NG ", sizeof(features));
