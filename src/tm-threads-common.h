@@ -32,24 +32,22 @@
  */
 typedef enum {
     TMM_FLOWWORKER,
-    TMM_RECEIVEPCAP,
-    TMM_RECEIVEPCAPFILE,
-    TMM_DECODEPCAP,
-    TMM_DECODEPCAPFILE,
+    TMM_RECEIVEPCAP,        //receive pcap
+    TMM_RECEIVEPCAPFILE,    //receive pcap file
+    TMM_DECODEPCAP,         //decode pcap
+    TMM_DECODEPCAPFILE,     //decode pcap file
 
-    TMM_RECEIVEPFRING,
-    TMM_DECODEPFRING,
+    TMM_RECEIVEPFRING,      //receive pfring
+    TMM_DECODEPFRING,       //decode pfring
 
     TMM_RESPONDREJECT,
 
-    TMM_RECEIVEAFP,
-    TMM_DECODEAFP,
+    TMM_RECEIVEAFP,         //receive AF_PACKET
+    TMM_DECODEAFP,          //decode AF_PACKET
 
     TMM_ALERTPCAPINFO,
 
     TMM_STATSLOGGER,
-    TMM_RECEIVENFLOG,
-    TMM_DECODENFLOG,
 
     TMM_FLOWMANAGER,
     TMM_FLOWRECYCLER,

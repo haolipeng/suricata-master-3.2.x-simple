@@ -200,8 +200,6 @@ const char * TmModuleTmmIdToString(TmmId id)
 {
     switch (id) {
         CASE_CODE (TMM_FLOWWORKER);
-        CASE_CODE (TMM_RECEIVENFLOG);
-        CASE_CODE (TMM_DECODENFLOG);
         CASE_CODE (TMM_RECEIVEPCAP);
         CASE_CODE (TMM_RECEIVEPCAPFILE);
         CASE_CODE (TMM_DECODEPCAP);
