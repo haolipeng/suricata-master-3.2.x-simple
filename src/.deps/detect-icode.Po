@@ -173,23 +173,15 @@ detect-icode.o: detect-icode.c /usr/include/stdc-predef.h \
  /usr/include/linux/if_packet.h queue.h action-globals.h \
  decode-ethernet.h decode-gre.h decode-sll.h decode-ipv4.h decode-ipv6.h \
  decode-icmpv4.h decode-tcp.h decode-udp.h decode-icmpv6.h decode-raw.h \
- decode-null.h decode-vlan.h detect-reference.h app-layer-protos.h \
- detect.h flow.h util-var.h detect-tag.h suricata.h packet-queue.h \
- data-queue.h runmodes.h runmode-pcap.h runmode-pcap-file.h \
- runmode-pfring.h runmode-af-packet.h runmode-unix-socket.h util-time.h \
- util-optimize.h detect-engine-proto.h util-prefilter.h util-mpm.h \
- util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
- util-hashlist.h util-radix-tree.h util-file.h /usr/include/nss/sechash.h \
- /usr/include/nss/seccomon.h /usr/include/nss/utilrename.h \
- /usr/include/nspr/prtypes.h /usr/include/nspr/prcpucfg.h \
- /usr/include/nspr/obsolete/protypes.h /usr/include/nss/secport.h \
- /usr/include/nspr/prlink.h /usr/include/nspr/prtypes.h \
- /usr/include/nspr/prlog.h /usr/include/nspr/plarena.h \
- /usr/include/nspr/plstr.h /usr/include/nss/hasht.h \
- /usr/include/nss/secoidt.h /usr/include/nss/secitem.h \
- /usr/include/nspr/plhash.h conf.h util-streaming-buffer.h reputation.h \
- host.h util-storage.h detect-mark.h stream.h detect-threshold.h \
- util-path.h util-conf.h debug.h detect-parse.h \
+ decode-vlan.h detect-reference.h app-layer-protos.h detect.h flow.h \
+ util-var.h detect-tag.h suricata.h packet-queue.h data-queue.h \
+ runmodes.h runmode-pcap.h runmode-pcap-file.h runmode-pfring.h \
+ runmode-af-packet.h runmode-unix-socket.h util-time.h util-optimize.h \
+ detect-engine-proto.h util-prefilter.h util-mpm.h util-spm.h \
+ util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h util-hashlist.h \
+ util-radix-tree.h util-file.h conf.h util-streaming-buffer.h \
+ reputation.h host.h util-storage.h detect-mark.h stream.h \
+ detect-threshold.h util-path.h util-conf.h debug.h detect-parse.h \
  detect-engine-prefilter-common.h detect-icode.h util-byte.h \
  /usr/include/byteswap.h util-unittest.h util-unittest-helper.h \
  detect-engine.h tm-threads.h tmqh-packetpool.h tm-modules.h \
@@ -691,8 +683,6 @@ decode-udp.h:
 decode-icmpv6.h:
 
 decode-raw.h:
-
-decode-null.h:
 
 decode-vlan.h:
 

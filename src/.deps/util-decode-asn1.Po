@@ -173,8 +173,8 @@ util-decode-asn1.o: util-decode-asn1.c /usr/include/stdc-predef.h \
  /usr/include/linux/if_packet.h queue.h action-globals.h \
  decode-ethernet.h decode-gre.h decode-sll.h decode-ipv4.h decode-ipv6.h \
  decode-icmpv4.h decode-tcp.h decode-udp.h decode-icmpv6.h decode-raw.h \
- decode-null.h decode-vlan.h detect-reference.h app-layer-protos.h \
- detect.h flow.h util-var.h detect-tag.h util-time.h util-optimize.h \
+ decode-vlan.h detect-reference.h app-layer-protos.h detect.h flow.h \
+ util-var.h detect-tag.h util-time.h util-optimize.h \
  detect-engine-proto.h packet-queue.h util-prefilter.h util-mpm.h \
  util-spm.h util-spm-bs.h util-spm-bs2bm.h util-spm-bm.h util-hash.h \
  util-hashlist.h util-radix-tree.h util-file.h /usr/include/nss/sechash.h \
@@ -686,8 +686,6 @@ decode-udp.h:
 decode-icmpv6.h:
 
 decode-raw.h:
-
-decode-null.h:
 
 decode-vlan.h:
 

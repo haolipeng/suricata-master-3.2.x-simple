@@ -687,8 +687,6 @@ decode-icmpv6.h:
 
 decode-raw.h:
 
-decode-null.h:
-
 decode-vlan.h:
 
 detect-reference.h:

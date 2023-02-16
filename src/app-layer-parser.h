@@ -118,9 +118,6 @@ void AppLayerParserRegisterParserAcceptableDataDirection(uint8_t ipproto,
 void AppLayerParserRegisterStateFuncs(uint8_t ipproto, AppProto alproto,
                            void *(*StateAlloc)(void),
                            void (*StateFree)(void *));
-void AppLayerParserRegisterLocalStorageFunc(uint8_t ipproto, AppProto proto,
-                                 void *(*LocalStorageAlloc)(void),
-                                 void (*LocalStorageFree)(void *));
 void AppLayerParserRegisterGetFilesFunc(uint8_t ipproto, AppProto alproto,
                              FileContainer *(*StateGetFiles)(void *, uint8_t));
 void AppLayerParserRegisterGetEventsFunc(uint8_t ipproto, AppProto proto,
@@ -150,9 +147,6 @@ void AppLayerParserRegisterDetectStateFuncs(uint8_t ipproto, AppProto alproto,
         int (*StateHasTxDetectState)(void *alstate),
         DetectEngineState *(*GetTxDetectState)(void *tx),
         int (*SetTxDetectState)(void *alstate, void *tx, DetectEngineState *));
-void AppLayerParserRegisterGetStreamDepth(uint8_t ipproto,
-                                          AppProto alproto,
-                                          uint32_t (*GetStreamDepth)(void));
 
 /***** Get and transaction functions *****/
 
@@ -209,7 +203,6 @@ int AppLayerParserProtocolIsTxEventAware(uint8_t ipproto, AppProto alproto);
 int AppLayerParserProtocolSupportsTxs(uint8_t ipproto, AppProto alproto);
 int AppLayerParserProtocolHasLogger(uint8_t ipproto, AppProto alproto);
 void AppLayerParserTriggerRawStreamReassembly(Flow *f);
-void AppLayerParserSetStreamDepth(uint8_t ipproto, AppProto alproto, uint32_t stream_depth);
 uint32_t AppLayerParserGetStreamDepth(uint8_t ipproto, AppProto alproto);
 
 /***** Cleanup *****/

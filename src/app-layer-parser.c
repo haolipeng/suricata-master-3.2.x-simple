@@ -363,20 +363,6 @@ void AppLayerParserRegisterStateFuncs(uint8_t ipproto, AppProto alproto,
     SCReturn;
 }
 
-void AppLayerParserRegisterLocalStorageFunc(uint8_t ipproto, AppProto alproto,
-                                 void *(*LocalStorageAlloc)(void),
-                                 void (*LocalStorageFree)(void *))
-{
-    SCEnter();
-
-    alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].LocalStorageAlloc =
-        LocalStorageAlloc;
-    alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].LocalStorageFree =
-        LocalStorageFree;
-
-    SCReturn;
-}
-
 void AppLayerParserRegisterGetFilesFunc(uint8_t ipproto, AppProto alproto,
                              FileContainer *(*StateGetFiles)(void *, uint8_t))
 {
@@ -1162,15 +1148,6 @@ void AppLayerParserTriggerRawStreamReassembly(Flow *f)
 
     if (f != NULL && f->protoctx != NULL)
         StreamTcpReassembleTriggerRawReassembly(f->protoctx);
-
-    SCReturn;
-}
-
-void AppLayerParserSetStreamDepth(uint8_t ipproto, AppProto alproto, uint32_t stream_depth)
-{
-    SCEnter();
-
-    alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].stream_depth = stream_depth;
 
     SCReturn;
 }
