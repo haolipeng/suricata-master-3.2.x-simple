@@ -135,6 +135,7 @@ TmEcode TmThreadsSlotVarRun(ThreadVars *tv, Packet *p,
         /* handle error */
         if (unlikely(r == TM_ECODE_FAILED)) {
             /* Encountered error.  Return packets to packetpool and return */
+            //TODO:为什么Packet归还到s->slot_pre_pq队列不需要加锁呢？
             TmqhReleasePacketsToPacketPool(&s->slot_pre_pq);
 
             SCMutexLock(&s->slot_post_pq.mutex_q);

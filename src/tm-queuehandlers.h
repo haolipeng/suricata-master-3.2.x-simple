@@ -26,7 +26,6 @@
 
 enum {
     TMQH_SIMPLE,
-    TMQH_NFQ,
     TMQH_PACKETPOOL,
     TMQH_FLOW,
     TMQH_RINGBUFFER_MRSW,
@@ -46,7 +45,7 @@ typedef struct Tmqh_ {
     void (*RegisterTests)(void);
 } Tmqh;
 
-Tmqh tmqh_table[TMQH_SIZE];
+Tmqh tmqh_table[TMQH_SIZE];//提供了4种类型队列:simple,flow,packetpool
 
 void TmqhSetup (void);
 void TmqhCleanup(void);

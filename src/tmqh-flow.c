@@ -55,6 +55,7 @@ void TmqhFlowRegister(void)
     tmqh_table[TMQH_FLOW].RegisterTests = TmqhFlowRegisterTests;
 
     char *scheduler = NULL;
+
     if (ConfGet("autofp-scheduler", &scheduler) == 1) {
         if (strcasecmp(scheduler, "round-robin") == 0) {
             SCLogNotice("using flow hash instead of round robin");

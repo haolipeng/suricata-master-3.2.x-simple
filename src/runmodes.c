@@ -72,7 +72,7 @@ const char *thread_name_counter_wakeup = "CW";
  */
 typedef struct RunMode_ {
     /* the runmode type */
-    int runmode;//抓包模式的索引值
+    int runmode;//抓包模式的index值
     const char *name;//线程模型的字符串名
     const char *description;
     /* runmode function */
@@ -81,7 +81,7 @@ typedef struct RunMode_ {
 
 typedef struct RunModes_ {
     int no_of_runmodes;
-    RunMode *runmodes;
+    RunMode *runmodes;//存储不同运行模型下自定义模式的信息
 } RunModes;
 
 static RunModes runmodes[RUNMODE_USER_MAX];
@@ -185,11 +185,11 @@ void RunModeRegisterRunModes(void)
 {
     memset(runmodes, 0, sizeof(runmodes));
 
-    RunModeIdsPcapRegister();
-    RunModeFilePcapRegister();
-    RunModeIdsPfringRegister();
-    RunModeIdsAFPRegister();
-    RunModeUnixSocketRegister();
+    RunModeIdsPcapRegister();//ids + pcap
+    RunModeFilePcapRegister();//file + pcap
+    RunModeIdsPfringRegister();//ids + Pfring
+    RunModeIdsAFPRegister();//IDS+AFP
+    RunModeUnixSocketRegister();//UnixSocket
 #ifdef UNITTESTS
     UtRunModeRegister();
 #endif
