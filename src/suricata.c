@@ -2369,6 +2369,7 @@ int main(int argc, char **argv)
     (void)SCSetThreadName("Suricata-Main");
 
     ParseSizeInit();
+	//注册运行模式
     RunModeRegisterRunModes();
 
     /* Initialize the configuration module. */

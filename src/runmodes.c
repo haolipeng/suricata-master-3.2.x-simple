@@ -185,11 +185,11 @@ void RunModeRegisterRunModes(void)
 {
     memset(runmodes, 0, sizeof(runmodes));
 
-    RunModeIdsPcapRegister();//ids + pcap
-    RunModeFilePcapRegister();//file + pcap
-    RunModeIdsPfringRegister();//ids + Pfring
-    RunModeIdsAFPRegister();//IDS+AFP
-    RunModeUnixSocketRegister();//UnixSocket
+    RunModeIdsPcapRegister();//ids + pcap 模式
+    RunModeFilePcapRegister();//file + pcap 模式
+    RunModeIdsPfringRegister();//ids + Pfring 模式
+    RunModeIdsAFPRegister();//IDS+AFP 模式
+    RunModeUnixSocketRegister();//UnixSocket 模式
 #ifdef UNITTESTS
     UtRunModeRegister();
 #endif
@@ -248,6 +248,7 @@ void RunModeDispatch(int runmode, const char *custom_mode)
 
     if (custom_mode == NULL) {
         char *val = NULL;
+		//从配置中读取运行模式
         if (ConfGet("runmode", &val) != 1) {
             custom_mode = NULL;
         } else {
@@ -255,6 +256,7 @@ void RunModeDispatch(int runmode, const char *custom_mode)
         }
     }
 
+	//获取运行模式中默认的自定义模式
     if (custom_mode == NULL || strcmp(custom_mode, "auto") == 0) {
         switch (runmode) {
             case RUNMODE_PCAP_DEV:
@@ -269,7 +271,7 @@ void RunModeDispatch(int runmode, const char *custom_mode)
                 break;
 #endif
             case RUNMODE_AFP_DEV:
-                custom_mode = RunModeAFPGetDefaultMode();
+                custom_mode = RunModeAFPGetDefaultMode();//默认为workers
                 break;
             case RUNMODE_UNIX_SOCKET:
                 custom_mode = RunModeUnixSocketGetDefaultMode();
@@ -291,7 +293,8 @@ void RunModeDispatch(int runmode, const char *custom_mode)
             custom_mode = local_custom_mode;
         }
     }
-
+	
+	//从全局变量runmodes中获取RunMode对象指针
     RunMode *mode = RunModeGetCustomMode(runmode, custom_mode);
     if (mode == NULL) {
         SCLogError(SC_ERR_RUNMODE, "The custom type \"%s\" doesn't exist "

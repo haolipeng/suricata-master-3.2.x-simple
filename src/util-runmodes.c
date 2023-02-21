@@ -309,14 +309,14 @@ static int RunModeSetLiveCaptureWorkersForDevice(ConfigIfaceThreadsCountFunc Mod
             exit(EXIT_FAILURE);
         }
 
-        tm_module = TmModuleGetByName(recv_mod_name);
+        tm_module = TmModuleGetByName(recv_mod_name);//接收模块
         if (tm_module == NULL) {
             SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName failed for %s", recv_mod_name);
             exit(EXIT_FAILURE);
         }
         TmSlotSetFuncAppend(tv, tm_module, aconf);
 
-        tm_module = TmModuleGetByName(decode_mod_name);
+        tm_module = TmModuleGetByName(decode_mod_name);//解码模块
         if (tm_module == NULL) {
             SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName %s failed", decode_mod_name);
             exit(EXIT_FAILURE);
