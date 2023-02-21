@@ -33,6 +33,7 @@ typedef struct PrefilterRuleStore_ {
     /* used for storing rule id's */
 
     /* Array of rule IDs found. */
+	/*已发现的规则id集合*/
     SigIntId *rule_id_array;
     /* Number of rule IDs in the array. */
     uint32_t rule_id_array_cnt;

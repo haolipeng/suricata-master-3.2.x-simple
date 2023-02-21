@@ -117,13 +117,14 @@ typedef struct AppLayerProtoDetectPMSignature_ {
 } AppLayerProtoDetectPMSignature;
 
 typedef struct AppLayerProtoDetectPMCtx_ {
-    uint16_t max_len;
+    uint16_t max_len;//多模匹配上下文中所有模式的最大长度
     uint16_t min_len;
     MpmCtx mpm_ctx;
 
     /** Mapping between pattern id and signature.  As each signature has a
      *  unique pattern with a unique id, we can lookup the signature by
      *  the pattern id. */
+    //模式id和特征间的映射关系，一个特征对应唯一的模式，可以通过模式id查找特征
     AppLayerProtoDetectPMSignature **map;
     AppLayerProtoDetectPMSignature *head;
 
@@ -161,7 +162,7 @@ typedef struct AppLayerProtoDetectCtx_ {
  * \brief The app layer protocol detection thread context. 应用层协议识别 线程上下文
  */
 struct AppLayerProtoDetectThreadCtx_ {
-    PrefilterRuleStore pmq;
+    PrefilterRuleStore pmq;//pattern match queue队列
     /* The value 2 is for direction(0 - toserver, 1 - toclient). */
     MpmThreadCtx mpm_tctx[FLOW_PROTO_DEFAULT][2];
     SpmThreadCtx *spm_thread_ctx;
@@ -195,11 +196,13 @@ static AppProto AppLayerProtoDetectPMMatchSignature(const AppLayerProtoDetectPMS
         goto end;
     }
 
+	//再次切割了搜索buffer和搜索长度
     uint8_t *sbuf = buf + s->cd->offset;
     uint16_t sbuflen = s->cd->depth - s->cd->offset;
     SCLogDebug("s->co->offset (%"PRIu16") s->cd->depth (%"PRIu16")",
                s->cd->offset, s->cd->depth);
 
+	//单模匹配
     found = SpmScan(s->cd->spm_ctx, tctx->spm_thread_ctx, sbuf, sbuflen);
     if (found != NULL)
         proto = s->alproto;
@@ -231,6 +234,7 @@ static AppProto AppLayerProtoDetectPMGetProto(AppLayerProtoDetectThreadCtx *tctx
     if (f->protomap >= FLOW_PROTO_DEFAULT)
         return ALPROTO_UNKNOWN;
 
+	//通过四层协议和检测方向确定AppLayerProtoDetectPMCtx实例
     if (direction & STREAM_TOSERVER) {
         pm_ctx = &alpd_ctx.ctx_ipp[f->protomap].ctx_pm[0];
         mpm_tctx = &tctx->mpm_tctx[f->protomap][0];
@@ -242,12 +246,14 @@ static AppProto AppLayerProtoDetectPMGetProto(AppLayerProtoDetectThreadCtx *tctx
         goto end;
 
     searchlen = buflen;//匹配的长度
+    //搜索的长度最大为pm_ctx->max_len
     if (searchlen > pm_ctx->max_len)
         searchlen = pm_ctx->max_len;
 
     uint32_t search_cnt = 0;
 
     /* do the mpm search */
+	//
     search_cnt = mpm_table[pm_ctx->mpm_ctx.mpm_type].Search(&pm_ctx->mpm_ctx,
                                                             mpm_tctx,
                                                             &tctx->pmq,
@@ -265,6 +271,7 @@ static AppProto AppLayerProtoDetectPMGetProto(AppLayerProtoDetectThreadCtx *tctx
     for (cnt = 0; cnt < tctx->pmq.rule_id_array_cnt; cnt++) {
         const AppLayerProtoDetectPMSignature *s = pm_ctx->map[tctx->pmq.rule_id_array[cnt]];
         while (s != NULL) {
+			//针对特征关联的模式,再做一次spm匹配检查
             AppProto proto = AppLayerProtoDetectPMMatchSignature(s,
                     tctx, buf, searchlen, ipproto);
 
@@ -272,6 +279,7 @@ static AppProto AppLayerProtoDetectPMGetProto(AppLayerProtoDetectThreadCtx *tctx
             if (proto != ALPROTO_UNKNOWN &&
                 !(pm_results_bf[proto / 8] & (1 << (proto % 8))) )
             {
+            	//位图去重后，添加到数组pm_results中
                 pm_results[pm_matches++] = proto;
                 pm_results_bf[proto / 8] |= 1 << (proto % 8);
             }
@@ -282,7 +290,7 @@ static AppProto AppLayerProtoDetectPMGetProto(AppLayerProtoDetectThreadCtx *tctx
  end:
     PmqReset(&tctx->pmq);
     if (buflen >= pm_ctx->max_len)
-        FLOW_SET_PM_DONE(f, direction);
+        FLOW_SET_PM_DONE(f, direction);//对flow设置标记
     SCReturnUInt(pm_matches);
 }
 

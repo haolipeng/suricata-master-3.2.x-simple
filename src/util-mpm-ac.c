@@ -1027,6 +1027,7 @@ void SCACDestroyCtx(MpmCtx *mpm_ctx)
 uint32_t SCACSearch(const MpmCtx *mpm_ctx, MpmThreadCtx *mpm_thread_ctx,
                     PrefilterRuleStore *pmq, const uint8_t *buf, uint16_t buflen)
 {
+	//匹配到的模式经过位图去重后，将模式关联的特征添加到PrefilterRuleStore结构体中
     const SCACCtx *ctx = (SCACCtx *)mpm_ctx->ctx;
     int i = 0;
     int matches = 0;
