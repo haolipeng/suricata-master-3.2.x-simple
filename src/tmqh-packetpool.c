@@ -369,7 +369,7 @@ void PacketPoolInit(void)
 #ifndef TLS
     TmqhPacketPoolInit();
 #endif
-
+	//从线程私有数据中获取PktPool
     PktPool *my_pool = GetThreadPacketPool();
 
 #ifdef DEBUG_VALIDATION
@@ -387,6 +387,7 @@ void PacketPoolInit(void)
                (uintmax_t)SIZE_OF_PACKET);
     int i = 0;
     for (i = 0; i < max_pending_packets; i++) {
+		//预分配max_pending_packets个数的Packet，并存到池子中
         Packet *p = PacketGetFromAlloc();
         if (unlikely(p == NULL)) {
             SCLogError(SC_ERR_FATAL, "Fatal error encountered while allocating a packet. Exiting...");

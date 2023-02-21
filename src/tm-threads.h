@@ -55,12 +55,12 @@ typedef struct TmSlot_ {
     /* queue filled by the SlotFunc with packets that will
      * be processed futher _before_ the current packet.
      * The locks in the queue are NOT used */
-    PacketQueue slot_pre_pq;
+    PacketQueue slot_pre_pq;//TODO：暂时没搞明白啥意思
 
     /* queue filled by the SlotFunc with packets that will
      * be processed futher _after_ the current packet. The
      * locks in the queue are NOT used */
-    PacketQueue slot_post_pq;
+    PacketQueue slot_post_pq;//TODO：暂时没搞明白啥意思
 
     /* store the thread module id */
     int tm_id;
@@ -159,14 +159,16 @@ static inline TmEcode TmThreadsSlotProcessPkt(ThreadVars *tv, TmSlot *s, Packet 
         TmThreadsSetFlag(tv, THV_FAILED);
         r = TM_ECODE_FAILED;
 
-    } else {
+    } else {//TmThreadsSlotVarRun处理成功
         tv->tmqh_out(tv, p);
 
         /* post process pq */
+		//检查TmSlot的slot_post_pq项，
         TmSlot *slot = s;
         while (slot != NULL) {
             if (slot->slot_post_pq.top != NULL) {
                 while (1) {
+					//加锁从队列取数据
                     SCMutexLock(&slot->slot_post_pq.mutex_q);
                     Packet *extra_p = PacketDequeue(&slot->slot_post_pq);
                     SCMutexUnlock(&slot->slot_post_pq.mutex_q);
@@ -174,6 +176,7 @@ static inline TmEcode TmThreadsSlotProcessPkt(ThreadVars *tv, TmSlot *s, Packet 
                     if (extra_p == NULL)
                         break;
 
+					//TmSlot的下一项不为空，则调用TmThreadsSlotVarRun函数将数据包从下一个slot开始处理
                     if (slot->slot_next != NULL) {
                         r = TmThreadsSlotVarRun(tv, extra_p, slot->slot_next);
                         if (r == TM_ECODE_FAILED) {
@@ -186,10 +189,11 @@ static inline TmEcode TmThreadsSlotProcessPkt(ThreadVars *tv, TmSlot *s, Packet 
                             break;
                         }
                     }
+					//处理完成后，交由tmqh_out进行数据包释放
                     tv->tmqh_out(tv, extra_p);
                 }
             } /* if (slot->slot_post_pq.top != NULL) */
-            slot = slot->slot_next;
+            slot = slot->slot_next;//顺序处理每个slot项
         } /* while (slot != NULL) */
     }
 

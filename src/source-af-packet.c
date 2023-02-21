@@ -1465,7 +1465,8 @@ TmEcode ReceiveAFPLoop(ThreadVars *tv, void *data, void *slot)
                 continue;
             }
         } else if (r > 0) {
-            r = AFPReadFunc(ptv);
+			//开始读取数据包
+			r = AFPReadFunc(ptv);
             switch (r) {
                 case AFP_READ_OK:
                     /* Trigger one dump of stats every second */

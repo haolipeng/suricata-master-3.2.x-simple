@@ -54,11 +54,11 @@ struct TmSlot_;
 
 /** \brief Per thread variable structure */
 typedef struct ThreadVars_ {
-    pthread_t t;
-    char name[16];
+    pthread_t t;				//线程句柄
+    char name[16];				//线程名称
     char *thread_group_name;
 
-    SC_ATOMIC_DECLARE(unsigned int, flags);
+    SC_ATOMIC_DECLARE(unsigned int, flags);//标记线程当前状态
 
     /** TmModule::flags for each module part of this thread */
     uint8_t tmm_flags;
@@ -67,26 +67,35 @@ typedef struct ThreadVars_ {
     int id;
 
     /** queue's */
-    Tmq *inq;
-    Tmq *outq;
-    void *outctx;
-    char *outqh_name;
+    Tmq *inq;					//输入数据包的队列
+    Tmq *outq;					//输出数据包的队列
+    void *outctx;				//autofp模式下，每个捕获线程需要保存所有worker线程的PacketQueue，采用此成员存储
+    char *outqh_name;			//输出数据包队列处理程序的名称
 
     /** queue handlers */
-    struct Packet_ * (*tmqh_in)(struct ThreadVars_ *);
-    void (*InShutdownHandler)(struct ThreadVars_ *);
-    void (*tmqh_out)(struct ThreadVars_ *, struct Packet_ *);
+    struct Packet_ * (*tmqh_in)(struct ThreadVars_ *);//输入数据包的队列处理程序中的InHandler
+    void (*InShutdownHandler)(struct ThreadVars_ *);//tmqh_in所属的队列处理程序中的InShutdownHandler
+    void (*tmqh_out)(struct ThreadVars_ *, struct Packet_ *);//输出数据包的队列处理程序中的OutHandler
 
     /** slot functions */
+	//线程的入口函数，有以下几种选择：
+	//参数”varslot”，TmThreadsSlotVar
+	//参数”pktacqloop”，TmThreadsSlotPktAcqLoop(默认)
+	//参数”command”，TmThreadsManagement
+	//以上都是在TmThreadSetSlots函数进行设置的
     void *(*tm_func)(void *);
-    struct TmSlot_ *tm_slots;
+    struct TmSlot_ *tm_slots;//线程下挂在的TmSlot链表，每个TmSlot下有多个模块
 
     /** stream packet queue for flow time out injection */
-    struct PacketQueue_ *stream_pq;
+    struct PacketQueue_ *stream_pq;//这玩意是干啥的
 
-    uint8_t thread_setup_flags;
+    uint8_t thread_setup_flags;//线程启动时的优先级和cpu亲和性
 
     /** the type of thread as defined in tm-threads.h (TVT_PPT, TVT_MGMT) */
+	//线程类型，共三种
+	//TVT_PPT 数据包处理线程
+	//TVT_MGMT 管理线程
+	//TVT_CMD 指令接收线程
     uint8_t type;
 
     uint16_t cpu_affinity; /** cpu or core number to set affinity to */
@@ -106,6 +115,7 @@ typedef struct ThreadVars_ {
 
     uint8_t cap_flags; /**< Flags to indicate the capabilities of all the
                             TmModules resgitered under this thread */
+	//将同类型线程存放到全局变量数组tv_root下，使用pre和next进行连接
     struct ThreadVars_ *next;
     struct ThreadVars_ *prev;
 } ThreadVars;

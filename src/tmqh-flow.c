@@ -228,6 +228,7 @@ void TmqhOutputFlowHash(ThreadVars *tv, Packet *p)
     TmqhFlowCtx *ctx = (TmqhFlowCtx *)tv->outctx;
 
     if (p->flags & PKT_WANTS_FLOW) {
+		//采用一致性哈希
         uint32_t hash = p->flow_hash;
         qid = hash % ctx->size;
     } else {

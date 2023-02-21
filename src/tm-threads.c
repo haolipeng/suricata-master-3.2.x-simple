@@ -124,6 +124,7 @@ TmEcode TmThreadsSlotVarRun(ThreadVars *tv, Packet *p,
         TmSlotFunc SlotFunc = SC_ATOMIC_GET(s->SlotFunc);
         PACKET_PROFILING_TMM_START(p, s->tm_id);
 
+		//重点：调用TmSlot的SlotFunc函数指针处理数据包
         if (unlikely(s->id == 0)) {
             r = SlotFunc(tv, p, SC_ATOMIC_GET(s->slot_data), &s->slot_pre_pq, &s->slot_post_pq);
         } else {
@@ -153,6 +154,9 @@ TmEcode TmThreadsSlotVarRun(ThreadVars *tv, Packet *p,
                 continue;
 
             /* see if we need to process the packet */
+			//下一个slot不为空，调递归调用TmThreadsSlotVarRun
+			//从下一个TmSlot开始处理slot_pre_pq中的数据包，
+			//处理完成后调用tmqh_out释放数据包。
             if (s->slot_next != NULL) {
                 r = TmThreadsSlotVarRun(tv, extra_p, s->slot_next);
                 if (unlikely(r == TM_ECODE_FAILED)) {
@@ -167,7 +171,7 @@ TmEcode TmThreadsSlotVarRun(ThreadVars *tv, Packet *p,
                     return TM_ECODE_FAILED;
                 }
             }
-            tv->tmqh_out(tv, extra_p);
+            tv->tmqh_out(tv, extra_p);//释放数据包
         }
     }
 
@@ -257,7 +261,7 @@ static int TmThreadTimeoutLoop(ThreadVars *tv, TmSlot *s)
 void *TmThreadsSlotPktAcqLoop(void *td)
 {
     /* block usr2.  usr2 to be handled by the main thread only */
-    UtilSignalBlock(SIGUSR2);
+    UtilSignalBlock(SIGUSR2);//阻塞SIGUSR2信号
 
     ThreadVars *tv = (ThreadVars *)td;
     TmSlot *s = tv->tm_slots;
@@ -270,6 +274,7 @@ void *TmThreadsSlotPktAcqLoop(void *td)
         SCLogWarning(SC_ERR_THREAD_INIT, "Unable to set thread name");
     }
 
+	//设置线程启动属性
     if (tv->thread_setup_flags != 0)
         TmThreadSetupOptions(tv);
 
@@ -290,6 +295,8 @@ void *TmThreadsSlotPktAcqLoop(void *td)
     }
 
     for (slot = s; slot != NULL; slot = slot->slot_next) {
+		//按顺序运行每个TmSlot中的SlotThreadInit函数指针
+		//SlotThreadInit：TmModule中的ThreadInit函数指针
         if (slot->SlotThreadInit != NULL) {
             void *slot_data = NULL;
             r = slot->SlotThreadInit(tv, slot->slot_initdata, &slot_data);
@@ -305,12 +312,14 @@ void *TmThreadsSlotPktAcqLoop(void *td)
             }
             (void)SC_ATOMIC_SET(slot->slot_data, slot_data);
         }
+		//初始化每个TmSlot的slot_pre_pq和slot_post_pq，以及其mutex锁
         memset(&slot->slot_pre_pq, 0, sizeof(PacketQueue));
         SCMutexInit(&slot->slot_pre_pq.mutex_q, NULL);
         memset(&slot->slot_post_pq, 0, sizeof(PacketQueue));
         SCMutexInit(&slot->slot_post_pq.mutex_q, NULL);
 
         /* get the 'pre qeueue' from module before the stream module */
+		//配置ThreadVars的stream_pq成员
         if (slot->slot_next != NULL && (slot->slot_next->tm_id == TMM_FLOWWORKER)) {
             SCLogDebug("pre-stream packetqueue %p (postq)", &s->slot_post_pq);
             tv->stream_pq = &slot->slot_post_pq;
@@ -321,7 +330,7 @@ void *TmThreadsSlotPktAcqLoop(void *td)
         }
     }
 
-    StatsSetupPrivate(tv);
+    StatsSetupPrivate(tv);//统计相关
 
     TmThreadsSetFlag(tv, THV_INIT_DONE);
 
@@ -332,6 +341,9 @@ void *TmThreadsSlotPktAcqLoop(void *td)
             TmThreadsUnsetFlag(tv, THV_PAUSED);
         }
 
+		//重点，AF_PACKET模式下为ReceiveAFPLoop
+		//参数：ThreadVars实例，slot_data，TmSlot实例
+		//tmm_modules[TMM_RECEIVEAFP].PktAcqLoop = ReceiveAFPLoop;
         r = s->PktAcqLoop(tv, SC_ATOMIC_GET(s->slot_data), s);
 
         if (r == TM_ECODE_FAILED) {
