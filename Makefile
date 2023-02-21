@@ -90,9 +90,7 @@ host_triplet = x86_64-pc-linux-gnu
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libprelude.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
-	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
@@ -162,8 +160,8 @@ CSCOPE = cscope
 DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(srcdir)/suricata.yaml.in COPYING ChangeLog compile \
-	config.guess config.rpath config.sub install-sh ltmain.sh \
-	missing
+	config.guess config.rpath config.sub depcomp install-sh \
+	ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -216,7 +214,7 @@ AUTOMAKE = ${SHELL} /home/work/suricata-master-3.2.x-simple/missing automake-1.1
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -march=native
+CFLAGS = -g -O0 -march=native
 CLANG_CFLAGS = 
 CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
@@ -244,7 +242,7 @@ HAVE_GIT_CMD = /usr/bin/git
 HAVE_PCAP_CONFIG = /usr/bin/pcap-config
 HAVE_PDFLATEX = no
 HAVE_PKG_CONFIG = /usr/bin/pkg-config
-HAVE_PYTHON_CONFIG = no
+HAVE_PYTHON_CONFIG = /usr/bin/python
 HAVE_SPHINXBUILD = no
 HAVE_WGET = /usr/bin/wget
 HTP_DIR = 

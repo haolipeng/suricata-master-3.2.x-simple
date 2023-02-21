@@ -35,7 +35,6 @@
 #include "util-hashlist.h"
 
 #include "detect-engine.h"
-#include "util-cuda.h"
 #include "util-misc.h"
 #include "conf.h"
 #include "conf-yaml-loader.h"

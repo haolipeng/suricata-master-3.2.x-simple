@@ -465,16 +465,6 @@ static int TCPProtoDetect(ThreadVars *tv,
          * start of the request/toserver is incomplete and no reliable
          * detection and parsing is possible. So we give up.
          */
-        if ((ssn->flags & STREAMTCP_FLAG_MIDSTREAM) &&
-                !(ssn->flags & STREAMTCP_FLAG_MIDSTREAM_SYNACK))
-        {
-            if (FLOW_IS_PM_DONE(f, STREAM_TOSERVER) && FLOW_IS_PP_DONE(f, STREAM_TOSERVER)) {
-                SCLogDebug("midstream end pd %p", ssn);
-                /* midstream and toserver detection failed: give up */
-                DisableAppLayer(tv, f, p);
-                goto end;
-            }
-        }
 
         if (*alproto_otherdir != ALPROTO_UNKNOWN) {
             uint8_t first_data_dir;
@@ -547,6 +537,7 @@ failure:
  *
  *  First run protocol detection and then when the protocol is known invoke
  *  the app layer parser.
+ *  首先进行协议识别，如果是已知的，则调用应用层解析器
  */
 int AppLayerHandleTCPData(ThreadVars *tv, TcpReassemblyThreadCtx *ra_ctx,
                           Packet *p, Flow *f,

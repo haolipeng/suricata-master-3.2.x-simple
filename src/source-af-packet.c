@@ -1465,7 +1465,8 @@ TmEcode ReceiveAFPLoop(ThreadVars *tv, void *data, void *slot)
                 continue;
             }
         } else if (r > 0) {
-            r = AFPReadFunc(ptv);
+			//开始读取数据包
+			r = AFPReadFunc(ptv);
             switch (r) {
                 case AFP_READ_OK:
                     /* Trigger one dump of stats every second */
@@ -2307,14 +2308,8 @@ TmEcode DecodeAFP(ThreadVars *tv, Packet *p, void *data, PacketQueue *pq, Packet
         case LINKTYPE_LINUX_SLL:
             DecodeSll(tv, dtv, p, GET_PKT_DATA(p), GET_PKT_LEN(p), pq);
             break;
-        case LINKTYPE_PPP:
-            DecodePPP(tv, dtv, p, GET_PKT_DATA(p), GET_PKT_LEN(p), pq);
-            break;
         case LINKTYPE_RAW:
             DecodeRaw(tv, dtv, p, GET_PKT_DATA(p), GET_PKT_LEN(p), pq);
-            break;
-        case LINKTYPE_NULL:
-            DecodeNull(tv, dtv, p, GET_PKT_DATA(p), GET_PKT_LEN(p), pq);
             break;
         default:
             SCLogError(SC_ERR_DATALINK_UNIMPLEMENTED, "Error: datalink type %" PRId32 " not yet supported in module DecodeAFP", p->datalink);

@@ -1,0 +1,8 @@
+TmThreadSpawn tm-threads.c:1880
+RunModeSetLiveCaptureWorkersForDevice util-runmodes.c:342
+RunModeSetLiveCaptureWorkers util-runmodes.c:374
+RunModeIdsAFPWorkers runmode-af-packet.c:687
+RunModeDispatch runmodes.c:344
+main suricata.c:2548
+__libc_start_main 0x00007ffff7c5c083
+_start 0x00005555555637fe

@@ -29,16 +29,8 @@ enum RunModes {
     RUNMODE_PCAP_DEV,
     RUNMODE_PCAP_FILE,
     RUNMODE_PFRING,
-    RUNMODE_NFQ,
-    RUNMODE_NFLOG,
-    RUNMODE_IPFW,
-    RUNMODE_ERF_FILE,
-    RUNMODE_DAG,
     RUNMODE_AFP_DEV,
-    RUNMODE_NETMAP,
-    RUNMODE_TILERA_MPIPE,
     RUNMODE_UNITTEST,
-    RUNMODE_NAPATECH,
     RUNMODE_UNIX_SOCKET,
     RUNMODE_USER_MAX, /* Last standard running mode */
     RUNMODE_LIST_KEYWORDS,
@@ -87,14 +79,7 @@ int RunModeOutputFiledataEnabled(void);
 #include "runmode-pcap.h"
 #include "runmode-pcap-file.h"
 #include "runmode-pfring.h"
-#include "runmode-tile.h"
-#include "runmode-nfq.h"
-#include "runmode-ipfw.h"
-#include "runmode-erf-file.h"
-#include "runmode-erf-dag.h"
-#include "runmode-napatech.h"
 #include "runmode-af-packet.h"
-#include "runmode-nflog.h"
 #include "runmode-unix-socket.h"
 
 int threading_set_cpu_affinity;

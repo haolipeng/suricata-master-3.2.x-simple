@@ -65,33 +65,10 @@ int DecodeEthernet(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p,
             DecodeIPV6(tv, dtv, p, pkt + ETHERNET_HEADER_LEN,
                        len - ETHERNET_HEADER_LEN, pq);
             break;
-        case ETHERNET_TYPE_PPPOE_SESS:
-            //printf("DecodeEthernet PPPOE Session\n");
-            DecodePPPOESession(tv, dtv, p, pkt + ETHERNET_HEADER_LEN,
-                               len - ETHERNET_HEADER_LEN, pq);
-            break;
-        case ETHERNET_TYPE_PPPOE_DISC:
-            //printf("DecodeEthernet PPPOE Discovery\n");
-            DecodePPPOEDiscovery(tv, dtv, p, pkt + ETHERNET_HEADER_LEN,
-                                 len - ETHERNET_HEADER_LEN, pq);
-            break;
         case ETHERNET_TYPE_VLAN:
         case ETHERNET_TYPE_8021QINQ:
             DecodeVLAN(tv, dtv, p, pkt + ETHERNET_HEADER_LEN,
                                  len - ETHERNET_HEADER_LEN, pq);
-            break;
-        case ETHERNET_TYPE_MPLS_UNICAST:
-        case ETHERNET_TYPE_MPLS_MULTICAST:
-            DecodeMPLS(tv, dtv, p, pkt + ETHERNET_HEADER_LEN,
-                       len - ETHERNET_HEADER_LEN, pq);
-            break;
-        case ETHERNET_TYPE_DCE:
-            if (unlikely(len < ETHERNET_DCE_HEADER_LEN)) {
-                ENGINE_SET_INVALID_EVENT(p, DCE_PKT_TOO_SMALL);
-            } else {
-                DecodeEthernet(tv, dtv, p, pkt + ETHERNET_DCE_HEADER_LEN,
-                    len - ETHERNET_DCE_HEADER_LEN, pq);
-            }
             break;
         default:
             SCLogDebug("p %p pkt %p ether type %04x not supported", p,

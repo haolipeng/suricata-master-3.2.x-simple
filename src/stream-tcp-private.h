@@ -68,7 +68,7 @@ typedef struct TcpStream_ {
     uint8_t os_policy;              /**< target based OS policy used for reassembly and handling packets*/
     uint8_t tcp_flags;              /**< TCP flags seen */
 
-    uint32_t isn;                   /**< initial sequence number 初始化的seq序列号*/
+    uint32_t isn;                   /**< initial sequence number 初始的seq序列号*/
     uint32_t next_seq;              /**< next expected sequence number 下一个期望的seq序列号*/
     uint32_t last_ack;              /**< last ack'd sequence number in this stream */
     uint32_t next_win;              /**< next max seq within window */
@@ -110,20 +110,12 @@ enum
  * Per SESSION flags
  */
 
-/** Flag for mid stream session */
-#define STREAMTCP_FLAG_MIDSTREAM                    0x0001
-/** Flag for mid stream established session */
-#define STREAMTCP_FLAG_MIDSTREAM_ESTABLISHED        0x0002
-/** Flag for mid session when syn/ack is received */
-#define STREAMTCP_FLAG_MIDSTREAM_SYNACK             0x0004
 /** Flag for TCP Timestamp option */
 #define STREAMTCP_FLAG_TIMESTAMP                    0x0008
 /** Server supports wscale (even though it can be 0) */
 #define STREAMTCP_FLAG_SERVER_WSCALE                0x0010
 /** 'Raw' reassembly is disabled for this ssn. */
 #define STREAMTCP_FLAG_DISABLE_RAW                  0x0020
-/** Flag to indicate that the session is handling asynchronous stream.*/
-#define STREAMTCP_FLAG_ASYNC                        0x0040
 /** Flag to indicate we're dealing with 4WHS: SYN, SYN, SYN/ACK, ACK
  * (http://www.breakingpointsystems.com/community/blog/tcp-portals-the-three-way-handshake-is-a-lie) */
 #define STREAMTCP_FLAG_4WHS                         0x0080
@@ -187,11 +179,6 @@ enum
 
 
 #define PAWS_24DAYS         2073600         /**< 24 days in seconds */
-
-#define PKT_IS_IN_RIGHT_DIR(ssn, p)        ((ssn)->flags & STREAMTCP_FLAG_MIDSTREAM_SYNACK ? \
-                                            PKT_IS_TOSERVER(p) ? (p)->flowflags &= ~FLOW_PKT_TOSERVER \
-                                            (p)->flowflags |= FLOW_PKT_TOCLIENT : (p)->flowflags &= ~FLOW_PKT_TOCLIENT \
-                                            (p)->flowflags |= FLOW_PKT_TOSERVER : 0)
 
 /* Macro's for comparing Sequence numbers
  * Page 810 from TCP/IP Illustrated, Volume 2. */

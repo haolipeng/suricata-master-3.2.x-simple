@@ -75,25 +75,12 @@
 
 #include "stream-tcp.h"
 
-#include "source-nfq.h"
-#include "source-nfq-prototypes.h"
-
-#include "source-nflog.h"
-
-#include "source-ipfw.h"
-
 #include "source-pcap.h"
 #include "source-pcap-file.h"
 
 #include "source-pfring.h"
 
-#include "source-erf-file.h"
-#include "source-erf-dag.h"
-#include "source-napatech.h"
-
 #include "source-af-packet.h"
-#include "source-mpipe.h"
-
 #include "respond-reject.h"
 
 #include "flow.h"
@@ -140,7 +127,6 @@
 #include "runmodes.h"
 #include "runmode-unittests.h"
 
-#include "util-cuda.h"
 #include "util-decode-asn1.h"
 #include "util-debug.h"
 #include "util-error.h"
@@ -562,9 +548,6 @@ void usage(const char *progname)
 #ifdef NFQ
     printf("\t-q <qid>                             : run in inline nfqueue mode\n");
 #endif /* NFQ */
-#ifdef IPFW
-    printf("\t-d <divert port>                     : run in inline ipfw divert mode\n");
-#endif /* IPFW */
     printf("\t-s <path>                            : path to signature file loaded in addition to suricata.yaml settings (optional)\n");
     printf("\t-S <path>                            : path to signature file loaded exclusively (optional)\n");
     printf("\t-l <dir>                             : default log directory\n");
@@ -618,17 +601,8 @@ void usage(const char *progname)
     printf("\t--group <group>                      : run suricata as this group after init\n");
 #endif /* HAVE_LIBCAP_NG */
     printf("\t--erf-in <path>                      : process an ERF file\n");
-#ifdef HAVE_DAG
-    printf("\t--dag <dagX:Y>                       : process ERF records from DAG interface X, stream Y\n");
-#endif
-#ifdef HAVE_NAPATECH
-    printf("\t--napatech                           : run Napatech Streams using the API\n");
-#endif
 #ifdef BUILD_UNIX_SOCKET
     printf("\t--unix-socket[=<file>]               : use unix socket to control suricata work\n");
-#endif
-#ifdef HAVE_MPIPE
-    printf("\t--mpipe                              : run with tilegx mpipe interface(s)\n");
 #endif
     printf("\t--set name=value                     : set a configuration value\n");
     printf("\n");
@@ -665,9 +639,6 @@ void SCPrintBuildInfo(void)
 #ifdef NFQ
     strlcat(features, "NFQ ", sizeof(features));
 #endif
-#ifdef IPFW
-    strlcat(features, "IPFW ", sizeof(features));
-#endif
 #ifdef HAVE_PCAP_SET_BUFF
     strlcat(features, "PCAP_SET_BUFF ", sizeof(features));
 #endif
@@ -685,9 +656,6 @@ void SCPrintBuildInfo(void)
 #endif
 #ifdef HAVE_PACKET_FANOUT
     strlcat(features, "HAVE_PACKET_FANOUT ", sizeof(features));
-#endif
-#ifdef HAVE_DAG
-    strlcat(features, "DAG ", sizeof(features));
 #endif
 #ifdef HAVE_LIBCAP_NG
     strlcat(features, "LIBCAP_NG ", sizeof(features));
@@ -838,25 +806,13 @@ void RegisterAllModules()
     /* managers */
     TmModuleFlowManagerRegister();
     TmModuleFlowRecyclerRegister();
-    /* nfq */
-    TmModuleReceiveNFQRegister();
-    TmModuleVerdictNFQRegister();
-    TmModuleDecodeNFQRegister();
-    /* ipfw */
-    TmModuleReceiveIPFWRegister();
-    TmModuleVerdictIPFWRegister();
-    TmModuleDecodeIPFWRegister();
     /* pcap live */
     TmModuleReceivePcapRegister();
     TmModuleDecodePcapRegister();
     /* pcap file */
     TmModuleReceivePcapFileRegister();
     TmModuleDecodePcapFileRegister();
-#ifdef HAVE_MPIPE
-    /* mpipe */
-    TmModuleReceiveMpipeRegister();
-    TmModuleDecodeMpipeRegister();
-#endif
+
     /* af-packet */
     TmModuleReceiveAFPRegister();
     TmModuleDecodeAFPRegister();
@@ -864,15 +820,6 @@ void RegisterAllModules()
     /* pfring */
     TmModuleReceivePfringRegister();
     TmModuleDecodePfringRegister();
-    /* dag file */
-    TmModuleReceiveErfFileRegister();
-    TmModuleDecodeErfFileRegister();
-    /* dag live */
-    TmModuleReceiveErfDagRegister();
-    TmModuleDecodeErfDagRegister();
-    /* napatech */
-    TmModuleNapatechStreamRegister();
-    TmModuleNapatechDecodeRegister();
 
     /* flow worker */
     TmModuleFlowWorkerRegister();
@@ -884,9 +831,6 @@ void RegisterAllModules()
     TmModuleStatsLoggerRegister();
 
     TmModuleDebugList();
-    /* nflog */
-    TmModuleReceiveNFLOGRegister();
-    TmModuleDecodeNFLOGRegister();
 }
 
 static TmEcode LoadYamlConfig(SCInstance *suri)
@@ -917,21 +861,6 @@ static TmEcode ParseInterfacesList(int runmode, char *pcap_dev)
                 SCReturnInt(TM_ECODE_FAILED);
             }
         }
-#ifdef HAVE_MPIPE
-    } else if (runmode == RUNMODE_TILERA_MPIPE) {
-        if (strlen(pcap_dev)) {
-            if (ConfSetFinal("mpipe.single_mpipe_dev", pcap_dev) != 1) {
-                fprintf(stderr, "ERROR: Failed to set mpipe.single_mpipe_dev\n");
-                SCReturnInt(TM_ECODE_FAILED);
-            }
-        } else {
-            int ret = LiveBuildDeviceList("mpipe.inputs");
-            if (ret == 0) {
-                fprintf(stderr, "ERROR: No interface found in config for mpipe\n");
-                SCReturnInt(TM_ECODE_FAILED);
-            }
-        }
-#endif
     } else if (runmode == RUNMODE_PFRING) {
         /* FIXME add backward compat support */
         /* iface has been set on command line */
@@ -962,14 +891,6 @@ static TmEcode ParseInterfacesList(int runmode, char *pcap_dev)
                 SCLogInfo("AF_PACKET: Setting IPS mode");
                 EngineModeSetIPS();
             }
-        }
-#endif
-#ifdef HAVE_NFLOG
-    } else if (runmode == RUNMODE_NFLOG) {
-        int ret = LiveBuildDeviceListCustom("nflog", "group");
-        if (ret == 0) {
-            SCLogError(SC_ERR_INITIALIZATION, "No group found in config for nflog");
-            SCReturnInt(TM_ECODE_FAILED);
         }
 #endif
     }
@@ -1298,10 +1219,6 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
         MpmTableSetup();
         SpmTableSetup();
         AppLayerProtoDetectSetup();
-        if (strcmp(opt_name, "afl-decoder-ppp") == 0)
-            exit(DecoderParseDataFromFile(opt_arg, DecodePPP));
-        else
-            exit(DecoderParseDataFromFileSerie(opt_arg, DecodePPP));
     } else if(strstr(opt_name, "afl-decoder-ipv4") != NULL) {
         StatsInit();
         MpmTableSetup();
@@ -1329,15 +1246,6 @@ static void ParseCommandLineAFL(const char *opt_name, char *opt_arg)
             exit(DecoderParseDataFromFile(opt_arg, DecodeEthernet));
         else
             exit(DecoderParseDataFromFileSerie(opt_arg, DecodeEthernet));
-    } else if(strstr(opt_name, "afl-decoder-erspan") != NULL) {
-        StatsInit();
-        MpmTableSetup();
-        SpmTableSetup();
-        AppLayerProtoDetectSetup();
-        if (strcmp(opt_name, "afl-decoder-erspan") == 0)
-            exit(DecoderParseDataFromFile(opt_arg, DecodeERSPAN));
-        else
-            exit(DecoderParseDataFromFileSerie(opt_arg, DecodeERSPAN));
     } else
 #endif
 #ifdef AFLFUZZ_DER
@@ -1417,8 +1325,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
         {"afl-decoder-ppp-serie", required_argument, 0 , 0},
         {"afl-decoder-ethernet", required_argument, 0 , 0},
         {"afl-decoder-ethernet-serie", required_argument, 0 , 0},
-        {"afl-decoder-erspan", required_argument, 0 , 0},
-        {"afl-decoder-erspan-serie", required_argument, 0 , 0},
         {"afl-decoder-ipv4", required_argument, 0 , 0},
         {"afl-decoder-ipv4-serie", required_argument, 0 , 0},
         {"afl-decoder-ipv6", required_argument, 0 , 0},
@@ -1448,13 +1354,7 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
         {"dag", required_argument, 0, 0},
         {"napatech", 0, 0, 0},
         {"build-info", 0, &build_info, 1},
-#ifdef HAVE_MPIPE
-        {"mpipe", optional_argument, 0, 0},
-#endif
         {"set", required_argument, 0, 0},
-#ifdef HAVE_NFLOG
-        {"nflog", optional_argument, 0, 0},
-#endif
 #ifdef AFLFUZZ_CONF_TEST
         {"afl-parse-rules", 0, &conf_test_force_success, 1},
 #endif
@@ -1515,17 +1415,7 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 if (ParseCommandLineAfpacket(suri, optarg) != TM_ECODE_OK) {
                     return TM_ECODE_FAILED;
                 }
-            }else if (strcmp((long_opts[option_index]).name, "nflog") == 0) {
-#ifdef HAVE_NFLOG
-                if (suri->run_mode == RUNMODE_UNKNOWN) {
-                    suri->run_mode = RUNMODE_NFLOG;
-                    LiveBuildDeviceListCustom("nflog", "group");
-                }
-#else
-                SCLogError(SC_ERR_NFLOG_NOSUPPORT, "NFLOG not enabled.");
-                return TM_ECODE_FAILED;
-#endif /* HAVE_NFLOG */
-            } else if (strcmp((long_opts[option_index]).name , "pcap") == 0) {
+            }else if (strcmp((long_opts[option_index]).name , "pcap") == 0) {
                 if (ParseCommandLinePcapLive(suri, optarg) != TM_ECODE_OK) {
                     return TM_ECODE_FAILED;
                 }
@@ -1621,40 +1511,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 suri->do_setgid = TRUE;
 #endif /* HAVE_LIBCAP_NG */
             }
-            else if (strcmp((long_opts[option_index]).name, "erf-in") == 0) {
-                suri->run_mode = RUNMODE_ERF_FILE;
-                if (ConfSetFinal("erf-file.file", optarg) != 1) {
-                    fprintf(stderr, "ERROR: Failed to set erf-file.file\n");
-                    return TM_ECODE_FAILED;
-                }
-            }
-            else if (strcmp((long_opts[option_index]).name, "dag") == 0) {
-#ifdef HAVE_DAG
-                if (suri->run_mode == RUNMODE_UNKNOWN) {
-                    suri->run_mode = RUNMODE_DAG;
-                }
-                else if (suri->run_mode != RUNMODE_DAG) {
-                    SCLogError(SC_ERR_MULTIPLE_RUN_MODE,
-                        "more than one run mode has been specified");
-                    usage(argv[0]);
-                    return TM_ECODE_FAILED;
-                }
-                LiveRegisterDevice(optarg);
-#else
-                SCLogError(SC_ERR_DAG_REQUIRED, "libdag and a DAG card are required"
-						" to receive packets using --dag.");
-                return TM_ECODE_FAILED;
-#endif /* HAVE_DAG */
-		}
-        else if (strcmp((long_opts[option_index]).name, "napatech") == 0) {
-#ifdef HAVE_NAPATECH
-            suri->run_mode = RUNMODE_NAPATECH;
-#else
-            SCLogError(SC_ERR_NAPATECH_REQUIRED, "libntapi and a Napatech adapter are required"
-                                                 " to capture packets using --napatech.");
-            return TM_ECODE_FAILED;
-#endif /* HAVE_NAPATECH */
-			}
             else if(strcmp((long_opts[option_index]).name, "pcap-buffer-size") == 0) {
 #ifdef HAVE_PCAP_SET_BUFF
                 if (ConfSetFinal("pcap.buffer-size", optarg) != 1) {
@@ -1670,25 +1526,6 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
                 suri->run_mode = RUNMODE_PRINT_BUILDINFO;
                 return TM_ECODE_OK;
             }
-#ifdef HAVE_MPIPE
-            else if(strcmp((long_opts[option_index]).name , "mpipe") == 0) {
-                if (suri->run_mode == RUNMODE_UNKNOWN) {
-                    suri->run_mode = RUNMODE_TILERA_MPIPE;
-                    if (optarg != NULL) {
-                        memset(suri->pcap_dev, 0, sizeof(suri->pcap_dev));
-                        strlcpy(suri->pcap_dev, optarg,
-                                ((strlen(optarg) < sizeof(suri->pcap_dev)) ?
-                                 (strlen(optarg) + 1) : sizeof(suri->pcap_dev)));
-                        LiveRegisterDevice(optarg);
-                    }
-                } else {
-                    SCLogError(SC_ERR_MULTIPLE_RUN_MODE,
-                               "more than one run mode has been specified");
-                    usage(argv[0]);
-                    exit(EXIT_FAILURE);
-                }
-            }
-#endif
             else if (strcmp((long_opts[option_index]).name, "set") == 0) {
                 if (optarg != NULL) {
                     /* Quick validation. */
@@ -1779,46 +1616,8 @@ static TmEcode ParseCommandLine(int argc, char** argv, SCInstance *suri)
 
             break;
         case 'q':
-#ifdef NFQ
-            if (suri->run_mode == RUNMODE_UNKNOWN) {
-                suri->run_mode = RUNMODE_NFQ;
-                EngineModeSetIPS();
-                if (NFQRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else if (suri->run_mode == RUNMODE_NFQ) {
-                if (NFQRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else {
-                SCLogError(SC_ERR_MULTIPLE_RUN_MODE, "more than one run mode "
-                                                     "has been specified");
-                usage(argv[0]);
-                return TM_ECODE_FAILED;
-            }
-#else
-            SCLogError(SC_ERR_NFQ_NOSUPPORT,"NFQUEUE not enabled. Make sure to pass --enable-nfqueue to configure when building.");
-            return TM_ECODE_FAILED;
-#endif /* NFQ */
             break;
         case 'd':
-#ifdef IPFW
-            if (suri->run_mode == RUNMODE_UNKNOWN) {
-                suri->run_mode = RUNMODE_IPFW;
-                EngineModeSetIPS();
-                if (IPFWRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else if (suri->run_mode == RUNMODE_IPFW) {
-                if (IPFWRegisterQueue(optarg) == -1)
-                    return TM_ECODE_FAILED;
-            } else {
-                SCLogError(SC_ERR_MULTIPLE_RUN_MODE, "more than one run mode "
-                                                     "has been specified");
-                usage(argv[0]);
-                return TM_ECODE_FAILED;
-            }
-#else
-            SCLogError(SC_ERR_IPFW_NOSUPPORT,"IPFW not enabled. Make sure to pass --enable-ipfw to configure when building.");
-            return TM_ECODE_FAILED;
-#endif /* IPFW */
             break;
         case 'r':
             if (suri->run_mode == RUNMODE_UNKNOWN) {
@@ -2146,7 +1945,6 @@ static int FinalizeRunMode(SCInstance *suri, char **argv)
 {
     switch (suri->run_mode) {
         case RUNMODE_PCAP_FILE:
-        case RUNMODE_ERF_FILE:
         case RUNMODE_ENGINE_ANALYSIS:
             suri->offline = 1;
             break;
@@ -2229,11 +2027,6 @@ static int ConfigGetCaptureValue(SCInstance *suri)
         switch (suri->run_mode) {
             case RUNMODE_PCAP_DEV:
             case RUNMODE_AFP_DEV:
-            case RUNMODE_NETMAP:
-                /* in netmap igb0+ has a special meaning, however the
-                 * interface really is igb0 */
-                strip_trailing_plus = 1;
-                /* fall through */
             case RUNMODE_PFRING:
                 nlive = LiveGetDeviceCount();
                 for (lthread = 0; lthread < nlive; lthread++) {
@@ -2430,11 +2223,6 @@ static int PostConfLoadedSetup(SCInstance *suri)
         }
     }
 
-#ifdef NFQ
-    if (suri->run_mode == RUNMODE_NFQ)
-        NFQInitConfig(FALSE);
-#endif
-
     /* Load the Host-OS lookup. */
     SCHInfoLoadFromConfig();
 
@@ -2581,6 +2369,7 @@ int main(int argc, char **argv)
     (void)SCSetThreadName("Suricata-Main");
 
     ParseSizeInit();
+	//注册运行模式
     RunModeRegisterRunModes();
 
     /* Initialize the configuration module. */
@@ -2605,6 +2394,7 @@ int main(int argc, char **argv)
     GlobalsInitPreConfig();
 
     /* Load yaml configuration file if provided. */
+    //加载suricata.yaml配置文件
     if (LoadYamlConfig(&suri) != TM_ECODE_OK) {
         exit(EXIT_FAILURE);
     }

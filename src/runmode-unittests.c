@@ -138,10 +138,10 @@ static void RegisterUnittests(void)
     HostBitRegisterTests();
     IPPairBitRegisterTests();
     StatsRegisterTests();
-    DecodePPPRegisterTests();
+    //DecodePPPRegisterTests();
     DecodeVLANRegisterTests();
     DecodeRawRegisterTests();
-    DecodePPPOERegisterTests();
+    //DecodePPPOERegisterTests();
     DecodeICMPV4RegisterTests();
     DecodeICMPV6RegisterTests();
     DecodeIPV4RegisterTests();
@@ -150,7 +150,6 @@ static void RegisterUnittests(void)
     DecodeUDPV4RegisterTests();
     DecodeGRERegisterTests();
     DecodeAsn1RegisterTests();
-    DecodeMPLSRegisterTests();
     AppLayerProtoDetectUnittestsRegister();
     ConfRegisterTests();
     ConfYamlRegisterTests();

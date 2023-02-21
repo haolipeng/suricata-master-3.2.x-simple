@@ -110,19 +110,6 @@ enum {
     /* ETHERNET EVENTS */
     ETHERNET_PKT_TOO_SMALL,         /**< ethernet packet smaller than minimum size */
 
-    /* PPP EVENTS */
-    PPP_PKT_TOO_SMALL,              /**< ppp packet smaller than minimum size */
-    PPPVJU_PKT_TOO_SMALL,           /**< ppp vj uncompressed packet smaller than minimum size */
-    PPPIPV4_PKT_TOO_SMALL,          /**< ppp ipv4 packet smaller than minimum size */
-    PPPIPV6_PKT_TOO_SMALL,          /**< ppp ipv6 packet smaller than minimum size */
-    PPP_WRONG_TYPE,                 /**< wrong type in ppp frame */
-    PPP_UNSUP_PROTO,                /**< protocol not supported for ppp */
-
-    /* PPPOE EVENTS */
-    PPPOE_PKT_TOO_SMALL,            /**< pppoe packet smaller than minimum size */
-    PPPOE_WRONG_CODE,               /**< wrong code for pppoe */
-    PPPOE_MALFORMED_TAGS,           /**< malformed tags in pppoe */
-
     /* GRE EVENTS */
     GRE_PKT_TOO_SMALL,              /**< gre packet smaller than minimum size */
     GRE_WRONG_VERSION,              /**< wrong version in gre header */
@@ -152,9 +139,6 @@ enum {
     LTNULL_PKT_TOO_SMALL,           /**< pkt too small for lt:null */
     LTNULL_UNSUPPORTED_TYPE,        /**< pkt has a type that the decoder doesn't support */
 
-    /* SCTP EVENTS */
-    SCTP_PKT_TOO_SMALL, /**< sctp packet smaller than minimum size */
-
     /* Fragmentation reasembly events. */
     IPV4_FRAG_PKT_TOO_LARGE,
     IPV6_FRAG_PKT_TOO_LARGE,
@@ -172,21 +156,6 @@ enum {
     /* IPv6 in IPv6 events */
     IPV6_IN_IPV6_PKT_TOO_SMALL,
     IPV6_IN_IPV6_WRONG_IP_VER,
-
-    /* MPLS decode events. */
-    MPLS_HEADER_TOO_SMALL,
-    MPLS_BAD_LABEL_ROUTER_ALERT,
-    MPLS_BAD_LABEL_IMPLICIT_NULL,
-    MPLS_BAD_LABEL_RESERVED,
-    MPLS_UNKNOWN_PAYLOAD_TYPE,
-
-    /* ERSPAN events */
-    ERSPAN_HEADER_TOO_SMALL,
-    ERSPAN_UNSUPPORTED_VERSION,
-    ERSPAN_TOO_MANY_VLAN_LAYERS,
-
-    /* Cisco Fabric Path/DCE events. */
-    DCE_PKT_TOO_SMALL,
 
     /* END OF DECODE EVENTS ON SINGLE PACKET */
     DECODE_EVENT_PACKET_MAX,

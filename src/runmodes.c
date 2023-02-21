@@ -72,16 +72,16 @@ const char *thread_name_counter_wakeup = "CW";
  */
 typedef struct RunMode_ {
     /* the runmode type */
-    int runmode;
-    const char *name;
+    int runmode;//抓包模式的index值
+    const char *name;//线程模型的字符串名
     const char *description;
     /* runmode function */
-    int (*RunModeFunc)(void);
+    int (*RunModeFunc)(void);//运行模式函数,在RunModeDispatch函数中被调用
 } RunMode;
 
 typedef struct RunModes_ {
     int no_of_runmodes;
-    RunMode *runmodes;
+    RunMode *runmodes;//存储不同运行模型下自定义模式的信息
 } RunModes;
 
 static RunModes runmodes[RUNMODE_USER_MAX];
@@ -119,22 +119,8 @@ static const char *RunModeTranslateModeToName(int runmode)
 #else
             return "PFRING(DISABLED)";
 #endif
-        case RUNMODE_NFQ:
-            return "NFQ";
-        case RUNMODE_NFLOG:
-            return "NFLOG";
-        case RUNMODE_IPFW:
-            return "IPFW";
-        case RUNMODE_ERF_FILE:
-            return "ERF_FILE";
-        case RUNMODE_DAG:
-            return "ERF_DAG";
-        case RUNMODE_NAPATECH:
-            return "NAPATECH";
         case RUNMODE_UNITTEST:
             return "UNITTEST";
-        case RUNMODE_TILERA_MPIPE:
-            return "MPIPE";
         case RUNMODE_AFP_DEV:
             return "AF_PACKET_DEV";
         case RUNMODE_UNIX_SOCKET:
@@ -199,18 +185,11 @@ void RunModeRegisterRunModes(void)
 {
     memset(runmodes, 0, sizeof(runmodes));
 
-    RunModeIdsPcapRegister();
-    RunModeFilePcapRegister();
-    RunModeIdsPfringRegister();
-    RunModeIpsNFQRegister();
-    RunModeIpsIPFWRegister();
-    RunModeErfFileRegister();
-    RunModeErfDagRegister();
-    RunModeNapatechRegister();
-    RunModeIdsAFPRegister();
-    RunModeIdsNflogRegister();
-    RunModeTileMpipeRegister();
-    RunModeUnixSocketRegister();
+    RunModeIdsPcapRegister();//ids + pcap 模式
+    RunModeFilePcapRegister();//file + pcap 模式
+    RunModeIdsPfringRegister();//ids + Pfring 模式
+    RunModeIdsAFPRegister();//IDS+AFP 模式
+    RunModeUnixSocketRegister();//UnixSocket 模式
 #ifdef UNITTESTS
     UtRunModeRegister();
 #endif
@@ -269,6 +248,7 @@ void RunModeDispatch(int runmode, const char *custom_mode)
 
     if (custom_mode == NULL) {
         char *val = NULL;
+		//从配置中读取运行模式
         if (ConfGet("runmode", &val) != 1) {
             custom_mode = NULL;
         } else {
@@ -276,6 +256,7 @@ void RunModeDispatch(int runmode, const char *custom_mode)
         }
     }
 
+	//获取运行模式中默认的自定义模式
     if (custom_mode == NULL || strcmp(custom_mode, "auto") == 0) {
         switch (runmode) {
             case RUNMODE_PCAP_DEV:
@@ -289,32 +270,11 @@ void RunModeDispatch(int runmode, const char *custom_mode)
                 custom_mode = RunModeIdsPfringGetDefaultMode();
                 break;
 #endif
-            case RUNMODE_NFQ:
-                custom_mode = RunModeIpsNFQGetDefaultMode();
-                break;
-            case RUNMODE_IPFW:
-                custom_mode = RunModeIpsIPFWGetDefaultMode();
-                break;
-            case RUNMODE_ERF_FILE:
-                custom_mode = RunModeErfFileGetDefaultMode();
-                break;
-            case RUNMODE_DAG:
-                custom_mode = RunModeErfDagGetDefaultMode();
-                break;
-            case RUNMODE_TILERA_MPIPE:
-                custom_mode = RunModeTileMpipeGetDefaultMode();
-                break;
-            case RUNMODE_NAPATECH:
-                custom_mode = RunModeNapatechGetDefaultMode();
-                break;
             case RUNMODE_AFP_DEV:
-                custom_mode = RunModeAFPGetDefaultMode();
+                custom_mode = RunModeAFPGetDefaultMode();//默认为workers
                 break;
             case RUNMODE_UNIX_SOCKET:
                 custom_mode = RunModeUnixSocketGetDefaultMode();
-                break;
-            case RUNMODE_NFLOG:
-                custom_mode = RunModeIdsNflogGetDefaultMode();
                 break;
             default:
                 SCLogError(SC_ERR_UNKNOWN_RUN_MODE, "Unknown runtime mode. Aborting");
@@ -333,7 +293,8 @@ void RunModeDispatch(int runmode, const char *custom_mode)
             custom_mode = local_custom_mode;
         }
     }
-
+	
+	//从全局变量runmodes中获取RunMode对象指针
     RunMode *mode = RunModeGetCustomMode(runmode, custom_mode);
     if (mode == NULL) {
         SCLogError(SC_ERR_RUNMODE, "The custom type \"%s\" doesn't exist "

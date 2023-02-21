@@ -51,16 +51,11 @@ enum PktSrcEnum {
     PKT_SRC_FFR,
 };
 
-#include "source-nflog.h"
-#include "source-nfq.h"
-#include "source-ipfw.h"
 #include "source-pcap.h"
 #include "source-af-packet.h"
-#include "source-mpipe.h"
 
 #include "action-globals.h"
 
-#include "decode-erspan.h"
 #include "decode-ethernet.h"
 #include "decode-gre.h"
 #include "decode-sll.h"
@@ -70,11 +65,8 @@ enum PktSrcEnum {
 #include "decode-icmpv6.h"
 #include "decode-tcp.h"
 #include "decode-udp.h"
-#include "decode-sctp.h"
 #include "decode-raw.h"
-#include "decode-null.h"
 #include "decode-vlan.h"
-#include "decode-mpls.h"
 
 #include "detect-reference.h"
 
@@ -180,18 +172,6 @@ typedef struct Address_ {
 #define SET_UDP_DST_PORT(pkt, prt) do {            \
         SET_PORT(UDP_GET_DST_PORT((pkt)), *(prt)); \
     } while (0)
-
-/* Set the SCTP ports into the Ports of the Packet.
- * Make sure p->sctph is initialized and validated. */
-#define SET_SCTP_SRC_PORT(pkt, prt) do {            \
-        SET_PORT(SCTP_GET_SRC_PORT((pkt)), *(prt)); \
-    } while (0)
-
-#define SET_SCTP_DST_PORT(pkt, prt) do {            \
-        SET_PORT(SCTP_GET_DST_PORT((pkt)), *(prt)); \
-    } while (0)
-
-
 
 #define GET_IPV4_SRC_ADDR_U32(p) ((p)->src.addr_data32[0])
 #define GET_IPV4_DST_ADDR_U32(p) ((p)->dst.addr_data32[0])
@@ -390,63 +370,49 @@ typedef struct Packet_
     /* Addresses, Ports and protocol
      * these are on top so we can use
      * the Packet as a hash key */
-    Address src;
-    Address dst;
+    Address src;//源地址
+    Address dst;//目的地址
     union {
-        Port sp;
+        Port sp;//源端口
         uint8_t type;
     };
     union {
-        Port dp;
+        Port dp;//目的端口
         uint8_t code;
     };
-    uint8_t proto;
+    uint8_t proto;//三层数据包载荷的协议类型
     /* make sure we can't be attacked on when the tunneled packet
      * has the exact same tuple as the lower levels */
-    uint8_t recursion_level;
+    uint8_t recursion_level;//隧道封装次数
 
-    uint16_t vlan_id[2];
-    uint8_t vlan_idx;
+    uint16_t vlan_id[2];//
+    uint8_t vlan_idx;//vlan嵌套层数
 
     /* flow */
-    uint8_t flowflags;
+    uint8_t flowflags;//flow标识,比如FLOW_PKT_TOSERVER
     /* coccinelle: Packet:flowflags:FLOW_PKT_ */
 
     /* Pkt Flags */
-    uint32_t flags;
+    uint32_t flags;//当前Packet的标识
 
-    struct Flow_ *flow;
+    struct Flow_ *flow;//关联的flow
 
     /* raw hash value for looking up the flow, will need to modulated to the
      * hash size still */
-    uint32_t flow_hash;
+    uint32_t flow_hash;//数据包匹配相应的flow时使用的hash值
 
-    struct timeval ts;
+    struct timeval ts;//数据包的时间
 
     union {
-        /* nfq stuff */
-#ifdef HAVE_NFLOG
-        NFLOGPacketVars nflog_v;
-#endif /* HAVE_NFLOG */
-#ifdef NFQ
-        NFQPacketVars nfq_v;
-#endif /* NFQ */
-#ifdef IPFW
-        IPFWPacketVars ipfw_v;
-#endif /* IPFW */
 #ifdef AF_PACKET
         AFPPacketVars afp_v;
-#endif
-#ifdef HAVE_MPIPE
-        /* tilegx mpipe stuff */
-        MpipePacketVars mpipe_v;
 #endif
         /** libpcap vars: shared by Pcap Live mode and Pcap File mode */
         PcapPacketVars pcap_v;
     };
 
     /** The release function for packet structure and data */
-    void (*ReleasePacket)(struct Packet_ *);
+    void (*ReleasePacket)(struct Packet_ *);//回调函数,当数据包需要被释放时调用
     /** The function triggering bypass the flow in the capture method.
      * Return 1 for success and 0 on error */
     int (*BypassPacketsFlow)(struct Packet_ *);
@@ -457,14 +423,14 @@ typedef struct Packet_
     /* header pointers */
     EthernetHdr *ethh;
 
-    /* Checksum for IP packets. */
+    /* Checksum for IP packets. 3层数据校验和*/
     int32_t level3_comp_csum;
-    /* Check sum for TCP, UDP or ICMP packets */
+    /* Check sum for TCP, UDP or ICMP packets 4层数据校验和*/
     int32_t level4_comp_csum;
 
-    IPV4Hdr *ip4h;
+    IPV4Hdr *ip4h;//ipv4包头指针
 
-    IPV6Hdr *ip6h;
+    IPV6Hdr *ip6h;//ipv6包头指针
 
     /* IPv4 and IPv6 are mutually exclusive */
     union {
@@ -484,36 +450,34 @@ typedef struct Packet_
 #define icmpv4vars  l4vars.icmpv4vars
 #define icmpv6vars  l4vars.icmpv6vars
 
-    TCPHdr *tcph;
+    TCPHdr *tcph;//tcp协议头指针
 
-    UDPHdr *udph;
+    UDPHdr *udph;//udp协议头指针
 
-    SCTPHdr *sctph;
-
-    ICMPV4Hdr *icmpv4h;
+    ICMPV4Hdr *icmpv4h;//icmp协议头指针
 
     ICMPV6Hdr *icmpv6h;
 
-    GREHdr *greh;
+    GREHdr *greh;//gre协议头指针
 
-    VLANHdr *vlanh[2];
+    VLANHdr *vlanh[2];//vlan协议头指针
 
     /* ptr to the payload of the packet
      * with it's length. */
-    uint8_t *payload;
-    uint16_t payload_len;
+    uint8_t *payload;//四层数据包的载荷，比如tcp或udp协议内的载荷。
+    uint16_t payload_len;//四层数据包的载荷长度。
 
     /* IPS action to take */
-    uint8_t action;
+    uint8_t action;//对数据包的处理动作
 
-    uint8_t pkt_src;
+    uint8_t pkt_src;//标识数据包的来源
 
     /* storage: set to pointer to heap and extended via allocation if necessary */
-    uint32_t pktlen;
+    uint32_t pktlen;//数据包字节长度
     uint8_t *ext_pkt;
 
     /* Incoming interface */
-    struct LiveDevice_ *livedev;
+    struct LiveDevice_ *livedev;//数据源的网口信息
 
     PacketAlerts alerts;
 
@@ -531,7 +495,7 @@ typedef struct Packet_
 
     /* double linked list ptrs */
     struct Packet_ *next;
-    struct Packet_ *prev;
+    struct Packet_ *prev;//next和prev将Packet链接起来
 
     /** data linktype in host order */
     int datalink;
@@ -569,10 +533,6 @@ typedef struct Packet_
     PktProfiling *profile;
 #endif
 }
-#ifdef HAVE_MPIPE
-    /* mPIPE requires packet buffers to be aligned to 128 byte boundaries. */
-    __attribute__((aligned(128)))
-#endif
 Packet;
 
 /** highest mtu of the interfaces we monitor */
@@ -740,9 +700,6 @@ void CaptureStatsSetup(ThreadVars *tv, CaptureStats *s);
         if ((p)->udph != NULL) {                \
             CLEAR_UDP_PACKET((p));              \
         }                                       \
-        if ((p)->sctph != NULL) {               \
-            CLEAR_SCTP_PACKET((p));             \
-        }                                       \
         if ((p)->icmpv4h != NULL) {             \
             CLEAR_ICMPV4_PACKET((p));           \
         }                                       \
@@ -893,11 +850,7 @@ void DecodeUpdatePacketCounters(ThreadVars *tv,
 /* decoder functions */
 int DecodeEthernet(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeSll(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodePPP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodePPPOESession(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodePPPOEDiscovery(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeTunnel(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *, enum DecodeTunnelProto) __attribute__ ((warn_unused_result));
-int DecodeNull(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeRaw(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeIPV4(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeIPV6(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
@@ -905,10 +858,8 @@ int DecodeICMPV4(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t
 int DecodeICMPV6(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeTCP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeUDP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodeSCTP(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeGRE(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeVLAN(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
-int DecodeMPLS(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 int DecodeERSPAN(ThreadVars *, DecodeThreadVars *, Packet *, uint8_t *, uint16_t, PacketQueue *);
 
 void AddressDebugPrint(Address *);
@@ -1033,8 +984,6 @@ int DecoderParseDataFromFileSerie(char *fileprefix, DecoderFunc Decoder);
 /* http://www.tcpdump.org/linktypes.html defines DLT_RAW as 101, yet others don't.
  * Libpcap on at least OpenBSD returns 101 as datalink type for RAW pcaps though. */
 #define LINKTYPE_RAW2       101
-#define PPP_OVER_GRE        11
-#define VLAN_OVER_GRE       13
 
 /*Packet Flags*/
 #define PKT_NOPACKET_INSPECTION         (1)         /**< Flag to indicate that packet header or contents should not be inspected*/

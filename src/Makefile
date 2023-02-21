@@ -95,9 +95,7 @@ am__append_1 = -ggdb -O0
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libprelude.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
-	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(noinst_HEADERS) \
@@ -121,15 +119,13 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	app-layer-template.$(OBJEXT) conf.$(OBJEXT) \
 	conf-yaml-loader.$(OBJEXT) counters.$(OBJEXT) \
 	data-queue.$(OBJEXT) decode.$(OBJEXT) decode-afl.$(OBJEXT) \
-	decode-erspan.$(OBJEXT) decode-ethernet.$(OBJEXT) \
-	decode-events.$(OBJEXT) decode-gre.$(OBJEXT) \
-	decode-icmpv4.$(OBJEXT) decode-icmpv6.$(OBJEXT) \
-	decode-ipv4.$(OBJEXT) decode-ipv6.$(OBJEXT) \
-	decode-null.$(OBJEXT) decode-raw.$(OBJEXT) \
-	decode-sctp.$(OBJEXT) decode-sll.$(OBJEXT) \
-	decode-tcp.$(OBJEXT) decode-teredo.$(OBJEXT) \
-	decode-udp.$(OBJEXT) decode-vlan.$(OBJEXT) \
-	decode-mpls.$(OBJEXT) decode-template.$(OBJEXT) \
+	decode-ethernet.$(OBJEXT) decode-events.$(OBJEXT) \
+	decode-gre.$(OBJEXT) decode-icmpv4.$(OBJEXT) \
+	decode-icmpv6.$(OBJEXT) decode-ipv4.$(OBJEXT) \
+	decode-ipv6.$(OBJEXT) \
+	decode-raw.$(OBJEXT) decode-sll.$(OBJEXT) decode-tcp.$(OBJEXT) \
+	decode-teredo.$(OBJEXT) decode-udp.$(OBJEXT) \
+	decode-vlan.$(OBJEXT) decode-template.$(OBJEXT) \
 	defrag-config.$(OBJEXT) defrag.$(OBJEXT) defrag-hash.$(OBJEXT) \
 	defrag-queue.$(OBJEXT) defrag-timeout.$(OBJEXT) \
 	detect-ack.$(OBJEXT) detect-app-layer-event.$(OBJEXT) \
@@ -228,36 +224,26 @@ am_suricata_OBJECTS = alert-debuglog.$(OBJEXT) alert-fastlog.$(OBJEXT) \
 	output-json.$(OBJEXT) packet-queue.$(OBJEXT) pkt-var.$(OBJEXT) \
 	reputation.$(OBJEXT) respond-reject.$(OBJEXT) \
 	respond-reject-libnet11.$(OBJEXT) runmode-af-packet.$(OBJEXT) \
-	runmode-erf-dag.$(OBJEXT) runmode-erf-file.$(OBJEXT) \
-	runmode-ipfw.$(OBJEXT) runmode-napatech.$(OBJEXT) \
-	runmode-nfq.$(OBJEXT) runmode-nflog.$(OBJEXT) \
 	runmode-pcap.$(OBJEXT) runmode-pcap-file.$(OBJEXT) \
 	runmode-pfring.$(OBJEXT) runmode-unittests.$(OBJEXT) \
-	runmode-unix-socket.$(OBJEXT) runmode-tile.$(OBJEXT) \
-	runmodes.$(OBJEXT) source-af-packet.$(OBJEXT) \
-	source-erf-dag.$(OBJEXT) source-erf-file.$(OBJEXT) \
-	source-ipfw.$(OBJEXT) source-mpipe.$(OBJEXT) \
-	source-napatech.$(OBJEXT) source-nfq.$(OBJEXT) \
-	source-nflog.$(OBJEXT) source-pcap.$(OBJEXT) \
+	runmode-unix-socket.$(OBJEXT) runmodes.$(OBJEXT) \
+	source-af-packet.$(OBJEXT) source-pcap.$(OBJEXT) \
 	source-pcap-file.$(OBJEXT) source-pfring.$(OBJEXT) \
 	stream.$(OBJEXT) stream-tcp.$(OBJEXT) \
 	stream-tcp-inline.$(OBJEXT) stream-tcp-reassemble.$(OBJEXT) \
 	stream-tcp-sack.$(OBJEXT) stream-tcp-util.$(OBJEXT) \
 	suricata.$(OBJEXT) threads.$(OBJEXT) tm-modules.$(OBJEXT) \
-	tmqh-flow.$(OBJEXT) tmqh-nfq.$(OBJEXT) \
-	tmqh-packetpool.$(OBJEXT) tmqh-ringbuffer.$(OBJEXT) \
-	tmqh-simple.$(OBJEXT) tm-queuehandlers.$(OBJEXT) \
-	tm-queues.$(OBJEXT) tm-threads.$(OBJEXT) \
-	unix-manager.$(OBJEXT) util-action.$(OBJEXT) \
-	util-atomic.$(OBJEXT) util-base64.$(OBJEXT) \
-	util-bloomfilter-counting.$(OBJEXT) util-bloomfilter.$(OBJEXT) \
-	util-buffer.$(OBJEXT) util-byte.$(OBJEXT) \
-	util-checksum.$(OBJEXT) util-cidr.$(OBJEXT) \
-	util-classification-config.$(OBJEXT) util-conf.$(OBJEXT) \
-	util-coredump-config.$(OBJEXT) util-cpu.$(OBJEXT) \
-	util-crypt.$(OBJEXT) util-cuda.$(OBJEXT) \
-	util-cuda-buffer.$(OBJEXT) util-cuda-handlers.$(OBJEXT) \
-	util-cuda-vars.$(OBJEXT) util-daemon.$(OBJEXT) \
+	tmqh-flow.$(OBJEXT) tmqh-packetpool.$(OBJEXT) \
+	tmqh-ringbuffer.$(OBJEXT) tmqh-simple.$(OBJEXT) \
+	tm-queuehandlers.$(OBJEXT) tm-queues.$(OBJEXT) \
+	tm-threads.$(OBJEXT) unix-manager.$(OBJEXT) \
+	util-action.$(OBJEXT) util-atomic.$(OBJEXT) \
+	util-base64.$(OBJEXT) util-bloomfilter-counting.$(OBJEXT) \
+	util-bloomfilter.$(OBJEXT) util-buffer.$(OBJEXT) \
+	util-byte.$(OBJEXT) util-checksum.$(OBJEXT) \
+	util-cidr.$(OBJEXT) util-classification-config.$(OBJEXT) \
+	util-conf.$(OBJEXT) util-coredump-config.$(OBJEXT) \
+	util-cpu.$(OBJEXT) util-crypt.$(OBJEXT) util-daemon.$(OBJEXT) \
 	util-debug.$(OBJEXT) util-debug-filters.$(OBJEXT) \
 	util-decode-asn1.$(OBJEXT) util-decode-der.$(OBJEXT) \
 	util-decode-der-get.$(OBJEXT) util-decode-mime.$(OBJEXT) \
@@ -341,19 +327,18 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/app-layer-template.Po ./$(DEPDIR)/app-layer.Po \
 	./$(DEPDIR)/conf-yaml-loader.Po ./$(DEPDIR)/conf.Po \
 	./$(DEPDIR)/counters.Po ./$(DEPDIR)/data-queue.Po \
-	./$(DEPDIR)/decode-afl.Po ./$(DEPDIR)/decode-erspan.Po \
-	./$(DEPDIR)/decode-ethernet.Po ./$(DEPDIR)/decode-events.Po \
-	./$(DEPDIR)/decode-gre.Po ./$(DEPDIR)/decode-icmpv4.Po \
-	./$(DEPDIR)/decode-icmpv6.Po ./$(DEPDIR)/decode-ipv4.Po \
-	./$(DEPDIR)/decode-ipv6.Po ./$(DEPDIR)/decode-mpls.Po \
-	./$(DEPDIR)/decode-null.Po ./$(DEPDIR)/decode-raw.Po \
-	./$(DEPDIR)/decode-sctp.Po ./$(DEPDIR)/decode-sll.Po \
-	./$(DEPDIR)/decode-tcp.Po ./$(DEPDIR)/decode-template.Po \
-	./$(DEPDIR)/decode-teredo.Po ./$(DEPDIR)/decode-udp.Po \
-	./$(DEPDIR)/decode-vlan.Po ./$(DEPDIR)/decode.Po \
-	./$(DEPDIR)/defrag-config.Po ./$(DEPDIR)/defrag-hash.Po \
-	./$(DEPDIR)/defrag-queue.Po ./$(DEPDIR)/defrag-timeout.Po \
-	./$(DEPDIR)/defrag.Po ./$(DEPDIR)/detect-ack.Po \
+	./$(DEPDIR)/decode-afl.Po ./$(DEPDIR)/decode-ethernet.Po \
+	./$(DEPDIR)/decode-events.Po ./$(DEPDIR)/decode-gre.Po \
+	./$(DEPDIR)/decode-icmpv4.Po ./$(DEPDIR)/decode-icmpv6.Po \
+	./$(DEPDIR)/decode-ipv4.Po ./$(DEPDIR)/decode-ipv6.Po \
+	./$(DEPDIR)/decode-raw.Po \
+	./$(DEPDIR)/decode-sll.Po ./$(DEPDIR)/decode-tcp.Po \
+	./$(DEPDIR)/decode-template.Po ./$(DEPDIR)/decode-teredo.Po \
+	./$(DEPDIR)/decode-udp.Po ./$(DEPDIR)/decode-vlan.Po \
+	./$(DEPDIR)/decode.Po ./$(DEPDIR)/defrag-config.Po \
+	./$(DEPDIR)/defrag-hash.Po ./$(DEPDIR)/defrag-queue.Po \
+	./$(DEPDIR)/defrag-timeout.Po ./$(DEPDIR)/defrag.Po \
+	./$(DEPDIR)/detect-ack.Po \
 	./$(DEPDIR)/detect-app-layer-event.Po \
 	./$(DEPDIR)/detect-app-layer-protocol.Po \
 	./$(DEPDIR)/detect-asn1.Po ./$(DEPDIR)/detect-base64-data.Po \
@@ -480,17 +465,10 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/reputation.Po \
 	./$(DEPDIR)/respond-reject-libnet11.Po \
 	./$(DEPDIR)/respond-reject.Po ./$(DEPDIR)/runmode-af-packet.Po \
-	./$(DEPDIR)/runmode-erf-dag.Po ./$(DEPDIR)/runmode-erf-file.Po \
-	./$(DEPDIR)/runmode-ipfw.Po ./$(DEPDIR)/runmode-napatech.Po \
-	./$(DEPDIR)/runmode-nflog.Po ./$(DEPDIR)/runmode-nfq.Po \
 	./$(DEPDIR)/runmode-pcap-file.Po ./$(DEPDIR)/runmode-pcap.Po \
-	./$(DEPDIR)/runmode-pfring.Po ./$(DEPDIR)/runmode-tile.Po \
-	./$(DEPDIR)/runmode-unittests.Po \
+	./$(DEPDIR)/runmode-pfring.Po ./$(DEPDIR)/runmode-unittests.Po \
 	./$(DEPDIR)/runmode-unix-socket.Po ./$(DEPDIR)/runmodes.Po \
-	./$(DEPDIR)/source-af-packet.Po ./$(DEPDIR)/source-erf-dag.Po \
-	./$(DEPDIR)/source-erf-file.Po ./$(DEPDIR)/source-ipfw.Po \
-	./$(DEPDIR)/source-mpipe.Po ./$(DEPDIR)/source-napatech.Po \
-	./$(DEPDIR)/source-nflog.Po ./$(DEPDIR)/source-nfq.Po \
+	./$(DEPDIR)/source-af-packet.Po \
 	./$(DEPDIR)/source-pcap-file.Po ./$(DEPDIR)/source-pcap.Po \
 	./$(DEPDIR)/source-pfring.Po ./$(DEPDIR)/stream-tcp-inline.Po \
 	./$(DEPDIR)/stream-tcp-reassemble.Po \
@@ -499,11 +477,11 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/suricata.Po ./$(DEPDIR)/threads.Po \
 	./$(DEPDIR)/tm-modules.Po ./$(DEPDIR)/tm-queuehandlers.Po \
 	./$(DEPDIR)/tm-queues.Po ./$(DEPDIR)/tm-threads.Po \
-	./$(DEPDIR)/tmqh-flow.Po ./$(DEPDIR)/tmqh-nfq.Po \
-	./$(DEPDIR)/tmqh-packetpool.Po ./$(DEPDIR)/tmqh-ringbuffer.Po \
-	./$(DEPDIR)/tmqh-simple.Po ./$(DEPDIR)/unix-manager.Po \
-	./$(DEPDIR)/util-action.Po ./$(DEPDIR)/util-affinity.Po \
-	./$(DEPDIR)/util-atomic.Po ./$(DEPDIR)/util-base64.Po \
+	./$(DEPDIR)/tmqh-flow.Po ./$(DEPDIR)/tmqh-packetpool.Po \
+	./$(DEPDIR)/tmqh-ringbuffer.Po ./$(DEPDIR)/tmqh-simple.Po \
+	./$(DEPDIR)/unix-manager.Po ./$(DEPDIR)/util-action.Po \
+	./$(DEPDIR)/util-affinity.Po ./$(DEPDIR)/util-atomic.Po \
+	./$(DEPDIR)/util-base64.Po \
 	./$(DEPDIR)/util-bloomfilter-counting.Po \
 	./$(DEPDIR)/util-bloomfilter.Po ./$(DEPDIR)/util-buffer.Po \
 	./$(DEPDIR)/util-byte.Po ./$(DEPDIR)/util-checksum.Po \
@@ -511,9 +489,6 @@ am__depfiles_remade = ./$(DEPDIR)/alert-debuglog.Po \
 	./$(DEPDIR)/util-classification-config.Po \
 	./$(DEPDIR)/util-conf.Po ./$(DEPDIR)/util-coredump-config.Po \
 	./$(DEPDIR)/util-cpu.Po ./$(DEPDIR)/util-crypt.Po \
-	./$(DEPDIR)/util-cuda-buffer.Po \
-	./$(DEPDIR)/util-cuda-handlers.Po \
-	./$(DEPDIR)/util-cuda-vars.Po ./$(DEPDIR)/util-cuda.Po \
 	./$(DEPDIR)/util-daemon.Po ./$(DEPDIR)/util-debug-filters.Po \
 	./$(DEPDIR)/util-debug.Po ./$(DEPDIR)/util-decode-asn1.Po \
 	./$(DEPDIR)/util-decode-der-get.Po \
@@ -618,7 +593,7 @@ AUTOMAKE = ${SHELL} /home/work/suricata-master-3.2.x-simple/missing automake-1.1
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -march=native
+CFLAGS = -g -O0 -march=native
 CLANG_CFLAGS = 
 CONFIGURE_LOCALSTATEDIR = /var
 CONFIGURE_PREFIX = /usr
@@ -646,7 +621,7 @@ HAVE_GIT_CMD = /usr/bin/git
 HAVE_PCAP_CONFIG = /usr/bin/pcap-config
 HAVE_PDFLATEX = no
 HAVE_PKG_CONFIG = /usr/bin/pkg-config
-HAVE_PYTHON_CONFIG = no
+HAVE_PYTHON_CONFIG = /usr/bin/python
 HAVE_SPHINXBUILD = no
 HAVE_WGET = /usr/bin/wget
 HTP_DIR = 
@@ -798,7 +773,7 @@ top_builddir = ..
 top_srcdir = ..
 noinst_HEADERS = action-globals.h \
     debug.h \
-	flow-private.h queue.h source-nfq-prototypes.h \
+	flow-private.h queue.h  \
 	suricata-common.h threadvars.h util-binsearch.h \
     util-validate.h
 
@@ -829,7 +804,6 @@ counters.c counters.h \
 data-queue.c data-queue.h \
 decode.c decode.h \
 decode-afl.c \
-decode-erspan.c decode-erspan.h \
 decode-ethernet.c decode-ethernet.h \
 decode-events.c decode-events.h \
 decode-gre.c decode-gre.h \
@@ -837,15 +811,12 @@ decode-icmpv4.c decode-icmpv4.h \
 decode-icmpv6.c decode-icmpv6.h \
 decode-ipv4.c decode-ipv4.h \
 decode-ipv6.c decode-ipv6.h \
-decode-null.c decode-null.h \
 decode-raw.c decode-raw.h \
-decode-sctp.c decode-sctp.h \
 decode-sll.c decode-sll.h \
 decode-tcp.c decode-tcp.h \
 decode-teredo.c decode-teredo.h \
 decode-udp.c decode-udp.h \
 decode-vlan.c decode-vlan.h \
-decode-mpls.c decode-mpls.h \
 decode-template.c decode-template.h \
 defrag-config.c defrag-config.h \
 defrag.c defrag.h \
@@ -1040,27 +1011,13 @@ reputation.c reputation.h \
 respond-reject.c respond-reject.h \
 respond-reject-libnet11.h respond-reject-libnet11.c \
 runmode-af-packet.c runmode-af-packet.h \
-runmode-erf-dag.c runmode-erf-dag.h \
-runmode-erf-file.c runmode-erf-file.h \
-runmode-ipfw.c runmode-ipfw.h \
-runmode-napatech.c runmode-napatech.h \
-runmode-nfq.c runmode-nfq.h \
-runmode-nflog.c runmode-nflog.h \
 runmode-pcap.c runmode-pcap.h \
 runmode-pcap-file.c runmode-pcap-file.h \
 runmode-pfring.c runmode-pfring.h \
 runmode-unittests.c runmode-unittests.h \
 runmode-unix-socket.c runmode-unix-socket.h \
-runmode-tile.c runmode-tile.h \
 runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
-source-erf-dag.c source-erf-dag.h \
-source-erf-file.c source-erf-file.h \
-source-ipfw.c source-ipfw.h \
-source-mpipe.c source-mpipe.h \
-source-napatech.c source-napatech.h \
-source-nfq.c source-nfq.h \
-source-nflog.c source-nflog.h \
 source-pcap.c source-pcap.h \
 source-pcap-file.c source-pcap-file.h \
 source-pfring.c source-pfring.h \
@@ -1075,7 +1032,6 @@ threads.c threads.h threads-arch-tile.h \
 threads-debug.h threads-profile.h \
 tm-modules.c tm-modules.h \
 tmqh-flow.c tmqh-flow.h \
-tmqh-nfq.c tmqh-nfq.h \
 tmqh-packetpool.c tmqh-packetpool.h \
 tmqh-ringbuffer.c tmqh-ringbuffer.h \
 tmqh-simple.c tmqh-simple.h \
@@ -1097,10 +1053,6 @@ util-conf.c util-conf.h \
 util-coredump-config.c util-coredump-config.h \
 util-cpu.c util-cpu.h \
 util-crypt.c util-crypt.h \
-util-cuda.c util-cuda.h \
-util-cuda-buffer.c util-cuda-buffer.h \
-util-cuda-handlers.c util-cuda-handlers.h \
-util-cuda-vars.c util-cuda-vars.h \
 util-daemon.c util-daemon.h \
 util-debug.c util-debug.h \
 util-debug-filters.c util-debug-filters.h \
@@ -1231,9 +1183,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/Makefile
+	  $(AUTOMAKE) --foreign src/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -1336,7 +1288,6 @@ include ./$(DEPDIR)/conf.Po # am--include-marker
 include ./$(DEPDIR)/counters.Po # am--include-marker
 include ./$(DEPDIR)/data-queue.Po # am--include-marker
 include ./$(DEPDIR)/decode-afl.Po # am--include-marker
-include ./$(DEPDIR)/decode-erspan.Po # am--include-marker
 include ./$(DEPDIR)/decode-ethernet.Po # am--include-marker
 include ./$(DEPDIR)/decode-events.Po # am--include-marker
 include ./$(DEPDIR)/decode-gre.Po # am--include-marker
@@ -1344,10 +1295,7 @@ include ./$(DEPDIR)/decode-icmpv4.Po # am--include-marker
 include ./$(DEPDIR)/decode-icmpv6.Po # am--include-marker
 include ./$(DEPDIR)/decode-ipv4.Po # am--include-marker
 include ./$(DEPDIR)/decode-ipv6.Po # am--include-marker
-include ./$(DEPDIR)/decode-mpls.Po # am--include-marker
-include ./$(DEPDIR)/decode-null.Po # am--include-marker
 include ./$(DEPDIR)/decode-raw.Po # am--include-marker
-include ./$(DEPDIR)/decode-sctp.Po # am--include-marker
 include ./$(DEPDIR)/decode-sll.Po # am--include-marker
 include ./$(DEPDIR)/decode-tcp.Po # am--include-marker
 include ./$(DEPDIR)/decode-template.Po # am--include-marker
@@ -1548,27 +1496,13 @@ include ./$(DEPDIR)/reputation.Po # am--include-marker
 include ./$(DEPDIR)/respond-reject-libnet11.Po # am--include-marker
 include ./$(DEPDIR)/respond-reject.Po # am--include-marker
 include ./$(DEPDIR)/runmode-af-packet.Po # am--include-marker
-include ./$(DEPDIR)/runmode-erf-dag.Po # am--include-marker
-include ./$(DEPDIR)/runmode-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/runmode-ipfw.Po # am--include-marker
-include ./$(DEPDIR)/runmode-napatech.Po # am--include-marker
-include ./$(DEPDIR)/runmode-nflog.Po # am--include-marker
-include ./$(DEPDIR)/runmode-nfq.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap-file.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pcap.Po # am--include-marker
 include ./$(DEPDIR)/runmode-pfring.Po # am--include-marker
-include ./$(DEPDIR)/runmode-tile.Po # am--include-marker
 include ./$(DEPDIR)/runmode-unittests.Po # am--include-marker
 include ./$(DEPDIR)/runmode-unix-socket.Po # am--include-marker
 include ./$(DEPDIR)/runmodes.Po # am--include-marker
 include ./$(DEPDIR)/source-af-packet.Po # am--include-marker
-include ./$(DEPDIR)/source-erf-dag.Po # am--include-marker
-include ./$(DEPDIR)/source-erf-file.Po # am--include-marker
-include ./$(DEPDIR)/source-ipfw.Po # am--include-marker
-include ./$(DEPDIR)/source-mpipe.Po # am--include-marker
-include ./$(DEPDIR)/source-napatech.Po # am--include-marker
-include ./$(DEPDIR)/source-nflog.Po # am--include-marker
-include ./$(DEPDIR)/source-nfq.Po # am--include-marker
 include ./$(DEPDIR)/source-pcap-file.Po # am--include-marker
 include ./$(DEPDIR)/source-pcap.Po # am--include-marker
 include ./$(DEPDIR)/source-pfring.Po # am--include-marker
@@ -1585,7 +1519,6 @@ include ./$(DEPDIR)/tm-queuehandlers.Po # am--include-marker
 include ./$(DEPDIR)/tm-queues.Po # am--include-marker
 include ./$(DEPDIR)/tm-threads.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-flow.Po # am--include-marker
-include ./$(DEPDIR)/tmqh-nfq.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-packetpool.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-ringbuffer.Po # am--include-marker
 include ./$(DEPDIR)/tmqh-simple.Po # am--include-marker
@@ -1605,10 +1538,6 @@ include ./$(DEPDIR)/util-conf.Po # am--include-marker
 include ./$(DEPDIR)/util-coredump-config.Po # am--include-marker
 include ./$(DEPDIR)/util-cpu.Po # am--include-marker
 include ./$(DEPDIR)/util-crypt.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda-buffer.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda-handlers.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda-vars.Po # am--include-marker
-include ./$(DEPDIR)/util-cuda.Po # am--include-marker
 include ./$(DEPDIR)/util-daemon.Po # am--include-marker
 include ./$(DEPDIR)/util-debug-filters.Po # am--include-marker
 include ./$(DEPDIR)/util-debug.Po # am--include-marker
@@ -1877,7 +1806,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/counters.Po
 	-rm -f ./$(DEPDIR)/data-queue.Po
 	-rm -f ./$(DEPDIR)/decode-afl.Po
-	-rm -f ./$(DEPDIR)/decode-erspan.Po
 	-rm -f ./$(DEPDIR)/decode-ethernet.Po
 	-rm -f ./$(DEPDIR)/decode-events.Po
 	-rm -f ./$(DEPDIR)/decode-gre.Po
@@ -1885,10 +1813,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/decode-icmpv6.Po
 	-rm -f ./$(DEPDIR)/decode-ipv4.Po
 	-rm -f ./$(DEPDIR)/decode-ipv6.Po
-	-rm -f ./$(DEPDIR)/decode-mpls.Po
-	-rm -f ./$(DEPDIR)/decode-null.Po
 	-rm -f ./$(DEPDIR)/decode-raw.Po
-	-rm -f ./$(DEPDIR)/decode-sctp.Po
 	-rm -f ./$(DEPDIR)/decode-sll.Po
 	-rm -f ./$(DEPDIR)/decode-tcp.Po
 	-rm -f ./$(DEPDIR)/decode-template.Po
@@ -2089,27 +2014,13 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/respond-reject-libnet11.Po
 	-rm -f ./$(DEPDIR)/respond-reject.Po
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-ipfw.Po
-	-rm -f ./$(DEPDIR)/runmode-napatech.Po
-	-rm -f ./$(DEPDIR)/runmode-nflog.Po
-	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap.Po
 	-rm -f ./$(DEPDIR)/runmode-pfring.Po
-	-rm -f ./$(DEPDIR)/runmode-tile.Po
 	-rm -f ./$(DEPDIR)/runmode-unittests.Po
 	-rm -f ./$(DEPDIR)/runmode-unix-socket.Po
 	-rm -f ./$(DEPDIR)/runmodes.Po
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
-	-rm -f ./$(DEPDIR)/source-erf-dag.Po
-	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-ipfw.Po
-	-rm -f ./$(DEPDIR)/source-mpipe.Po
-	-rm -f ./$(DEPDIR)/source-napatech.Po
-	-rm -f ./$(DEPDIR)/source-nflog.Po
-	-rm -f ./$(DEPDIR)/source-nfq.Po
 	-rm -f ./$(DEPDIR)/source-pcap-file.Po
 	-rm -f ./$(DEPDIR)/source-pcap.Po
 	-rm -f ./$(DEPDIR)/source-pfring.Po
@@ -2126,7 +2037,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/tm-queues.Po
 	-rm -f ./$(DEPDIR)/tm-threads.Po
 	-rm -f ./$(DEPDIR)/tmqh-flow.Po
-	-rm -f ./$(DEPDIR)/tmqh-nfq.Po
 	-rm -f ./$(DEPDIR)/tmqh-packetpool.Po
 	-rm -f ./$(DEPDIR)/tmqh-ringbuffer.Po
 	-rm -f ./$(DEPDIR)/tmqh-simple.Po
@@ -2146,10 +2056,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/util-coredump-config.Po
 	-rm -f ./$(DEPDIR)/util-cpu.Po
 	-rm -f ./$(DEPDIR)/util-crypt.Po
-	-rm -f ./$(DEPDIR)/util-cuda-buffer.Po
-	-rm -f ./$(DEPDIR)/util-cuda-handlers.Po
-	-rm -f ./$(DEPDIR)/util-cuda-vars.Po
-	-rm -f ./$(DEPDIR)/util-cuda.Po
 	-rm -f ./$(DEPDIR)/util-daemon.Po
 	-rm -f ./$(DEPDIR)/util-debug-filters.Po
 	-rm -f ./$(DEPDIR)/util-debug.Po
@@ -2298,7 +2204,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/counters.Po
 	-rm -f ./$(DEPDIR)/data-queue.Po
 	-rm -f ./$(DEPDIR)/decode-afl.Po
-	-rm -f ./$(DEPDIR)/decode-erspan.Po
 	-rm -f ./$(DEPDIR)/decode-ethernet.Po
 	-rm -f ./$(DEPDIR)/decode-events.Po
 	-rm -f ./$(DEPDIR)/decode-gre.Po
@@ -2306,10 +2211,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/decode-icmpv6.Po
 	-rm -f ./$(DEPDIR)/decode-ipv4.Po
 	-rm -f ./$(DEPDIR)/decode-ipv6.Po
-	-rm -f ./$(DEPDIR)/decode-mpls.Po
-	-rm -f ./$(DEPDIR)/decode-null.Po
 	-rm -f ./$(DEPDIR)/decode-raw.Po
-	-rm -f ./$(DEPDIR)/decode-sctp.Po
 	-rm -f ./$(DEPDIR)/decode-sll.Po
 	-rm -f ./$(DEPDIR)/decode-tcp.Po
 	-rm -f ./$(DEPDIR)/decode-template.Po
@@ -2510,27 +2412,13 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/respond-reject-libnet11.Po
 	-rm -f ./$(DEPDIR)/respond-reject.Po
 	-rm -f ./$(DEPDIR)/runmode-af-packet.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-dag.Po
-	-rm -f ./$(DEPDIR)/runmode-erf-file.Po
-	-rm -f ./$(DEPDIR)/runmode-ipfw.Po
-	-rm -f ./$(DEPDIR)/runmode-napatech.Po
-	-rm -f ./$(DEPDIR)/runmode-nflog.Po
-	-rm -f ./$(DEPDIR)/runmode-nfq.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap-file.Po
 	-rm -f ./$(DEPDIR)/runmode-pcap.Po
 	-rm -f ./$(DEPDIR)/runmode-pfring.Po
-	-rm -f ./$(DEPDIR)/runmode-tile.Po
 	-rm -f ./$(DEPDIR)/runmode-unittests.Po
 	-rm -f ./$(DEPDIR)/runmode-unix-socket.Po
 	-rm -f ./$(DEPDIR)/runmodes.Po
 	-rm -f ./$(DEPDIR)/source-af-packet.Po
-	-rm -f ./$(DEPDIR)/source-erf-dag.Po
-	-rm -f ./$(DEPDIR)/source-erf-file.Po
-	-rm -f ./$(DEPDIR)/source-ipfw.Po
-	-rm -f ./$(DEPDIR)/source-mpipe.Po
-	-rm -f ./$(DEPDIR)/source-napatech.Po
-	-rm -f ./$(DEPDIR)/source-nflog.Po
-	-rm -f ./$(DEPDIR)/source-nfq.Po
 	-rm -f ./$(DEPDIR)/source-pcap-file.Po
 	-rm -f ./$(DEPDIR)/source-pcap.Po
 	-rm -f ./$(DEPDIR)/source-pfring.Po
@@ -2547,7 +2435,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/tm-queues.Po
 	-rm -f ./$(DEPDIR)/tm-threads.Po
 	-rm -f ./$(DEPDIR)/tmqh-flow.Po
-	-rm -f ./$(DEPDIR)/tmqh-nfq.Po
 	-rm -f ./$(DEPDIR)/tmqh-packetpool.Po
 	-rm -f ./$(DEPDIR)/tmqh-ringbuffer.Po
 	-rm -f ./$(DEPDIR)/tmqh-simple.Po
@@ -2567,10 +2454,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/util-coredump-config.Po
 	-rm -f ./$(DEPDIR)/util-cpu.Po
 	-rm -f ./$(DEPDIR)/util-crypt.Po
-	-rm -f ./$(DEPDIR)/util-cuda-buffer.Po
-	-rm -f ./$(DEPDIR)/util-cuda-handlers.Po
-	-rm -f ./$(DEPDIR)/util-cuda-vars.Po
-	-rm -f ./$(DEPDIR)/util-cuda.Po
 	-rm -f ./$(DEPDIR)/util-daemon.Po
 	-rm -f ./$(DEPDIR)/util-debug-filters.Po
 	-rm -f ./$(DEPDIR)/util-debug.Po

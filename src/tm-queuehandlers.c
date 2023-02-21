@@ -31,7 +31,6 @@
 
 #include "tm-queuehandlers.h"
 #include "tmqh-simple.h"
-#include "tmqh-nfq.h"
 #include "tmqh-packetpool.h"
 #include "tmqh-flow.h"
 #include "tmqh-ringbuffer.h"
@@ -41,7 +40,6 @@ void TmqhSetup (void)
     memset(&tmqh_table, 0, sizeof(tmqh_table));
 
     TmqhSimpleRegister();
-    TmqhNfqRegister();
     TmqhPacketpoolRegister();
     TmqhFlowRegister();
     TmqhRingBufferRegister();

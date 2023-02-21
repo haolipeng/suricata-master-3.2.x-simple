@@ -179,6 +179,7 @@ TmEcode FlowWorker(ThreadVars *tv, Packet *p, void *data, PacketQueue *preq, Pac
         FlowHandlePacket(tv, fw->dtv, p);
         if (likely(p->flow != NULL)) {
             DEBUG_ASSERT_FLOW_LOCKED(p->flow);
+            //
             if (FlowUpdate(p) == TM_ECODE_DONE) {
                 FLOWLOCK_UNLOCK(p->flow);
                 return TM_ECODE_OK;

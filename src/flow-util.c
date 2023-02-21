@@ -162,10 +162,7 @@ void FlowInit(Flow *f, const Packet *p)
     } else if (p->icmpv6h != NULL) {
         f->type = p->type;
         f->code = p->code;
-    } else if (p->sctph != NULL) { /* XXX MACRO */
-        SET_SCTP_SRC_PORT(p,&f->sp);
-        SET_SCTP_DST_PORT(p,&f->dp);
-    } /* XXX handle default */
+    }
 #ifdef DEBUG
     else {
         printf("FIXME: %s:%s:%" PRId32 "\n", __FILE__, __FUNCTION__, __LINE__);

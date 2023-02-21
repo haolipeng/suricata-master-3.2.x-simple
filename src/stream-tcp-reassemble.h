@@ -84,8 +84,6 @@ void StreamTcpSetSessionNoReassemblyFlag (TcpSession *, char );
 void StreamTcpSetDisableRawReassemblyFlag (TcpSession *ssn, char direction);
 
 void StreamTcpSetOSPolicy(TcpStream *, Packet *);
-void StreamTcpReassemblePause (TcpSession *, char );
-void StreamTcpReassembleUnPause (TcpSession *, char );
 int StreamTcpCheckStreamContents(uint8_t *, uint16_t , TcpStream *);
 
 int StreamTcpReassembleInsertSegment(ThreadVars *, TcpReassemblyThreadCtx *, TcpStream *, TcpSegment *, Packet *);

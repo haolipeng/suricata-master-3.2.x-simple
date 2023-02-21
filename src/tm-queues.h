@@ -24,13 +24,14 @@
 #ifndef __TM_QUEUES_H__
 #define __TM_QUEUES_H__
 
+//实现对队列的管理
 typedef struct Tmq_ {
-    char *name;
-    uint16_t id;
-    uint16_t reader_cnt;
-    uint16_t writer_cnt;
+    char *name;//队列名称
+    uint16_t id;//对应的队列存储在trans_q中的索引
+    uint16_t reader_cnt;//读队列中数据的线程数
+    uint16_t writer_cnt;//向队列写数据的线程数
     /* 0 for packet-queue and 1 for data-queue */
-    uint8_t q_type;
+    uint8_t q_type;//队列类型， 0为数据包队列，1为数据队列
 } Tmq;
 
 Tmq* TmqCreateQueue(char *name);

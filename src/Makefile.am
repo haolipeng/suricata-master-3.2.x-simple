@@ -1,6 +1,6 @@
 noinst_HEADERS = action-globals.h \
     debug.h \
-	flow-private.h queue.h source-nfq-prototypes.h \
+	flow-private.h queue.h  \
 	suricata-common.h threadvars.h util-binsearch.h \
     util-validate.h
 bin_PROGRAMS = suricata
@@ -32,7 +32,6 @@ counters.c counters.h \
 data-queue.c data-queue.h \
 decode.c decode.h \
 decode-afl.c \
-decode-erspan.c decode-erspan.h \
 decode-ethernet.c decode-ethernet.h \
 decode-events.c decode-events.h \
 decode-gre.c decode-gre.h \
@@ -42,13 +41,11 @@ decode-ipv4.c decode-ipv4.h \
 decode-ipv6.c decode-ipv6.h \
 decode-null.c decode-null.h \
 decode-raw.c decode-raw.h \
-decode-sctp.c decode-sctp.h \
 decode-sll.c decode-sll.h \
 decode-tcp.c decode-tcp.h \
 decode-teredo.c decode-teredo.h \
 decode-udp.c decode-udp.h \
 decode-vlan.c decode-vlan.h \
-decode-mpls.c decode-mpls.h \
 decode-template.c decode-template.h \
 defrag-config.c defrag-config.h \
 defrag.c defrag.h \
@@ -243,27 +240,13 @@ reputation.c reputation.h \
 respond-reject.c respond-reject.h \
 respond-reject-libnet11.h respond-reject-libnet11.c \
 runmode-af-packet.c runmode-af-packet.h \
-runmode-erf-dag.c runmode-erf-dag.h \
-runmode-erf-file.c runmode-erf-file.h \
-runmode-ipfw.c runmode-ipfw.h \
-runmode-napatech.c runmode-napatech.h \
-runmode-nfq.c runmode-nfq.h \
-runmode-nflog.c runmode-nflog.h \
 runmode-pcap.c runmode-pcap.h \
 runmode-pcap-file.c runmode-pcap-file.h \
 runmode-pfring.c runmode-pfring.h \
 runmode-unittests.c runmode-unittests.h \
 runmode-unix-socket.c runmode-unix-socket.h \
-runmode-tile.c runmode-tile.h \
 runmodes.c runmodes.h \
 source-af-packet.c source-af-packet.h \
-source-erf-dag.c source-erf-dag.h \
-source-erf-file.c source-erf-file.h \
-source-ipfw.c source-ipfw.h \
-source-mpipe.c source-mpipe.h \
-source-napatech.c source-napatech.h \
-source-nfq.c source-nfq.h \
-source-nflog.c source-nflog.h \
 source-pcap.c source-pcap.h \
 source-pcap-file.c source-pcap-file.h \
 source-pfring.c source-pfring.h \
@@ -278,7 +261,6 @@ threads.c threads.h threads-arch-tile.h \
 threads-debug.h threads-profile.h \
 tm-modules.c tm-modules.h \
 tmqh-flow.c tmqh-flow.h \
-tmqh-nfq.c tmqh-nfq.h \
 tmqh-packetpool.c tmqh-packetpool.h \
 tmqh-ringbuffer.c tmqh-ringbuffer.h \
 tmqh-simple.c tmqh-simple.h \
@@ -300,10 +282,6 @@ util-conf.c util-conf.h \
 util-coredump-config.c util-coredump-config.h \
 util-cpu.c util-cpu.h \
 util-crypt.c util-crypt.h \
-util-cuda.c util-cuda.h \
-util-cuda-buffer.c util-cuda-buffer.h \
-util-cuda-handlers.c util-cuda-handlers.h \
-util-cuda-vars.c util-cuda-vars.h \
 util-daemon.c util-daemon.h \
 util-debug.c util-debug.h \
 util-debug-filters.c util-debug-filters.h \

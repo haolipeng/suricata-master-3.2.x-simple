@@ -363,20 +363,6 @@ void AppLayerParserRegisterStateFuncs(uint8_t ipproto, AppProto alproto,
     SCReturn;
 }
 
-void AppLayerParserRegisterLocalStorageFunc(uint8_t ipproto, AppProto alproto,
-                                 void *(*LocalStorageAlloc)(void),
-                                 void (*LocalStorageFree)(void *))
-{
-    SCEnter();
-
-    alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].LocalStorageAlloc =
-        LocalStorageAlloc;
-    alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].LocalStorageFree =
-        LocalStorageFree;
-
-    SCReturn;
-}
-
 void AppLayerParserRegisterGetFilesFunc(uint8_t ipproto, AppProto alproto,
                              FileContainer *(*StateGetFiles)(void *, uint8_t))
 {
@@ -1166,15 +1152,6 @@ void AppLayerParserTriggerRawStreamReassembly(Flow *f)
     SCReturn;
 }
 
-void AppLayerParserSetStreamDepth(uint8_t ipproto, AppProto alproto, uint32_t stream_depth)
-{
-    SCEnter();
-
-    alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].stream_depth = stream_depth;
-
-    SCReturn;
-}
-
 uint32_t AppLayerParserGetStreamDepth(uint8_t ipproto, AppProto alproto)
 {
     SCReturnInt(alp_ctx.ctxs[FlowGetProtoMapping(ipproto)][alproto].stream_depth);
@@ -1219,20 +1196,6 @@ void AppLayerParserRegisterProtocolParsers(void)
     //RegisterENIPTCPParsers();
     //RegisterDNP3Parsers();
     RegisterTemplateParsers();
-
-    /** IMAP */
-    AppLayerProtoDetectRegisterProtocol(ALPROTO_IMAP, "imap");
-    if (AppLayerProtoDetectConfProtoDetectionEnabled("tcp", "imap")) {
-        if (AppLayerProtoDetectPMRegisterPatternCS(IPPROTO_TCP, ALPROTO_IMAP,
-                                  "1|20|capability", 12, 0, STREAM_TOSERVER) < 0)
-        {
-            SCLogInfo("imap proto registration failure\n");
-            exit(EXIT_FAILURE);
-        }
-    } else {
-        SCLogInfo("Protocol detection and parser disabled for %s protocol.",
-                  "imap");
-    }
 
     return;
 }

@@ -25,8 +25,7 @@
  * recursivity in the call.
  *
  * For each protocol a DecodePROTO function is provided. For
- * example we have DecodeIPV4() for IPv4 and DecodePPP() for
- * PPP.
+ * example we have DecodeIPV4() for IPv4.
  *
  * These functions have all a pkt and and a len argument which
  * are respectively a pointer to the protocol data and the length
@@ -70,8 +69,6 @@ int DecodeTunnel(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p,
         uint8_t *pkt, uint16_t len, PacketQueue *pq, enum DecodeTunnelProto proto)
 {
     switch (proto) {
-        case DECODE_TUNNEL_PPP:
-            return DecodePPP(tv, dtv, p, pkt, len, pq);
         case DECODE_TUNNEL_IPV4:
             return DecodeIPV4(tv, dtv, p, pkt, len, pq);
         case DECODE_TUNNEL_IPV6:
@@ -80,8 +77,6 @@ int DecodeTunnel(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p,
             return DecodeVLAN(tv, dtv, p, pkt, len, pq);
         case DECODE_TUNNEL_ETHERNET:
             return DecodeEthernet(tv, dtv, p, pkt, len, pq);
-        case DECODE_TUNNEL_ERSPAN:
-            return DecodeERSPAN(tv, dtv, p, pkt, len, pq);
         default:
             SCLogInfo("FIXME: DecodeTunnel: protocol %" PRIu32 " not supported.", proto);
             break;
@@ -421,7 +416,6 @@ void DecodeRegisterPerfCounters(DecodeThreadVars *dtv, ThreadVars *tv)
     dtv->counter_mpls = StatsRegisterCounter("decoder.mpls", tv);
     dtv->counter_avg_pkt_size = StatsRegisterAvgCounter("decoder.avg_pkt_size", tv);
     dtv->counter_max_pkt_size = StatsRegisterMaxCounter("decoder.max_pkt_size", tv);
-    dtv->counter_erspan = StatsRegisterMaxCounter("decoder.erspan", tv);
     dtv->counter_flow_memcap = StatsRegisterCounter("flow.memcap", tv);
 
     dtv->counter_defrag_ipv4_fragments =

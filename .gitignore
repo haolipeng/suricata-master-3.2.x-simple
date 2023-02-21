@@ -2,12 +2,10 @@
 *.lo
 *.[ch]e
 *.log
-.deps/
 .libs/
 m4/
 TAGS
 aclocal.m4
-autom4te.cache/
 config.log
 libtool
 src/*.diff
@@ -17,10 +15,10 @@ src/*.orig
 src/TAGS
 src/suricata
 stamp-h1
-src/build-info.h
 qa/log/
-/suricata-master-3.2.x.si4project
 /.idea/
 /qa/
 /contrib/
 /suricata-master-3.2.x-simple.si4project
+/suricata-master-3.2.x.si4project
+/src/.deps/

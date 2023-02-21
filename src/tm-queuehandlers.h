@@ -26,7 +26,6 @@
 
 enum {
     TMQH_SIMPLE,
-    TMQH_NFQ,
     TMQH_PACKETPOOL,
     TMQH_FLOW,
     TMQH_RINGBUFFER_MRSW,
@@ -38,15 +37,15 @@ enum {
 
 typedef struct Tmqh_ {
     char *name;
-    Packet *(*InHandler)(ThreadVars *);
+    Packet *(*InHandler)(ThreadVars *);//incoming handler
     void (*InShutdownHandler)(ThreadVars *);
-    void (*OutHandler)(ThreadVars *, Packet *);
+    void (*OutHandler)(ThreadVars *, Packet *);//outgoing handler
     void *(*OutHandlerCtxSetup)(char *);
     void (*OutHandlerCtxFree)(void *);
     void (*RegisterTests)(void);
 } Tmqh;
 
-Tmqh tmqh_table[TMQH_SIZE];
+Tmqh tmqh_table[TMQH_SIZE];//提供了4种类型队列:simple,flow,packetpool
 
 void TmqhSetup (void);
 void TmqhCleanup(void);

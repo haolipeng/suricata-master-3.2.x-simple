@@ -484,7 +484,7 @@ static int DecodeIPV4Options(Packet *p, uint8_t *pkt, uint16_t len, IPV4Options 
 
     return 0;
 }
-
+//解码ipv4数据包
 static int DecodeIPV4Packet(Packet *p, uint8_t *pkt, uint16_t len)
 {
     if (unlikely(len < IPV4_HEADER_LEN)) {
@@ -492,6 +492,7 @@ static int DecodeIPV4Packet(Packet *p, uint8_t *pkt, uint16_t len)
         return -1;
     }
 
+    //判断ip version
     if (unlikely(IP_GET_RAW_VER(pkt) != 4)) {
         SCLogDebug("wrong ip version %" PRIu8 "",IP_GET_RAW_VER(pkt));
         ENGINE_SET_INVALID_EVENT(p, IPV4_WRONG_IP_VER);
@@ -524,6 +525,7 @@ static int DecodeIPV4Packet(Packet *p, uint8_t *pkt, uint16_t len)
     if (ip_opt_len > 0) {
         IPV4Options opts;
         memset(&opts, 0x00, sizeof(opts));
+        //解码ipv4数据包的可选字段
         DecodeIPV4Options(p, pkt + IPV4_HEADER_LEN, ip_opt_len, &opts);
     }
 
@@ -545,6 +547,7 @@ int DecodeIPV4(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p, uint8_t *pkt, u
     p->proto = IPV4_GET_IPPROTO(p);
 
     /* If a fragment, pass off for re-assembly. */
+    //ip分片重组
     if (unlikely(IPV4_GET_IPOFFSET(p) > 0 || IPV4_GET_MF(p) == 1)) {
         Packet *rp = Defrag(tv, dtv, p, pq);
         if (rp != NULL) {
@@ -572,23 +575,19 @@ int DecodeIPV4(ThreadVars *tv, DecodeThreadVars *dtv, Packet *p, uint8_t *pkt, u
     switch (IPV4_GET_IPPROTO(p)) {
         case IPPROTO_TCP:
             DecodeTCP(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
-                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
+                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);//解码tcp协议字段
             break;
         case IPPROTO_UDP:
             DecodeUDP(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
-                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
+                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);//解码udp协议字段
             break;
         case IPPROTO_ICMP:
             DecodeICMPV4(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
-                         IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
+                         IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);//解码icmp协议字段
             break;
         case IPPROTO_GRE:
             DecodeGRE(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
-                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
-            break;
-        case IPPROTO_SCTP:
-            DecodeSCTP(tv, dtv, p, pkt + IPV4_GET_HLEN(p),
-                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);
+                      IPV4_GET_IPLEN(p) - IPV4_GET_HLEN(p), pq);//解码gre协议字段
             break;
         case IPPROTO_IPV6:
             {
