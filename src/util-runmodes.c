@@ -309,33 +309,33 @@ static int RunModeSetLiveCaptureWorkersForDevice(ConfigIfaceThreadsCountFunc Mod
             exit(EXIT_FAILURE);
         }
 
-        tm_module = TmModuleGetByName(recv_mod_name);//接收模块
+        tm_module = TmModuleGetByName(recv_mod_name);
         if (tm_module == NULL) {
             SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName failed for %s", recv_mod_name);
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, aconf);
+        TmSlotSetFuncAppend(tv, tm_module, aconf);//收包slot注册
 
-        tm_module = TmModuleGetByName(decode_mod_name);//解码模块
+        tm_module = TmModuleGetByName(decode_mod_name);
         if (tm_module == NULL) {
             SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName %s failed", decode_mod_name);
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
+        TmSlotSetFuncAppend(tv, tm_module, NULL);//解码slot注册
 
         tm_module = TmModuleGetByName("FlowWorker");
         if (tm_module == NULL) {
             SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName for FlowWorker failed");
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
+        TmSlotSetFuncAppend(tv, tm_module, NULL);//flow worker slot注册
 
         tm_module = TmModuleGetByName("RespondReject");
         if (tm_module == NULL) {
             SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName RespondReject failed");
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
+        TmSlotSetFuncAppend(tv, tm_module, NULL);//RespondReject slot注册
 
         TmThreadSetCPU(tv, WORKER_CPU_SET);
 
