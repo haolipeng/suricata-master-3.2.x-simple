@@ -128,6 +128,7 @@ TmEcode TmThreadsSlotVarRun(ThreadVars *tv, Packet *p,
         if (unlikely(s->id == 0)) {
             r = SlotFunc(tv, p, SC_ATOMIC_GET(s->slot_data), &s->slot_pre_pq, &s->slot_post_pq);
         } else {
+        	//这里直接走decode模块，不走receive模块
             r = SlotFunc(tv, p, SC_ATOMIC_GET(s->slot_data), &s->slot_pre_pq, NULL);
         }
 

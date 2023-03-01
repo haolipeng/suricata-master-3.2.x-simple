@@ -281,7 +281,7 @@ static int RunModeSetLiveCaptureWorkersForDevice(ConfigIfaceThreadsCountFunc Mod
     int threads_count;
 
     if (single_mode) {
-        threads_count = 1;//单工作线程模式
+        threads_count = 1;//单工作线程模式下，线程数为1
     } else {
         threads_count = ModThreadsCount(aconf);
         SCLogInfo("Going to use %" PRId32 " thread(s)", threads_count);
@@ -309,35 +309,35 @@ static int RunModeSetLiveCaptureWorkersForDevice(ConfigIfaceThreadsCountFunc Mod
             exit(EXIT_FAILURE);
         }
 
-        tm_module = TmModuleGetByName(recv_mod_name);//接收模块
+        tm_module = TmModuleGetByName(recv_mod_name);
         if (tm_module == NULL) {
             SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName failed for %s", recv_mod_name);
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, aconf);
+        TmSlotSetFuncAppend(tv, tm_module, aconf);//收包模块slot注册
 
-        tm_module = TmModuleGetByName(decode_mod_name);//解码模块
+        tm_module = TmModuleGetByName(decode_mod_name);
         if (tm_module == NULL) {
             SCLogError(SC_ERR_INVALID_VALUE, "TmModuleGetByName %s failed", decode_mod_name);
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
+        TmSlotSetFuncAppend(tv, tm_module, NULL);//解码模块slot注册
 
         tm_module = TmModuleGetByName("FlowWorker");
         if (tm_module == NULL) {
             SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName for FlowWorker failed");
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
+        TmSlotSetFuncAppend(tv, tm_module, NULL);//flow worker模块slot注册
 
         tm_module = TmModuleGetByName("RespondReject");
         if (tm_module == NULL) {
             SCLogError(SC_ERR_RUNMODE, "TmModuleGetByName RespondReject failed");
             exit(EXIT_FAILURE);
         }
-        TmSlotSetFuncAppend(tv, tm_module, NULL);
+        TmSlotSetFuncAppend(tv, tm_module, NULL);//RespondReject slot注册
 
-        TmThreadSetCPU(tv, WORKER_CPU_SET);
+        TmThreadSetCPU(tv, WORKER_CPU_SET);//设置cpu亲和性
 
         if (TmThreadSpawn(tv) != TM_ECODE_OK) {
             SCLogError(SC_ERR_THREAD_SPAWN, "TmThreadSpawn failed");
